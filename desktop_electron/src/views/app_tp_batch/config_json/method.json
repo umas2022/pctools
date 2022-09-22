@@ -1,0 +1,48 @@
+{
+    "info1": "格式统一",
+    "data": {
+        "print": {
+            "label": "打印路径",
+            "commit": "打印输入路径下所有目标的完整路径",
+            "example_in": "dir/dir1/",
+            "example_out": "dir/dir1/file1\ndir/dir2/file2",
+            "addons": ""
+        },
+        "to_one": {
+            "label": "拷贝合并",
+            "commit": "多级目录文件拷贝至同级目录，命名合并上一级目录名",
+            "example_in": "dir/dir1/file1\ndir/dir2/file2",
+            "example_out": "dir/dir1.file1\ndir/dir2.file2",
+            "addons": ""
+        },
+        "just_copy": {
+            "label": "直接拷贝",
+            "commit": "整体备份所有文件，原样拷贝，保留目录结构",
+            "example_in": "dir/dir1/file1\ndir/dir2/file2",
+            "example_out": "dir/dir1/file1\ndir/dir2/file2",
+            "addons": ""
+        },
+        "img_cut": {
+            "label": "图片压缩",
+            "commit": "备份保留目录结构，压缩图片，忽略部分格式文件，详情参见backup_img_cut.py",
+            "example_in": "dir/dir1/jpg(10M)",
+            "example_out": "dir/dir1/jpg(3M)",
+            "addons": ""
+        },
+        "webp_to_jpg":
+        {
+            "label": "webp格式转化",
+            "commit": "webp图片格式转换为jpg，使其可用被华为云识别",
+            "example_in": "img.webp" ,
+            "example_out": "img.jpg",
+            "addons": ""
+        },
+        "compare_del": {
+            "label": "对比删除",
+            "commit": "以输出路径为基准，删除输入路径中不存在的项，适用于备份后源文件有改动的场合，注意被删除的是path_in，需手动交换路径或使用exchange参数",
+            "example_in": "dir_in/a\n\ndir_out/a\ndir_out/b" ,
+            "example_out": "dir_in/a\n\ndir_out/a\ndir_out/b(删除)",
+            "addons": ""
+        }
+    }
+}

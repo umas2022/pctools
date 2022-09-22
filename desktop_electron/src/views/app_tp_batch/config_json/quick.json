@@ -1,0 +1,142 @@
+{
+    "info1": "各参数预设值",
+    "data": {
+        "test": {
+            "info": "测试参数",
+            "label": "测试参数",
+            "head": {
+                "terminal": false
+            },
+            "body": [
+                {
+                    "path_in": "1",
+                    "path_out": "1",
+                    "log_path": "1",
+                    "target": ".txt",
+                    "method": "webp_to_jpg",
+                    "output": "basic_counter",
+                    "add_form": {
+                        "para": ""
+                    }
+                },
+                {
+                    "path_in": "2",
+                    "path_out": "2",
+                    "log_path": "2",
+                    "target": ".h264",
+                    "method": "img_cut",
+                    "output": "basic_runner",
+                    "add_form": {
+                        "para": ""
+                    }
+                }
+            ]
+        },
+        "default": {
+            "info": "默认参数",
+            "label": "默认参数",
+            "head": {
+                "terminal": false
+            },
+            "body": [
+                {
+                    "path_in": "D:\\s-linux\\project\\test_file\\test_in",
+                    "path_out": "D:\\s-linux\\project\\test_file\\test_out",
+                    "log_path": "D:\\s-linux\\project\\test_file\\test_out\\log",
+                    "target": "file",
+                    "method": "print",
+                    "output": "basic_counter"
+                }
+            ]
+        },
+        "webp_to_jpg": {
+            "info": "webp图片转换格式为jpg",
+            "label": "webp图片格式转换",
+            "head": {
+                "terminal": false
+            },
+            "body": [
+                {
+                    "path_in": "C:\\Users\\umas2\\Pictures\\Dell-暂存",
+                    "path_out": "C:\\Users\\umas2\\Pictures\\Dell-暂存",
+                    "log_path": "",
+                    "target": ".webp",
+                    "method": "webp_to_jpg",
+                    "output": "basic_logger"
+                }
+            ]
+        },
+        "2t_cut": {
+            "label": "2T盘samu图片压缩",
+            "info": "使用图片压缩方法备份2t盘samu文件夹到1t盘",
+            "head": {
+                "terminal": true
+            },
+            "body": [
+                {
+                    "path_in": "E:\\[2T]-samu-raw",
+                    "path_out": "F:\\[1T]-samu-cut",
+                    "log_path": "F:\\[1T]-samu-cut\\log",
+                    "target": "file",
+                    "method": "print",
+                    "output": "basic_counter"
+                },
+                {
+                    "path_in": "E:\\[2T]-samu-raw",
+                    "path_out": "F:\\[1T]-samu-cut",
+                    "log_path": "F:\\[1T]-samu-cut\\log",
+                    "target": "file",
+                    "method": "img_cut",
+                    "output": "basic_logger"
+                },
+                {
+                    "path_in": "F:\\[1T]-samu-cut",
+                    "path_out": "E:\\[2T]-samu-raw",
+                    "log_path": "F:\\[1T]-samu-cut\\log",
+                    "target": "file",
+                    "method": "compare_del",
+                    "output": "basic_logger"
+                },
+                {
+                    "path_in": "F:\\[1T]-samu-cut",
+                    "path_out": "E:\\[2T]-samu-raw",
+                    "log_path": "F:\\[1T]-samu-cut\\log",
+                    "target": "dir",
+                    "method": "compare_del",
+                    "output": "basic_logger"
+                }
+            ]
+        },
+        "2t_backup": {
+            "label": "2T盘backup全部备份",
+            "info": "备份2t盘backup文件夹到1t盘",
+            "head": {
+                "terminal": true
+            },
+            "body": [
+                {
+                    "path_in": "E:\\[2T]-backup",
+                    "path_out": "F:\\[1T]-backup",
+                    "log_path": "F:\\[1T]-backup\\log",
+                    "target": "file",
+                    "method": "print",
+                    "output": "basic_counter",
+                    "add_form": {
+                        "para": ""
+                    }
+                },
+                {
+                    "path_in": "E:\\[2T]-backup",
+                    "path_out": "F:\\[1T]-backup",
+                    "log_path": "F:\\[1T]-backup\\log",
+                    "target": "file",
+                    "method": "just_copy",
+                    "output": "basic_logger",
+                    "add_form": {
+                        "para": ""
+                    }
+                }
+            ]
+        }
+    }
+}
