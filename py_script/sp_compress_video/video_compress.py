@@ -103,7 +103,7 @@ class VideoCompress():
         logger.info("video compress function start ...")
         # 计数
         total = 0
-        for full_in in Traverse.get_file(self.path_in):
+        for full_in in Traverse().get_file(self.path_in):
             if full_in.split(".")[-1] in self.handleFormat:
                 total += 1
                 name = full_in.replace("\\", "/").split("/")[-1]
@@ -111,7 +111,7 @@ class VideoCompress():
         logger.write("total : %d\n" % total)
         # 开始
         jetzt = 0
-        for full_in in Traverse.get_file(self.path_in):
+        for full_in in Traverse().get_file(self.path_in):
             full_in = full_in.replace("\\", "/")
             # 单文件名
             name = full_in.split("/")[-1]

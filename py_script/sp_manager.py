@@ -62,8 +62,10 @@ class SpManager():
         preset_dic = json.load(open("./preset.json", "r", encoding="utf-8"))
         if not pre_key in preset_dic:
             logger.error("sp-manager: unexpected key - %s" % pre_key)
+            exit(0)
         preset_one = preset_dic[pre_key]
         if not preset_one["function"] in dir(self):
             logger.error("sp-manager: unexpected function - %s" % preset_one["function"])
+            exit(0)
         called_func = getattr(self, preset_one["function"])
         called_func(json_set=preset_one["input"])

@@ -1,5 +1,5 @@
 <template>
-  <div class="main">
+  <div class="main-copy">
     <h1>Copy</h1>
     <router-view />
   </div>
@@ -10,7 +10,8 @@
 
 <style lang="scss">
 // 全局居中
-div.main {
+div.main-copy {
   text-align: center;
+  height: calc(100% - 90px);
 }
 </style>

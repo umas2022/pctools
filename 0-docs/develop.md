@@ -119,7 +119,7 @@
 
 ### 2022.6.14
 - 图片压缩对bmp报错WARNING: ImgCut - Process failed : 25487 -> 2494，参考[Remonsan Project]文件夹 - bug没能复现，不管了
-- tools: 注释了tools_python的log文件输出：/tools_python/components/log.py - > - 工具箱logger封装进class，支持输入log文件路径
+- tools: 注释了py_script的log文件输出：/py_script/components/log.py - > - 工具箱logger封装进class，支持输入log文件路径
 - 前端子组件重组，增加log文件开关，log文件路径输入
 - log功能前后端测试通过
 
@@ -276,7 +276,7 @@
 
 
 ### 2022.3.24
-- component和usage文件夹移动到tools_python文件夹下，日后报错记得在这里修改
+- component和usage文件夹移动到py_script文件夹下，日后报错记得在这里修改
 - rename新增方法批量添加前缀
 - 后端websocket在app_test中简单实现，postman通信成功
 

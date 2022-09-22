@@ -30,9 +30,9 @@
 - 后端允许了所有跨域请求，不安全
 
 
-### tools_python
-- tools_python：文件夹目录中间修改了一次，import可能报错，还没改完
-- tools_python：增加更多接口给前端，比如img_cut自定义压缩上限，是否反向删除
+### py_script
+- py_script：文件夹目录中间修改了一次，import可能报错，还没改完
+- py_script：增加更多接口给前端，比如img_cut自定义压缩上限，是否反向删除
 - rename: 删除括号扩展为删除任意前缀
 - box_backup：rename的命令行输出文件总数是0
 - box_backup：rename.by_number把子文件夹里的文件也顺序编号了

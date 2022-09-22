@@ -68,7 +68,7 @@ const run_be = () => {
 
 const check_be = () => {
     console.log("wsConnect");
-    let wsdemo = new WebSocket(get_wsurl().local + "demo_websocket");
+    let wsdemo = new WebSocket(get_wsurl().local + "app_test_ws");
     wsdemo.onopen = () => {
         wsdemo.send("hello");
         console.log("connected !");

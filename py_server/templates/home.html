@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <!-- vue3 -->
+    <script src="https://unpkg.com/vue@next"></script>
+    <!-- axios -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <!-- element ui -->
+    <link rel="stylesheet" href="https://unpkg.com/element-plus/dist/index.css">
+    <script src="https://unpkg.com/element-plus"></script>
+    <title>toobox interface</title>
+</head>
+
+<body>
+    <div id="app">
+        <div class="copy-to-one">
+            <el-form ref="formRef" label-width="120px" class="input-form">
+                <el-form-item label="input path :">
+                    <el-input v-model="inputPath" placeholder="Please input" clearable />
+                </el-form-item>
+                <el-form-item label="output path :">
+                    <el-input v-model="outputPath" placeholder="Please input" clearable />
+                </el-form-item>
+                <el-form-item>
+                    <el-button type="primary" plain @click=buttonStart>start</el-button>
+                    <el-button type="danger" plain @click=buttonStop v-show="progressStart">stop</el-button>
+                    <el-button type="warning" plain @click=buttonClick v-show="progressStart">view log</el-button>
+                </el-form-item>
+                <el-form-item class="demo-progress">
+                    <el-progress :percentage="progressPercentage" v-show="progressStart" />
+                </el-form-item>
+            </el-form>
+        </div>
+        <div>
+            <h1>{{ hello }}</h1>
+            <p>这里返回了一个html页面</p>
+            <p>上面hello传递了一个参数</p>
+
+            <form action="" method="post">
+                {% csrf_token %}
+                <input type="text" name="outputPath">
+                <input type="submit" value="搜索">
+            </form>
+            <p>{{ getOutput }}</p>
+        </div>
+
+    </div>
+    <script>
+        const App = {
+            setup() {
+                const inputPath = Vue.ref("in")
+                const outputPath = Vue.ref("out")
+                const progressStart = Vue.ref(false)
+                const progressPercentage = Vue.ref(25)
+
+                const buttonStart = () => {
+
+                    progressStart.value = true
+
+                    var data = new FormData();
+                    data.append('inputPath', inputPath.value);
+                    data.append('outputPath', outputPath.value);
+
+                    var config = {
+                        method: "post",
+                        url: "copy_to_one",
+                        data: data,
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    };
+
+                    axios(config)
+                        .then(function (response) {
+                            console.log("response:", response)
+                        })
+                        .catch(function (error) {
+                            console.log(error);
+                        });
+
+
+
+                }
+                const buttonStop = () => {
+                    progressStart.value = false
+                }
+
+                const buttonClick = () => {
+                    console.log("click!!!")
+                    console.log(inputPath.value)
+                    progressPercentage.value = progressPercentage.value + 5
+                }
+                return {
+                    inputPath,
+                    outputPath,
+                    buttonStart,
+                    buttonStop,
+                    progressStart,
+                    progressPercentage,
+                    buttonClick
+                }
+            }
+        };
+        const app = Vue.createApp(App);
+        app.use(ElementPlus);
+        app.mount("#app");
+    </script>
+    <style>
+        .input-form {
+            width: 80%;
+        }
+
+        .demo-progress .el-progress--line {
+            margin-bottom: 15px;
+            width: 350px;
+        }
+    </style>
+
+</body>
+
+</html>

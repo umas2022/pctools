@@ -22,7 +22,7 @@ const wsRes = ref("");
 // 按钮：websocket连接
 const wsConnect = () => {
   console.log("wsConnect");
-  let wsdemo = new WebSocket(wsurl.local + "demo_websocket");
+  let wsdemo = new WebSocket(wsurl.local + "app_test_ws");
   wsdemo.onopen = () => {
     wsdemo.send("hello");
     console.log("connected !");

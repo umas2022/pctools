@@ -120,7 +120,8 @@ class ImgCompress():
 
     def run(self):
         '''开始处理'''
-        for full_in in Traverse.get_file(self.path_in):
+        logger.info("video compress function start ...")
+        for full_in in Traverse().get_file(self.path_in):
             full_in = full_in.replace("\\", "/")
             # 单文件名
             name = full_in.split("/")[-1]

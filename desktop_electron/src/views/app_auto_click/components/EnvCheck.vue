@@ -14,7 +14,7 @@ import {ref} from "vue"
 
 const py_path =
   process.env.NODE_ENV === "development"
-    ? path.join(process.cwd(), "../tools_python/box_autoclick/electron_call")
+    ? path.join(process.cwd(), "../py_script/box_autoclick/electron_call")
     : path.join(process.cwd(), "resources/static/python/box_auto_click/electron_call");
 
 const check_msg = ref([])

@@ -1,5 +1,5 @@
 <template>
-  <div class="outter">
+  <div class="main-frame">
     <div class="menu" style="width:">
       <div class="ctrl-icon">
         <use-svg-icon class="svg" :class="[rotate_flag ? 'vertical' : 'horizontal']"
@@ -61,7 +61,7 @@ const test_button = () => {
 </script>
 
 <style lang="scss" scoped>
-div.outter {
+div.main-frame {
   position: relative;
 }
 
@@ -90,11 +90,13 @@ div.ctrl-icon {
 // 左侧菜单栏
 div.menu {
   background-color: rgba(128, 128, 128, 0.2);
+  border-radius: 5px;
   transition: all 1s;
   height: calc(100vh - 15px);
   width: calc(1px * v-bind(menu_width));
   float: left;
-  overflow: auto; //触发滚动条
+  overflow-y: hidden;
+  overflow-x: hidden;
 }
 
 
@@ -105,6 +107,9 @@ div.body {
   height: calc(100vh - 15px);
   width: calc(100% - 1px * v-bind(menu_width));
   float: left;
+  overflow-y: hidden;
+  overflow-x: hidden;
+  
 }
 
 // // 全局居中

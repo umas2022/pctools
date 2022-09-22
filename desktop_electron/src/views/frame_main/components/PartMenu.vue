@@ -1,6 +1,6 @@
 <template>
   <!-- 在App.vue中引用  -->
-  <div class="main">
+  <div class="main-menu">
     <el-scrollbar>
       <el-menu class="el-menu-vertical-demo" background-color="rgba(255, 255, 255, 0)"
         active-text-color="rgba(0, 0, 255, 0.5)" @select="handleSelect" router>
@@ -37,7 +37,7 @@ const handleSelect = (key, keyPath) => {
 };
 </script>
 <style lang="scss" scoped>
-div.main {
+div.main-menu {
   height: calc(100vh - 80px);
 }
 

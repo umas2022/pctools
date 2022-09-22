@@ -28,7 +28,7 @@ module.exports = defineConfig({
         extraResources: [
           // { from: 'public/static/python', to: 'static/python' } // 静态资源拷贝目录
           { from: 'public/static', to: 'static' }, // 静态资源拷贝目录
-          { from: '../tools_python/box_autoclick', to: 'static/python/box_auto_click' } // python脚本拷贝目录
+          { from: '../py_script/box_autoclick', to: 'static/python/box_auto_click' } // python脚本拷贝目录
         ],
 
         // "directories": {
