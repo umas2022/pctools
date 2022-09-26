@@ -56,13 +56,13 @@ const maxpos = ref(0);
 const innerRef = ref<HTMLDivElement>();
 const scrollbarRef = ref<InstanceType<typeof ElScrollbar>>();
 const gotoBottom = () => {
-    maxpos.value = innerRef.value.clientHeight - 195;
+    maxpos.value = innerRef.value.clientHeight - 185;
     scrollbarRef.value.setScrollTop(maxpos.value);
 };
 // 监听传参变化，刷新文本显示和滚动条位置
 watch(props, () => {
-    logtext.value.push(props.data);
-    if (logtext.value.length > maxrow.value) {
+    logtext.value.push(...JSON.parse(props.data))
+    while (logtext.value.length > maxrow.value) {
         logtext.value.shift();
     }
     gotoBottom();
@@ -153,6 +153,7 @@ div.text {
     height: 30px;
     width: 30px;
     cursor: pointer;
+
     .el-icon {
         padding-top: 3px;
     }

@@ -4,9 +4,8 @@ import HelloWorld from "../views/test_hello_world/HelloIndex.vue";
 
 const routes: Array<RouteRecordRaw> = [
   {
-    // path: "/",
-    // alias: "/home",
-    path: "/home",
+    path: "/",
+    alias: "/home",
     name: "home",
     meta: {
       hidden: false,
@@ -143,9 +142,7 @@ const routes: Array<RouteRecordRaw> = [
   },
   // 应用：python tp 批处理
   {
-    // path: "/tp_batch",
-    path: "/",
-    alias: "/tp_batch",
+    path: "/tp_batch",
     name: "tp_batch",
     meta: {
       hidden: false,

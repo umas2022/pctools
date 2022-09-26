@@ -1,7 +1,12 @@
+import time
 from channels.generic.websocket import WebsocketConsumer
+
+from utils.stdout_catcher import *
+
 
 class SpOperator(WebsocketConsumer):
     '''sp批处理程序中间件'''
+
     def connect(self):
         self.accept()
 
@@ -16,6 +21,18 @@ class SpOperator(WebsocketConsumer):
         """
         print(text_data)
 
-        for i in range(1000):
-            print(i)
-            self.send(str(i))
+        # 定义工作主函数
+        def main_func() -> None:
+            now = time.process_time()
+            for i in range(10000):
+                print(i)
+            print("py-time: %s ms" % str(int(1000 * (time.process_time() - now))))
+
+        # 定义日志截取函数
+        def log_func(log):
+            self.send(str(log))
+
+        # 调用
+        catcher = Catcher(main_func, log_func)
+        catcher.run(buff_size=10)
+        # catcher.run()

@@ -14,6 +14,7 @@
   // 开始按钮
   const start = () => {
     const send_data = JSON.parse(JSON.stringify(data_set));
+    delete send_data.res
     console.log("ws connecting ...");
   
     let wsdemo = new WebSocket(get_wsurl().local + "sp_operator");
@@ -22,6 +23,7 @@
     };
     wsdemo.onmessage = (e) => {
       data_set.res = e.data;
+      // console.log(e.data)
     };
   };
   
