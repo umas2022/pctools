@@ -91,9 +91,9 @@ class LogRepack:
             self.raw_logger.set_path(path)
 
     def write(self, inputstr: any):
-        '''直接写入log文件，输入值被str()函数包裹，未指定log文件时print错误并跳过'''
+        '''直接写入log文件，输入值被str()函数包裹，未指定log文件时直接return'''
         if self.raw_logger.file == "":
-            print("\nlogger.write exit: no log file specified\n")
+            # print("logger.write -> exit: no log file specified")
             return
         with open(self.raw_logger.file, "a") as log_file:
             log_file.write(str(inputstr) + "\n")

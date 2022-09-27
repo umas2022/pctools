@@ -4,11 +4,7 @@
     <el-button type="primary" plain @click="waterfall_reset">reload</el-button>
     <div class="body" v-show="show_body">
       <!-- 分列 -->
-      <div
-        v-for="col in cols_current"
-        class="flow"
-        :id="'flow_' + (col - 1)"
-      ></div>
+      <div v-for="col in cols_current" class="flow" :id="'flow_' + (col - 1)"></div>
       <!-- 看到这个就开始加载新图 -->
       <div class="reload"></div>
     </div>
@@ -17,9 +13,17 @@
       <el-button type="danger" @click="rear_add_10">手动加载</el-button>
     </div>
   </div>
+  <!-- 单张弹窗大图 -->
+  <el-dialog v-model="dialog_form.dialog_visible" title="compare" width="70%">
+    <div class="img-com">
+      <h3>{{dialog_form.selected}}</h3>
+      <img :style="{ width: win_width*0.6+'px' }" :src="dialog_form.selected" />
+    </div>
+  </el-dialog>
+
 </template>
 <script setup>
-import { inject, ref, onMounted, createApp, h } from "vue";
+import { inject, ref, onMounted, createApp, reactive } from "vue";
 import WfShow from "./WfShow";
 
 const img_form = inject("img_form");
@@ -46,21 +50,23 @@ const cols_current = ref(1);
 const shortest_index = ref(0);
 // 当前图片宽度
 const img_width_current = ref(300);
+// 窗口宽度
+const win_width = ref(0)
 // 当前展示的最后图片序号
 const last_index = ref(0);
 // 初始化计算列数、宽度、序号
 const cal_cols = () => {
-  let win_width = document.documentElement.clientWidth;
-  if (win_width < preset_dict.img_width_min) {
+   win_width.value = document.documentElement.clientWidth;
+  if (win_width.value < preset_dict.img_width_min) {
     cols_current.value = 1;
-    img_width_current.value = win_width * 0.88;
-  } else if (win_width / preset_dict.img_width_min > preset_dict.cols_max) {
+    img_width_current.value = win_width.value * 0.88;
+  } else if (win_width.value / preset_dict.img_width_min > preset_dict.cols_max) {
     cols_current.value = preset_dict.cols_max;
     img_width_current.value =
-      Math.floor(win_width / preset_dict.cols_max) * 0.88;
+      Math.floor(win_width.value / preset_dict.cols_max) * 0.88;
   } else {
-    cols_current.value = Math.floor(win_width / preset_dict.img_width_min);
-    img_width_current.value = Math.floor(win_width / cols_current.value) * 0.88;
+    cols_current.value = Math.floor(win_width.value / preset_dict.img_width_min);
+    img_width_current.value = Math.floor(win_width.value / cols_current.value) * 0.88;
   }
 };
 
@@ -130,6 +136,7 @@ async function rear_add() {
         img_index: last_index.value,
         img_form: img_form,
         input_form: input_form,
+        dialog_form:dialog_form
       },
     };
     let new_img = createApp(WfShow, vprops);
@@ -185,6 +192,13 @@ onMounted(() => {
 window.onresize = () => {
   waterfall_reset();
 };
+
+// 单张弹窗大图控制
+const dialog_form = reactive({
+  dialog_visible :false,
+  selected:""
+})
+
 </script>
 <style scoped lang="scss">
 div.flow {
@@ -192,13 +206,16 @@ div.flow {
   border: solid 3px red;
   vertical-align: top;
 }
+
 div.main {
   position: relative;
   z-index: 2;
+
   div.body {
     position: inherit;
     z-index: 2;
   }
+
   div.reload {
     position: absolute;
     bottom: 0px;

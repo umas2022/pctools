@@ -10,7 +10,7 @@
     </div>
 
     <div class="body" @click="test_button">
-        <PartBody />
+      <PartBody />
     </div>
   </div>
 </template>
@@ -109,11 +109,18 @@ div.body {
   float: left;
   overflow-y: hidden;
   overflow-x: hidden;
-  
+
 }
 
 // // 全局居中
 // #app {
 //   text-align: center;
 // }
+</style>
+
+<!-- 全局style -->
+<style lang="scss">
+* {
+  user-select: none; // 页面文字禁止被选中
+}
 </style>

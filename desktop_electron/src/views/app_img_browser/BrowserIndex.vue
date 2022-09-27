@@ -1,14 +1,10 @@
 <template>
-  <div class="main">
+  <div class="browser-main">
+    <el-scrollbar height="100%">
     <h1>
       img browser
       <div class="info-icon">
-        <useSvgIcon
-          icon="info"
-          color="black"
-          :width="Number(20)"
-          @click="dialogVisible = !dialogVisible"
-        />
+        <useSvgIcon icon="info" color="black" :width="Number(20)" @click="dialogVisible = !dialogVisible" />
       </div>
     </h1>
     <!-- help页弹窗 -->
@@ -39,6 +35,7 @@
 
     <!-- 底部留白 -->
     <div class="block" style="height: 150px"></div>
+  </el-scrollbar>
   </div>
 </template>
 
@@ -111,9 +108,11 @@ const test_button = () => {
 </script>
 
 <style lang="scss" scoped>
-  div.main {
+div.browser-main {
   text-align: center;
+  height: 100%;
 }
+
 // info感叹号图标
 div.info-icon {
   display: inline-block;
