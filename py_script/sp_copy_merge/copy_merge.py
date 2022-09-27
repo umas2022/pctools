@@ -15,7 +15,7 @@ class CopyMerge():
         self.path_in = path_in.replace("\\", "/")
         self.path_out = path_out.replace("\\", "/")
 
-    def __method_merge(self, methodPathIn, methodPathOut):
+    def __copy_filter(self, methodPathIn, methodPathOut):
         '''处理方法：拷贝合并'''
         name = methodPathIn.split("/")[-1]
         name_upper_dir = methodPathIn.replace(self.path_in + "/", "")
@@ -45,13 +45,13 @@ class CopyMerge():
         logger.info("copy merge function start ...")
         # 计数
         total = 0
-        for full_in in Traverse.get_file(self.path_in):
+        for full_in in Traverse().get_file(self.path_in):
             total += 1
             name = full_in.replace("\\", "/").split("/")[-1]
             logger.info("counting : %d\t%s" % (total, name))
         # 开始
         jetzt = 0
-        for full_in in Traverse.get_file(self.path_in):
+        for full_in in Traverse().get_file(self.path_in):
             jetzt += 1
             full_in = full_in.replace("\\", "/")
             # 单文件名
@@ -60,5 +60,5 @@ class CopyMerge():
             name_upper_dir = full_in.replace(self.path_in + "/", "")
             # 完整输出路径
             full_out = os.path.join(self.path_out, name_upper_dir).replace("\\", "/")
-            state = self.__method_merge(full_in, full_out)
+            state = self.__copy_filter(full_in, full_out)
             logger.info("%s\t%d/%d\t%s" % (state, jetzt, total, full_in))

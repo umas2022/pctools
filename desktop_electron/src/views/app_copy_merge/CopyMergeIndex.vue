@@ -19,7 +19,7 @@
 
         <!-- 显示log -->
         <div class="log-box">
-            <ShowLogBox :data="data_set.res" />
+            <ShowLogBox :data="data_set.res" :height=log_height />
         </div>
     </div>
 </template>
@@ -38,12 +38,16 @@ const dialogVisible = ref(false);
 
 // 参数集
 const data_set = reactive({
+    function: "run_copy_merge",
     path_in: "D:\\s-linux\\project\\test_file\\test_in",
     path_out: "D:\\s-linux\\project\\test_file\\test_out",
     res: ""
 })
 provide("data_set", data_set)
 
+// log高度控制
+const log_height = reactive({ data: 0, time: 0 })
+provide("log_height", log_height)
 
 </script>
 
@@ -55,10 +59,8 @@ div.main-index {
 }
 
 div.log-box {
-    // border: 1px solid green;
     position: absolute;
     width: calc(100% + 1px);
-    // height: 100%;
     bottom: 0px;
 }
 </style>

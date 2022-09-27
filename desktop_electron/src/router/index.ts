@@ -31,7 +31,7 @@ const routes: Array<RouteRecordRaw> = [
         name: "merge",
         meta: {
           hidden: false,
-          name: "拷贝合并",
+          name: "拷贝合并√",
         },
         component: () =>
           import("../views/app_copy_merge/CopyMergeIndex.vue"),
@@ -122,6 +122,17 @@ const routes: Array<RouteRecordRaw> = [
         meta: {
           hidden: false,
           name: "删除后缀",
+        },
+        component: () =>
+          import("../views/app_remove_difference/RemoveDifferenceIndex.vue"),
+      },
+      // 应用：删除关键字
+      {
+        path: "/keyword",
+        name: "keyword",
+        meta: {
+          hidden: false,
+          name: "删除关键字",
         },
         component: () =>
           import("../views/app_remove_difference/RemoveDifferenceIndex.vue"),

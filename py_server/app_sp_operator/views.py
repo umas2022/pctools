@@ -2,6 +2,8 @@ import time
 from channels.generic.websocket import WebsocketConsumer
 
 from utils.stdout_catcher import *
+from py_script.sp_manager import SpManager
+from py_script.sp_manager import logger
 
 
 class SpOperator(WebsocketConsumer):
@@ -19,14 +21,24 @@ class SpOperator(WebsocketConsumer):
         :param text_data: 客户端发送的消息
         :return:
         """
-        print(text_data)
+        logger.info("get msg:")
+        logger.info(text_data)
+        get_data = json.loads(text_data)
+        get_function = get_data["function"]
 
         # 定义工作主函数
         def main_func() -> None:
+            logger.set_mode("frontend")
+            sm = SpManager()
+            if not get_function in dir(sm):
+                logger.error("sp-manager: unexpected function - %s" % get_function)
+                return
             now = time.process_time()
-            for i in range(10000):
-                print(i)
-            print("py-time: %s ms" % str(int(1000 * (time.process_time() - now))))
+            called_func = getattr(sm, get_function)
+            called_func(json_set=get_data)
+            time_spent_ms = int(1000 * (time.process_time() - now))
+            time_spent = str(time_spent_ms/1000)+"s" if time_spent_ms > 1000 else str(time_spent_ms)+"ms"
+            logger.info("time-spent: %s" % time_spent)
 
         # 定义日志截取函数
         def log_func(log):

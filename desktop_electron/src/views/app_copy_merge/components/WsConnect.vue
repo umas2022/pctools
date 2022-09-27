@@ -10,9 +10,13 @@
   
   // 传参
   const data_set = inject("data_set")
+  const log_height = inject("log_height")
   
   // 开始按钮
   const start = () => {
+    log_height.data = 300
+    log_height.time = Date.now()
+
     const send_data = JSON.parse(JSON.stringify(data_set));
     delete send_data.res
     console.log("ws connecting ...");
@@ -23,7 +27,6 @@
     };
     wsdemo.onmessage = (e) => {
       data_set.res = e.data;
-      // console.log(e.data)
     };
   };
   

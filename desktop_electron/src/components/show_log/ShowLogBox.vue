@@ -3,18 +3,25 @@
         <!-- 右上角清空按钮 -->
         <div class="show-log-clear" @click="clearbox">
             <el-icon :size="20">
-                <el-icon>
-                    <Brush />
-                </el-icon>
+                <Brush />
+            </el-icon>
+        </div>
+        <!-- 右上角最小化 -->
+        <div class="show-log-mini" @click="setFixedHeight(30)">
+            <el-icon :size="25">
+                <arrow-down />
+            </el-icon>
+        </div>
+        <!-- 右上角最大化 -->
+        <div class="show-log-max" @click="setFixedHeight(300)">
+            <el-icon :size="25">
+                <arrow-up />
             </el-icon>
         </div>
         <!-- 右上角高度调整条 -->
-        <div class="show-log-resizer" @mousedown="resizeStart" @mouseup="resizeStop" @mouseleave="resizeStop"
-            @click="resizeStop">
-            <el-icon :size="30">
-                <arrow-down-bold />
-            </el-icon>
-        </div>
+        <!-- <div class="show-log-resizer" @mousedown="resizeStart" @mouseup="resizeStop" @mouseleave="resizeStop"
+            @click="resizeStop"> -->
+        <div class="show-log-resizer" @mousedown="resizeStart" @click="resizeStop"> </div>
 
         <!-- 主框体 -->
         <div class="show-log-body" :style="{ height: boxHeight + 'px' }">
@@ -31,13 +38,18 @@
 </template>
   
 <script lang="ts" setup>
-import { ref } from "@vue/reactivity";
+import { ref, onMounted } from "vue";
 import { onUpdated, watch } from "@vue/runtime-core";
 import type { ElScrollbar } from "element-plus";
 
 // 父组件传参
 const props = defineProps<{
     data: string;
+    // height需要带一个时间戳，否则相同的data不能触发watch
+    height: {
+        data: number;
+        time: number;
+    };
 }>();
 
 // 显示文本
@@ -56,49 +68,73 @@ const maxpos = ref(0);
 const innerRef = ref<HTMLDivElement>();
 const scrollbarRef = ref<InstanceType<typeof ElScrollbar>>();
 const gotoBottom = () => {
-    maxpos.value = innerRef.value.clientHeight - 185;
-    scrollbarRef.value.setScrollTop(maxpos.value);
+    maxpos.value = innerRef.value!.clientHeight - 185;
+    scrollbarRef.value!.setScrollTop(maxpos.value);
 };
 // 监听传参变化，刷新文本显示和滚动条位置
-watch(props, () => {
+watch(() => props.data, () => {
+    // 数组合并
     logtext.value.push(...JSON.parse(props.data))
     while (logtext.value.length > maxrow.value) {
         logtext.value.shift();
     }
     gotoBottom();
-});
+}, { deep: true });
 
+// 组件更新时触发：滚动至底部
 onUpdated(() => {
     gotoBottom()
 })
 
 // 鼠标拖动框高度
-var rawHeight = 200;
+var rawHeight = 30;
 const boxHeight = ref(rawHeight);
 // 记录初始高度
 var heightRec = 0;
-// 高度重设
-const resizeFunc = (evt) => {
+// 鼠标拖动设定高度
+const resizeFunc = (evt: MouseEvent) => {
     let heightNow = evt.y;
     boxHeight.value = rawHeight - heightNow + heightRec;
-    console.log(heightNow)
+    const body_div = document.querySelector<HTMLElement>(".show-log-body")!
+    body_div.style.cssText += " transition: 0s"
 };
-// 高度初始化
-const resizeStart = (evt) => {
+// 鼠标拖动高度初始化
+const resizeStart = (evt: MouseEvent) => {
     heightRec = evt.y;
     window.addEventListener("mousemove", resizeFunc);
 };
-// 停止高度改变
+// 停止鼠标拖动高度改变
 const resizeStop = () => {
     rawHeight = boxHeight.value;
     window.removeEventListener("mousemove", resizeFunc);
+    const body_div = document.querySelector<HTMLElement>(".show-log-body")!
+    body_div.style.cssText += " transition: 0.5s"
 };
-// 监听高度变化，高度太小时直接触发结束
-watch(boxHeight, () => {
-    if (boxHeight.value < 100) {
-        resizeStop();
+// 直接设定高度
+const setFixedHeight = (height:number)=>{
+    boxHeight.value = height
+    rawHeight = height
+}
+
+// 监听传参变化，刷新窗口高度
+watch(() => props.height, () => {
+    // 数组合并
+    setFixedHeight(props.height.data)
+    gotoBottom();
+}, { deep: true });
+
+// // 监听高度变化，高度太小时直接触发结束
+// watch(boxHeight, () => {
+//     if (boxHeight.value < 100) {
+//         resizeStop();
+//     }
+// });
+
+onMounted(() => {
+    document.onmouseup = () => {
+        resizeStop()
     }
-});
+})
 
 // 测试按钮
 const testbutton = () => {
@@ -119,6 +155,7 @@ div.main-show-log {
         border: 2px solid rgba(128, 128, 128, 0.342);
         background-color: rgba(255, 255, 255, 0.788);
         border-radius: 5px;
+        transition: 0.5s;
     }
 }
 
@@ -130,18 +167,7 @@ div.text {
     margin-bottom: 5px;
 }
 
-// 尺寸拖动条
-.show-log-resizer {
-    position: absolute;
-    z-index: 2;
-    right: 50px;
-    background-color: rgba(106, 106, 106, 0.23);
-    border-radius: 5px;
-    height: 30px;
-    width: 100px;
-    transform: rotate(180deg);
-    cursor: pointer;
-}
+
 
 // 清空按钮
 .show-log-clear {
@@ -156,6 +182,55 @@ div.text {
 
     .el-icon {
         padding-top: 3px;
+    }
+}
+
+// 最小化按钮
+.show-log-mini {
+    position: absolute;
+    z-index: 2;
+    right: 50px;
+    background-color: rgba(106, 106, 106, 0.23);
+    border-radius: 5px;
+    height: 30px;
+    width: 30px;
+    cursor: pointer;
+
+    .el-icon {
+        padding-top: 3px;
+    }
+}
+
+// 最大化按钮
+.show-log-max {
+    position: absolute;
+    z-index: 2;
+    right: 85px;
+    background-color: rgba(106, 106, 106, 0.23);
+    border-radius: 5px;
+    height: 30px;
+    width: 30px;
+    cursor: pointer;
+
+    .el-icon {
+        padding-top: 2px;
+    }
+}
+
+// 尺寸拖动条
+.show-log-resizer {
+    position: absolute;
+    z-index: 2;
+    right: 120px;
+    background-color: rgba(106, 106, 106, 0.23);
+    border-radius: 5px;
+    height: 10px;
+    width: 300px;
+    transform: rotate(180deg);
+    cursor: n-resize;
+
+    .el-icon {
+        top: 0px;
     }
 }
 </style>

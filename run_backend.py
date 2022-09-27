@@ -4,8 +4,8 @@ import sys
 # # 激活虚拟环境
 # print("\nactivate virtualenv by: source env/bin/activate\n")
 
-win_path = r"D:\s-linux\project\onebox\py_server"
-wsl_path = r"/mnt/d/s-linux/project/onebox/py_server"
+win_path = r"D:\s-linux\project\pctools\py_server"
+wsl_path = r"/mnt/d/s-linux/project/pctools/py_server"
 py_version = "python"
 # py_version = "python3"
 print("python version in use: %s" % py_version)
