@@ -45,7 +45,7 @@ const routes: Array<RouteRecordRaw> = [
           name: "完全备份",
         },
         component: () =>
-          import("../views/app_copy_merge/CopyMergeIndex.vue"),
+          import("../views/app_copy_backup/CopyBackupIndex.vue"),
       },
       // 应用：拷贝检查
       {
@@ -139,6 +139,17 @@ const routes: Array<RouteRecordRaw> = [
       }
     ]
   },
+    // 应用：设置页
+    {
+      path: "/setting",
+      name: "setting",
+      meta: {
+        hidden: false,
+        name: "设置",
+      },
+      component: () =>
+        import("../views/app_settings/AppSettings.vue"),
+    },
 
   // 应用：图片浏览器
   {
@@ -164,17 +175,7 @@ const routes: Array<RouteRecordRaw> = [
   },
 
 
-  // 应用：设置页
-  {
-    path: "/setting",
-    name: "setting",
-    meta: {
-      hidden: false,
-      name: "设置",
-    },
-    component: () =>
-      import("../views/app_settings/AppSettings.vue"),
-  },
+
   // dev 开发中合集
   {
     path: "/dev",

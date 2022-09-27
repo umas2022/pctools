@@ -1,0 +1,20 @@
+{
+    "title": "完全备份",
+    "info": [
+        "1.完全备份",
+        "2.不写说明"
+    ],
+    "input": [
+        {
+            "key": "path_in",
+            "label":"输入路径",
+            "value":"D:\\s-linux\\project\\test_file\\test_in"
+        },
+        {
+            "key": "path_out",
+            "label":"输出路径",
+            "value":"D:\\s-linux\\project\\test_file\\test_out"
+        }
+    ],
+    "function": "run_copy_backup"
+}
