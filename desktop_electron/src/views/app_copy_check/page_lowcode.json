@@ -1,5 +1,5 @@
 {
-    "title": "拷贝合并",
+    "title": "结果检查",
     "info": [
         "1.不写说明"
     ],
@@ -20,5 +20,5 @@
             "value":""
         }
     ],
-    "function": "run_copy_merge"
+    "function": "run_copy_check"
 }

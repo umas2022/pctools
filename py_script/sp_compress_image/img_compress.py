@@ -120,7 +120,18 @@ class ImgCompress():
 
     def run(self):
         '''开始处理'''
-        logger.info("video compress function start ...")
+        logger.info("image compress function start ...")
+        logger.write("image compress")
+        # 计数
+        total = 0
+        for full_in in Traverse().get_file(self.path_in):
+            if full_in.split(".")[-1] in self.handleFormat or full_in.split(".")[-1] in self.transFormat:
+                total += 1
+                name = full_in.replace("\\", "/").split("/")[-1]
+                logger.info("counting : %d\t%s" % (total, name))
+        logger.write("total : %d\n" % total)
+        # 开始
+        jetzt = 0
         for full_in in Traverse().get_file(self.path_in):
             full_in = full_in.replace("\\", "/")
             # 单文件名
@@ -130,4 +141,6 @@ class ImgCompress():
             # 完整输出路径
             full_out = os.path.join(self.path_out, name_upper_dir).replace("\\", "/")
             state = self.__img_filter(full_in, full_out)
-            logger.info("%s\t%s" % (state, full_in))
+            if state:
+                jetzt +=1
+                logger.info("%s\t%d/%d\t%s" % (state, jetzt, total, full_in))

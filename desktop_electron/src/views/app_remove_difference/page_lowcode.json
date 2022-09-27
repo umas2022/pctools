@@ -1,24 +1,24 @@
 {
-    "title": "拷贝合并",
+    "title": "删除差异",
     "info": [
         "1.不写说明"
     ],
     "input": [
         {
-            "key": "path_in",
-            "label":"输入路径",
+            "key": "base_path",
+            "label":"基准路径",
             "value":"D:\\s-linux\\project\\test_file\\test_in"
         },
         {
-            "key": "path_out",
-            "label":"输出路径",
+            "key": "del_path",
+            "label":"删除路径",
             "value":"D:\\s-linux\\project\\test_file\\test_out"
         },
         {
             "key": "path_log",
             "label":"日志路径",
-            "value":""
+            "value":"D:\\s-linux\\project\\test_file\\test_out\\log"
         }
     ],
-    "function": "run_copy_merge"
+    "function": "run_remove_difference"
 }

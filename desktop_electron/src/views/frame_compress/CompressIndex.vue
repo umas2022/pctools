@@ -12,5 +12,7 @@
 // 全局居中
 div.main {
   text-align: center;
+  height: calc(100% - 90px);
+
 }
 </style>

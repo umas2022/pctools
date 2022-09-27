@@ -31,7 +31,7 @@ const routes: Array<RouteRecordRaw> = [
         name: "merge",
         meta: {
           hidden: false,
-          name: "拷贝合并√",
+          name: "拷贝合并",
         },
         component: () =>
           import("../views/app_copy_merge/CopyMergeIndex.vue"),
@@ -53,10 +53,10 @@ const routes: Array<RouteRecordRaw> = [
         name: "check",
         meta: {
           hidden: false,
-          name: "拷贝检查",
+          name: "结果检查",
         },
         component: () =>
-          import("../views/app_copy_merge/CopyMergeIndex.vue"),
+          import("../views/app_copy_check/CopyCheckIndex.vue"),
       }
     ]
   },
@@ -90,7 +90,7 @@ const routes: Array<RouteRecordRaw> = [
           name: "图片压缩",
         },
         component: () =>
-          import("../views/app_compress_video/CompressVideoIndex.vue"),
+          import("../views/app_compress_image/CompressImageIndex.vue"),
       }
     ]
   },
@@ -124,7 +124,7 @@ const routes: Array<RouteRecordRaw> = [
           name: "删除后缀",
         },
         component: () =>
-          import("../views/app_remove_difference/RemoveDifferenceIndex.vue"),
+          import("../views/app_remove_suffix/RemoveSuffixIndex.vue"),
       },
       // 应用：删除关键字
       {
@@ -135,7 +135,7 @@ const routes: Array<RouteRecordRaw> = [
           name: "删除关键字",
         },
         component: () =>
-          import("../views/app_remove_difference/RemoveDifferenceIndex.vue"),
+          import("../views/app_remove_keyword/RemoveKeywordIndex.vue"),
       }
     ]
   },
@@ -145,7 +145,7 @@ const routes: Array<RouteRecordRaw> = [
       name: "setting",
       meta: {
         hidden: false,
-        name: "设置",
+        name: "-设置-",
       },
       component: () =>
         import("../views/app_settings/AppSettings.vue"),
@@ -161,17 +161,6 @@ const routes: Array<RouteRecordRaw> = [
     },
     component: () =>
       import("../views/app_img_browser/BrowserIndex.vue"),
-  },
-  // 应用：python tp 批处理
-  {
-    path: "/tp_batch",
-    name: "tp_batch",
-    meta: {
-      hidden: false,
-      name: "tp批处理",
-    },
-    component: () =>
-      import("../views/app_tp_batch/PythonTp.vue"),
   },
 
 

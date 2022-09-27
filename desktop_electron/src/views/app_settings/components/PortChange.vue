@@ -13,7 +13,6 @@
                 <div class="info" v-if="setInfoFlagPort">
                     <span>开发模式：localhost:4091 / </span>
                     <span>生产模式：localhost:4090</span> <br />
-                    <span>修好了，现在改完不用刷新</span>
                 </div>
                 <!-- 分割线 -->
                 <div style="width: 80%; margin: 0 auto">
@@ -33,7 +32,6 @@ const setInfoFlagPort = ref(false);
 const setValuePort = ref(false);
 onMounted(() => {
     let getPort = Cookies.get("port");
-    console.log(getPort);
     if (getPort == 4091) {
         setValuePort.value = true;
     }

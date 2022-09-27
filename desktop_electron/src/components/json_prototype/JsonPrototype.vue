@@ -1,6 +1,6 @@
 <template>
     <div class="prototype-main">
-        <el-button type="danger" @click="test_button">test</el-button>
+        <!-- <el-button type="danger" @click="test_button">test</el-button> -->
         <!-- 标题栏 -->
         <h3>{{pg_title}}
             <div class="info-icon"

@@ -42,7 +42,7 @@ class logRaw:
             if not os.path.exists(self.path):
                 os.makedirs(self.path)
             time_prefix = time.strftime("%Y-%m-%d_%H.%M", time.localtime())
-            self.file = os.path.join(self.path, time_prefix+'.log')
+            self.file = os.path.join(self.path, time_prefix + '.log')
 
             formatter_file = logging.Formatter(
                 '%(asctime)s - %(filename)s[line:%(lineno)d] - %(levelname)s: %(message)s')
@@ -90,37 +90,37 @@ class LogRepack:
         if not path == "":
             self.raw_logger.set_path(path)
 
-    def write(self,inputstr):
-        '''直接写入log文件，输入值被str()函数包裹，尾部换行'''
+    def write(self, inputstr: any):
+        '''直接写入log文件，输入值被str()函数包裹，未指定log文件时print错误并跳过'''
         if self.raw_logger.file == "":
-            print("\n\n\t===> !!! no log file specified, logger.write() exit !!! <===\n\n")
+            print("\nlogger.write exit: no log file specified\n")
             return
         with open(self.raw_logger.file, "a") as log_file:
-            log_file.write(str(inputstr)+"\n")
+            log_file.write(str(inputstr) + "\n")
 
     def debug(self, inputstr):
         if self.mode == "terminal":
             self.logger.debug(inputstr)
         elif self.mode == "frontend":
-            print("debug : "+inputstr)
+            print("debug : " + inputstr)
 
     def info(self, inputstr):
         if self.mode == "terminal":
             self.logger.info(inputstr)
         elif self.mode == "frontend":
-            print("info : "+inputstr)
+            print("info : " + inputstr)
 
     def warning(self, inputstr):
         if self.mode == "terminal":
             self.logger.warning(inputstr)
         elif self.mode == "frontend":
-            print("warning : "+inputstr)
+            print("warning : " + inputstr)
 
     def error(self, inputstr):
         if self.mode == "terminal":
             self.logger.error(inputstr)
         elif self.mode == "frontend":
-            print("error : "+inputstr)
+            print("error : " + inputstr)
 
 
 # 只能实例化一次，避免handler的重复添加，导致多重输出

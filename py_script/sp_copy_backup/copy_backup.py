@@ -10,41 +10,40 @@ from utils_logger.log import logger_re as logger
 from utils_tools.traverse import Traverse
 
 
-class CopyMerge():
-    def __init__(self, path_in, path_out,path_log="") -> None:
-        self.path_in = path_in.replace("\\", "/")
-        self.path_out = path_out.replace("\\", "/")
+class CopyBackup():
+    def __init__(self, path_in, path_out,path_log = "") -> None:
+        self.path_in = str(path_in).replace("\\", "/")
+        self.path_out = str(path_out).replace("\\", "/")
         logger.raw_logger.set_path(str(path_log).replace("\\", "/"))
 
     def __copy_filter(self, methodPathIn, methodPathOut):
-        '''处理方法：拷贝合并'''
+        '''处理方法：完全备份'''
+
+        # 创建输出目录结构
         name = methodPathIn.split("/")[-1]
-        name_upper_dir = methodPathIn.replace(self.path_in + "/", "")
-        new_name = ".".join(name_upper_dir.split("/"))
-        full_out = os.path.join(self.path_out, new_name).replace("\\", "/")
-
-        if not os.path.exists(self.path_out):
+        dir_out = methodPathOut.replace("/" + name, "")
+        if not os.path.exists(dir_out):
             try:
-                os.makedirs(self.path_out)
+                os.makedirs(dir_out)
             except Exception as e:
-                logger.error("ToOne - MAKEDIR ERROR !!! :%s" % e)
-                logger.error("DIR : %s" % self.path_out)
+                logger.error("sp-ImgCut - MAKEDIR ERROR !!! :%s" % e)
+                logger.error("file : %s" % dir_out)
 
-        if os.path.isfile(full_out):
+        if os.path.isfile(methodPathOut):
             return "pass"
         else:
             try:
-                copyfile(methodPathIn, full_out)
+                copyfile(methodPathIn, methodPathOut)
                 return "copy"
             except Exception as e:
-                logger.error("ToOne - COPY ERROR !!! :%s" % e)
-                logger.error("DIR : %s" % methodPathIn)
+                logger.error("CopyBackup - COPY ERROR !!! :%s" % e)
+                logger.error("file : %s" % methodPathIn)
                 return "error"
 
     def run(self):
         '''开始处理'''
-        logger.info("copy merge function start ...")
-        logger.write("copy merge")
+        logger.info("copy backup function start ...")
+        logger.write("copy backup")
         # 计数
         total = 0
         for full_in in Traverse().get_file(self.path_in):

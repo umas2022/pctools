@@ -101,6 +101,7 @@ class VideoCompress():
     def run(self):
         '''开始处理'''
         logger.info("video compress function start ...")
+        logger.write("video compress")
         # 计数
         total = 0
         for full_in in Traverse().get_file(self.path_in):

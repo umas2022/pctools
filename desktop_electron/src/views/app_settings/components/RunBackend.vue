@@ -15,7 +15,7 @@
         </div>
         <!-- 折叠info栏 -->
         <div class="info" v-if="setInfoFlagPort">
-            <span>脚本位置：D:\s-linux\project\onebox\run_backend.py</span> <br>
+            <span>脚本位置：D:\s-linux\project\pctools\run_backend.py</span> <br>
             <span>默认启动4090端口</span> <br>
             <span>后端应该在windows启动项中随开机启动，启动项位置： </span> <br>
             <span>C:\Users\umas\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\startup.vbs</span> <br />

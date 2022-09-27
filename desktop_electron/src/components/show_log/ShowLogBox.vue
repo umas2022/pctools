@@ -96,7 +96,9 @@ const resizeFunc = (evt: MouseEvent) => {
     let heightNow = evt.y;
     boxHeight.value = rawHeight - heightNow + heightRec;
     const body_div = document.querySelector<HTMLElement>(".show-log-body")!
-    body_div.style.cssText += " transition: 0s"
+    if (body_div) {
+        body_div.style.cssText += " transition: 0s"
+    }
 };
 // 鼠标拖动高度初始化
 const resizeStart = (evt: MouseEvent) => {
@@ -108,10 +110,12 @@ const resizeStop = () => {
     rawHeight = boxHeight.value;
     window.removeEventListener("mousemove", resizeFunc);
     const body_div = document.querySelector<HTMLElement>(".show-log-body")!
-    body_div.style.cssText += " transition: 0.5s"
+    if (body_div) {
+        body_div.style.cssText += " transition: 0.5s"
+    }
 };
 // 直接设定高度
-const setFixedHeight = (height:number)=>{
+const setFixedHeight = (height: number) => {
     boxHeight.value = height
     rawHeight = height
 }

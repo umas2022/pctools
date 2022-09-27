@@ -1,5 +1,9 @@
 <template>
-    <div>
-        <h3>删除差异</h3>
+    <div style="height:100%">
+        <JsonPrototype :data=lowcode />
     </div>
 </template>
+<script setup lang="ts">
+import JsonPrototype from "@/components/json_prototype/JsonPrototype.vue"
+const lowcode = require("./page_lowcode.json") 
+</script>
