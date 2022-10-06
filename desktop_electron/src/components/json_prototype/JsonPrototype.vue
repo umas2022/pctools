@@ -17,10 +17,19 @@
             </div>
         </el-dialog>
         <!-- 输入框 -->
-        <div class="input-box">
+        <div class="input-box" v-if="as_input">
             <div class="input-each" v-for="item in as_input">
                 {{item.label}}
                 <el-input v-model="item.value" clearable></el-input>
+            </div>
+        </div>
+        <!-- 选择框 -->
+        <div class="select-box" v-if="as_select">
+            <div class="input-each" v-for="item in as_select">
+                {{item.label}}
+                <el-select v-model="item.selected">
+                    <el-option v-for="each in item.option" :label="each.label" :value="each.value" />
+                </el-select>
             </div>
         </div>
 
@@ -52,6 +61,17 @@ type type_input = {
     label: string,
     value: string
 }
+// 选择框
+type select_option = {
+    key: string,
+    label: string
+}
+type type_select = {
+    key: string,
+    label: string,
+    selected: string,
+    option: Array<select_option>
+}
 // 消息发送
 type type_send = {
     function: string
@@ -62,6 +82,7 @@ const props = defineProps<{
         title: string,
         info: object,
         input: Array<type_input>,
+        select: Array<type_select>,
         function: string
     };
 }>();
@@ -71,11 +92,13 @@ const props = defineProps<{
 // json页面参数取出
 const pg_title = props.data.title
 const pg_info = props.data.info
-const pg_input = props.data.input
+const pg_input = props.data.input ? props.data.input : null
+const pg_select = props.data.select ? props.data.select : null
 const pg_function = props.data.function
 
 // json页面参数赋值
 const as_input = ref(JSON.parse(JSON.stringify(pg_input)))
+const as_select = ref(JSON.parse(JSON.stringify(pg_select)))
 
 // help页弹窗控制
 const dialogVisible = ref(false);
@@ -92,11 +115,22 @@ const start = () => {
     log_height.time = Date.now()
 
     const send_data: type_send = { function: pg_function }
-    as_input.value.forEach((item: type_input) => {
-        let add_data: any = {}
-        add_data[item.key] = item.value
-        Object.assign(send_data,add_data)
-    });
+    if (as_input.value) {
+        as_input.value.forEach((item: type_input) => {
+            let add_data: any = {}
+            add_data[item.key] = item.value
+            Object.assign(send_data, add_data)
+        });
+    }
+    if (as_select.value) {
+        as_select.value.forEach((item: type_select) => {
+            let add_data: any = {}
+            add_data[item.key] = item.selected
+            Object.assign(send_data, add_data)
+        })
+    }
+
+
     console.log(send_data)
     console.log("ws connecting ...");
 
@@ -122,10 +156,20 @@ div.prototype-main {
     text-align: center;
 }
 
-.el-input {
-    width: 50%;
-    padding: 10px;
+div.input-box {
+    .el-input {
+        width: 50%;
+        padding: 10px;
+    }
 }
+
+div.select-box {
+    .el-select {
+        width: calc(50% - 20px);
+        padding: 10px;
+    }
+}
+
 
 div.log-box {
     position: absolute;

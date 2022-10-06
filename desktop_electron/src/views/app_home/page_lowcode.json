@@ -1,0 +1,24 @@
+{
+    "title": "快捷功能入口",
+    "info": [
+        "1.不写说明"
+    ],
+    "select": [
+        {
+            "key": "pre_key",
+            "label": "选择方法",
+            "selected":"samu_image_compress",
+            "option": [
+                {
+                    "value": "samu_image_compress",
+                    "label": "samu图片压缩备份"
+                },
+                {
+                    "value": "samu_video_compress",
+                    "label": "samu视频压缩备份"
+                }
+            ]
+        }
+    ],
+    "function": "quick_start"
+}

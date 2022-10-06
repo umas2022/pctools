@@ -2,9 +2,12 @@
 create: 2022.9.20
 
 sp包入口
+每个函数除基本输入外都配备json_set输入，用于后端直接调用
 '''
 
 import json
+import os
+import sys
 from utils_logger.log import logger_re as logger
 from sp_compress_video.video_compress import VideoCompress
 from sp_compress_image.img_compress import ImgCompress
@@ -117,9 +120,13 @@ class SpManager():
         rs = RemoveSuffix(path_in, suffix, path_log)
         rs.run()
 
-    def quick_start(self, pre_key: str):
+    def quick_start(self, pre_key="",json_set = {}):
         '''使用preset.json中的预设参数快速运行函数'''
-        preset_dic = json.load(open("./preset.json", "r", encoding="utf-8"))
+        if not json_set == {}:
+            pre_key = json_set['pre_key']
+        script_path = os.path.split(os.path.realpath(__file__))[0]
+        preset_path = os.path.join(script_path,"./preset.json")
+        preset_dic = json.load(open(preset_path, "r", encoding="utf-8"))
         if not pre_key in preset_dic:
             logger.error("sp-manager: unexpected key - %s" % pre_key)
             exit(0)
@@ -129,3 +136,5 @@ class SpManager():
             exit(0)
         called_func = getattr(self, preset_one["function"])
         called_func(json_set=preset_one["input"])
+
+

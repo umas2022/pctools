@@ -83,6 +83,7 @@ class ImgCompress():
         '''处理方法分类器'''
         # 创建输出目录结构
         name = methodPathIn.split("/")[-1]
+        suffix = methodPathOut.split(".")[-1]
         dir_out = methodPathOut.replace("/" + name, "")
         if not os.path.exists(dir_out):
             try:
@@ -91,7 +92,6 @@ class ImgCompress():
                 logger.error("sp-ImgCut - MAKEDIR ERROR !!! :%s" % e)
                 logger.error("file : %s" % dir_out)
 
-        imgSizeRaw = os.path.getsize(methodPathIn) / 1024
         # 输出路径已存在格式在拷贝列表中的文件，或满足尺寸条件的图片
         if os.path.isfile(methodPathOut):
             imgSizeOut = os.path.getsize(methodPathOut) / 1024
@@ -100,19 +100,22 @@ class ImgCompress():
             # 若已存在图片尺寸不满足条件，则删除该图片
             else:
                 try:
-                    os.remove(methodPathOut)
+                    if suffix in self.handleFormat or suffix in self.transFormat:
+                        os.remove(methodPathOut)
                 except Exception as e:
                     logger.error(
                         "error-001 : ImgCut - remove png error !!! :%s" % e)
                     logger.error("path : %s" % dir_out)
+
+        imgSizeRaw = os.path.getsize(methodPathIn) / 1024
         # 原图尺寸满足，直接拷贝
         if imgSizeRaw < self.maxSizeKB:
             return self.__method_copy(methodPathIn, methodPathOut)
         # 转换列表
-        elif methodPathOut.split(".")[-1] in self.transFormat:
+        elif suffix in self.transFormat:
             return self.__method_trans(methodPathIn, methodPathOut)
         # 压缩列表
-        elif methodPathOut.split(".")[-1] in self.handleFormat:
+        elif suffix in self.handleFormat:
             return self.__method_cut(methodPathIn, methodPathOut)
         # 其他格式
         else:
