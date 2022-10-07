@@ -139,6 +139,29 @@ const routes: Array<RouteRecordRaw> = [
       }
     ]
   },
+    // 重命名功能合集
+    {
+      path: "/rename",
+      name: "rename",
+      meta: {
+        hidden: false,
+        name: "-命名-",
+      },
+      component: () => import("../views/frame_rename/RenameIndex.vue"),
+      children: [
+        // 应用：基础重命名
+        {
+          path: "/basic",
+          name: "basic",
+          meta: {
+            hidden: false,
+            name: "基础重命名",
+          },
+          component: () =>
+            import("../views/app_rename_basic/RenameIndex.vue"),
+        }
+      ]
+    },
     // 应用：设置页
     {
       path: "/setting",

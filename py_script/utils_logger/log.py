@@ -64,7 +64,7 @@ class logRaw:
 class LogRepack:
     '''
     为满足直接调用和前端调用的不同需求，对输出函数进行再封装
-    frontend模式用于前端请求，内部为print函数，可以截取标准输出发送至前端
+    frontend模式用于前端请求,内部为print函数,可以截取标准输出发送至前端,默认只在log文件中写入error和warning
     terminal模式输出原版logger到控制台
 
     logger = LogRepack("frontend")
@@ -115,12 +115,14 @@ class LogRepack:
             self.logger.warning(inputstr)
         elif self.mode == "frontend":
             print("warning : " + inputstr)
+            self.write("warning : " + inputstr)
 
     def error(self, inputstr):
         if self.mode == "terminal":
             self.logger.error(inputstr)
         elif self.mode == "frontend":
             print("error : " + inputstr)
+            self.write("error : " + inputstr)
 
 
 # 只能实例化一次，避免handler的重复添加，导致多重输出

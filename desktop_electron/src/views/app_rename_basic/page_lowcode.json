@@ -1,0 +1,53 @@
+{
+    "title": "基础重命名功能",
+    "version": "v2",
+    "info": [
+        "1.使用v2版本的原型页,支持输入框和选择框混排"
+    ],
+    "page": [
+        {
+            "type": "select",
+            "data": {
+                "key": "use_func",
+                "label": "选择方法",
+                "value": "add_prefix",
+                "option": [
+                    {
+                        "value": "add_prefix",
+                        "label": "添加前缀"
+                    },
+                    {
+                        "value": "del_prefix",
+                        "label": "删除前缀"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "input",
+            "data": {
+                "key": "path_in",
+                "label": "基准路径",
+                "value": "D:\\s-linux\\project\\test_file\\test_in"
+            }
+        },
+        {
+            "type": "input",
+            "data": {
+                "key": "path_log",
+                "label": "日志路径",
+                "placeholder":"置空不使用log",
+                "value": ""
+            }
+        },
+        {
+            "type": "input",
+            "data": {
+                "key": "add_in",
+                "label": "附加参数",
+                "value": ""
+            }
+        }
+    ],
+    "function": "run_rename_basic"
+}
