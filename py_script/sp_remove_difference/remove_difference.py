@@ -51,11 +51,13 @@ class RemoveDifference():
         '''开始处理'''
         logger.info("remove difference function start ...")
         # 文件夹删除
+        logger.write("remove difference - dir")
         total = 0
         for full_del in Traverse().get_dir(self.del_path):
             total += 1
             name = full_del.replace("\\", "/").split("/")[-1]
             logger.info("dir counting : %d\t%s" % (total, name))
+        logger.write("total dir : %d\n" % total)
         # 开始
         jetzt = 0
         for full_del in Traverse().get_dir(self.del_path):
@@ -72,11 +74,13 @@ class RemoveDifference():
 
         # 文件删除
         # 计数
+        logger.write("remove difference - file")
         total = 0
         for full_del in Traverse().get_file(self.del_path):
             total += 1
             name = full_del.replace("\\", "/").split("/")[-1]
             logger.info("file counting : %d\t%s" % (total, name))
+        logger.write("total file : %d\n" % total)
         # 开始
         jetzt = 0
         for full_del in Traverse().get_file(self.del_path):

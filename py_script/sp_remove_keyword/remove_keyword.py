@@ -36,12 +36,14 @@ class RemoveKeyword():
     def run(self):
         '''开始处理'''
         logger.info("remove keyword function start ...")
+        logger.write("remove keyword")
         # 计数
         total = 0
         for full_in in Traverse().get_file(self.path_in):
             total += 1
             name = full_in.replace("\\", "/").split("/")[-1]
             logger.info("counting : %d\t%s" % (total, name))
+        logger.write("total : %d\n" % total)
         # 开始
         jetzt = 0
         for full_in in Traverse().get_file(self.path_in):

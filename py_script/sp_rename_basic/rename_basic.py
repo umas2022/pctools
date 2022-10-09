@@ -69,7 +69,7 @@ class RenameBasic():
     def run(self):
         '''开始处理'''
         logger.info("rename function start ...")
-        logger.write("rename")
+        logger.write("rename %s" % self.use_func)
         # 计数
         total = 0
         for full_in in Traverse().get_file(self.path_in):

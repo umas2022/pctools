@@ -1,23 +1,38 @@
 {
     "title": "快捷功能入口",
+    "version": "v2",
     "info": [
         "1.不写说明"
     ],
-    "select": [
+    "page": [
         {
-            "key": "pre_key",
-            "label": "选择方法",
-            "selected":"samu_image_compress",
-            "option": [
-                {
-                    "value": "samu_image_compress",
-                    "label": "samu图片压缩备份"
-                },
-                {
-                    "value": "samu_video_compress",
-                    "label": "samu视频压缩备份"
-                }
-            ]
+            "type": "select",
+            "data": {
+                "key": "pre_key",
+                "label": "选择方法",
+                "value": "samu_compress",
+                "option": [
+                    {
+                        "value": "samu_compress",
+                        "label": "samu全压缩"
+                    },
+                    {
+                        "value": "samu_image_compress",
+                        "label": "samu图片压缩备份"
+                    },
+                    {
+                        "value": "samu_video_compress",
+                        "label": "samu视频压缩备份"
+                    }
+                ],
+                "annotation": [
+                    "全压缩:视频压缩+图片压缩+反向对比删除",
+                    "==========",
+                    "图片压缩:大小上限3MB,目标:jpg,JPG,jpeg,bmp,BMP,jpe,JPEG,png,PNG",
+                    "==========",
+                    "视频压缩:码率上限1w kbps,cpu占用50%,目标mp4,MP4,wmv,webm,ogv, mkv, m4v, MTS, mov, avi"
+                ]
+            }
         }
     ],
     "function": "quick_start"
