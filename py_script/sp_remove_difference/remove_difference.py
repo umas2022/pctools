@@ -93,4 +93,4 @@ class RemoveDifference():
             # 完整输出路径
             full_base = os.path.join(self.base_path, name_upper_dir).replace("\\", "/")
             state = self.__remove_file(full_base, full_del)
-            logger.info("%s\t%d/%d\t%s" % (state, jetzt, total, full_del))
+            logger.info("rm-dif: %s\t%d/%d\t%s" % (state, jetzt, total, full_del))

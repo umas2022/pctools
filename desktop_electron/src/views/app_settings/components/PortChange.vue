@@ -25,24 +25,26 @@
 <script setup>
 import { onMounted, ref } from "vue";
 import useSvgIcon from "@/components/use_svg/useSvgIcon.vue";
-import Cookies from "js-cookie";
 
 // 开发模式port
 const setInfoFlagPort = ref(false);
 const setValuePort = ref(false);
 onMounted(() => {
-    let getPort = Cookies.get("port");
+    let getPort = localStorage.getItem("port")
     if (getPort == 4091) {
         setValuePort.value = true;
     }
 });
 const setFuncPort = () => {
     if (setValuePort.value == true) {
-        Cookies.set("port", "4091", { expires: 30 });
+        localStorage.setItem("port","4091")
     } else {
-        Cookies.set("port", "4090", { expires: 30 });
+        localStorage.setItem("port","4090")
+
     }
-};</script>
+    console.log("port in use : "+localStorage.getItem("port"))
+};
+</script>
 <style lang="scss" scoped>
 div.info-icon {
     display: inline-block;

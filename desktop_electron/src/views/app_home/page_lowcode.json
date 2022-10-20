@@ -23,6 +23,10 @@
                     {
                         "value": "samu_video_compress",
                         "label": "samu视频压缩备份"
+                    },
+                    {
+                        "value": "compress_test",
+                        "label": "测试用三步压缩"
                     }
                 ],
                 "annotation": [
@@ -32,6 +36,15 @@
                     "==========",
                     "视频压缩:码率上限1w kbps,cpu占用50%,目标mp4,MP4,wmv,webm,ogv, mkv, m4v, MTS, mov, avi"
                 ]
+            }
+        },
+        {
+            "type": "switch",
+            "data": {
+                "key": "terminal",
+                "label": "启用终端",
+                "value": true,
+                "annotation": "文件量大 / 并行运行 -> 建议使用终端"
             }
         }
     ],

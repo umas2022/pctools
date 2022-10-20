@@ -5,17 +5,16 @@
  */
 
 
-import Cookies from "js-cookie";
-
-
 /**
- * 本地后端端口号，在app_settings页面中存入cookie
+ * 本地后端端口号，在app_settings页面中存入localStorage
+ * 应用中应使用get_port函数获取最新的端口，而不是直接读取port变量
+ * （经测试打包后electron无法使用cookie）
  * 生产环境：4090
  * 开发环境：4091
  */
-export var port = Cookies.get("port") || 4090 
+export var port = localStorage.getItem("port") || 4090 
 export function get_port(){
-  return Cookies.get("port") || 4090 
+  return localStorage.getItem("port") || 4090 
 }
 
 /**

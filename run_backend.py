@@ -30,6 +30,7 @@ elif sys.argv[1] == "wsl":
 # 也可以直接输入端口号，开发模式使用端口4091
 else:
     port = sys.argv[1]
-    print("\n\tbackend use port: %s\n" % port)
+    print("\n\tbackend port: %s\n" % port)
     os.chdir("./py_server")
+    print("%s manage.py runserver 0.0.0.0:%s" % (py_version, port))
     os.system("%s manage.py runserver 0.0.0.0:%s" % (py_version, port))

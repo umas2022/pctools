@@ -1,23 +1,43 @@
 {
     "title": "图片压缩",
+    "version": "v2",
     "info": [
         "1.不写说明"
     ],
-    "input": [
+    "page": [
         {
-            "key": "path_in",
-            "label":"输入路径",
-            "value":"D:\\s-linux\\project\\test_file\\test_in"
+            "type": "input",
+            "data":{
+                "key": "path_in",
+                "label": "输入路径",
+                "value": "D:\\s-linux\\project\\test_file\\test_in"
+            }
         },
         {
-            "key": "path_out",
-            "label":"输出路径",
-            "value":"D:\\s-linux\\project\\test_file\\test_out"
+            "type": "input",
+            "data":{
+                "key": "path_out",
+                "label": "输出路径",
+                "value": "D:\\s-linux\\project\\test_file\\test_out"
+            }
         },
         {
-            "key": "path_log",
-            "label":"日志路径",
-            "value":"D:\\s-linux\\project\\test_file\\test_out\\log"
+            "type": "input",
+            "data":{
+                "key": "path_log",
+                "label": "日志路径",
+                "value": "D:\\s-linux\\project\\test_file\\test_out\\log",
+                "placeholder":"置空不使用日志"
+            }
+        },
+        {
+            "type": "switch",
+            "data": {
+                "key": "terminal",
+                "label": "启用终端",
+                "value": true,
+                "annotation": "文件量大 / 并行运行 -> 建议使用终端"
+            }
         }
     ],
     "function": "run_compress_image"

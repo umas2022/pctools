@@ -9,16 +9,20 @@
         <el-button type="primary" plain @click="run_be">启动</el-button>
         <el-button type="primary" plain @click="check_be">测试</el-button>
         <!-- python返回值 -->
-        <div v-if="show_res">
-            <el-button type="danger" plain @click="res_msg=[];show_res=false">clear</el-button>
-            <div v-for="item in res_msg">{{item}}</div>
+        <div class="res" v-if="show_res">
+            <el-scrollbar  always>
+                <el-button type="danger" plain size="small" @click="res_msg=[];show_res=false">clear</el-button>
+                <div class="msg" v-for="item in res_msg">
+                    <div style="display:inline-block">-></div>
+                    <div style="display:inline-block;padding-left: 10px;"></div>
+                    <div style="display:inline-block">{{item}}</div>
+                </div>
+            </el-scrollbar>
         </div>
         <!-- 折叠info栏 -->
         <div class="info" v-if="setInfoFlagPort">
-            <span>脚本位置：D:\s-linux\project\pctools\run_backend.py</span> <br>
-            <span>默认启动4090端口</span> <br>
-            <span>后端应该在windows启动项中随开机启动，启动项位置： </span> <br>
-            <span>C:\Users\umas\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\startup.vbs</span> <br />
+            <span>脚本位置：{{be_full}}</span> <br>
+            <span>默认端口4090</span> <br>
         </div>
         <!-- 分割线 -->
         <div style="width: 80%; margin: 0 auto">
@@ -32,7 +36,6 @@ import { onMounted, ref, computed } from "vue";
 import useSvgIcon from "@/components/use_svg/useSvgIcon.vue";
 import { ElMessage } from "element-plus";
 import { get_wsurl } from "../../../utils/api_config";
-import Cookies from "js-cookie";
 const { PythonShell } = window.require("python-shell");
 const path = window.require("path");
 
@@ -40,7 +43,7 @@ const path = window.require("path");
 const setInfoFlagPort = ref(false);
 
 // python调用
-const be_path = ref("D:\\s-linux\\project\\onebox")
+const be_path = ref("D:\\s-linux\\project\\pctools")
 const be_script = ref("run_backend.py")
 const be_full = computed(() => path.join(be_path.value, be_script.value))
 const res_msg = ref([])
@@ -51,6 +54,7 @@ const run_be = () => {
         mode: "text",
         pythonOptions: ["-u"], // get print results in real-time
         scriptPath: be_path.value,
+        // args: ["4091"],
         args: ["win"],
     };
     let pyshell = new PythonShell(be_script.value, options);
@@ -75,7 +79,7 @@ const check_be = () => {
     };
     wsdemo.onmessage = (e) => {
         // console.log(e.data)
-        if(e.data=="999"){
+        if (e.data == "999") {
             ElMessage.success("success")
         }
     };
@@ -88,5 +92,24 @@ div.info-icon {
     padding-left: 10px;
     padding-right: 20px;
     cursor: pointer;
+}
+
+div.res {
+    width: 80%;
+    margin: auto;
+    border: solid 3px gray;
+    border-radius: 10px;
+    position: relative;
+    white-space: nowrap;
+
+    .el-button {
+        position: absolute;
+        right: 0px;
+    }
+
+    .msg {
+        display: flex;
+        left: 0px;
+    }
 }
 </style>

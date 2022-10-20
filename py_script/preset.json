@@ -52,8 +52,8 @@
             }
         ]
     },
-    "samu_compress_test": {
-        "info": "动作链测试",
+    "compress_test": {
+        "info": "三步压缩动作链测试",
         "path_log": "D:\\s-linux\\project\\test_file\\test_log",
         "action": [
             {

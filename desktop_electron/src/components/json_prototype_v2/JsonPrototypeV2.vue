@@ -63,6 +63,25 @@
                         </div>
                     </div>
                 </div>
+                <!-- 开关switch -->
+                <div class="switch-box" v-if="item.type=='switch'" @click="handle_switch(item.data)">
+                    {{item.data.label}}
+                    <el-switch v-model="item.data.value">
+                    </el-switch>
+                    <!-- 注解 -->
+                    <div class="info-icon" v-if="item.data.annotation">
+                        <useSvgIcon icon="info" color="black" :width="Number(20)"
+                            @click="item.data.annotation_visible = !item.data.annotation_visible" />
+                    </div>
+                    <div v-if="item.data.annotation_visible">
+                        <div v-if="typeof(item.data.annotation)=='string'">
+                            {{item.data.annotation}}
+                        </div>
+                        <div v-else v-for="each_line in item.data.annotation">
+                            {{each_line}}
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <!-- 显示log -->
@@ -105,10 +124,17 @@ type type_select = {
     option: Array<select_option>
     annotation: string
 }
+// 开关
+type type_switch = {
+    key: string,
+    label: string,
+    value: boolean
+    annotation: string | Array<string>
+}
 // 页面数据类型
 type type_page = {
     type: string,
-    // data: type_input | type_select // 这句求了个交集
+    // data: type_input | type_select // 这句求了个交集，应该求并
     data: any
 }
 // 消息发送
@@ -136,15 +162,18 @@ const pg_function = props.data.function
 
 // json页面参数赋值
 const as_data = ref(JSON.parse(JSON.stringify(pg_data)))
+const as_terminal = ref(false)
 
 // help页弹窗控制
 const dialogVisible = ref(false);
-// 注解文本控制
-onMounted(() => {
-    as_data.value.forEach((each_step: type_page) => {
-        each_step.data["annotation_visible"] = false
-    })
-})
+
+
+// switch点击事件改变terminal模式
+const handle_switch = (item: type_switch) => {
+    if (item.key == "terminal") {
+        as_terminal.value = item.value
+    }
+}
 
 // log高度控制
 const log_height = reactive({ data: 0, time: 0 })
@@ -154,8 +183,10 @@ const log_res = ref("")
 
 // 开始按钮
 const start = () => {
-    log_height.data = 300
-    log_height.time = Date.now()
+    if (!as_terminal.value) {
+        log_height.data = 300
+        log_height.time = Date.now()
+    }
 
     const send_data: type_send = { function: pg_function }
     as_data.value.forEach((item: type_page) => {
@@ -176,9 +207,22 @@ const start = () => {
     };
 };
 
+
+// 参数加载
+onMounted(() => {
+    as_data.value.forEach((each_step: type_page) => {
+        // 注解文本控制
+        each_step.data["annotation_visible"] = false
+        // 识别terminal状态
+        if (each_step.type == "switch") {
+            handle_switch(each_step.data)
+        }
+    })
+})
+
 // 测试按钮
 const test_button = () => {
-    console.log(as_data.value)
+    console.log(as_terminal.value)
 }
 </script>
 
@@ -189,6 +233,7 @@ div.prototype-main {
     text-align: center;
 }
 
+// 输入框
 div.input-box {
     .el-input {
         width: 50%;
@@ -203,6 +248,7 @@ div.input-box {
     }
 }
 
+// 选择框
 div.select-box {
     .el-select {
         width: calc(50% - 20px);
@@ -213,6 +259,23 @@ div.select-box {
         display: inline-block;
         position: absolute;
         padding-top: 15px;
+        cursor: pointer;
+    }
+}
+
+// 开关
+div.switch-box {
+    padding: 10px;
+
+    .el-switch {
+        padding-left: 10px;
+    }
+
+    .info-icon {
+        display: inline-block;
+        position: absolute;
+        padding-top: 6px;
+        padding-left: 15px;
         cursor: pointer;
     }
 }

@@ -1,5 +1,7 @@
 import time
 from channels.generic.websocket import WebsocketConsumer
+import subprocess
+import threading
 
 from utils.stdout_catcher import *
 from py_script.sp_manager import SpManager
@@ -21,8 +23,7 @@ class SpOperator(WebsocketConsumer):
         :param text_data: 客户端发送的消息
         :return:
         """
-        logger.info("get msg:")
-        logger.info(text_data)
+        logger.info("get data: %s" % str(text_data))
         get_data = json.loads(text_data)
         get_function = get_data["function"]
 
@@ -37,14 +38,25 @@ class SpOperator(WebsocketConsumer):
             called_func = getattr(sm, get_function)
             called_func(json_set=get_data)
             time_spent_ms = int(1000 * (time.process_time() - now))
-            time_spent = str(time_spent_ms/1000)+"s" if time_spent_ms > 1000 else str(time_spent_ms)+"ms"
+            time_spent = str(time_spent_ms / 1000) + "s" if time_spent_ms > 1000 else str(time_spent_ms) + "ms"
             logger.info("time-spent: %s" % time_spent)
 
         # 定义日志截取函数
         def log_func(log):
             self.send(str(log))
 
-        # 调用
-        catcher = Catcher(main_func, log_func)
-        catcher.run(buff_size=10)
-        # catcher.run()
+        # 直接调用
+        def run_direct():
+            catcher = Catcher(main_func, log_func)
+            catcher.run(buff_size=10)
+        # 终端调用
+
+        def run_terminal():
+            subprocess.run(['python3', './app_sp_operator/call_terminal.py', json.dumps(get_data)], creationflags=subprocess.CREATE_NEW_CONSOLE)
+            # subprocess.run(['python3', './app_sp_operator/call_terminal.py', json.dumps(get_data)])
+        if "terminal" in get_data:
+            go_main = threading.Thread(target=run_terminal)
+            go_main.start()
+        else:
+            go_main = threading.Thread(target=run_direct)
+            go_main.start()
