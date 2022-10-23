@@ -21,8 +21,9 @@
         </div>
         <!-- 折叠info栏 -->
         <div class="info" v-if="setInfoFlagPort">
-            <span>脚本位置：{{be_full}}</span> <br>
             <span>默认端口4090</span> <br>
+            <span>脚本位置：{{be_full}}</span> <br>
+            <span>由于后台启动无法正常结束后端，导致下次使用时端口被占用，暂时为后端单独开了一个终端</span> <br>
         </div>
         <!-- 分割线 -->
         <div style="width: 80%; margin: 0 auto">
@@ -44,7 +45,8 @@ const setInfoFlagPort = ref(false);
 
 // python调用
 const be_path = ref("D:\\s-linux\\project\\pctools")
-const be_script = ref("run_backend.py")
+// const be_script = ref("run_backend.py")
+const be_script = ref("run_backterminal.py")
 const be_full = computed(() => path.join(be_path.value, be_script.value))
 const res_msg = ref([])
 const show_res = ref(false)

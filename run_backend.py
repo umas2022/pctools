@@ -34,3 +34,6 @@ else:
     os.chdir("./py_server")
     print("%s manage.py runserver 0.0.0.0:%s" % (py_version, port))
     os.system("%s manage.py runserver 0.0.0.0:%s" % (py_version, port))
+
+
+

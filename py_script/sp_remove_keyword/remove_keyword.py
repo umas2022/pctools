@@ -11,7 +11,7 @@ from utils_tools.traverse import Traverse
 
 
 class RemoveKeyword():
-    def __init__(self, path_in, keyword,path_log = "") -> None:
+    def __init__(self, path_in, keyword, path_log="") -> None:
         self.path_in = str(path_in).replace("\\", "/")
         self.path_log = str(path_log).replace("\\", "/")
         self.keyword = keyword
@@ -19,7 +19,7 @@ class RemoveKeyword():
     def __remove_filter(self, methodPathIn):
         '''处理方法：删除关键词'''
         name = methodPathIn.split("/")[-1]
-        if  self.keyword in name:
+        if self.keyword in name:
             try:
                 if (not self.path_log == "") and self.path_log in methodPathIn:
                     return "skip log"
@@ -31,7 +31,6 @@ class RemoveKeyword():
                 return "error"
         else:
             return "pass"
-
 
     def run(self):
         '''开始处理'''
@@ -46,8 +45,13 @@ class RemoveKeyword():
         logger.write("total : %d\n" % total)
         # 开始
         jetzt = 0
+        del_count = 0
         for full_in in Traverse().get_file(self.path_in):
             jetzt += 1
             full_in = full_in.replace("\\", "/")
             state = self.__remove_filter(full_in)
             logger.info("%s\t%d/%d\t%s" % (state, jetzt, total, full_in))
+            if state == "remove":
+                del_count += 1
+        logger.info("total: %d" % total)
+        logger.info("delete: %d" % del_count)

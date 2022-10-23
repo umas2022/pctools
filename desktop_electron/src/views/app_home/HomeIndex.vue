@@ -1,9 +1,12 @@
 <template>
   <div class="main">
     <h1>Home</h1>
-    <img src="static/img/home.gif" alt="" width="100">
     <div style="height:100%">
-      <JsonPrototype :data=lowcode />
+      <JsonPrototype :data=lowcode >
+        <template #bottom>
+          <img src="static/img/home.gif" alt="" width="100" style="padding:30px">
+        </template>
+      </JsonPrototype>
     </div>
   </div>
 </template>
@@ -16,7 +19,7 @@ const lowcode = require("./page_lowcode.json")
 <style lang="scss" scoped>
 div.main {
   text-align: center;
-  height: calc(100% - 199px);
+  height: calc(100% - 90px);
 }
 
 </style>
