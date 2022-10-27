@@ -20,6 +20,15 @@
                 "label": "输出路径",
                 "value": "D:\\s-linux\\project\\test_file\\test_out"
             }
+        },{
+            "type": "input",
+            "data":{
+                "key": "max_size_kb",
+                "label": "尺寸上限",
+                "value": "3072",
+                "placeholder":"单位 - KB",
+                "annotation": "实测3MB效果还可以，这里非int型的输入会引起后端报错"
+            }
         },
         {
             "type": "input",

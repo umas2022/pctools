@@ -24,6 +24,26 @@
         {
             "type": "input",
             "data":{
+                "key": "max_bit_kbps",
+                "label": "码率上限",
+                "value": "10000",
+                "placeholder":"单位 - 千bps",
+                "annotation": "实测10000效果还可以，这里非int型的输入会引起后端报错"
+            }
+        },
+        {
+            "type": "input",
+            "data":{
+                "key": "cpu_thread",
+                "label": "使用线程",
+                "value": "3",
+                "placeholder":"范围1~6",
+                "annotation": "本机6核，默认thread=3，占用率50%"
+            }
+        },
+        {
+            "type": "input",
+            "data":{
                 "key": "path_log",
                 "label": "日志路径",
                 "value": "D:\\s-linux\\project\\test_file\\test_out\\log",

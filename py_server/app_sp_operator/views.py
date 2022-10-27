@@ -55,8 +55,9 @@ class SpOperator(WebsocketConsumer):
             subprocess.run(['python3', './app_sp_operator/call_terminal.py', json.dumps(get_data)], creationflags=subprocess.CREATE_NEW_CONSOLE)
             # subprocess.run(['python3', './app_sp_operator/call_terminal.py', json.dumps(get_data)])
         if "terminal" in get_data:
-            go_main = threading.Thread(target=run_terminal)
-            go_main.start()
-        else:
-            go_main = threading.Thread(target=run_direct)
-            go_main.start()
+            if get_data["terminal"] == True:
+                go_main = threading.Thread(target=run_terminal)
+                go_main.start()
+                return
+        go_main = threading.Thread(target=run_direct)
+        go_main.start()

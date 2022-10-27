@@ -121,4 +121,5 @@ div.info-icon {
   padding-right: 20px;
   cursor: pointer;
 }
+
 </style>

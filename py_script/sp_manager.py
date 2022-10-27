@@ -8,6 +8,7 @@ sp包入口
 import json
 import os
 import sys
+from tkinter import EXCEPTION
 from utils_logger.log import logger_re as logger
 from sp_compress_video.video_compress import VideoCompress
 from sp_compress_image.img_compress import ImgCompress
@@ -33,10 +34,14 @@ class SpManager():
         path_log: log文件路径(可选)\n
         max_size_kb: 图片大小限制(默认3072KB)'''
         if not json_set == {}:
-            path_in = json_set['path_in']
-            path_out = json_set['path_out']
-            path_log = json_set['path_log'] if "path_log" in json_set else ""
-            max_size_kb = json_set['max_size_kb'] if "max_size_kb" in json_set else 3072
+            try:
+                path_in = json_set['path_in']
+                path_out = json_set['path_out']
+                path_log = json_set['path_log'] if "path_log" in json_set else ""
+                max_size_kb = int(json_set['max_size_kb']) if "max_size_kb" in json_set else 3072
+            except Exception as e:
+                logger.error("key error: %s" %e)
+                return
         ic = ImgCompress(path_in, path_out, path_log, max_size_kb)
         ic.run()
 
@@ -48,11 +53,15 @@ class SpManager():
         max_bit_kbps: 最大比特率(默认10000kbps)\n
         cpu_thread: cpu占用量(6核cpu, 默认thread=3, 占用率50%)'''
         if not json_set == {}:
-            path_in = json_set['path_in']
-            path_out = json_set['path_out']
-            path_log = json_set['path_log'] if "path_log" in json_set else ""
-            max_bit_kbps = json_set['max_bit_kbps'] if "max_bit_kbps" in json_set else 10000
-            cpu_thread = json_set['cpu_thread'] if "cpu_thread" in json_set else 3
+            try:
+                path_in = json_set['path_in']
+                path_out = json_set['path_out']
+                path_log = json_set['path_log'] if "path_log" in json_set else ""
+                max_bit_kbps = int(json_set['max_bit_kbps'])  if "max_bit_kbps" in json_set else 10000
+                cpu_thread = int(json_set['cpu_thread']) if "cpu_thread" in json_set else 3
+            except Exception as e:
+                logger.error("key error: %s" %e)
+                return
         vc = VideoCompress(path_in, path_out, path_log, max_bit_kbps, cpu_thread)
         vc.run()
 
@@ -61,9 +70,13 @@ class SpManager():
         path_in: 输入路径\n
         path_out: 输出路径'''
         if not json_set == {}:
-            path_in = json_set['path_in']
-            path_out = json_set['path_out']
-            path_log = json_set['path_log'] if "path_log" in json_set else ""
+            try:
+                path_in = json_set['path_in']
+                path_out = json_set['path_out']
+                path_log = json_set['path_log'] if "path_log" in json_set else ""
+            except Exception as e:
+                logger.error("key error: %s" %e)
+                return
         cb = CopyBackup(path_in, path_out, path_log)
         cb.run()
 
@@ -72,9 +85,13 @@ class SpManager():
         path_in: 输入路径\n
         path_out: 输出路径'''
         if not json_set == {}:
-            path_in = json_set['path_in']
-            path_out = json_set['path_out']
-            path_log = json_set['path_log'] if "path_log" in json_set else ""
+            try:
+                path_in = json_set['path_in']
+                path_out = json_set['path_out']
+                path_log = json_set['path_log'] if "path_log" in json_set else ""
+            except Exception as e:
+                logger.error("key error: %s" %e)
+                return
         cm = CopyMerge(path_in, path_out, path_log)
         cm.run()
 
@@ -83,9 +100,13 @@ class SpManager():
         path_in: 输入路径\n
         path_out: 输出路径'''
         if not json_set == {}:
-            path_in = json_set['path_in']
-            path_out = json_set['path_out']
-            path_log = json_set['path_log'] if "path_log" in json_set else ""
+            try:
+                path_in = json_set['path_in']
+                path_out = json_set['path_out']
+                path_log = json_set['path_log'] if "path_log" in json_set else ""
+            except Exception as e:
+                logger.error("key error: %s" %e)
+                return
         cc = CopyCheck(path_in, path_out, path_log)
         cc.run()
 
@@ -94,9 +115,13 @@ class SpManager():
         path_in: 输入路径\n
         path_out: 输出路径'''
         if not json_set == {}:
-            base_path = json_set['base_path']
-            del_path = json_set['del_path']
-            path_log = json_set['path_log']if "path_log" in json_set else ""
+            try:
+                base_path = json_set['base_path']
+                del_path = json_set['del_path']
+                path_log = json_set['path_log']if "path_log" in json_set else ""
+            except Exception as e:
+                logger.error("key error: %s" %e)
+                return
         rd = RemoveDifference(base_path, del_path, path_log)
         rd.run()
 
@@ -105,9 +130,13 @@ class SpManager():
         path_in: 输入路径\n
         path_out: 输出路径'''
         if not json_set == {}:
-            path_in = json_set['path_in']
-            keyword = json_set['keyword']
-            path_log = json_set['path_log']if "path_log" in json_set else ""
+            try:
+                path_in = json_set['path_in']
+                keyword = json_set['keyword']
+                path_log = json_set['path_log']if "path_log" in json_set else ""
+            except Exception as e:
+                logger.error("key error: %s" %e)
+                return
         rk = RemoveKeyword(path_in, keyword, path_log)
         rk.run()
 
@@ -116,9 +145,13 @@ class SpManager():
         path_in: 输入路径\n
         suffix: 指定后缀名'''
         if not json_set == {}:
-            path_in = json_set['path_in']
-            suffix = json_set['suffix']
-            path_log = json_set['path_log']if "path_log" in json_set else ""
+            try:
+                path_in = json_set['path_in']
+                suffix = json_set['suffix']
+                path_log = json_set['path_log']if "path_log" in json_set else ""
+            except Exception as e:
+                logger.error("key error: %s" %e)
+                return
         rs = RemoveSuffix(path_in, suffix, path_log)
         rs.run()
 
@@ -129,17 +162,25 @@ class SpManager():
         add_in: 附加输入参数
         path_log: 日志路径(置空不使用日志)'''
         if not json_set == {}:
-            path_in = json_set['path_in']
-            use_func = json_set['use_func']
-            add_in = json_set['add_in']
-            path_log = json_set['path_log']if "path_log" in json_set else ""
+            try:
+                path_in = json_set['path_in']
+                use_func = json_set['use_func']
+                add_in = json_set['add_in']
+                path_log = json_set['path_log']if "path_log" in json_set else ""
+            except Exception as e:
+                logger.error("key error: %s" %e)
+                return
         rb = RenameBasic(path_in, use_func, add_in, path_log)
         rb.run()
 
     def quick_start(self, pre_key="", json_set={}):
         '''使用preset.json中的预设参数快速运行函数'''
         if not json_set == {}:
-            pre_key = json_set['pre_key']
+            try:
+                pre_key = json_set['pre_key']
+            except Exception as e:
+                logger.error("key error: %s" %e)
+                return
         script_path = os.path.split(os.path.realpath(__file__))[0]
         preset_path = os.path.join(script_path, "./preset.json")
         preset_dic = json.load(open(preset_path, "r", encoding="utf-8"))

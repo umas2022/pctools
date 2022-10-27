@@ -26,9 +26,16 @@
         ]
     },
     "samu_compress": {
-        "info": "2T盘samu文件夹[图片,视频]压缩备份+反向对比删除",
+        "info": "2T盘samu文件夹反向对比删除+[图片,视频]压缩备份",
         "path_log": "F:\\[1T]-samu-cut\\log",
         "action": [
+            {
+                "function": "run_remove_difference",
+                "input": {
+                    "base_path": "E:\\[2T]-samu-raw",
+                    "del_path": "F:\\[1T]-samu-cut"
+                }
+            },
             {
                 "function": "run_compress_video",
                 "input": {
@@ -41,13 +48,6 @@
                 "input": {
                     "path_in": "E:\\[2T]-samu-raw",
                     "path_out": "F:\\[1T]-samu-cut"
-                }
-            },
-            {
-                "function": "run_remove_difference",
-                "input": {
-                    "base_path": "E:\\[2T]-samu-raw",
-                    "del_path": "F:\\[1T]-samu-cut"
                 }
             }
         ]

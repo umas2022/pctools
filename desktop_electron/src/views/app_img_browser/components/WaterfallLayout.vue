@@ -1,5 +1,5 @@
 <template>
-  <div class="main">
+  <div class="wf-main">
     <h3>真瀑布流展示</h3>
     <el-button type="primary" plain @click="waterfall_reset">reload</el-button>
     <div class="body" v-show="show_body">
@@ -59,14 +59,14 @@ const cal_cols = () => {
    win_width.value = document.documentElement.clientWidth;
   if (win_width.value < preset_dict.img_width_min) {
     cols_current.value = 1;
-    img_width_current.value = win_width.value * 0.88;
+    img_width_current.value = win_width.value * 0.8;
   } else if (win_width.value / preset_dict.img_width_min > preset_dict.cols_max) {
     cols_current.value = preset_dict.cols_max;
     img_width_current.value =
-      Math.floor(win_width.value / preset_dict.cols_max) * 0.88;
+      Math.floor(win_width.value / preset_dict.cols_max) * 0.8;
   } else {
     cols_current.value = Math.floor(win_width.value / preset_dict.img_width_min);
-    img_width_current.value = Math.floor(win_width.value / cols_current.value) * 0.88;
+    img_width_current.value = Math.floor(win_width.value / cols_current.value) * 0.8;
   }
 };
 
@@ -207,9 +207,9 @@ div.flow {
   vertical-align: top;
 }
 
-div.main {
+div.wf-main {
   position: relative;
-  z-index: 2;
+  z-index: -1; // 防止挡到右边滚动条
 
   div.body {
     position: inherit;
