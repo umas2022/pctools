@@ -37,7 +37,7 @@ module.exports = defineConfig({
 
         "nsis": {
           "oneClick": false, // 是否一键安装
-          "allowElevation": true, // 允许请求提升。若为false，则用户必须使用提升的权限重新启动安装程序。
+          "allowElevation": true, // 允许请求提升。若为false, 则用户必须使用提升的权限重新启动安装程序。
           "allowToChangeInstallationDirectory": true, //是否允许修改安装目录
           "installerIcon": "public/static/icon/mati_spa_128.ico",// 安装时图标
           // "uninstallerIcon": "",//卸载时图标
@@ -48,7 +48,7 @@ module.exports = defineConfig({
           "runAfterFinish": false,//是否安装完成后运行
         },
         "win": {
-          "icon": "public/static/icon/mati_ei_256.ico", // 打包图标，这个图标显示不全？
+          "icon": "public/static/icon/mati_ei_256.ico", // 打包图标, 这个图标显示不全？
           "target": [
             {
               "target": "nsis", //利用nsis制作安装程序

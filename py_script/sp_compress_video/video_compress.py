@@ -2,14 +2,14 @@
 create: 2022.9.19
 
 视频压缩
-目前只对比特率进行压缩，尚未实现尺寸的压缩
+目前只对比特率进行压缩, 尚未实现尺寸的压缩
 '''
 
 import os
 from PIL import Image  # pip install pillow
 from shutil import copyfile
 from moviepy.editor import *  # pip install moviepy
-import ffmpeg  # pip install ffmpeg-python，需要windows中配置好环境变量
+import ffmpeg  # pip install ffmpeg-python, 需要windows中配置好环境变量
 from utils_logger.log import logger_re as logger
 from utils_tools.traverse import Traverse
 
@@ -24,9 +24,9 @@ class VideoCompress():
         logger.raw_logger.set_path(str(path_log).replace("\\", "/"))
         # 最大比特率(kbps)
         self.max_bit = max_bit
-        # 容许系数(倍率范围内都被视为满足条件，由于写入误差存在，此系数建议>1.05)
+        # 容许系数(倍率范围内都被视为满足条件, 由于写入误差存在, 此系数建议>1.05)
         self.tolerance_factor = 1.2
-        # cpu占用量（6核cpu，thread=3，占用率50%）
+        # cpu占用量（6核cpu, thread=3, 占用率50%）
         self.cpu_thread = cpu_thread
         # 默认处理的文件格式
         self.handleFormat = ["mp4", "MP4", "wmv", "webm",
@@ -51,7 +51,7 @@ class VideoCompress():
         try:
             logger.info("compress target : %s" % methodPathIn)
             clip = VideoFileClip(methodPathIn)
-            # 总比特率设定 1w kbps 实测质量较好，6核cpu设定thread=3占用50%
+            # 总比特率设定 1w kbps 实测质量较好, 6核cpu设定thread=3占用50%
             clip.write_videofile(methodPathOut, bitrate=str(
                 self.max_bit * 1024), threads=self.cpu_thread)
             return "compress"
@@ -72,7 +72,7 @@ class VideoCompress():
                 logger.error("sp-VideoCompress - MAKEDIR ERROR !!! :%s" % e)
                 logger.error("file : %s" % dir_out)
 
-        # 状态：pass，输出路径已存在目标文件
+        # 状态：pass, 输出路径已存在目标文件
         if os.path.isfile(methodPathOut):
             try:
                 probe = ffmpeg.probe(methodPathOut)
@@ -84,7 +84,7 @@ class VideoCompress():
                 logger.error("file : %s" % dir_out)
                 return "error"
 
-        # 状态：copy，原文件已满足条件，不处理直接拷贝
+        # 状态：copy, 原文件已满足条件, 不处理直接拷贝
         try:
             probe = ffmpeg.probe(methodPathIn)
             bitrate = int(int(probe['format']['bit_rate']) / 1024)
@@ -95,7 +95,7 @@ class VideoCompress():
             logger.error("file : %s" % dir_out)
             return "error"
 
-        # 状态：compress，其余情况进入压缩函数
+        # 状态：compress, 其余情况进入压缩函数
         return self.__method_compress(methodPathIn, methodPathOut)
 
     def run(self):

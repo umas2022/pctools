@@ -5,7 +5,7 @@
 import { use_axios_local } from "./api_axios.js"
 
 /**
- * 通用回调，直接打印返回值
+ * 通用回调, 直接打印返回值
  * @param {any} res 后端返回值
  */
 export function log_res(res) {

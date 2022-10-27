@@ -2,8 +2,8 @@
 
 ## 介绍
 - 批处理工具箱  
-- 2022.8.17从box_v0.1更新至onebox，增加了electron桌面端
-- 2022.9.21从onebox更新至pctools，精简代码，重写ui
+- 2022.8.17从box_v0.1更新至onebox, 增加了electron桌面端
+- 2022.9.21从onebox更新至pctools, 精简代码, 重写ui
 
 ## 环境配置
 - 环境配置参考py_script中utils_env_init

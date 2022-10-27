@@ -9,7 +9,7 @@
       <div class="reload"></div>
     </div>
     <div>
-      <h3>划太快，加载速度跟不上 / 到底了</h3>
+      <h3>划太快, 加载速度跟不上 / 到底了</h3>
       <el-button type="danger" @click="rear_add_10">手动加载</el-button>
     </div>
   </div>
@@ -98,7 +98,7 @@ async function find_shortest() {
 }
 
 // 标记最底部的图片
-// 使用了一层背景遮罩，不需要这个功能了
+// 使用了一层背景遮罩, 不需要这个功能了
 const mark_last = () => {
   // let last_one = document.getElementsByClassName("last_drop");
   // if (last_one.length > 0) {

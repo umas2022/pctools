@@ -12,7 +12,7 @@
       </div>
     </h1>
     <h3>本页点击功能需要以管理员身份运行</h3>
-    <h3>（界面先放一放，python功能先实现）</h3>
+    <h3>（界面先放一放, python功能先实现）</h3>
 
     <!-- help页弹窗 -->
     <el-dialog title="Info" v-model="dialogVisible" width="500px">

@@ -150,7 +150,7 @@ type type_switch = {
 // 页面数据类型
 type type_page = {
     type: string,
-    // data: type_input | type_select // 这句求了个交集，应该求并
+    // data: type_input | type_select // 这句求了个交集, 应该求并
     data: any
 }
 // 消息发送

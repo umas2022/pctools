@@ -45,7 +45,7 @@ import type { ElScrollbar } from "element-plus";
 // 父组件传参
 const props = defineProps<{
     data: string;
-    // height需要带一个时间戳，否则相同的data不能触发watch
+    // height需要带一个时间戳, 否则相同的data不能触发watch
     height: {
         data: number;
         time: number;
@@ -71,7 +71,7 @@ const gotoBottom = () => {
     maxpos.value = innerRef.value!.clientHeight - 185;
     scrollbarRef.value!.setScrollTop(maxpos.value);
 };
-// 监听传参变化，刷新文本显示和滚动条位置
+// 监听传参变化, 刷新文本显示和滚动条位置
 watch(() => props.data, () => {
     // 数组合并
     logtext.value.push(...JSON.parse(props.data))
@@ -120,14 +120,14 @@ const setFixedHeight = (height: number) => {
     rawHeight = height
 }
 
-// 监听传参变化，刷新窗口高度
+// 监听传参变化, 刷新窗口高度
 watch(() => props.height, () => {
     // 数组合并
     setFixedHeight(props.height.data)
     gotoBottom();
 }, { deep: true });
 
-// // 监听高度变化，高度太小时直接触发结束
+// // 监听高度变化, 高度太小时直接触发结束
 // watch(boxHeight, () => {
 //     if (boxHeight.value < 100) {
 //         resizeStop();

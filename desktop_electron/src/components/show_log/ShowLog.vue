@@ -83,7 +83,7 @@ const gotoBottom = () => {
   maxpos.value = innerRef.value.clientHeight - 195;
   scrollbarRef.value.setScrollTop(maxpos.value);
 };
-// 监听传参变化，刷新文本显示和滚动条位置
+// 监听传参变化, 刷新文本显示和滚动条位置
 watch(props, () => {
   logtext.value.push(props.data);
   if (logtext.value.length > maxrow.value) {
@@ -114,7 +114,7 @@ const resizeStop = () => {
   rawHeight = boxHeight.value;
   window.removeEventListener("mousemove", resizeFunc);
 };
-// 监听高度变化，高度太小时直接触发结束
+// 监听高度变化, 高度太小时直接触发结束
 watch(boxHeight, () => {
   if (boxHeight.value < 100) {
     resizeStop();

@@ -47,7 +47,7 @@ const addons = computed(() => {
   }
 });
 
-// 选中的组件，不能响应式更新，在watch中手动更新
+// 选中的组件, 不能响应式更新, 在watch中手动更新
 var cp_select = shallowRef(cp_list[addons.value]);
 
 // 测试按钮

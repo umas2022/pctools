@@ -9,7 +9,7 @@ import json
 from utils_logger.log import logger_re as logger
 from sp_manager import SpManager
 
-# pyshell传参从1开始，0位是脚本路径
+# pyshell传参从1开始, 0位是脚本路径
 # print(sys.argv[1])
 logger.set_mode("frontend")
 

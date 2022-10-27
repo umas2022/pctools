@@ -32,7 +32,7 @@ import json
 class TextArea:
     '''
     替换stdout(启动替换后回调函数中不能使用print)\n
-    消息以数组形式打包发送，防止消息阻塞
+    消息以数组形式打包发送, 防止消息阻塞
     '''
 
     def __init__(self, catch_func, buff_size=0, buff_time=0.5) -> None:
@@ -97,5 +97,5 @@ class Catcher:
         self.main_func()
         # 截获系统输出
         text_area = sys.stdout
-        # 恢复系统输出，不然后面不能再print了
+        # 恢复系统输出, 不然后面不能再print了
         sys.stdout = stdout

@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>Websocket Demo</h1>
-    <h5>Websocket通信demo，后端无延时发送0~999</h5>
+    <h5>Websocket通信demo, 后端无延时发送0~999</h5>
 
     <div class="mb-4">
       <el-button type="primary" @click="wsConnect">connect</el-button>

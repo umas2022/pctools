@@ -8,16 +8,16 @@ function printRes(res) {
 }
 
 /**
- * axios基本函数，接收任意url
+ * axios基本函数, 接收任意url
  * @param {string}  inputUrl        ip地址
  * @param {object}  inputHeaders    请求头；default = {}
- * @param {string}  inputApi        api名，带斜杠，如"oi_r/"
+ * @param {string}  inputApi        api名, 带斜杠, 如"oi_r/"
  * @param {string}  inputMethod     "get" / "put" / "post" ...
  * @param {int}     inputTimeout    超时时长；default = 5000 (set in conf)
  * @param {int}     inputRetry      重试次数；default = 1
  * @param {object}  inputData       body；default = {}
- * @param {function} inputFuncGetRes callback，获取返回值；default = printRes()
- * @param {function} inputFuncGetErr callback，获取错误信息；default = printRes()
+ * @param {function} inputFuncGetRes callback, 获取返回值；default = printRes()
+ * @param {function} inputFuncGetErr callback, 获取错误信息；default = printRes()
  */
 export function use_axios({
   inputUrl,
@@ -38,7 +38,7 @@ export function use_axios({
     },
     shouldResetTimeout: true, //  重置超时时间
     retryCondition: (error) => {
-      //true为打开自动发送请求，false为关闭自动发送请求
+      //true为打开自动发送请求, false为关闭自动发送请求
       if (error.message.includes("timeout")) {
         return true;
       } else {
@@ -51,7 +51,7 @@ export function use_axios({
   axios({
     method: inputMethod,
     // url: inputUrl + inputApi + "/", //不加斜杠报错301
-    url: inputUrl + inputApi, // 有些api不要斜杠，如user_id
+    url: inputUrl + inputApi, // 有些api不要斜杠, 如user_id
     data: inputData,
     headers: inputHeaders,
     timeout: inputTimeout,
@@ -66,12 +66,12 @@ export function use_axios({
 }
 
 /**
- * axios本地函数，向本地服务器发送请求
- * @param {string}  inputApi        api名，带斜杠，如"oi_r/"
+ * axios本地函数, 向本地服务器发送请求
+ * @param {string}  inputApi        api名, 带斜杠, 如"oi_r/"
  * @param {string}  inputMethod     "get" / "put" / "post" ...
  * @param {object}  inputData       body；default = {}
- * @param {function} inputFuncGetRes callback，获取返回值；default = printRes()
- * @param {function} inputFuncGetErr callback，获取错误信息；default = printRes()
+ * @param {function} inputFuncGetRes callback, 获取返回值；default = printRes()
+ * @param {function} inputFuncGetErr callback, 获取错误信息；default = printRes()
  */
 export function use_axios_local({
   inputApi,

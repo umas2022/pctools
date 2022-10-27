@@ -1,4 +1,4 @@
-# 目前存在问题，弹窗不能持续存在
+# 目前存在问题, 弹窗不能持续存在
 
 import subprocess
 print("start from call_terminal.py")

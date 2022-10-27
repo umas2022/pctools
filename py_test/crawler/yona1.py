@@ -4,7 +4,7 @@ bookwalker漫画《夜夜夜》爬虫
 思路：1.登录页登录 2.home页点击进入漫画
 使用修改window.navigator.webdriver的方式反爬
 
-目前问题是似乎ip被ban了，后面几次需要进行谷歌人机认证，再后来直接白屏
+目前问题是似乎ip被ban了, 后面几次需要进行谷歌人机认证, 再后来直接白屏
 '''
 
 import sys

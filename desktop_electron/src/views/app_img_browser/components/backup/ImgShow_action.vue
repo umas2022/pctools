@@ -72,7 +72,7 @@ window.onresize = () => {
 };
 
 // 顺序轮换
-// 顺序对应，从左到右位置为123，初始时div从左到右abc
+// 顺序对应, 从左到右位置为123, 初始时div从左到右abc
 const img_height_a = ref();
 const img_height_b = ref();
 const img_height_c = ref();
@@ -281,7 +281,7 @@ const file_copy = (img_path, to_path) => {
 
 // 存在重名文件弹窗
 const dialog_visible = ref(false);
-// 展示重复文件，函数在onMounted和onresize中被调用
+// 展示重复文件, 函数在onMounted和onresize中被调用
 const img_exist = ref();
 const com_width = ref();
 const resize_compare = () => {

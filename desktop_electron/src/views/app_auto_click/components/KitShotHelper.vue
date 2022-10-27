@@ -1,8 +1,8 @@
 <template>
   <div class="main">
     <h3>shot helper</h3>
-    <span>中文输入匹配不到目标，推测是中文编码错误</span> <br>
-    <span>使用英文匹配时会截出黑条，暂时在python中指定窗口名</span> <br>
+    <span>中文输入匹配不到目标, 推测是中文编码错误</span> <br>
+    <span>使用英文匹配时会截出黑条, 暂时在python中指定窗口名</span> <br>
     <div class="input">
       目标窗口：
       <el-input v-model="input_form.window" disabled ></el-input> <br />

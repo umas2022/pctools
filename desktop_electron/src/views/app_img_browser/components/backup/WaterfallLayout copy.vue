@@ -102,7 +102,7 @@ async function find_shortest() {
 }
 
 // 标记最底部的图片
-// 使用了一层背景遮罩，不需要这个功能了
+// 使用了一层背景遮罩, 不需要这个功能了
 const mark_last = () => {
   // let last_one = document.getElementsByClassName("last_drop");
   // if (last_one.length > 0) {

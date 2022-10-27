@@ -65,7 +65,7 @@ class ImgCompress():
     def __method_trans(self, methodPathIn, methodPathOut) -> None:
         '''图片处理方法：转换'''
         try:
-            # 先以jpg保存，压缩后再改名为png
+            # 先以jpg保存, 压缩后再改名为png
             imgPathOutJpg = methodPathOut.replace(
                 "." + methodPathOut.split(".")[-1], ".jpg")
             img = Image.open(methodPathIn)
@@ -92,12 +92,12 @@ class ImgCompress():
                 logger.error("sp-ImgCut - MAKEDIR ERROR !!! :%s" % e)
                 logger.error("file : %s" % dir_out)
 
-        # 输出路径已存在格式在拷贝列表中的文件，或满足尺寸条件的图片
+        # 输出路径已存在格式在拷贝列表中的文件, 或满足尺寸条件的图片
         if os.path.isfile(methodPathOut):
             imgSizeOut = os.path.getsize(methodPathOut) / 1024
             if imgSizeOut < self.maxSizeKB:
                 return "pass"
-            # 若已存在图片尺寸不满足条件，则删除该图片
+            # 若已存在图片尺寸不满足条件, 则删除该图片
             else:
                 try:
                     if suffix in self.handleFormat or suffix in self.transFormat:
@@ -108,7 +108,7 @@ class ImgCompress():
                     logger.error("path : %s" % dir_out)
 
         imgSizeRaw = os.path.getsize(methodPathIn) / 1024
-        # 原图尺寸满足，直接拷贝
+        # 原图尺寸满足, 直接拷贝
         if imgSizeRaw < self.maxSizeKB:
             return self.__method_copy(methodPathIn, methodPathOut)
         # 转换列表

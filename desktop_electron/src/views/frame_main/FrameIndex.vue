@@ -32,7 +32,7 @@ const svg_size = ref(35);
 const svg_padding = ref(6);
 
 // 点击事件
-// 如果不加区分直接用三元表达式取反，点击过快时setTimeout中的取反会被跳过
+// 如果不加区分直接用三元表达式取反, 点击过快时setTimeout中的取反会被跳过
 const click_show = () => {
   // 关闭menu
   if (show_header.value) {

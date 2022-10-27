@@ -1,7 +1,7 @@
 '''
 create: 2022.1.1
 
-log控制，经过一次在封装，terminal模式输出可被捕获
+log控制, 经过一次在封装, terminal模式输出可被捕获
 from general_basic.log import logger_re as logger
 '''
 
@@ -12,7 +12,7 @@ import os
 
 
 class logRaw:
-    '''原版logger，只在LogRepack中实例化一次，多次实例化会导致重复添加handler，输出重复'''
+    '''原版logger, 只在LogRepack中实例化一次, 多次实例化会导致重复添加handler, 输出重复'''
 
     def __init__(self, log_path='', set_level="debug"):
         self.path = log_path
@@ -63,7 +63,7 @@ class logRaw:
 
 class LogRepack:
     '''
-    为满足直接调用和前端调用的不同需求，对输出函数进行再封装
+    为满足直接调用和前端调用的不同需求, 对输出函数进行再封装
     frontend模式用于前端请求,内部为print函数,可以截取标准输出发送至前端,默认只在log文件中写入error和warning
     terminal模式输出原版logger到控制台
 
@@ -86,12 +86,12 @@ class LogRepack:
         self.mode = mode
 
     def set_path(self, path):
-        '''重设log路径，设置后启用文件写入'''
+        '''重设log路径, 设置后启用文件写入'''
         if not path == "":
             self.raw_logger.set_path(path)
 
     def write(self, inputstr: any):
-        '''直接写入log文件，输入值被str()函数包裹，未指定log文件时直接return'''
+        '''直接写入log文件, 输入值被str()函数包裹, 未指定log文件时直接return'''
         if self.raw_logger.file == "":
             # print("logger.write -> exit: no log file specified")
             return
@@ -125,7 +125,7 @@ class LogRepack:
             self.write("error : " + inputstr)
 
 
-# 只能实例化一次，避免handler的重复添加，导致多重输出
+# 只能实例化一次, 避免handler的重复添加, 导致多重输出
 # 调用方法：from general_basic.log import logger_re as logger
 logger_re = LogRepack()
 logger_raw = logger_re.get_raw()

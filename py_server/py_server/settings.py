@@ -37,7 +37,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
 
-    '*',  # 允许所有请求，并不能解决跨域问题
+    '*',  # 允许所有请求, 并不能解决跨域问题
     # 'localhost'
 ]
 
@@ -143,7 +143,7 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # 跨域白名单
-# #凡是出现在白名单中的域名，都可以访问后端接口
+# #凡是出现在白名单中的域名, 都可以访问后端接口
 # CORS_ORIGIN_WHITELIST = (
 #     'http://localhost:8081',  # 开发端口
 #     'http://127.0.0.1:4080', # 生产端口 

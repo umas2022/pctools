@@ -134,7 +134,7 @@ const file_copy_check = (img_path, to_path) => {
     } else {
       // 已存在：报警进入弹窗比较
       ElMessage({
-        message: "file already exist，弹窗比较的代码还没写",
+        message: "file already exist, 弹窗比较的代码还没写",
         grouping: true,
         showClose: true,
         type: "warning",
@@ -189,7 +189,7 @@ const file_copy = (img_path, to_path) => {
 
 // 存在重名文件弹窗
 const dialog_visible = ref(false);
-// 展示重复文件，函数在onMounted和onresize中被调用
+// 展示重复文件, 函数在onMounted和onresize中被调用
 const img_exist = ref();
 const com_width = ref();
 const resize_com = () => {

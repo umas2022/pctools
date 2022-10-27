@@ -67,7 +67,7 @@ const form_options = inject("form_options");
 const mode_select = form.value[props.index].method
 provide("mode_select", mode_select);
 
-// 选项切换触发，赋值组件参数mode_select
+// 选项切换触发, 赋值组件参数mode_select
 const option_change = (index) => {
   mode_select = form_options.mode_options[index];
 };

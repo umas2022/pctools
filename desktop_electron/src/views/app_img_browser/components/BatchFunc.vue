@@ -29,7 +29,7 @@ const save_to = (img_path, to_dir) => {
       return new Promise((resolve) => {
         fs.access(to_path, (access_err) => {
           if (access_err == null) {
-            // access没有报错，文件已存在
+            // access没有报错, 文件已存在
             ElMessage({
               message: "file already exist",
               grouping: true,
@@ -38,7 +38,7 @@ const save_to = (img_path, to_dir) => {
             });
             resolve(true);
           } else {
-            // access有报错，文件不存在
+            // access有报错, 文件不存在
             resolve(false);
           }
         });
@@ -57,7 +57,7 @@ const save_to = (img_path, to_dir) => {
     copy_check: (to_path) => {
       fs.access(to_path, (access_err) => {
         if (access_err == null) {
-          // access没有报错，文件已存在
+          // access没有报错, 文件已存在
           ElMessage({
             message: "done",
             grouping: true,
@@ -65,7 +65,7 @@ const save_to = (img_path, to_dir) => {
             type: "success",
           });
         } else {
-          // access有报错，文件已存在
+          // access有报错, 文件已存在
           ElMessage({
             message: "copy process failed",
             grouping: true,
@@ -83,7 +83,7 @@ const save_to = (img_path, to_dir) => {
   built_in.exist_check(to_path).then((res) => {
     if (!res) {
       built_in.file_copy(img_path, to_path).then(() => {
-        // 这里then不总能生效，加上延时保证判断结果
+        // 这里then不总能生效, 加上延时保证判断结果
         setTimeout(() => {
           built_in.copy_check(to_path);
         }, 100);

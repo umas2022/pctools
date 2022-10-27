@@ -42,7 +42,7 @@
     websocket_urlpatterns = [path("app_test_ws",views.WebsocketTest.as_asgi())]
     ```
     - 添加asgi: py_server/asgi.py
-        - URLRouter本质是字符串，新增的url用+连接即可
+        - URLRouter本质是字符串, 新增的url用+连接即可
     ```python
     import app_test_ws.urls
     application = ProtocolTypeRouter({
@@ -55,7 +55,7 @@
 
 - 应用迁移
     ```python manage.py migrate```
-    - 一般需要用的时候会红字报警的，不用刻意调
+    - 一般需要用的时候会红字报警的, 不用刻意调
     
 - 启用shell调试
     ```python manage.py shell```
