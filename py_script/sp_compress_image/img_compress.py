@@ -17,18 +17,27 @@ class ImgCompress():
     必要参数：path_in, path_out\n
     默认参数：max_size(3072)'''
 
-    def __init__(self,path_in,path_out, path_log="", maxSizeKB=3072) -> None:
+    def __init__(self, path_in="", path_out="", path_log="", max_size_kb=3072, json_set={}) -> None:
         self.path_in = str(path_in).replace("\\", "/")
         self.path_out = str(path_out).replace("\\", "/")
         logger.raw_logger.set_path(str(path_log).replace("\\", "/"))
         # 图片尺寸上限
-        self.maxSizeKB = maxSizeKB
+        self.max_size_kb = max_size_kb
         # 单次压缩系数
         self.cutCoefficient = 0.9
         # 默认处理的文件格式
         self.handleFormat = ["jpg", "JPG", "jpeg", "bmp", "BMP", "jpe", "JPEG"]
         # 需要转换的图片格式
         self.transFormat = ["png", "PNG"]
+        if not json_set == {}:
+            try:
+                self.path_in = json_set['path_in'].replace("\\", "/")
+                self.path_out = json_set['path_out'].replace("\\", "/")
+                self.path_log = json_set['path_log'].replace("\\", "/") if "path_log" in json_set else ""
+                self.max_size_kb = int(json_set['max_size_kb']) if "max_size_kb" in json_set else 3072
+            except Exception as e:
+                logger.error("key error: %s" % e)
+                return
 
     def __method_copy(self, methodPathIn, methodPathOut) -> None:
         '''图片处理方法：直接拷贝'''
@@ -50,7 +59,7 @@ class ImgCompress():
         img = Image.open(methodPathIn)
         imgSizeOut = imgSizeRaw
         try:
-            while imgSizeOut > self.maxSizeKB:
+            while imgSizeOut > self.max_size_kb:
                 img = img.resize((int(img.size[0] * self.cutCoefficient), int(
                     img.size[1] * self.cutCoefficient)), Image.ANTIALIAS)
                 img = img.convert('RGB')
@@ -95,7 +104,7 @@ class ImgCompress():
         # 输出路径已存在格式在拷贝列表中的文件, 或满足尺寸条件的图片
         if os.path.isfile(methodPathOut):
             imgSizeOut = os.path.getsize(methodPathOut) / 1024
-            if imgSizeOut < self.maxSizeKB:
+            if imgSizeOut < self.max_size_kb:
                 return "pass"
             # 若已存在图片尺寸不满足条件, 则删除该图片
             else:
@@ -109,7 +118,7 @@ class ImgCompress():
 
         imgSizeRaw = os.path.getsize(methodPathIn) / 1024
         # 原图尺寸满足, 直接拷贝
-        if imgSizeRaw < self.maxSizeKB:
+        if imgSizeRaw < self.max_size_kb:
             return self.__method_copy(methodPathIn, methodPathOut)
         # 转换列表
         elif suffix in self.transFormat:
@@ -145,5 +154,5 @@ class ImgCompress():
             full_out = os.path.join(self.path_out, name_upper_dir).replace("\\", "/")
             state = self.__img_filter(full_in, full_out)
             if state:
-                jetzt +=1
+                jetzt += 1
                 logger.info("%s\t%d/%d\t%s" % (state, jetzt, total, full_in))

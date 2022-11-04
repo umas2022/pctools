@@ -11,10 +11,18 @@ from utils_tools.traverse import Traverse
 
 
 class CopyMerge():
-    def __init__(self, path_in, path_out,path_log="") -> None:
+    def __init__(self, path_in="", path_out="",path_log="",json_set = {}) -> None:
         self.path_in = path_in.replace("\\", "/")
         self.path_out = path_out.replace("\\", "/")
         logger.raw_logger.set_path(str(path_log).replace("\\", "/"))
+        if not json_set == {}:
+            try:
+                self.path_in = json_set['path_in'].replace("\\", "/")
+                self.path_out = json_set['path_out'].replace("\\", "/")
+                self.path_log = json_set['path_log'].replace("\\", "/") if "path_log" in json_set else ""
+            except Exception as e:
+                logger.error("key error: %s" %e)
+                return
 
     def __copy_filter(self, methodPathIn, methodPathOut):
         '''处理方法：拷贝合并'''

@@ -1,0 +1,49 @@
+{
+    "title": "完全备份",
+    "version": "v2", // version必须注明v2版本
+    "info": [
+        "1.完全备份",
+        "2.不写说明"
+    ],
+    "page": [
+        {
+            "type": "input",
+            "data": {
+                "key": "path_log", // key必须和后端一致
+                "label": "日志路径",
+                "value": "D:\\s-linux\\project\\test_file\\test_out\\log",
+                "placeholder":"置空不使用log文件", // input类型支持placeholder, 可以省略
+                "annotation": "一行注释" // input类型支持注解, 类型为string或Array<string>, 可以省略
+            }
+        },
+        {
+            "type": "select",
+            "data": {
+                "key": "use_func", // key必须和后端一致
+                "label": "选择方法",
+                "value": "add_prefix", // value必须是option中存在的值
+                "option": [
+                    {
+                        "value": "add_prefix", // key必须和后端一致
+                        "label": "添加前缀"
+                    },
+                    {
+                        "value": "del_prefix",
+                        "label": "删除前缀"
+                    }
+                ],
+                "annotation":"这里是一行注释" // select类型支持注解, 类型为string或Array<string>, 可以省略
+            }
+        },
+        {
+            "type": "switch",
+            "data": {
+                "key": "terminal", // key必须和后端一致
+                "label": "启用终端",
+                "value": true,
+                "annotation": ["文件量大 / 并行运行 -> 建议使用终端","终端启用时不显示底部log"] // switch类型支持注解, 类型为string或Array<string>, 可以省略
+            }
+        }
+    ],
+    "function": "run_copy_backup" // function必须和后端一致
+}

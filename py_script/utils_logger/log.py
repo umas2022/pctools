@@ -102,27 +102,27 @@ class LogRepack:
         if self.mode == "terminal":
             self.logger.debug(inputstr)
         elif self.mode == "frontend":
-            print("debug : " + inputstr)
+            print("debug : " + str(inputstr))
 
     def info(self, inputstr):
         if self.mode == "terminal":
             self.logger.info(inputstr)
         elif self.mode == "frontend":
-            print("info : " + inputstr)
+            print("info : " + str(inputstr))
 
     def warning(self, inputstr):
         if self.mode == "terminal":
             self.logger.warning(inputstr)
         elif self.mode == "frontend":
-            print("warning : " + inputstr)
-            self.write("warning : " + inputstr)
+            print("warning : " + str(inputstr))
+            self.write("warning : " + str(inputstr))
 
     def error(self, inputstr):
         if self.mode == "terminal":
             self.logger.error(inputstr)
         elif self.mode == "frontend":
-            print("error : " + inputstr)
-            self.write("error : " + inputstr)
+            print("error : " + str(inputstr))
+            self.write("error : " + str(inputstr))
 
 
 # 只能实例化一次, 避免handler的重复添加, 导致多重输出

@@ -1,0 +1,1 @@
+{"info": ["此列表由后端脚本自动生成", "数据为每个单独类文件夹名和interf.json的title"], "data": [{"title": "压缩 - 图片压缩", "key": "sp_compress_image"}, {"title": "压缩 - 视频压缩", "key": "sp_compress_video"}, {"title": "拷贝 - 完全备份", "key": "sp_copy_backup"}, {"title": "拷贝 - 拷贝合并", "key": "sp_copy_merge"}]}

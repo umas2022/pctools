@@ -18,7 +18,7 @@ class VideoCompress():
     def method_name(self):
         return "video_compress"
 
-    def __init__(self, path_in, path_out, path_log="", max_bit=10000, cpu_thread=3) -> None:
+    def __init__(self, path_in="", path_out="", path_log="", max_bit=10000, cpu_thread=3,json_set = {}) -> None:
         self.path_in = str(path_in).replace("\\", "/")
         self.path_out = str(path_out).replace("\\", "/")
         logger.raw_logger.set_path(str(path_log).replace("\\", "/"))
@@ -31,6 +31,17 @@ class VideoCompress():
         # 默认处理的文件格式
         self.handleFormat = ["mp4", "MP4", "wmv", "webm",
                              "ogv", "mkv", "m4v", "MTS", "mov", "avi"]
+
+        if not json_set == {}:
+            try:
+                self.path_in = json_set['path_in'].replace("\\", "/")
+                self.path_out = json_set['path_out'].replace("\\", "/")
+                self.path_log = json_set['path_log'].replace("\\", "/") if "path_log" in json_set else ""
+                self.max_bit_kbps = int(json_set['max_bit_kbps'])  if "max_bit_kbps" in json_set else 10000
+                self.cpu_thread = int(json_set['cpu_thread']) if "cpu_thread" in json_set else 3
+            except Exception as e:
+                logger.error("key error: %s" %e)
+                return
 
     def __method_copy(self, methodPathIn, methodPathOut) -> None:
         '''处理方法：直接拷贝'''

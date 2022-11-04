@@ -1,0 +1,43 @@
+{
+    "title": "压缩 - 图片压缩",
+    "info": [
+        "1.图片质量和尺寸同时压缩, 单次压缩系数好像是0.8, 循环执行",
+        "2.png图片先舍弃透明度通道再进行压缩"
+    ],
+    "require": [
+        {
+            "type": "input",
+            "data":{
+                "key": "path_in",
+                "label": "输入路径",
+                "value": "D:\\s-linux\\project\\test_file\\test_in"
+            }
+        },
+        {
+            "type": "input",
+            "data":{
+                "key": "path_out",
+                "label": "输出路径",
+                "value": "D:\\s-linux\\project\\test_file\\test_out"
+            }
+        },{
+            "type": "input",
+            "data":{
+                "key": "max_size_kb",
+                "label": "尺寸上限",
+                "value": "3072",
+                "placeholder":"单位 - KB",
+                "annotation": "实测3MB效果还可以, 这里非int型的输入会引起后端报错"
+            }
+        },
+        {
+            "type": "input",
+            "data":{
+                "key": "path_log",
+                "label": "日志路径",
+                "value": "D:\\s-linux\\project\\test_file\\test_log",
+                "placeholder":"置空不使用日志"
+            }
+        }
+    ]
+}
