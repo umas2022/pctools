@@ -42,6 +42,7 @@ const state_change = () => {
         info_ref.value!.classList.remove("animate__fadeOutDown")
         info_ref.value!.classList.add("animate__fadeInDown")
         info_ref.value!.classList.remove("close")
+        info_ref.value!.style.zIndex = "2"
         blocker_ref.value!.classList.remove("animate__fadeOut")
         blocker_ref.value!.classList.add("animate__fadeIn")
         blocker_ref.value!.classList.remove("close")
@@ -49,6 +50,7 @@ const state_change = () => {
         info_ref.value!.classList.remove("animate__fadeInDown")
         info_ref.value!.classList.add("animate__fadeOutDown")
         setTimeout(() => {
+            info_ref.value!.style.zIndex = "0"
             info_ref.value!.classList.add("close")
         }, 800)
         blocker_ref.value!.classList.remove("animate__fadeIn")
@@ -106,7 +108,7 @@ div.info {
     padding: 10px;
     border: solid 3px gray;
     border-radius: 15px;
-    z-index: 2;
+    // z-index: 2;
 }
 
 div.info-blocker {
@@ -121,7 +123,6 @@ div.info-blocker {
 
 div.close {
     display: none;
-    transition: opacity 1s linear 1s;
 }
 </style>
   

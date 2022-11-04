@@ -7,7 +7,6 @@
       <CpPortChange />
       <!-- 启动后端 -->
       <CpRunBackend />
-      <CpRunBackend />
       <!-- 脚本路径 -->
       <CpPyPath />
       <!-- 更新目录 -->
