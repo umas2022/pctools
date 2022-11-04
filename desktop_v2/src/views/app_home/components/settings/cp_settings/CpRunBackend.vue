@@ -27,9 +27,9 @@
 import { onMounted, ref, computed } from "vue";
 import { ElMessage } from "element-plus";
 import BasicTemplate from "./BasicTemplate.vue"
-const { PythonShell } = window.require("python-shell");
-const get_wsurl = require("@/utils/api_config.js");
+import { get_wsurl } from "@/utils/api_config.js";
 const path = window.require("path");
+const { PythonShell } = window.require("python-shell");
 
 
 // python调用
