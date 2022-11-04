@@ -36,7 +36,8 @@
                 "key": "path_log",
                 "label": "日志路径",
                 "value": "D:\\s-linux\\project\\test_file\\test_log",
-                "placeholder":"置空不使用日志"
+                "placeholder":"置空不使用日志",
+                "annotation": "日志默认只记录error和warning"
             }
         }
     ]
