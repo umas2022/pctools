@@ -33,7 +33,7 @@ const get_list = () => {
             store.index_list = JSON.parse(e.data).data
         } catch {
             if (e.data == "done") {
-                ElMessage.success("done")
+                ElMessage.success("refresh index")
             } else {
                 ElMessage.error(e.data)
             }

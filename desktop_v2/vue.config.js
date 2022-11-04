@@ -22,13 +22,18 @@ module.exports = defineConfig({
         "appId": "toolbox", // 包名
         "copyright": "umasnb", // 版权
         "asar": true, // asar打包的python无法运行
-        // "asarUnpack": [
-        //   "public/static/python" // 这个不起作用
+
+        // 复制到根目录下
+        // extraFiles: [ 
+        //   "src/assets"
         // ],
+
+        // 复制到根目录/resources下
         extraResources: [
-          // { from: 'public/static/python', to: 'static/python' } // 静态资源拷贝目录
-          { from: 'public/static', to: 'static' }, // 静态资源拷贝目录
-          { from: '../py_script/box_autoclick', to: 'static/python/box_auto_click' } // python脚本拷贝目录
+          "src/assets", // 相当于{ from: 'src/assets', to: 'src/assets' }
+          // { from: 'src/assets', to: 'assets' }, // assets资源目录指定
+          { from: 'public/static', to: 'static' }, // public静态资源拷贝目录,程序中用static/xxx可以直接访问
+          { from: '../py_script/box_autoclick', to: 'static/python/box_auto_click' } // python脚本单独拷贝目录
         ],
 
         // "directories": {
