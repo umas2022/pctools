@@ -8,19 +8,23 @@
         </div>
         <!-- 右上角最小化 -->
         <div class="show-log-mini" @click="setFixedHeight(30)">
-            <el-icon :size="25">
+            <!-- <el-icon :size="25">
                 <arrow-down />
+            </el-icon> -->
+            <el-icon :size="25">
+                <Minus />
             </el-icon>
         </div>
         <!-- 右上角最大化 -->
         <div class="show-log-max" @click="setFixedHeight(300)">
-            <el-icon :size="25">
+            <!-- <el-icon :size="25">
                 <arrow-up />
+            </el-icon> -->
+            <el-icon :size="25">
+                <Plus />
             </el-icon>
         </div>
-        <!-- 右上角高度调整条 -->
-        <!-- <div class="show-log-resizer" @mousedown="resizeStart" @mouseup="resizeStop" @mouseleave="resizeStop"
-            @click="resizeStop"> -->
+        <!-- 底部高度调整条 -->
         <div class="show-log-resizer" @mousedown="resizeStart" @click="resizeStop"> </div>
 
         <!-- 主框体 -->
@@ -93,8 +97,9 @@ const boxHeight = ref(rawHeight);
 var heightRec = 0;
 // 鼠标拖动设定高度
 const resizeFunc = (evt: MouseEvent) => {
+    // 当前高度
     let heightNow = evt.y;
-    boxHeight.value = rawHeight - heightNow + heightRec;
+    boxHeight.value = rawHeight + (heightNow - heightRec);
     const body_div = document.querySelector<HTMLElement>(".show-log-body")!
     if (body_div) {
         body_div.style.cssText += " transition: 0s"
@@ -224,8 +229,9 @@ div.text {
 // 尺寸拖动条
 .show-log-resizer {
     position: absolute;
+    bottom: 0;
+    right: calc(50% - 150px);
     z-index: 2;
-    right: 120px;
     background-color: rgba(106, 106, 106, 0.23);
     border-radius: 5px;
     height: 10px;

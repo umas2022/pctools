@@ -1,5 +1,5 @@
 <template>
-    <div class="prototype-main" v-if="pg_title != ''">
+    <div class="prototype-main animate-box animate__animated animate__backInRight" v-if="pg_title != ''">
         <div class="h3">输入参数</div>
         <!-- <el-button type="danger" @click="test_button">test</el-button> -->
         <!-- 标题栏 -->
@@ -81,17 +81,20 @@
             </div>
         </div>
 
-        <!-- 显示log -->
-        <div class="log-box">
-            <ShowLogBox :data="log_res" :height=log_height />
-        </div>
 
+
+        <!-- 终端switch -->
         <div style="display:inline-block;padding: 10px;">
             <span>使用终端 </span>
             <el-switch v-model="as_terminal" />
         </div>
         <div style="display:inline-block;padding: 10px;">
             <el-button @click="start">开始</el-button>
+        </div>
+
+        <!-- 显示log -->
+        <div class="log-box">
+            <ShowLogBox :data="log_res" :height=log_height />
         </div>
 
         <!-- 底部留白 -->
@@ -216,7 +219,6 @@ const test_button = () => {
 <style lang="scss">
 div.prototype-main {
     position: relative;
-    height: 100%;
     text-align: center;
 }
 
@@ -269,8 +271,9 @@ div.switch-box {
 
 
 div.log-box {
-    position: absolute;
-    width: calc(100% + 1px);
-    bottom: 0px;
+    // position: absolute;
+    // bottom: 0px;
+    width: calc(100% - 120px);
+    margin: auto;
 }
 </style>

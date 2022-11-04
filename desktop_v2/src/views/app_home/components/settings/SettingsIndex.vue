@@ -4,29 +4,34 @@
 
       <div class="h1">设置</div>
       <!-- 后端端口 -->
-      <PortChange />
+      <CpPortChange />
       <!-- 启动后端 -->
-      <RunBackend />
+      <CpRunBackend />
+      <CpRunBackend />
       <!-- 脚本路径 -->
-      <PyPath />
+      <CpPyPath />
       <!-- 更新目录 -->
-      <UpdateIndex />
-      <h3>create : 2022.8.22</h3>
-      <h3>by : umas</h3>
-      <h3>by : umas</h3>
-      <h3>by : umas</h3>
-      <h3>by : umas</h3>
-      <h3>by : umas</h3>
-      <h3>by : umas</h3>
+      <CpUpdateIndex />
+      <!-- 尾部占位 -->
+      <div class="rear" style="padding:20px">
+        <h3>create : 2022.8.22</h3>
+        <h3>by : umas</h3>
+        <h3>by : umas</h3>
+        <h3>by : umas</h3>
+        <h3>by : umas</h3>
+        <h3>by : umas</h3>
+        <h3>by : umas</h3>
+      </div>
+
     </el-scrollbar>
   </div>
 </template>
 
 <script setup>
-import PortChange from "./cp_settings/PortChange.vue"
-import RunBackend from "./cp_settings/RunBackend.vue"
-import PyPath from "./cp_settings/PyPath.vue"
-import UpdateIndex from "./cp_settings/UpdateIndex.vue"
+import CpPortChange from "./cp_settings/CpPortChange.vue"
+import CpRunBackend from "./cp_settings/CpRunBackend.vue"
+import CpPyPath from "./cp_settings/CpPyPath.vue"
+import CpUpdateIndex from "./cp_settings/CpUpdateIndex.vue"
 </script>
 
 <style scoped lang="scss">
@@ -35,7 +40,6 @@ div.app-settings {
   text-align: center;
   background-color: rgba(255, 0, 0, 0.05);
 }
-
-
 </style>
+
 

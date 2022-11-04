@@ -2,8 +2,8 @@
   <div class="home">
     <div class="background"></div>
     <div class="body">
-      <MainIndex v-if="!show_settings" />
-      <SettingsIndex v-else />
+      <MainIndex v-if="!show_settings" class="animate-box animate__animated animate__backInRight" />
+      <SettingsIndex v-else class="animate-box animate__animated animate__backInLeft " />
     </div>
     <!-- 设置按钮 -->
     <div class="go-settings" @click="show_settings = !show_settings">
@@ -53,12 +53,6 @@ div.home::before {
   opacity: 0.15;
 }
 
-
-
-.el-scrollbar {
-  height: 520px;
-}
-
 div.go-settings {
   position: absolute;
   padding: 10px;
@@ -71,6 +65,8 @@ div.go-settings {
 
 <!-- 全局style -->
 <style lang="scss">
+@import 'animate.css';
+
 div.h1 {
   font-weight: bold; // 加粗
   font-size: 33px;
