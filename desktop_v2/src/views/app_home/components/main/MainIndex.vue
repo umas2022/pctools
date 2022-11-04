@@ -1,8 +1,11 @@
 <template>
   <div class="app-main">
-    <GetList />
-    <GetModule />
-    <Interface />
+    <el-scrollbar>
+      <GetList />
+      <GetModule />
+      <Interface />
+    </el-scrollbar>
+
   </div>
 </template>
 <script setup lang="ts">
@@ -13,6 +16,8 @@ import Interface from "./cp_main/Interface.vue"
 </script>
 <style lang="scss" scoped>
 div.app-main {
+  height: 100vh;
   text-align: center;
+  background-color: rgba(0, 0, 255, 0.05);
 }
 </style>

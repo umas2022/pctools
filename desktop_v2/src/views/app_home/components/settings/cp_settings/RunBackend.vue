@@ -9,7 +9,7 @@
         <el-button type="primary" plain @click="run_be">启动</el-button>
         <el-button type="primary" plain @click="check_be">测试</el-button>
         <!-- python返回值 -->
-        <div class="res" v-if="show_res">
+        <!-- <div class="res" v-if="show_res">
             <el-scrollbar  always>
                 <el-button type="danger" plain size="small" @click="res_msg=[];show_res=false">clear</el-button>
                 <div class="msg" v-for="item in res_msg">
@@ -18,7 +18,7 @@
                     <div style="display:inline-block">{{item}}</div>
                 </div>
             </el-scrollbar>
-        </div>
+        </div> -->
         <!-- 折叠info栏 -->
         <div class="info" v-if="setInfoFlagPort">
             <span>默认端口4090</span> <br>

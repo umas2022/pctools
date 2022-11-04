@@ -175,8 +175,8 @@ class SearcherFunction():
             catcher.run(buff_size=10)
         # 终端调用
         def run_terminal():
-            # subprocess.run(['python3', './app_sp_operator/terminal_searcher.py', json.dumps(get_data)], creationflags=subprocess.CREATE_NEW_CONSOLE)
-            subprocess.run(['python3', './app_sp_operator/terminal_searcher.py', json.dumps(get_data)])
+            subprocess.run(['python3', './app_sp_operator/terminal_searcher.py', json.dumps(get_data)], creationflags=subprocess.CREATE_NEW_CONSOLE)
+            # subprocess.run(['python3', './app_sp_operator/terminal_searcher.py', json.dumps(get_data)])
         if get_data["terminal"] == True:
             go_main = threading.Thread(target=run_terminal)
             go_main.start()

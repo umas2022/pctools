@@ -1,14 +1,14 @@
 <template>
     <div class="prototype-main" v-if="pg_title != ''">
-        <h3>输入参数</h3>
+        <div class="h3">输入参数</div>
         <!-- <el-button type="danger" @click="test_button">test</el-button> -->
         <!-- 标题栏 -->
-        <h3>{{ pg_title }}
+        <div class="h3">{{ pg_title }}
             <div class="info-icon"
                 style="display: inline-block;  vertical-align: middle;  padding-left: 10px;  padding-right: 20px;  cursor: pointer;">
                 <useSvgIcon icon="info" color="black" :width="Number(20)" @click="dialogVisible = !dialogVisible" />
             </div>
-        </h3>
+        </div>
 
         <!-- info弹窗 -->
         <el-dialog :title="pg_title" v-model="dialogVisible" width="500px">

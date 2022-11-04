@@ -1,6 +1,6 @@
 <template>
     <div class="cp-module">
-        <h3>获取功能</h3>
+        <div class="h3">获取功能</div>
         <el-select v-model="store.function" placeholder="选择功能">
             <el-option v-for="item in store.index_list" :key="item.key" :label="item.title" :value="item.key" />
         </el-select>
