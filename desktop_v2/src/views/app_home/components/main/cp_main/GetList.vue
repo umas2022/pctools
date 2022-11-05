@@ -28,7 +28,7 @@ const get_list = () => {
         wsdemo.send(JSON.stringify(send_data));
     };
     wsdemo.onmessage = (e) => {
-        console.log(e.data);
+        // console.log(e.data);
         try {
             store.index_list = JSON.parse(e.data).data
         } catch {

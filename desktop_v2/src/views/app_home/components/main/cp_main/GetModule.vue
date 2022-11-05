@@ -2,11 +2,10 @@
     <div class="cp-module">
         <div class="h3">获取功能</div>
         <el-select v-model="store.function" placeholder="选择功能">
-            <el-option v-for="item in store.index_list" :key="item.key" :label="item.title" :value="item.key" />
+            <el-option v-for="item in store.index_list" :key="item.key" :label="item.title" :value="item.key" @click="get_intf"/>
         </el-select>
 
-        <el-button @click="get_intf">获取</el-button>
-        <!-- <div v-for="item in store.intf_data">{{ item }}</div> -->
+        <!-- <el-button @click="get_intf">获取</el-button> -->
     </div>
 </template>
 <script setup lang="ts">

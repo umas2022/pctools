@@ -1,36 +1,31 @@
 <template>
-    <div class="cp-template">
-        <!-- 上分割线 -->
-        <div class="divider top" />
-
-        <!-- 标签 -->
-        <div class="label">
-            <slot name="tp-label"></slot>
-            <div class="info-icon">
-                <useSvgIcon icon="info" color="black" :width="Number(20)" @click="state_change" />
+    <div class="gcp-dialog">
+        <!-- 显示信息 -->
+        <div class="info close animate-box animate__animated animate__fadeOutDown" ref="info_ref">
+            <div class="each-line" v-for="(item, key) in $props.data" style="padding:8px">
+                {{ item }}
             </div>
+            <slot name="content"></slot>
         </div>
-
-        <!-- 控制 -->
-        <div class="control">
-            <slot name="tp-control"></slot>
-        </div>
-
-        <!-- 折叠info栏 -->
-        <div class="info animate-box animate__animated animate__fadeOutDown" ref="info_ref">
-            <slot name="tp-info"></slot>
-        </div>
+        <!-- 深色背景 -->
         <div class="info-blocker close animate-box animate__animated animate__fadeOut " @click="state_change"
-            ref="blocker_ref"> </div>
-
-        <!-- 下分割线 -->
-        <div  class="divider bottom" />
+            ref="blocker_ref">
+        </div>
     </div>
 </template>
   
 <script setup lang="ts">
-import { onMounted, ref, inject } from "vue";
+import { ref, watch } from "vue";
 import useSvgIcon from "@/components/svgbox/useSvgIcon.vue";
+
+// 父组件传参
+const props = defineProps<{
+    data: Array<string>;
+    display: boolean
+}>();
+watch(() => props.display, () => {
+    state_change()
+})
 
 const state_change_flag = ref(false)
 const info_ref = ref<HTMLDivElement>()
@@ -38,12 +33,12 @@ const blocker_ref = ref<HTMLDivElement>()
 
 const state_change = () => {
     state_change_flag.value = !state_change_flag.value
-
     if (state_change_flag.value) {
         info_ref.value!.classList.remove("animate__fadeOutDown")
         info_ref.value!.classList.add("animate__fadeInDown")
         info_ref.value!.classList.remove("close")
-        info_ref.value!.style.zIndex = "2"
+        info_ref.value!.style.zIndex = "11"
+        blocker_ref.value!.style.zIndex = "10"
         blocker_ref.value!.classList.remove("animate__fadeOut")
         blocker_ref.value!.classList.add("animate__fadeIn")
         blocker_ref.value!.classList.remove("close")
@@ -52,6 +47,7 @@ const state_change = () => {
         info_ref.value!.classList.add("animate__fadeOutDown")
         setTimeout(() => {
             info_ref.value!.style.zIndex = "0"
+            blocker_ref.value!.style.zIndex = "0"
             info_ref.value!.classList.add("close")
         }, 800)
         blocker_ref.value!.classList.remove("animate__fadeIn")
@@ -67,53 +63,29 @@ const state_change = () => {
 <style scoped lang="scss">
 @import 'animate.css';
 
-div.cp-template {
-    position: relative;
-    height: 70px;
+div.gcp-dialog {
+    // font-weight: lighter;
+    font-weight: bold;
+    font-size: 16px;
+    text-align: left;
 }
 
-div.label {
-    display: inline-block;
-    text-align: right;
-    width: 200px;
-    position: absolute;
-    right: 50%;
-    top: calc(50% - 11px);
-    z-index: 0;
-
-    div.info-icon {
-        display: inline-block;
-        vertical-align: middle; // 垂直居中
-        padding-left: 10px;
-        padding-right: 20px;
-        cursor: pointer;
-        z-index: 2;
-    }
-}
-
-div.control {
-    display: inline-block;
-    position: absolute;
-    left: 50%;
-    top: calc(50% - 15px);
-    z-index: 0;
-}
 
 div.info {
     display: inline-block;
     position: absolute;
-    background-color: rgba(255, 255, 255, 0.8);
+    background-color: rgba(255, 255, 255, 0.9);
     width: 500px;
     left: calc(50% - 250px);
     top: 50px;
     padding: 10px;
     border: solid 3px gray;
     border-radius: 15px;
-    // z-index: 2;
 }
 
 div.info-blocker {
     position: fixed;
+    height: 100%;
     top: 0;
     left: 0;
     bottom: 0;
@@ -125,23 +97,8 @@ div.info-blocker {
 div.close {
     display: none;
 }
-
-// 分隔线
-div.divider {
-    height: 3px;
-    border-top: 3px solid rgba(0, 0, 0, 0.2);
-    width: 80%;
-    margin: 0 auto;
-
-    &.bottom {
-        border-top: 3px solid rgba(0, 0, 0, 0.4);
-        position: absolute;
-        bottom: 0px;
-        left: 0;
-        right: 0;
-    }
-}
 </style>
+  
 
   
   

@@ -10,10 +10,10 @@
             <template #tp-control>
                 <el-button v-if="!modify_path_flag" type="primary" plain @click="reset_path">修改</el-button>
                 <el-button v-else type="primary" plain @click="reset_path">保存</el-button>
-                <div v-if="!modify_path_flag" style="display:inline-block;padding:10px">
-                     <span style="font-size:small">{{ store.py_path }}</span>
+                <div v-if="!modify_path_flag" style="display:inline-block;padding-left:10px">
+                     <!-- <span style="font-size:small">{{ store.py_path }}</span> -->
                 </div>
-                <div v-else style="display:inline-block;padding:10px">
+                <div v-else style="display:inline-block">
                     <el-input v-model="store.py_path"></el-input>
                 </div>
             </template>

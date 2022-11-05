@@ -8,8 +8,7 @@
 
             <!-- 控制 -->
             <template #tp-control>
-                <el-button type="primary" plain @click="run_be">启动</el-button>
-                <el-button type="primary" plain @click="check_be">测试</el-button>
+                <el-button type="danger" plain @click="run_be">启动</el-button>
             </template>
 
             <!-- 折叠info栏 -->
@@ -49,11 +48,11 @@ const run_be = () => {
         args: ["win"],
     };
     let pyshell = new PythonShell(be_script.value, options);
-    pyshell.on("message", function (message:string) {
+    pyshell.on("message", function (message: string) {
         res_msg.value.push(message)
         console.log(message);
     });
-    pyshell.end(function (err:string) {
+    pyshell.end(function (err: string) {
         if (err) {
             throw err;
         }
@@ -61,18 +60,5 @@ const run_be = () => {
     });
 }
 
-const check_be = () => {
-    console.log("wsConnect");
-    let wsdemo = new WebSocket(get_wsurl().local + "app_test_ws");
-    wsdemo.onopen = () => {
-        wsdemo.send("hello");
-        console.log("connected !");
-    };
-    wsdemo.onmessage = (e) => {
-        // console.log(e.data)
-        if (e.data == "999") {
-            ElMessage.success("success")
-        }
-    };
-}
+
 </script>

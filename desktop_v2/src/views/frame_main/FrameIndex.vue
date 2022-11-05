@@ -17,7 +17,7 @@
 
 <script  setup>
 import { ref } from "vue";
-import useSvgIcon from "@/components/use_svg/useSvgIcon.vue";
+import useSvgIcon from "@/components/svgbox/useSvgIcon.vue";
 import PartMenu from "./components/PartMenu.vue";
 import PartBody from "./components/PartBody.vue";
 

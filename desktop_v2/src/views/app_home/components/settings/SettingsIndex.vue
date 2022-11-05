@@ -3,10 +3,12 @@
     <el-scrollbar>
 
       <div class="h1">设置</div>
-      <!-- 后端端口 -->
-      <CpPortChange />
       <!-- 启动后端 -->
       <CpRunBackend />
+      <!-- 后端测试 -->
+      <CpBackendTest />
+      <!-- 开发模式端口 -->
+      <CpPortChange />
       <!-- 脚本路径 -->
       <CpPyPath />
       <!-- 更新目录 -->
@@ -29,6 +31,7 @@
 <script setup>
 import CpPortChange from "./cp_settings/CpPortChange.vue"
 import CpRunBackend from "./cp_settings/CpRunBackend.vue"
+import CpBackendTest from "./cp_settings/CpBackendTest.vue"
 import CpPyPath from "./cp_settings/CpPyPath.vue"
 import CpUpdateIndex from "./cp_settings/CpUpdateIndex.vue"
 </script>

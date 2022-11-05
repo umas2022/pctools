@@ -7,6 +7,22 @@
       </div>
     </div>
 
+    <!-- 全局info弹窗 -->
+    <DialogPopup :data="info_data" :display="info_display">
+      <template #content>
+        <div style="margin:0 auto;padding:20px 0 0 0;width: 250px;">
+          <el-icon>
+            <Promotion />
+          </el-icon>
+          这是一行slot,希望你能喜欢
+          <el-icon>
+            <Promotion />
+          </el-icon>
+        </div>
+      </template>
+
+    </DialogPopup>
+
     <!-- 内容主体 -->
     <div class="body">
       <div class="animate-box animate__animated " ref="main_index">
@@ -34,8 +50,16 @@ import { provide, reactive, ref } from "vue"
 
 import MainIndex from "./components/main/MainIndex.vue"
 import SettingsIndex from "./components/settings/SettingsIndex.vue"
+import DialogPopup from "@/components/dialog/DialogPopup.vue";
 
-const path = window.require("path");
+// 显示全局info
+const info_data = ref([""])
+const info_display = ref(false)
+const display_gb_info = (data_input: Array<string>) => {
+  info_display.value = !info_display.value
+  info_data.value = data_input
+}
+provide("display_gb_info", display_gb_info)
 
 // 页面切换
 const main_index = ref<HTMLDivElement>()
@@ -106,6 +130,7 @@ div.home {
 //   opacity: 0.15;
 // }
 
+// 背景图片
 div.bg-box {
   position: absolute;
   z-index: 0;
