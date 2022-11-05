@@ -110,7 +110,7 @@ import ShowLogBox from "@/components/show_log/ShowLogBox.vue";
 import useSvgIcon from "@/components/svgbox/useSvgIcon.vue";
 
 const store: any = inject("store")
-const display_gb_info:any = inject("display_gb_info")
+const display_gb_info: any = inject("display_gb_info")
 
 // 类型定义
 // 输入框
