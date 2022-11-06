@@ -1,81 +1,85 @@
 <template>
     <div class="animate-box animate__animated" ref="intf_ref">
+        <el-button type="danger" @click="test_button">test</el-button>
         <div class="intf-main" v-if="store.intf_data.title">
             <!-- 标题栏 -->
             <div class="h3">{{ pg_title }}
                 <div class="info-icon"
                     style="display: inline-block;  vertical-align: middle;  padding-left: 10px;  padding-right: 20px;  cursor: pointer;">
-                    <!-- <useSvgIcon icon="info" color="black" :width="Number(20)" @click="dialogVisible = !dialogVisible" /> -->
                     <useSvgIcon icon="info" color="black" :width="Number(20)" @click="display_gb_info(pg_info)" />
                 </div>
             </div>
-
-            <!-- info弹窗 -->
-            <el-dialog :title="pg_title" v-model="dialogVisible" width="500px">
-                <div>
-                    <div class="each-line" v-for="(item, key) in pg_info" :key="key">
-                        {{ item }}
-                    </div>
-                </div>
-            </el-dialog>
 
             <!-- 各种框分类 -->
             <div class="filter" v-for="item in pg_data">
                 <!-- 输入框 -->
                 <div class="input-box" v-if="item.type == 'input'">
-                    {{ item.data.label }}
-                    <el-input v-model="item.data.value" clearable :placeholder="item.data.placeholder || '请输入'">
-                    </el-input>
-                    <!-- 注解 -->
-                    <div class="info-icon" v-if="item.data.annotation">
-                        <useSvgIcon icon="info" color="black" :width="Number(20)"
-                            @click="item.data.annotation_visible = !item.data.annotation_visible" />
-                    </div>
-                    <div v-if="item.data.annotation_visible">
-                        <div v-if="typeof (item.data.annotation) == 'string'">
-                            {{ item.data.annotation }}
+                    <!-- show模式检测 -->
+                    <div v-if="item.show != undefined && item.show.value == false" />
+                    <div v-else>
+                        {{ item.data.label }}
+                        <el-input v-model="item.data.value" clearable :placeholder="item.data.placeholder || '请输入'">
+                        </el-input>
+                        <!-- 注解 -->
+                        <div class="info-icon" v-if="item.data.annotation">
+                            <useSvgIcon icon="info" color="black" :width="Number(20)"
+                                @click="item.data.annotation_visible = !item.data.annotation_visible" />
                         </div>
-                        <div v-else v-for="each_line in item.data.annotation">
-                            {{ each_line }}
+                        <div v-if="item.data.annotation_visible">
+                            <div v-if="typeof (item.data.annotation) == 'string'">
+                                {{ item.data.annotation }}
+                            </div>
+                            <div v-else v-for="each_line in item.data.annotation">
+                                {{ each_line }}
+                            </div>
                         </div>
                     </div>
                 </div>
+
                 <!-- 选择框 -->
                 <div class="select-box" v-if="item.type == 'select'">
-                    {{ item.data.label }}
-                    <el-select v-model="item.data.value" @click="set_height(30)">
-                        <el-option v-for="each in item.data.option" :label="each.label" :value="each.value" />
-                    </el-select>
-                    <!-- 注解 -->
-                    <div class="info-icon" v-if="item.data.annotation">
-                        <useSvgIcon icon="info" color="black" :width="Number(20)"
-                            @click="item.data.annotation_visible = !item.data.annotation_visible" />
-                    </div>
-                    <div v-if="item.data.annotation_visible">
-                        <div v-if="typeof (item.data.annotation) == 'string'">
-                            {{ item.data.annotation }}
+                    <!-- show模式检测 -->
+                    <div v-if="item.show != undefined && item.show.value == false" />
+                    <div v-else>
+                        {{ item.data.label }}
+                        <el-select v-model="item.data.value" @click="set_height(30)">
+                            <el-option v-for="each in item.data.option" :label="each.label" :value="each.value" />
+                        </el-select>
+                        <!-- 注解 -->
+                        <div class="info-icon" v-if="item.data.annotation">
+                            <useSvgIcon icon="info" color="black" :width="Number(20)"
+                                @click="item.data.annotation_visible = !item.data.annotation_visible" />
                         </div>
-                        <div v-else v-for="each_line in item.data.annotation">
-                            {{ each_line }}
+                        <div v-if="item.data.annotation_visible">
+                            <div v-if="typeof (item.data.annotation) == 'string'">
+                                {{ item.data.annotation }}
+                            </div>
+                            <div v-else v-for="each_line in item.data.annotation">
+                                {{ each_line }}
+                            </div>
                         </div>
                     </div>
                 </div>
                 <!-- 开关switch -->
                 <div class="switch-box" v-if="item.type == 'switch'">
-                    {{ item.data.label }}
-                    <el-switch v-model="item.data.value">
-                    </el-switch>
-                    <!-- 注解 -->
-                    <div class="info-icon" v-if="item.data.annotation">
-                        <useSvgIcon icon="info" color="black" :width="Number(20)"
-                            @click="item.data.annotation_visible = !item.data.annotation_visible" />
-                    </div>
-                    <div v-if="item.data.annotation_visible">
-                        <div v-if="typeof (item.data.annotation) == 'string'">
-                            {{ item.data.annotation }}
+                    <!-- show模式检测 -->
+                    <div v-if="item.show != undefined && item.show.value == false" />
+                    <div v-else>
+                        {{ item.data.label }}
+                        <el-switch v-model="item.data.value">
+                        </el-switch>
+                        <!-- 注解 -->
+                        <div class="info-icon" v-if="item.data.annotation">
+                            <useSvgIcon icon="info" color="black" :width="Number(20)"
+                                @click="item.data.annotation_visible = !item.data.annotation_visible" />
                         </div>
-                        <div v-else v-for="each_line in item.data.annotation">
-                            {{ each_line }}
+                        <div v-if="item.data.annotation_visible">
+                            <div v-if="typeof (item.data.annotation) == 'string'">
+                                {{ item.data.annotation }}
+                            </div>
+                            <div v-else v-for="each_line in item.data.annotation">
+                                {{ each_line }}
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -157,24 +161,20 @@ const pg_title = computed(() => { return store.intf_data.title || "" })
 const pg_info = computed(() => { return store.intf_data.info || [] })
 const pg_data = computed(() => { return store.intf_data.require || [] })
 
-// json页面参数赋值
+// 全局参数
 const as_terminal = ref(false)
-
-// help页弹窗控制
-const dialogVisible = ref(false);
-
 
 // log高度控制,加上时间让组件传参可以识别变化
 const log_height = reactive({ data: 0, time: 0 })
 provide("log_height", log_height)
 // log文本
 const log_res = ref("")
-
 // 设置log栏高度,高位300,低位30
 const set_height = (get_height: number) => {
     log_height.data = get_height
     log_height.time = Date.now()
 }
+
 // 开始按钮
 const start = () => {
     if (!as_terminal.value) {
@@ -228,10 +228,35 @@ watch(pg_title, () => {
     }
 })
 
+// show模式切换
+const set_show_state = () => {
+    pg_data.value.forEach((item: any) => {
+        if (item.show) {
+            item.show.value = computed(() => {
+                return get_item_value(item.show.listen.key) == item.show.listen.value
+            })
+        }
+    });
+}
+const get_item_value = (item_key: string) => {
+    for (let num in pg_data.value) {
+        let item = pg_data.value[num]
+        if (item.data.key == item_key) {
+            return item.data.value
+        }
+    }
+}
+onMounted(() => {
+    set_show_state()
+})
+watch(() => store.intf_data.title, () => {
+    set_show_state()
+})
+
+
 // 测试按钮
 const test_button = () => {
-    console.log(pg_data.value)
-
+    set_show_state()
 }
 </script>
 

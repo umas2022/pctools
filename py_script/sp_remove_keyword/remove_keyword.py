@@ -64,12 +64,18 @@ class RemoveKeyword():
                         return "error"
                 # 检测到目标,移动到试错目录
                 else:
+                    # 创建输出目录结构
+                    name_upper_dir = methodPathIn.replace(self.path_in + "/", "")
+                    methodPathOut = os.path.join(self.cut_path, name_upper_dir).replace("\\", "/")
+                    name = methodPathIn.split("/")[-1]
+                    dir_out = methodPathOut.replace("/" + name, "")
+                    if not os.path.exists(dir_out):
+                        try:
+                            os.makedirs(dir_out)
+                        except Exception as e:
+                            logger.error("RemoveKeyword - make dir error :%s" % e)
+                            logger.error("file : %s" % dir_out)
                     try:
-                        name_upper_dir = methodPathIn.replace(self.path_in + "/", "")
-                        methodPathOut = os.path.join(self.cut_path, name_upper_dir).replace("\\", "/")
-                        # if self.target == "dir":
-                        #     shutil.rmtree(methodPathIn)
-                        # else:
                         shutil.move(methodPathIn, methodPathOut)
                         return "move"
                     except Exception as e:
