@@ -12,7 +12,7 @@ from utils_tools.traverse import Traverse
 
 
 class RenameBasic():
-    def __init__(self, path_in, use_func, add_in="", path_log="") -> None:
+    def __init__(self, path_in="", use_func="", add_in="", add_in_2="", path_log="", json_set={}) -> None:
         '''
         path_in: 输入路径
         use_func: 重命名方法
@@ -23,6 +23,17 @@ class RenameBasic():
         logger.raw_logger.set_path(str(path_log).replace("\\", "/"))
         self.use_func = use_func
         self.add_in = add_in
+        self.add_in_2 = add_in_2
+        if not json_set == {}:
+            try:
+                self.path_in = json_set['path_in'].replace("\\", "/")
+                self.path_log = json_set['path_log'].replace("\\", "/") if "path_log" in json_set else ""
+                self.use_func = json_set['use_func']
+                self.add_in = json_set['add_in']if "add_in" in json_set else ""
+                self.add_in_2 = json_set['add_in_2']if "add_in_2" in json_set else ""
+            except Exception as e:
+                logger.error("key error: %s" % e)
+                return
 
     def __method_add_prefix(self, methodPathIn: str, jetzt: int):
         '''处理方法: 添加前缀'''
@@ -46,6 +57,21 @@ class RenameBasic():
         methodPathOut = os.path.join(dir, name_new).replace("\\", "/")
         return state, methodPathOut
 
+    def __method_replace_key(self, methodPathIn: str, jetzt: int):
+        '''处理方法: 关键字替换'''
+        state = "replace_key"
+        methodPathIn = methodPathIn.replace("\\", "/")
+        dir, name = os.path.split(methodPathIn)
+        name_list = name.split(self.add_in)
+        if name_list[0] == "":
+            name_new = self.add_in_2.join(name_list)
+        else:
+            state = "pass"
+            name_new = self.add_in.join(name_list)
+        methodPathOut = os.path.join(dir, name_new).replace("\\", "/")
+        logger.debug(methodPathOut)
+        return state, methodPathOut
+
     def __filter(self, methodPathIn: str, jetzt: int):
         '''处理方法分类器'''
         if not os.path.isfile(methodPathIn):
@@ -57,6 +83,9 @@ class RenameBasic():
         # 删除前缀
         elif self.use_func == "del_prefix":
             state, methodPathOut = self.__method_del_prefix(methodPathIn, jetzt)
+        # 关键字替换
+        elif self.use_func == "replace_key":
+            state, methodPathOut = self.__method_replace_key(methodPathIn, jetzt)
         else:
             logger.error("暂时还没写其他的方法！")
         try:

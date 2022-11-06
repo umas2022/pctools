@@ -17,7 +17,9 @@
                     <!-- show模式检测 -->
                     <div v-if="item.show != undefined && item.show.value == false" />
                     <div v-else>
-                        {{ item.data.label }}
+                        <div style="display:inline-block;width:100px">
+                            {{ item.data.label }}
+                        </div>
                         <el-input v-model="item.data.value" clearable :placeholder="item.data.placeholder || '请输入'">
                         </el-input>
                         <!-- 注解 -->
@@ -41,7 +43,9 @@
                     <!-- show模式检测 -->
                     <div v-if="item.show != undefined && item.show.value == false" />
                     <div v-else>
-                        {{ item.data.label }}
+                        <div style="display:inline-block;width:100px">
+                            {{ item.data.label }}
+                        </div>
                         <el-select v-model="item.data.value" @click="set_height(30)">
                             <el-option v-for="each in item.data.option" :label="each.label" :value="each.value" />
                         </el-select>
@@ -65,7 +69,9 @@
                     <!-- show模式检测 -->
                     <div v-if="item.show != undefined && item.show.value == false" />
                     <div v-else>
-                        {{ item.data.label }}
+                        <div style="display:inline-block;width:100px">
+                            {{ item.data.label }}
+                        </div>
                         <el-switch v-model="item.data.value">
                         </el-switch>
                         <!-- 注解 -->

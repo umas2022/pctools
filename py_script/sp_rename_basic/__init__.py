@@ -1,0 +1,1 @@
+from sp_rename_basic.rename_basic import RenameBasic as MainClass
