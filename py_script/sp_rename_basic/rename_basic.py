@@ -12,7 +12,7 @@ from utils_tools.traverse import Traverse
 
 
 class RenameBasic():
-    def __init__(self, path_in="", use_func="", add_in="", add_in_2="", path_log="", json_set={}) -> None:
+    def __init__(self, path_in="", use_func="", target="file", add_in="", add_in_2="", path_log="", json_set={}) -> None:
         '''
         path_in: 输入路径
         use_func: 重命名方法
@@ -29,6 +29,7 @@ class RenameBasic():
                 self.path_in = json_set['path_in'].replace("\\", "/")
                 self.path_log = json_set['path_log'].replace("\\", "/") if "path_log" in json_set else ""
                 self.use_func = json_set['use_func']
+                self.target = json_set['target'] if "target" in json_set else "file"
                 self.add_in = json_set['add_in']if "add_in" in json_set else ""
                 self.add_in_2 = json_set['add_in_2']if "add_in_2" in json_set else ""
             except Exception as e:
@@ -75,8 +76,9 @@ class RenameBasic():
     def __filter(self, methodPathIn: str, jetzt: int):
         '''处理方法分类器'''
         if not os.path.isfile(methodPathIn):
-            logger.error("RenameBasic: no such file - %s" % methodPathIn)
-            return "error"
+            if not os.path.isdir(methodPathIn):
+                logger.error("RenameBasic: no such file - %s" % methodPathIn)
+                return "error"
         # 添加前缀
         if self.use_func == "add_prefix":
             state, methodPathOut = self.__method_add_prefix(methodPathIn, jetzt)
@@ -99,16 +101,25 @@ class RenameBasic():
         '''开始处理'''
         logger.info("rename function start ...")
         logger.write("rename %s" % self.use_func)
-        # 计数
+        # 分类
         total = 0
-        for full_in in Traverse().get_file(self.path_in):
+        tarverse_func = ""
+        if self.target == "dir":
+            tarverse_func = Traverse().get_dir
+        elif self.target == "file":
+            tarverse_func = Traverse().get_file
+        else:
+            logger.error("remove_keyword : unexpected target - %s" % self.target)
+            return
+        # 计数
+        for full_in in tarverse_func(self.path_in):
             total += 1
             name = full_in.replace("\\", "/").split("/")[-1]
             logger.info("counting : %d\t%s" % (total, name))
         logger.write("total : %d\n" % total)
         # 开始
         jetzt = 0
-        for full_in in Traverse().get_file(self.path_in):
+        for full_in in tarverse_func(self.path_in):
             jetzt += 1
             full_in = full_in.replace("\\", "/")
             # 调用filter

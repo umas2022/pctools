@@ -50,6 +50,24 @@
             }
         },
         {
+            "type": "select",
+            "data": {
+                "key": "target",
+                "label": "目标对象",
+                "value": "file",
+                "option": [
+                    {
+                        "value": "file",
+                        "label": "文件"
+                    },
+                    {
+                        "value": "dir",
+                        "label": "文件夹"
+                    }
+                ]
+            }
+        },
+        {
             "type": "input",
             "show": {
                 "value": false,

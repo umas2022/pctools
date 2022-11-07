@@ -1,6 +1,6 @@
 <template>
     <div class="animate-box animate__animated" ref="intf_ref">
-        <el-button type="danger" @click="test_button">test</el-button>
+        <!-- <el-button type="danger" @click="test_button">test</el-button> -->
         <div class="intf-main" v-if="store.intf_data.title">
             <!-- 标题栏 -->
             <div class="h3">{{ pg_title }}
@@ -153,7 +153,8 @@ type type_switch = {
 type type_page = {
     type: string,
     // data: type_input | type_select // 这句求了个交集, 应该求并
-    data: any
+    data: any,
+    show: any
 }
 // 消息发送
 type type_send = {
@@ -193,7 +194,16 @@ const start = () => {
     }
     pg_data.value.forEach((item: type_page) => {
         let add_data: any = {}
-        add_data[item.data.key] = item.data.value
+        if (item.show) {
+            if (item.show.value) {
+                console.log(item.data.label)
+                add_data[item.data.key] = item.data.value
+            }
+        }
+        else {
+            add_data[item.data.key] = item.data.value
+
+        }
         Object.assign(send_data, add_data)
     });
 

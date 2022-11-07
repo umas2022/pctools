@@ -90,7 +90,7 @@
                 "key": "cut_path",
                 "label": "试错路径",
                 "value": "",
-                "placeholder": "置空不使用试错,show模式暂时没能实现"
+                "placeholder": "置空不使用试错"
             }
         }
     ]
