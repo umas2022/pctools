@@ -13,6 +13,8 @@
       <CpPyPath />
       <!-- 更新目录 -->
       <CpUpdateIndex />
+      <!-- 显示导航条 -->
+      <CpShowNav />
       <!-- 尾部占位 -->
       <div class="rear" style="padding:20px">
         <h3>create : 2022.8.22</h3>
@@ -22,6 +24,7 @@
         <h3>by : umas</h3>
         <h3>by : umas</h3>
         <h3>by : umas</h3>
+        <h5>写这么多只是想试试滚动条是不是还活着</h5>
       </div>
 
     </el-scrollbar>
@@ -34,6 +37,7 @@ import CpRunBackend from "./cp_settings/CpRunBackend.vue"
 import CpBackendTest from "./cp_settings/CpBackendTest.vue"
 import CpPyPath from "./cp_settings/CpPyPath.vue"
 import CpUpdateIndex from "./cp_settings/CpUpdateIndex.vue"
+import CpShowNav from "./cp_settings/CpShowNav.vue"
 </script>
 
 <style scoped lang="scss">

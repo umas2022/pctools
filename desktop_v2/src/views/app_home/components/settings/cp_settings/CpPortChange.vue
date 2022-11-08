@@ -24,21 +24,21 @@
 import { onMounted, ref, inject } from "vue";
 import BasicTemplate from "./BasicTemplate.vue"
 
-const store = inject("store")
+const store_home = inject("store_home")
 // 开发模式port
 const setInfoFlagPort = ref(false);
 const setValuePort = ref(false);
 onMounted(() => {
-    if (store.port == 4091) {
+    if (store_home.port == 4091) {
         setValuePort.value = true;
     }
 });
 const setFuncPort = () => {
     if (setValuePort.value == true) {
-        store.port = 4091
+        store_home.port = 4091
     } else {
-        store.port = 4090
+        store_home.port = 4090
     }
-    console.log("port in use : " + store.port)
+    console.log("port in use : " + store_home.port)
 };
 </script>

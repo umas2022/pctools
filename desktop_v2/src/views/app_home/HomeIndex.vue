@@ -39,7 +39,7 @@
         <Setting />
       </el-icon>
       <el-icon :size="30" v-else>
-        <ArrowLeftBold />
+        <ArrowRightBold />
       </el-icon>
     </div>
 
@@ -97,14 +97,14 @@ const state_change = () => {
 }
 
 // 全局参数
-const store = reactive({
+const store_home = reactive({
   port: 4090,
   py_path: "D:\\s-linux\\project\\pctools\\py_script",
   index_list: [],
   function: "",
   intf_data: {}
 })
-provide("store", store)
+provide("store_home", store_home)
 
 </script>
 <style lang="scss" scoped>
@@ -160,11 +160,12 @@ div.close {
   display: none;
 }
 
+// 右上角切换按钮
 div.go-settings {
   position: absolute;
   padding: 10px;
   z-index: 2;
-  left: 0px;
+  right: 0px;
   top: 0px;
   cursor: pointer;
 }

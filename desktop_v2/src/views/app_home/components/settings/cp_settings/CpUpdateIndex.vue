@@ -29,13 +29,13 @@ import { get_wsurl } from "@/utils/api_config.js";
 import { ElMessage } from "element-plus";
 import { inject } from "vue";
 
-const store:any = inject("store")
+const store_home:any = inject("store_home")
 
 const update_list = () => {
     // 更新目录
     const send_data = {
         function: "list_update",
-        data: { py_path: store.py_path }
+        data: { py_path: store_home.py_path }
     }
 
     console.log("ws connecting ...");

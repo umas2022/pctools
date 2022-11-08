@@ -229,7 +229,7 @@ div.text {
 // 尺寸拖动条
 .show-log-resizer {
     position: absolute;
-    bottom: 0;
+    bottom: -10px;
     right: calc(50% - 150px);
     z-index: 2;
     background-color: rgba(106, 106, 106, 0.23);

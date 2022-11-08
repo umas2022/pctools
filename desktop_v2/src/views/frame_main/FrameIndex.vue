@@ -1,9 +1,9 @@
 <template>
   <div class="main-frame">
-    <div class="menu" >
-      <div class="ctrl-icon">
-        <!-- <use-svg-icon class="svg" :class="[rotate_flag ? 'vertical' : 'horizontal']"
-          :style="{ padding: svg_padding + 'px' }" @click="click_show" icon="menu" color="black" :width="svg_size" /> -->
+    <div class="menu">
+      <div class="ctrl-icon" v-if="store_frame.show_nav">
+        <use-svg-icon class="svg" :class="[rotate_flag ? 'vertical' : 'horizontal']"
+          :style="{ padding: svg_padding + 'px' }" @click="click_show" icon="menu" color="black" :width="svg_size" />
       </div>
       <div style="height:50px"></div>
       <PartMenu v-if="show_header" />
@@ -15,8 +15,8 @@
   </div>
 </template>
 
-<script  setup>
-import { ref } from "vue";
+<script  setup lang="ts">
+import { ref, reactive, provide } from "vue";
 import useSvgIcon from "@/components/svgbox/useSvgIcon.vue";
 import PartMenu from "./components/PartMenu.vue";
 import PartBody from "./components/PartBody.vue";
@@ -54,6 +54,12 @@ const click_show = () => {
   }
 };
 
+// frame全局变量仓库
+const store_frame = reactive({
+  show_nav: true
+})
+provide("store_frame", store_frame)
+
 
 // 测试按钮
 const test_button = () => {
@@ -68,6 +74,7 @@ div.main-frame {
 //左上角按钮
 div.ctrl-icon {
   position: absolute;
+  left:  0px;
   z-index: 2;
   cursor: pointer;
 
@@ -112,10 +119,6 @@ div.body {
 
 }
 
-// // 全局居中
-// #app {
-//   text-align: center;
-// }
 </style>
 
 <!-- 全局style -->

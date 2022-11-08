@@ -2,7 +2,7 @@
     <div class="cp-getlist">
         <div class="h3">获取目录</div>
         <span style="padding:10px">当前方法数量:</span>
-        <span style="padding:10px">{{ store.index_list.length }}</span>
+        <span style="padding:10px">{{ store_home.index_list.length }}</span>
         <el-button @click="get_list">刷新</el-button>
     </div>
 
@@ -12,13 +12,13 @@ import { ref, inject, onMounted } from "vue"
 import { get_wsurl } from "@/utils/api_config.js";
 import { ElMessage } from "element-plus";
 
-const store: any = inject("store")
+const store_home: any = inject("store_home")
 
 const get_list = () => {
     // 获取目录
     const send_data = {
         function: "get_list",
-        data: { py_path: store.py_path }
+        data: { py_path: store_home.py_path }
     }
 
     console.log("ws connecting ...");
@@ -30,7 +30,7 @@ const get_list = () => {
     wsdemo.onmessage = (e) => {
         // console.log(e.data);
         try {
-            store.index_list = JSON.parse(e.data).data
+            store_home.index_list = JSON.parse(e.data).data
         } catch {
             if (e.data == "done") {
                 ElMessage.success("refresh index")
@@ -42,7 +42,7 @@ const get_list = () => {
 }
 
 onMounted(() => {
-    if (store.index_list.length==0){
+    if (store_home.index_list.length==0){
          get_list()
     }
 })

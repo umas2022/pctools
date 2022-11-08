@@ -1,7 +1,7 @@
 <template>
     <div class="animate-box animate__animated" ref="intf_ref">
         <!-- <el-button type="danger" @click="test_button">test</el-button> -->
-        <div class="intf-main" v-if="store.intf_data.title">
+        <div class="intf-main" v-if="store_home.intf_data.title">
             <!-- 标题栏 -->
             <div class="h3">{{ pg_title }}
                 <div class="info-icon"
@@ -119,7 +119,7 @@ import { get_wsurl } from "@/utils/api_config.js";
 import ShowLogBox from "@/components/show_log/ShowLogBox.vue";
 import useSvgIcon from "@/components/svgbox/useSvgIcon.vue";
 
-const store: any = inject("store")
+const store_home: any = inject("store_home")
 const display_gb_info: any = inject("display_gb_info")
 
 // 类型定义
@@ -164,9 +164,9 @@ type type_send = {
 }
 
 // json页面参数取出
-const pg_title = computed(() => { return store.intf_data.title || "" })
-const pg_info = computed(() => { return store.intf_data.info || [] })
-const pg_data = computed(() => { return store.intf_data.require || [] })
+const pg_title = computed(() => { return store_home.intf_data.title || "" })
+const pg_info = computed(() => { return store_home.intf_data.info || [] })
+const pg_data = computed(() => { return store_home.intf_data.require || [] })
 
 // 全局参数
 const as_terminal = ref(false)
@@ -188,9 +188,9 @@ const start = () => {
         set_height(300)
     }
     const send_data: type_send = {
-        function: store.function,
+        function: store_home.function,
         terminal: as_terminal.value,
-        py_path: store.py_path
+        py_path: store_home.py_path
     }
     pg_data.value.forEach((item: type_page) => {
         let add_data: any = {}
@@ -265,7 +265,7 @@ const get_item_value = (item_key: string) => {
 onMounted(() => {
     set_show_state()
 })
-watch(() => store.intf_data.title, () => {
+watch(() => store_home.intf_data.title, () => {
     set_show_state()
 })
 
@@ -339,11 +339,9 @@ div.switch-box {
     }
 }
 
-
+// 日志
 div.log-box {
-    // position: absolute;
-    // bottom: 0px;
-    width: calc(100% - 120px);
+    width: calc(100% - 180px);
     margin: auto;
 }
 </style>

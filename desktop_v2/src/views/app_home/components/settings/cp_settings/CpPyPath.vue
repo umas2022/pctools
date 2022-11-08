@@ -11,16 +11,16 @@
                 <el-button v-if="!modify_path_flag" type="primary" plain @click="reset_path">修改</el-button>
                 <el-button v-else type="primary" plain @click="reset_path">保存</el-button>
                 <div v-if="!modify_path_flag" style="display:inline-block;padding-left:10px">
-                     <!-- <span style="font-size:small">{{ store.py_path }}</span> -->
+                     <!-- <span style="font-size:small">{{ store_home.py_path }}</span> -->
                 </div>
                 <div v-else style="display:inline-block">
-                    <el-input v-model="store.py_path"></el-input>
+                    <el-input v-model="store_home.py_path"></el-input>
                 </div>
             </template>
 
             <!-- 折叠info栏 -->
             <template #tp-info>
-                <span>python脚本位置: {{ store.py_path }}</span>
+                <span>python脚本位置: {{ store_home.py_path }}</span>
             </template>
 
         </BasicTemplate>
@@ -31,12 +31,12 @@
 import { onMounted, ref, inject, reactive } from "vue";
 import BasicTemplate from "./BasicTemplate.vue"
 
-const store = inject("store")
+const store_home = inject("store_home")
 
 const modify_path_flag = ref(false)
 
 const reset_path = () => {
     modify_path_flag.value = !modify_path_flag.value
-    console.log(store.py_path)
+    console.log(store_home.py_path)
 };
 </script>
