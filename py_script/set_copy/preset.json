@@ -1,0 +1,82 @@
+{
+    "samu_image_compress": {
+        "info": "2T盘samu文件夹图片压缩",
+        "path_log": "F:\\[1T]-samu-cut\\log",
+        "action": [
+            {
+                "function": "sp_compress_image",
+                "input": {
+                    "path_in": "E:\\[2T]-samu-raw",
+                    "path_out": "F:\\[1T]-samu-cut"
+                }
+            }
+        ]
+    },
+    "samu_video_compress": {
+        "info": "2T盘samu文件夹视频压缩",
+        "path_log": "F:\\[1T]-samu-cut\\log",
+        "action": [
+            {
+                "function": "sp_compress_video",
+                "input": {
+                    "path_in": "E:\\[2T]-samu-raw",
+                    "path_out": "F:\\[1T]-samu-cut"
+                }
+            }
+        ]
+    },
+    "samu_compress": {
+        "info": "2T盘samu文件夹反向对比删除+[图片,视频]压缩备份",
+        "path_log": "F:\\[1T]-samu-cut\\log",
+        "action": [
+            {
+                "function": "sp_remove_difference",
+                "input": {
+                    "base_path": "E:\\[2T]-samu-raw",
+                    "del_path": "F:\\[1T]-samu-cut"
+                }
+            },
+            {
+                "function": "sp_compress_video",
+                "input": {
+                    "path_in": "E:\\[2T]-samu-raw",
+                    "path_out": "F:\\[1T]-samu-cut"
+                }
+            },
+            {
+                "function": "sp_compress_image",
+                "input": {
+                    "path_in": "E:\\[2T]-samu-raw",
+                    "path_out": "F:\\[1T]-samu-cut"
+                }
+            }
+        ]
+    },
+    "compress_test": {
+        "info": "三步压缩动作链测试",
+        "path_log": "D:\\s-linux\\project\\test_file\\test_log",
+        "action": [
+            {
+                "function": "sp_compress_video",
+                "input": {
+                    "path_in": "D:\\s-linux\\project\\test_file\\test_in",
+                    "path_out": "D:\\s-linux\\project\\test_file\\test_out"
+                }
+            },
+            {
+                "function": "sp_compress_image",
+                "input": {
+                    "path_in": "D:\\s-linux\\project\\test_file\\test_in",
+                    "path_out": "D:\\s-linux\\project\\test_file\\test_out"
+                }
+            },
+            {
+                "function": "sp_remove_difference",
+                "input": {
+                    "base_path": "D:\\s-linux\\project\\test_file\\test_in",
+                    "del_path": "D:\\s-linux\\project\\test_file\\test_out"
+                }
+            }
+        ]
+    }
+}

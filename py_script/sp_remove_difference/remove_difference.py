@@ -12,10 +12,18 @@ from utils_tools.traverse import Traverse
 
 
 class RemoveDifference():
-    def __init__(self, base_path, del_path, path_log="") -> None:
+    def __init__(self, base_path="", del_path="", path_log="",json_set={}) -> None:
         self.base_path = str(base_path).replace("\\", "/")
         self.del_path = str(del_path).replace("\\", "/")
         self.path_log = str(path_log).replace("\\", "/")
+        if not json_set == {}:
+            try:
+                self.base_path = json_set['base_path']
+                self.del_path = json_set['del_path']
+                self.path_log = json_set['path_log']if "path_log" in json_set else ""
+            except Exception as e:
+                logger.error("key error: %s" %e)
+                return
 
     def __remove_dir(self, methodPathBasic, methodPathDel):
         '''处理方法：删除文件夹'''

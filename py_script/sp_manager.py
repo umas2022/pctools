@@ -11,7 +11,6 @@ sp包入口
 import json
 import os
 import sys
-from tkinter import EXCEPTION
 from utils_logger.log import logger_re as logger
 from sp_compress_video.video_compress import VideoCompress
 from sp_compress_image.img_compress import ImgCompress
