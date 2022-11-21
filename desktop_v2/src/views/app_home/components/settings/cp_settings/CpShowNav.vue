@@ -3,12 +3,12 @@
         <BasicTemplate>
             <!-- 标签 -->
             <template #tp-label>
-                <span>显示导航</span>
+                <span>显示测试页导航</span>
             </template>
 
             <!-- 控制 -->
             <template #tp-control>
-                <el-button type="primary" plain @click="reset_path">切换</el-button>
+                <el-switch v-model="show_nav" @click="reset_path"></el-switch>
             </template>
 
             <!-- 折叠info栏 -->
@@ -27,9 +27,9 @@ import BasicTemplate from "./BasicTemplate.vue"
 
 const store_frame: any = inject("store_frame")
 
-
+const show_nav = ref(store_frame.show_nav)
 const reset_path = () => {
-    store_frame.show_nav = !store_frame.show_nav
+    store_frame.show_nav = show_nav.value
     console.log(store_frame.show_nav)
 };
 </script>

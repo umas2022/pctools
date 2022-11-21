@@ -56,7 +56,7 @@ const click_show = () => {
 
 // frame全局变量仓库
 const store_frame = reactive({
-  show_nav: true
+  show_nav: false
 })
 provide("store_frame", store_frame)
 
