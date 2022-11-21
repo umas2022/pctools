@@ -73,6 +73,17 @@ class RenameBasic():
         logger.debug(methodPathOut)
         return state, methodPathOut
 
+    def __method_num_array(self,methodPathIn: str, jetzt: int):
+        '''处理方法: 三位数字序号命名'''
+        state = "num_array"
+        methodPathIn = methodPathIn.replace("\\", "/")
+        dir, name = os.path.split(methodPathIn)
+        fileFormat = name.split(".")[-1]
+        name_new = str(jetzt).zfill(3)+"."+fileFormat
+        methodPathOut = os.path.join(dir, name_new).replace("\\", "/")
+        logger.debug(methodPathOut)
+        return state, methodPathOut
+
     def __filter(self, methodPathIn: str, jetzt: int):
         '''处理方法分类器'''
         if not os.path.isfile(methodPathIn):
@@ -88,6 +99,9 @@ class RenameBasic():
         # 关键字替换
         elif self.use_func == "replace_key":
             state, methodPathOut = self.__method_replace_key(methodPathIn, jetzt)
+        # 序号命名
+        elif self.use_func == "num_array":
+            state, methodPathOut = self.__method_num_array(methodPathIn, jetzt)
         else:
             logger.error("暂时还没写其他的方法！")
         try:

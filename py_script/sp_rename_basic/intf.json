@@ -23,6 +23,10 @@
                     {
                         "value": "replace_key",
                         "label": "关键字替换"
+                    },
+                    {
+                        "value": "num_array",
+                        "label": "序号命名"
                     }
                 ],
                 "annotation": "这里是一行注释"
