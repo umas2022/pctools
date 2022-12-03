@@ -57,6 +57,7 @@ const dialogVisible = ref(false);
 
 <style lang="scss" scoped>
 div.auto-main{
+  text-align: center;
   height: 100%;
 }
 div.part {

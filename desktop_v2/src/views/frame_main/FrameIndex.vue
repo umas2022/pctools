@@ -1,7 +1,7 @@
 <template>
   <div class="main-frame">
-    <div class="menu">
-      <div class="ctrl-icon" v-if="store_frame.show_nav">
+    <div class="menu" v-if="store_frame.show_nav">
+      <div class="ctrl-icon" >
         <use-svg-icon class="svg" :class="[rotate_flag ? 'vertical' : 'horizontal']"
           :style="{ padding: svg_padding + 'px' }" @click="click_show" icon="menu" color="black" :width="svg_size" />
       </div>
@@ -16,7 +16,7 @@
 </template>
 
 <script  setup lang="ts">
-import { ref, reactive, provide } from "vue";
+import { ref, reactive, provide, onMounted } from "vue";
 import useSvgIcon from "@/components/svgbox/useSvgIcon.vue";
 import PartMenu from "./components/PartMenu.vue";
 import PartBody from "./components/PartBody.vue";
@@ -25,8 +25,8 @@ import PartBody from "./components/PartBody.vue";
 const show_header = ref(false);
 // 默认不旋转菜单按钮
 const rotate_flag = ref(true);
-// 显示情况下的默认高度
-const menu_width = ref(0);
+// 菜单初始宽度(5px边框)
+const menu_width = ref(5);
 // 菜单图标的尺寸
 const svg_size = ref(15);
 const svg_padding = ref(2);
@@ -38,7 +38,7 @@ const click_show = () => {
   if (show_header.value) {
     show_header.value = false;
     rotate_flag.value = true;
-    menu_width.value = 0;
+    menu_width.value = 5;
     svg_size.value = 15;
     svg_padding.value = 2;
   }
@@ -56,10 +56,18 @@ const click_show = () => {
 
 // frame全局变量仓库
 const store_frame = reactive({
+  // 是否显示左上角导航按钮
   show_nav: false
 })
 provide("store_frame", store_frame)
 
+
+onMounted(() => {
+  let path = window.location.hash
+  if (path != "#/") {
+    store_frame.show_nav = true
+  }
+})
 
 // 测试按钮
 const test_button = () => {
@@ -74,7 +82,7 @@ div.main-frame {
 //左上角按钮
 div.ctrl-icon {
   position: absolute;
-  left:  0px;
+  left: 5px;
   z-index: 2;
   cursor: pointer;
 
@@ -97,6 +105,8 @@ div.ctrl-icon {
 // 左侧菜单栏
 div.menu {
   background-color: rgba(128, 128, 128, 0.2);
+  box-sizing: border-box;
+  border-right: 5px solid rgba(0, 0, 0, 0.1);
   border-radius: 5px;
   transition: all 1s;
   height: calc(100vh - 15px);
@@ -118,7 +128,6 @@ div.body {
   overflow-x: hidden;
 
 }
-
 </style>
 
 <!-- 全局style -->
