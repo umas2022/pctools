@@ -26,16 +26,17 @@
 import { onMounted, ref, computed } from "vue";
 import { ElMessage } from "element-plus";
 import BasicTemplate from "./BasicTemplate.vue"
+import { useStore } from "vuex"
 import { get_wsurl } from "@/utils/api_config.js";
 const path = window.require("path");
 const { PythonShell } = window.require("python-shell");
+const store = useStore()
 
 
 // python调用
-const be_path = ref("D:\\s-linux\\project\\pctools")
-// const be_script = ref("run_backend.py")
-const be_script = ref("run_backterminal.py")
-const be_full = computed(() => path.join(be_path.value, be_script.value))
+const be_path = store.state.pro_path
+const be_script = "run_backterminal.py"
+const be_full = computed(() => path.join(be_path, be_script))
 const res_msg = ref([""])
 const show_res = ref(false)
 const run_be = () => {
@@ -43,11 +44,11 @@ const run_be = () => {
     let options = {
         mode: "text",
         pythonOptions: ["-u"], // get print results in real-time
-        scriptPath: be_path.value,
+        scriptPath: be_path,
         // args: ["4091"],
         args: ["win"],
     };
-    let pyshell = new PythonShell(be_script.value, options);
+    let pyshell = new PythonShell(be_script, options);
     pyshell.on("message", function (message: string) {
         res_msg.value.push(message)
         console.log(message);

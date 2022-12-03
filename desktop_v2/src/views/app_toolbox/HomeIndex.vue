@@ -33,7 +33,7 @@
       </div>
     </div>
 
-    <!-- 左上角设置按钮 -->
+    <!-- 右上角设置按钮 -->
     <div class="go-settings" @click="state_change">
       <el-icon :size="30" v-if="!show_settings">
         <Setting />
@@ -42,15 +42,23 @@
         <ArrowRightBold />
       </el-icon>
     </div>
+    <!-- 右上角后端启动按钮 -->
+    <div class="run-back" @click="run_back">
+      <el-icon :size="30" v-if="!show_settings">
+        <Position />
+      </el-icon>
+    </div>
 
   </div>
 </template>
 <script setup lang="ts">
-import { provide, reactive, ref } from "vue"
-
+import { provide, reactive, ref, } from "vue"
+import { useStore } from "vuex"
 import MainIndex from "./components/main/MainIndex.vue"
 import SettingsIndex from "./components/settings/SettingsIndex.vue"
-import DialogPopup from "@/components/dialog/DialogPopup.vue";
+import DialogPopup from "@/components/dialog/DialogPopup.vue"
+
+const store = useStore()
 
 // 显示全局info
 const info_data = ref([""])
@@ -94,6 +102,31 @@ const state_change = () => {
       main_index.value!.classList.remove("close")
     }, 300)
   }
+}
+
+// 启动后端
+const { PythonShell } = window.require("python-shell");
+const run_back = () => {
+  let be_path = store.state.pro_path
+  console.log(be_path)
+  let be_script = "run_backterminal.py"
+  let options = {
+    mode: "text",
+    pythonOptions: ["-u"], // get print results in real-time
+    scriptPath: be_path,
+    // args: ["4091"],
+    args: ["win"],
+  };
+  let pyshell = new PythonShell(be_script, options);
+  pyshell.on("message", function (message: string) {
+    console.log(message);
+  });
+  pyshell.end(function (err: string) {
+    if (err) {
+      throw err;
+    }
+    console.log("finished");
+  });
 }
 
 // 全局参数
@@ -166,6 +199,16 @@ div.go-settings {
   padding: 10px;
   z-index: 2;
   right: 0px;
+  top: 0px;
+  cursor: pointer;
+}
+
+// 右上角后端按钮
+div.run-back {
+  position: absolute;
+  padding: 10px;
+  z-index: 2;
+  right: 35px;
   top: 0px;
   cursor: pointer;
 }
