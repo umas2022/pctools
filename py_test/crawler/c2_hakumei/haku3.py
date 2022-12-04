@@ -19,7 +19,8 @@ save_path = r"D:\s-workspace\crawler_save"
 sharp_factor = 2
 # debug模式chrome数据位置
 chrome_path = r"D:\\p-data\\chrome_temp"
-chrome_ready = False
+# chrome已经ready,脚本不再启动chrome
+chrome_ready = True
 
 import time
 import threading
