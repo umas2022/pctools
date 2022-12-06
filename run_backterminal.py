@@ -1,4 +1,5 @@
 # 为后端开启新的终端
+# electron手动启动后端时调用此脚本
 
 import subprocess
 import sys

@@ -3,11 +3,11 @@
 ## Introduction
 - python basic function
 - Django backend server
-- Electron frontend
-- (book-walker crawler)
+- Electron frontend- (book-walker crawler)
 
 ## Environment
 - refer: ./py_script/utils_env_init
+- refer: ./sh_script
 
 ## Run
 - dev: run backend server  
@@ -19,6 +19,7 @@
 - dev: build electron package
 ```npm run electron:build```
     - exe file path: /desktop_electron/dist_electron
+
 
 
 

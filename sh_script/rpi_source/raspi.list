@@ -1,0 +1,2 @@
+deb http://mirrors.tuna.tsinghua.edu.cn/raspberrypi/ buster main ui
+deb-src http://mirrors.tuna.tsinghua.edu.cn/raspberrypi/ buster main ui
