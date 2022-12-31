@@ -38,7 +38,7 @@ const state_change = () => {
         setTimeout(() => {
             ani_ref.value!.style.zIndex = "0"
             ani_ref.value!.classList.add("close")
-        }, 800)
+        }, 100)
     }
 }
 </script>

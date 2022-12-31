@@ -1,3 +1,4 @@
+// 此json与sp_manager.py一同弃用
 {
     "samu_image_compress": {
         "info": "2T盘samu文件夹图片压缩",

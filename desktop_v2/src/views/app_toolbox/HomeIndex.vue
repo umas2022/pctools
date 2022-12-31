@@ -26,63 +26,79 @@
 
 
     <!-- 右上角设置按钮(齿轮) -->
-    <div class="go-settings" @click="state_change">
-      <AnimateDown :display="button_display">
-        <template #content>
-          <el-icon :size="30">
-            <Setting />
-          </el-icon>
-        </template>
-      </AnimateDown>
-    </div>
+    <el-tooltip class="box-item" effect="dark" content="参数设置" placement="bottom-end">
+      <div class="go-settings button" @click="state_change">
+        <AnimateDown :display="button_display">
+          <template #content>
+            <el-icon :size="30">
+              <Setting />
+            </el-icon>
+          </template>
+        </AnimateDown>
+      </div>
+    </el-tooltip>
+
+
+
     <!-- 右上角返回主页按钮(右箭头) -->
-    <div class="go-settings" @click="state_change">
-      <AnimateDown :display="!button_display">
-        <template #content>
-          <el-icon :size="30">
-            <ArrowRightBold />
-          </el-icon>
-        </template>
-      </AnimateDown>
-    </div>
+    <el-tooltip class="box-item button" effect="dark" content="返回主页" placement="bottom-end">
+      <div class="go-home button" @click="state_change">
+        <AnimateDown :display="!button_display">
+          <template #content>
+            <el-icon :size="30">
+              <Right />
+            </el-icon>
+          </template>
+        </AnimateDown>
+      </div>
+    </el-tooltip>
+
     <!-- 右上角后端启动按钮(小飞机) -->
-    <div class="run-back" @click="run_back">
-      <AnimateDown :display="button_display">
-        <template #content>
-          <el-icon :size="30">
-            <Position />
-          </el-icon>
-        </template>
-      </AnimateDown>
-    </div>
+    <el-tooltip class="box-item" effect="dark" content="启动后端" placement="bottom-end">
+      <div class="run-back button" @click="run_back">
+        <AnimateDown :display="button_display">
+          <template #content>
+            <el-icon :size="30">
+              <Position />
+            </el-icon>
+          </template>
+        </AnimateDown>
+      </div>
+    </el-tooltip>
+
     <!-- 右上角展开按钮(加号) -->
-    <div class="extract" @click="extract_change">
-      <AnimateDown :display="button_display">
-        <template #content>
-          <AnimateDown :display="!store_home.extract_display">
-            <template #content>
-              <el-icon :size="30">
-                <Plus />
-              </el-icon>
-            </template>
-          </AnimateDown>
-        </template>
-      </AnimateDown>
-    </div>
+    <el-tooltip class="box-item" effect="dark" content="功能展开" placement="bottom-end">
+      <div class="extract button" @click="extract_change">
+        <AnimateDown :display="button_display">
+          <template #content>
+            <AnimateDown :display="!store_home.extract_display">
+              <template #content>
+                <el-icon :size="30">
+                  <Plus />
+                </el-icon>
+              </template>
+            </AnimateDown>
+          </template>
+        </AnimateDown>
+      </div>
+    </el-tooltip>
+
     <!-- 右上角折叠按钮(减号) -->
-    <div class="extract" @click="extract_change">
-      <AnimateDown :display="button_display">
-        <template #content>
-          <AnimateDown :display="store_home.extract_display">
-            <template #content>
-              <el-icon :size="30">
-                <Minus />
-              </el-icon>
-            </template>
-          </AnimateDown>
-        </template>
-      </AnimateDown>
-    </div>
+    <el-tooltip class="box-item" effect="dark" content="功能折叠" placement="bottom-end">
+      <div class="extract button" @click="extract_change">
+        <AnimateDown :display="button_display">
+          <template #content>
+            <AnimateDown :display="store_home.extract_display">
+              <template #content>
+                <el-icon :size="30">
+                  <Minus />
+                </el-icon>
+              </template>
+            </AnimateDown>
+          </template>
+        </AnimateDown>
+      </div>
+    </el-tooltip>
 
     <!-- 内容主体 -->
     <div class="body">
@@ -177,7 +193,7 @@ const run_back = () => {
 
 // 内容折叠
 const extract_change = () => {
-store_home.extract_display = !store_home.extract_display
+  store_home.extract_display = !store_home.extract_display
 }
 
 // 全局参数
@@ -248,48 +264,52 @@ div.close {
   display: none;
 }
 
-// 右上角切换按钮
-div.go-settings {
+// 右上角按钮统一格式
+div.button {
   position: absolute;
   padding: 10px;
   z-index: 2;
-  right: 0px;
   top: 0px;
   cursor: pointer;
+}
+
+// 右上角切换按钮
+div.go-settings {
+  right: 0px;
 
   :hover {
     border-radius: 5px;
-    background-color: rgba(0, 255, 255, 0.2);
+    background-color: rgba(255, 0, 0, 0.05);
+  }
+}
+
+// 右上角返回主页
+div.go-home {
+  right: 0px;
+
+  :hover {
+    border-radius: 5px;
+    background-color: rgba(0, 0, 255, 0.05);
   }
 }
 
 // 右上角后端按钮
 div.run-back {
-  position: absolute;
-  padding: 10px;
-  z-index: 2;
   right: 35px;
-  top: 0px;
-  cursor: pointer;
 
   :hover {
     border-radius: 5px;
-    background-color: rgba(0, 255, 255, 0.2);
+    background-color: rgba(0, 0, 255, 0.06);
   }
 }
 
 // 右上角展开按钮
 div.extract {
-  position: absolute;
-  padding: 10px;
-  z-index: 2;
   right: 68px;
-  top: 0px;
-  cursor: pointer;
 
   :hover {
     border-radius: 5px;
-    background-color: rgba(0, 255, 255, 0.2);
+    background-color: rgba(0, 255, 0, 0.05);
   }
 }
 </style>

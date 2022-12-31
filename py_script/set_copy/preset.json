@@ -26,7 +26,7 @@
         ]
     },
     "samu_compress": {
-        "info": "2T盘samu文件夹反向对比删除+[图片,视频]压缩备份",
+        "info": "2T盘samu文件夹反向对比删除+[图片,视频]压缩备份+全部备份",
         "path_log": "F:\\[1T]-samu-cut\\log",
         "action": [
             {
@@ -45,6 +45,13 @@
             },
             {
                 "function": "sp_compress_image",
+                "input": {
+                    "path_in": "E:\\[2T]-samu-raw",
+                    "path_out": "F:\\[1T]-samu-cut"
+                }
+            },
+            {
+                "function": "sp_copy_backup",
                 "input": {
                     "path_in": "E:\\[2T]-samu-raw",
                     "path_out": "F:\\[1T]-samu-cut"
