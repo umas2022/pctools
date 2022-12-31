@@ -113,7 +113,7 @@ class RemoveKeyword():
             full_in = full_in.replace("\\", "/")
             state = self.__remove_filter(full_in)
             logger.info("%s\t%d/%d\t%s" % (state, jetzt, total, full_in))
-            if state == "remove":
+            if state == "remove" or state == "move":
                 del_count += 1
         logger.info("total: %d" % total)
         logger.info("delete: %d" % del_count)

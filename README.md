@@ -16,9 +16,12 @@
 ```python run_backterminal.py```
 - dev: run electron server in develop mode
 ```python run_electron.py```
+
+## Build
 - dev: build electron package
+```cd desktop_v2/```
 ```npm run electron:build```
-    - exe file path: /desktop_electron/dist_electron
+- exe file path: /desktop_v2/dist_electron
 
 
 

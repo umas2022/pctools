@@ -5,7 +5,7 @@ bookwalker漫画《妖精森林的小不点》爬虫
 思路:
     1. 手动启动chrome打开debug端口,转交selenium
     2. 代码截图,点击进入下一页,根据viewport0的显示状态判断点击是否成功
-    3. 图片锐化和截图双线程同步进行
+    3. 图片锐化(+信息删除)和截图双线程同步进行(jpg节省空间)
     4. 截图保存后检查文件大小,小于设定值的截图被判断为loading页,重新截图
 问题:
     1.截图清晰度受屏幕分辨率影响,质量较低;网页截图比平板截屏质量差
@@ -21,7 +21,7 @@ https://bookwalker.jp/bookshelf1/
 
 
 # 总页数(设为1截取单页)
-total_page = 892
+total_page = 1248
 # 起始页码(截图保存命名用)
 current_page = 1
 # 图片保存位置(路径下不要有其他图片)
@@ -35,9 +35,9 @@ chrome_path = r"D:\\p-data\\chrome_temp"
 driver_path = r"D:\p-tools\chromedriver\chromedriver108.exe"
 # chrome已经手动ready,脚本不再启动chrome
 chrome_ready = True
-# 重新截图判断阈值(KB)(2K分辨率下loading页截图约36KB,纯白页16KB)
-reshot_size = 100
-# 截图/点击,重试次数
+# 重新截图大小(KB)(不同截图环境loading页大小不相同)
+reshot_size = 200
+# 截图/点击,重试次数上限
 retry_times = 8
 
 
@@ -47,6 +47,8 @@ import logging
 import os
 import sys
 import copy
+# 删除图片信息
+import piexif  # pip install piexif
 # 图片锐化
 from PIL import Image, ImageEnhance
 # 爬虫主程序
@@ -62,6 +64,7 @@ from selenium.webdriver.common.action_chains import ActionChains
 
 
 wait_here = input("press enter to start ...")
+time_start = time.time()
 
 '''设置logger'''
 logger = logging.getLogger('py_demo')
@@ -86,15 +89,20 @@ logger.addHandler(file_handler)
 
 
 def sharpen_main(shot_path):
-    '''子线程:锐化主函数'''
+    '''子线程:图片锐化+删除信息主函数'''
     shot_path_list = shot_path.split("/")
     img = Image.open(shot_path)
     enhancer = ImageEnhance.Sharpness(img)
     im_s = enhancer.enhance(sharp_factor)
     shot_path_list[-1] = shot_path_list[-1].replace("shot", "sharp")
     sharp_path = "/".join(shot_path_list)
+    # jpg节省点空间
+    im_s = im_s.convert('RGB')
+    sharp_path = sharp_path.replace(".png", ".jpg")
     im_s.save(sharp_path)
     os.remove(shot_path)
+    # 删除信息(其实正常截图本来就不含信息)
+    piexif.remove(sharp_path)
 
 
 '''实例化浏览器'''
@@ -120,10 +128,12 @@ for i in range(total_page):
         logger.info("loading ...")
         time.sleep(1)
     # 浏览器全屏截图(截图动作占用约0.5s,并行报错暂未解决)
-    logger.info("shot : %d / %d , page : %d" % (i + 1, total_page, num))
+    time_cost = int(time.time() - time_start)
+    time_left = int(time_cost / (i + 1) * (total_page - i - 1))
+    logger.info("shot : %d / %d , page : %d, time-left : %d s" % (i + 1, total_page, num, time_left))
     shot_path = os.path.join(save_path, "shot_%d.png" % num)
     driver.save_screenshot(shot_path)
-    # 检查截图大小,小于设定值识别为loading页,重新截图
+    # 检查截图大小,小于设定值为loading页,重新截图
     shot_retry = 0
     while True:
         shot_retry += 1
@@ -157,9 +167,9 @@ for i in range(total_page):
             if click_retry > retry_times:
                 logger.error("click %d times retry!" % retry_times)
                 exit(1)
-    viewport_before = viewport_now
 
+    viewport_before = viewport_now
     # wait_here = input("go >>")
 
-logger.debug("shot-function finish")
+logger.info("shot-function finish")
 driver.quit()

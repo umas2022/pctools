@@ -1,7 +1,9 @@
 <template>
   <div class="app-main">
     <el-scrollbar>
-      <GetList />
+      <AnimateDown :display="store_home.extract_display"><template #content>
+          <GetList />
+        </template></AnimateDown>
       <GetModule />
       <Interface />
     </el-scrollbar>
@@ -9,9 +11,13 @@
   </div>
 </template>
 <script setup lang="ts">
+import { inject } from "vue"
 import GetList from "./cp_main/GetList.vue"
 import GetModule from "./cp_main/GetModule.vue"
 import Interface from "./cp_main/Interface.vue"
+import AnimateDown from "@/components/animate_down/AnimateDown.vue"
+
+const store_home:any = inject("store_home")
 
 </script>
 <style lang="scss" scoped>

@@ -14,7 +14,7 @@
           <el-icon>
             <Promotion />
           </el-icon>
-          这是一行slot,希望你能喜欢
+          这是一行slot,希望今天的你也能喜欢
           <el-icon>
             <Promotion />
           </el-icon>
@@ -22,6 +22,67 @@
       </template>
 
     </DialogPopup>
+
+
+
+    <!-- 右上角设置按钮(齿轮) -->
+    <div class="go-settings" @click="state_change">
+      <AnimateDown :display="button_display">
+        <template #content>
+          <el-icon :size="30">
+            <Setting />
+          </el-icon>
+        </template>
+      </AnimateDown>
+    </div>
+    <!-- 右上角返回主页按钮(右箭头) -->
+    <div class="go-settings" @click="state_change">
+      <AnimateDown :display="!button_display">
+        <template #content>
+          <el-icon :size="30">
+            <ArrowRightBold />
+          </el-icon>
+        </template>
+      </AnimateDown>
+    </div>
+    <!-- 右上角后端启动按钮(小飞机) -->
+    <div class="run-back" @click="run_back">
+      <AnimateDown :display="button_display">
+        <template #content>
+          <el-icon :size="30">
+            <Position />
+          </el-icon>
+        </template>
+      </AnimateDown>
+    </div>
+    <!-- 右上角展开按钮(加号) -->
+    <div class="extract" @click="extract_change">
+      <AnimateDown :display="button_display">
+        <template #content>
+          <AnimateDown :display="!store_home.extract_display">
+            <template #content>
+              <el-icon :size="30">
+                <Plus />
+              </el-icon>
+            </template>
+          </AnimateDown>
+        </template>
+      </AnimateDown>
+    </div>
+    <!-- 右上角折叠按钮(减号) -->
+    <div class="extract" @click="extract_change">
+      <AnimateDown :display="button_display">
+        <template #content>
+          <AnimateDown :display="store_home.extract_display">
+            <template #content>
+              <el-icon :size="30">
+                <Minus />
+              </el-icon>
+            </template>
+          </AnimateDown>
+        </template>
+      </AnimateDown>
+    </div>
 
     <!-- 内容主体 -->
     <div class="body">
@@ -33,22 +94,6 @@
       </div>
     </div>
 
-    <!-- 右上角设置按钮 -->
-    <div class="go-settings" @click="state_change">
-      <el-icon :size="30" v-if="!show_settings">
-        <Setting />
-      </el-icon>
-      <el-icon :size="30" v-else>
-        <ArrowRightBold />
-      </el-icon>
-    </div>
-    <!-- 右上角后端启动按钮 -->
-    <div class="run-back" @click="run_back">
-      <el-icon :size="30" v-if="!show_settings">
-        <Position />
-      </el-icon>
-    </div>
-
   </div>
 </template>
 <script setup lang="ts">
@@ -56,6 +101,7 @@ import { provide, reactive, ref, } from "vue"
 import { useStore } from "vuex"
 import MainIndex from "./components/main/MainIndex.vue"
 import SettingsIndex from "./components/settings/SettingsIndex.vue"
+import AnimateDown from "@/components/animate_down/AnimateDown.vue"
 import DialogPopup from "@/components/dialog/DialogPopup.vue"
 
 const store = useStore()
@@ -72,12 +118,12 @@ provide("display_gb_info", display_gb_info)
 // 页面切换
 const main_index = ref<HTMLDivElement>()
 const settings_index = ref<HTMLDivElement>()
-const show_settings = ref(false)
+const button_display = ref(true)
 
 const state_change = () => {
-  show_settings.value = !show_settings.value
+  button_display.value = !button_display.value
   // 显示设置页
-  if (show_settings.value) {
+  if (!button_display.value) {
     main_index.value!.classList.remove("animate__backInLeft")
     main_index.value!.classList.add("animate__backOutLeft")
     setTimeout(() => {
@@ -129,13 +175,22 @@ const run_back = () => {
   });
 }
 
+// 内容折叠
+const extract_change = () => {
+store_home.extract_display = !store_home.extract_display
+}
+
 // 全局参数
 const store_home = reactive({
+  // 后端端口
   port: 4090,
+  // 脚本调用位置,用于启动后端
   py_path: "D:\\s-linux\\project\\pctools\\py_script",
   index_list: [],
   function: "",
-  intf_data: {}
+  intf_data: {},
+  // 内容折叠
+  extract_display: true
 })
 provide("store_home", store_home)
 
@@ -201,6 +256,11 @@ div.go-settings {
   right: 0px;
   top: 0px;
   cursor: pointer;
+
+  :hover {
+    border-radius: 5px;
+    background-color: rgba(0, 255, 255, 0.2);
+  }
 }
 
 // 右上角后端按钮
@@ -211,6 +271,26 @@ div.run-back {
   right: 35px;
   top: 0px;
   cursor: pointer;
+
+  :hover {
+    border-radius: 5px;
+    background-color: rgba(0, 255, 255, 0.2);
+  }
+}
+
+// 右上角展开按钮
+div.extract {
+  position: absolute;
+  padding: 10px;
+  z-index: 2;
+  right: 68px;
+  top: 0px;
+  cursor: pointer;
+
+  :hover {
+    border-radius: 5px;
+    background-color: rgba(0, 255, 255, 0.2);
+  }
 }
 </style>
 

@@ -1,7 +1,7 @@
 '''
 create: 2022.9.20
 
-图片压缩
+对比删除差异
 '''
 
 import os
@@ -18,9 +18,9 @@ class RemoveDifference():
         self.path_log = str(path_log).replace("\\", "/")
         if not json_set == {}:
             try:
-                self.base_path = json_set['base_path']
-                self.del_path = json_set['del_path']
-                self.path_log = json_set['path_log']if "path_log" in json_set else ""
+                self.base_path = json_set['base_path'].replace("\\", "/")
+                self.del_path = json_set['del_path'].replace("\\", "/")
+                self.path_log = json_set['path_log'].replace("\\", "/") if "path_log" in json_set else ""
             except Exception as e:
                 logger.error("key error: %s" %e)
                 return
@@ -68,6 +68,7 @@ class RemoveDifference():
         logger.write("total dir : %d\n" % total)
         # 开始
         jetzt = 0
+        # 遍历被将要删除的路径
         for full_del in Traverse().get_dir(self.del_path):
             jetzt += 1
             full_del = full_del.replace("\\", "/")
@@ -75,7 +76,7 @@ class RemoveDifference():
             name = full_del.split("/")[-1]
             # 对root的相对路径
             name_upper_dir = full_del.replace(self.del_path + "/", "")
-            # 完整输出路径
+            # 对比基准路径
             full_base = os.path.join(self.base_path, name_upper_dir).replace("\\", "/")
             state = self.__remove_dir(full_base, full_del)
             logger.info("%s\t%d/%d\t%s" % (state, jetzt, total, full_del))
