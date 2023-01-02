@@ -31,7 +31,7 @@ const get_list = () => {
         // console.log(e.data);
         try {
             store_home.index_list = JSON.parse(e.data).data
-            console.log(store_home.index_list.length)
+            // console.log(store_home.index_list.length)
             if (store_home.index_list.length != 0) {
                 setTimeout(() => {
                     store_home.extract_display = false

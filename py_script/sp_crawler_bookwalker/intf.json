@@ -1,0 +1,147 @@
+{
+    "title": "爬虫 - bookwalker通用",
+    "info": [
+        "1.由于重复调试导致的谷歌人机验证,放弃了全自动过程,改用手动启动debug模式chrome再由selenium接管",
+        "1.能力所限,放弃了对<canvas>的操作,直接简单截图,推荐屏幕超分提高图片分辨率",
+        "2.没有任何OCR功能,不能识别图片页面和设定的文件名序号,漏掉的单页会导致后续所有页码序号对应错误,处理完记得检查",
+        "3.实测黑白漫画的透明度通道对清晰度几乎没有影响,采用jpg存储图片,需要png自己去源码里注释,这个switch懒得做了"
+    ],
+    "require": [
+        {
+            "type": "input",
+            "data": {
+                "key": "total_page",
+                "label": "总页数",
+                "value": "5",
+                "annotation": "截图总页数"
+            }
+        },
+        {
+            "type": "input",
+            "data": {
+                "key": "current_page",
+                "label": "起始页码",
+                "value": "1",
+                "annotation": "截图保存命名的起始序号"
+            }
+        },
+        {
+            "type": "input",
+            "data": {
+                "key": "save_path",
+                "label": "保存位置",
+                "value": "D:\\s-workspace\\crawler_save",
+                "annotation": [
+                    "路径下不要有其他图片",
+                    "路径必须存在,没有写新建文件夹功能"
+                ]
+            }
+        },
+        {
+            "type": "input",
+            "data": {
+                "key": "sharp_factor",
+                "label": "图片锐化系数",
+                "value": "2",
+                "annotation": "1为原图,<1糊化,>1锐化,实测2效果还行"
+            }
+        },
+        {
+            "type": "input",
+            "data": {
+                "key": "chrome_path",
+                "label": "chrome数据位置",
+                "value": "D:\\p-data\\chrome_temp",
+                "annotation": [
+                    "debug模式chrome数据位置",
+                    "用于debug模式chrome的脚本启动"
+                ]
+            }
+        },
+        {
+            "type": "input",
+            "data": {
+                "key": "chrome_port",
+                "label": "chrome端口",
+                "value": "9222",
+                "annotation": [
+                    "debug模式chrome占用的端口",
+                    "9222一般不会被占用",
+                    "用于debug模式chrome的脚本启动"
+                ]
+            }
+        },
+        {
+            "type": "input",
+            "data": {
+                "key": "driver_path",
+                "label": "driver位置",
+                "value": "D:\\p-tools\\chromedriver\\chromedriver108.exe",
+                "annotation": [
+                    "注意要和chrome版本一致",
+                    "https://chromedriver.chromium.org/downloads"
+                ]
+            }
+        },
+        {
+            "type": "input",
+            "data": {
+                "key": "reshot_size",
+                "label": "重新截图大小",
+                "value": "200",
+                "annotation": [
+                    "单位:KB",
+                    "检测loading页的不成熟方案",
+                    "不同截图环境loading页大小不相同,4kjpg实测200KB毕竟合适",
+                    "极简的页面截图很小,可能触发这个检测,正常现象",
+                    "注意这个尺寸是png转换为jpg之前的大小,转换后实际大小会小很多,懒得改了"
+                ]
+            }
+        },
+        {
+            "type": "input",
+            "data": {
+                "key": "retry_times",
+                "label": "重试次数上限",
+                "value": "8",
+                "annotation": "默认时间间隔为1秒,根据网络情况适当调整"
+            }
+        },
+        {
+            "type": "input",
+            "data": {
+                "key": "click_point_y",
+                "label": "y轴翻页点击位置",
+                "value": "300",
+                "annotation": [
+                    "单位:像素,顶部为0",
+                    "极端分辨率下点击不能触发翻页时可以尝试修改"
+                ]
+            }
+        },
+        {
+            "type": "input",
+            "data": {
+                "key": "click_point_x",
+                "label": "x轴翻页点击位置",
+                "value": "100",
+                "annotation": [
+                    "单位:像素,左边为0",
+                    "极端分辨率下点击不能触发翻页时可以尝试修改"
+                ]
+            }
+        },
+        {
+            "type": "button",
+            "data": {
+                "key": "open_chrome",
+                "label": "启动chrome",
+                "button":"启动",
+                "annotation": [
+                    "脚本启动debug模式chrome",
+                    "用到的参数:chrome数据位置,chrome端口"
+                ]
+            }
+        }
+    ]
+}

@@ -12,12 +12,12 @@
 
             <!-- 各种框分类 -->
             <div class="filter" v-for="item in pg_data">
-                <!-- 输入框 -->
+                <!-- 输入框input -->
                 <div class="input-box" v-if="item.type == 'input'">
                     <!-- show模式检测 -->
                     <div v-if="item.show != undefined && item.show.value == false" />
                     <div v-else>
-                        <div style="display:inline-block;width:100px">
+                        <div style="display:inline-block;width:150px">
                             {{ item.data.label }}
                         </div>
                         <el-input v-model="item.data.value" clearable :placeholder="item.data.placeholder || '请输入'">
@@ -38,12 +38,12 @@
                     </div>
                 </div>
 
-                <!-- 选择框 -->
+                <!-- 选择框select -->
                 <div class="select-box" v-if="item.type == 'select'">
                     <!-- show模式检测 -->
                     <div v-if="item.show != undefined && item.show.value == false" />
                     <div v-else>
-                        <div style="display:inline-block;width:100px">
+                        <div style="display:inline-block;width:150px">
                             {{ item.data.label }}
                         </div>
                         <el-select v-model="item.data.value" @click="set_height(30)">
@@ -64,12 +64,13 @@
                         </div>
                     </div>
                 </div>
+
                 <!-- 开关switch -->
                 <div class="switch-box" v-if="item.type == 'switch'">
                     <!-- show模式检测 -->
                     <div v-if="item.show != undefined && item.show.value == false" />
                     <div v-else>
-                        <div style="display:inline-block;width:100px">
+                        <div style="display:inline-block;width:150px">
                             {{ item.data.label }}
                         </div>
                         <el-switch v-model="item.data.value">
@@ -89,7 +90,34 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- 按钮button -->
+                <div class="button-box" v-if="item.type == 'button'">
+                    <!-- show模式检测 -->
+                    <div v-if="item.show != undefined && item.show.value == false" />
+                    <div v-else>
+                        <div style="display:inline-block;width:150px">
+                            {{ item.data.label }}
+                        </div>
+                        <el-button @click="start(item.data.key)">{{ item.data.button }}</el-button>
+                        <!-- 注解 -->
+                        <div class="info-icon" v-if="item.data.annotation">
+                            <useSvgIcon icon="info" color="black" :width="Number(20)"
+                                @click="item.data.annotation_visible = !item.data.annotation_visible" />
+                        </div>
+                        <div v-if="item.data.annotation_visible">
+                            <div v-if="typeof (item.data.annotation) == 'string'">
+                                {{ item.data.annotation }}
+                            </div>
+                            <div v-else v-for="each_line in item.data.annotation">
+                                {{ each_line }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
+
 
 
 
@@ -160,7 +188,8 @@ type type_page = {
 type type_send = {
     function: string,
     terminal: boolean,
-    py_path: string
+    py_path: string,
+    button: any
 }
 
 // json页面参数取出
@@ -182,15 +211,20 @@ const set_height = (get_height: number) => {
     log_height.time = Date.now()
 }
 
+
 // 开始按钮
-const start = () => {
+const start = (button: any) => {
+    if (typeof (button) != "string") {
+        button = ""
+    }
     if (!as_terminal.value) {
         set_height(300)
     }
     const send_data: type_send = {
         function: store_home.function,
         terminal: as_terminal.value,
-        py_path: store_home.py_path
+        py_path: store_home.py_path,
+        button: button
     }
     pg_data.value.forEach((item: type_page) => {
         let add_data: any = {}
@@ -329,6 +363,19 @@ div.switch-box {
     .el-switch {
         padding-left: 10px;
     }
+
+    .info-icon {
+        display: inline-block;
+        position: absolute;
+        padding-top: 6px;
+        padding-left: 15px;
+        cursor: pointer;
+    }
+}
+
+// 按钮
+div.button-box {
+    padding: 10px;
 
     .info-icon {
         display: inline-block;

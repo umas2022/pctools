@@ -16,6 +16,9 @@
             <template #tp-info>
                 <span>更新python脚本目录列表</span><br />
                 <span>目录由每个单独module下的intf.json的头部组成</span> 
+                <span>只有具有intf.json的文件夹会被识别为一个模组</span> 
+                <span>intf.json需要有正确的格式</span> 
+                <span>更新后在主页手动刷新方法列表</span> 
             </template>
 
         </BasicTemplate>

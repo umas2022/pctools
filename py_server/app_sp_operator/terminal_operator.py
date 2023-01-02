@@ -18,7 +18,7 @@ sys.path.append(script_path)
 from py_script.sp_manager import SpManager
 from py_script.sp_manager import logger
 
-now = time.process_time()
+now = time.time()
 
 text_data = sys.argv[1]
 get_data = json.loads(text_data)
@@ -31,7 +31,7 @@ if not get_function in dir(sm):
 called_func = getattr(sm, get_function)
 called_func(json_set=get_data)
 
-time_spent_ms = int(1000 * (time.process_time() - now))
+time_spent_ms = int(1000 * (time.time() - now))
 time_spent = str(time_spent_ms / 1000) + "s" if time_spent_ms > 1000 else str(time_spent_ms) + "ms"
 logger.info("time-spent: %s" % time_spent)
 

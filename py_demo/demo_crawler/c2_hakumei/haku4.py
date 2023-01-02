@@ -17,6 +17,8 @@ chrome.exe --remote-debugging-port=9222 --user-data-dir="D:\\p-data\\chrome_temp
 
 https://bookwalker.jp/bookshelf1/
 
+2023.1.1 转至py_script/sp_crawler_bookwalker继续更新,此处demo不再更新
+
 '''
 
 

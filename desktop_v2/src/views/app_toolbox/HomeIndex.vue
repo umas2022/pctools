@@ -10,7 +10,7 @@
     <!-- 全局info弹窗 -->
     <DialogPopup :data="info_data" :display="info_display">
       <template #content>
-        <div style="margin:0 auto;padding:20px 0 0 0;width: 250px;">
+        <div style="margin:0 auto;padding:20px 0 0 0;width: 300px;">
           <el-icon>
             <Promotion />
           </el-icon>

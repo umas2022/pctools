@@ -17,6 +17,7 @@ class SpOperator(WebsocketConsumer):
     sp批处理程序中间函数
     调用sp_manager.py
     已被直接搜索py_script目录的方法替代
+    包括同目录下的terminal_operator一同弃用
     '''
 
     def connect(self):
@@ -42,10 +43,10 @@ class SpOperator(WebsocketConsumer):
             if not get_function in dir(sm):
                 logger.error("sp-manager: unexpected function - %s" % get_function)
                 return
-            now = time.process_time()
+            now = time.time()
             called_func = getattr(sm, get_function)
             called_func(json_set=get_data)
-            time_spent_ms = int(1000 * (time.process_time() - now))
+            time_spent_ms = int(1000 * (time.time() - now))
             time_spent = str(time_spent_ms / 1000) + "s" if time_spent_ms > 1000 else str(time_spent_ms) + "ms"
             logger.info("time-spent: %s" % time_spent)
 
@@ -147,21 +148,28 @@ class SearcherFunction():
         必要参数: get_data.function, get_data.py_path, get_data.terminal, get_data.其他参数
         '''
         logger.info("get data: %s" % str(get_data))
+        # 主要功能函数
         get_function = get_data["function"]
+        # 由附加按钮触发的子函数
+        get_button = get_data["button"] if "button" in get_data else ""
 
         # 定义工作主函数
         def main_func() -> None:
             logger.set_mode("frontend")
-            now = time.process_time()
+            now = time.time()
 
             for filefiner,name,ispkg in pkgutil.iter_modules([get_data["py_path"]]):
-                if name == get_data["function"]:
+                if name == get_function:
                     importlib.import_module(name)
                     module = sys.modules[name]
                     mc = module.MainClass(json_set = get_data)
-                    mc.run()
+                    if not get_button == "":
+                        called_func = getattr(mc, get_button)
+                        called_func()
+                    else:
+                        mc.run()
             
-            time_spent_ms = int(1000 * (time.process_time() - now))
+            time_spent_ms = int(1000 * (time.time() - now))
             time_spent = str(time_spent_ms / 1000) + "s" if time_spent_ms > 1000 else str(time_spent_ms) + "ms"
             logger.info("time-spent: %s" % time_spent)
 
