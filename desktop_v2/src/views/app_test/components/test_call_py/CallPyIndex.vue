@@ -36,7 +36,7 @@ const run_py_1 = () => {
     if (err) {
       throw err;
     }
-    console.log("finished");
+    console.log("CallPyIndex: done");
   });
 };
 // 法2：单次传递多个参数

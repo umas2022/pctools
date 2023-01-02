@@ -68,7 +68,7 @@ const run_be = () => {
         if (err) {
             throw err;
         }
-        console.log("finished");
+        console.log("RunBackend: done");
     });
 }
 

@@ -13,10 +13,13 @@
 - 爬虫程序运行的非常慢,不就是个截图怎么这么慢啊,并行还报错
 - 爬虫对loading页的判断不太好,2k+png->36k,4k+jpg->169k,仅凭图片尺寸判断loading需要根据截图环境调整阈值
 
+# 2023.1.2
+- 启动前端时直接拉起后端,重试10次获取list
+
 # 2023.1.1
 - 微调了前端interface的文字宽度,爬虫页参数的title太长了会换行
 - bookwalker的爬虫整合进script了,接进了前端页面
-- 前端的interface增加了button选项,现在可以在intf.json中添加button了
+- 前端的interface增加了button选项,现在可以通过在intf.json中添加button调用主类里的子函数了,button和执行程序调用的是同一个websocket函数,所有页面内的参数都会被传递,所以不需要为button单独设计输入参数框
 
 # 2022.12.31
 - 前端增加了animate组件box,给右上角三个按钮套上了

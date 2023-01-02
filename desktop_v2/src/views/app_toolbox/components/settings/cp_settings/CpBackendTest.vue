@@ -3,7 +3,7 @@
         <BasicTemplate>
             <!-- 标签 -->
             <template #tp-label>
-                <span>后端测试</span>
+                <span>后端连通性测试</span>
             </template>
 
             <!-- 控制 -->

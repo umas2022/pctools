@@ -113,8 +113,10 @@
   </div>
 </template>
 <script setup lang="ts">
-import { provide, reactive, ref, } from "vue"
+import { provide, reactive, ref, onMounted } from "vue"
+import type {Ref} from "vue"
 import { useStore } from "vuex"
+import { get_wsurl } from "@/utils/api_config.js";
 import MainIndex from "./components/main/MainIndex.vue"
 import SettingsIndex from "./components/settings/SettingsIndex.vue"
 import AnimateDown from "@/components/animate_down/AnimateDown.vue"
@@ -170,7 +172,6 @@ const state_change = () => {
 const { PythonShell } = window.require("python-shell");
 const run_back = () => {
   let be_path = store.state.pro_path
-  console.log(be_path)
   let be_script = "run_backterminal.py"
   let options = {
     mode: "text",
@@ -195,6 +196,27 @@ const run_back = () => {
 const extract_change = () => {
   store_home.extract_display = !store_home.extract_display
 }
+
+// 后端连通性检测
+const check_be = (flag: Ref<boolean>) => {
+  let wsdemo = new WebSocket(get_wsurl().local + "app_test_ws");
+  wsdemo.onopen = () => {
+    flag.value = true
+  };
+}
+
+// 初始化动作
+onMounted(() => {
+  // 启动后端
+  const backend_started = ref(false)
+  check_be(backend_started)
+  setTimeout(() => {
+    if (!backend_started.value) {
+      run_back()
+    }
+  }, 500)
+
+})
 
 // 全局参数
 const store_home = reactive({

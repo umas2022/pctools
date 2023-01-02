@@ -33,7 +33,7 @@ const env_check = () => {
     if (err) {
       throw err;
     }
-    console.log("finished");
+    console.log("EnvCheck: done");
   });
 };
 
