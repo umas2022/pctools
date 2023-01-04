@@ -226,10 +226,15 @@ const store_home = reactive({
   py_path: path.join(static_path(), "backend_v2/py_script"),
   // 项目位置,用于后端启动
   prj_path: path.join(static_path(), "backend_v2"),
+  // 功能列表,后端返回的index.json
   index_list: [],
+  // 选中的组
+  group:"",
+  // 选中的具体功能
   function: "",
+  // 对应功能的intf.json
   intf_data: {},
-  // 内容折叠
+  // 页面内容折叠
   extract_display: true
 })
 provide("store_home", store_home)

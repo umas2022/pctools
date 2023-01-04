@@ -39,7 +39,8 @@ class SearcherFunction():
         必要参数:get_data.py_path
         '''
         logger.info("更新目录")
-        index_list = []
+        index_list = {}
+        group_dic = []
         index_file_path = os.path.join(get_data["py_path"], "index.json")
         index_file_data = json.load(open(index_file_path, "r", encoding="utf-8"))
         contents = os.listdir(get_data["py_path"])
@@ -50,8 +51,15 @@ class SearcherFunction():
                 intf_path = os.path.join(item, "intf.json")
                 if os.path.isfile(intf_path):
                     intf_json = json.load(open(intf_path, "r", encoding="utf-8"))
-                    key = contents[contents_path.index(item)]
-                    index_list.append({"title": intf_json["title"], "key": key})
+                    func_key = contents[contents_path.index(item)]
+
+                    group = intf_json["group"]["key"]
+                    group_label = intf_json["group"]["label"]
+                    if not group in group_dic:
+                        index_list[group] = {"label": group_label, "data": {}}
+                        group_dic.append(group)
+                    index_list[group]["data"][func_key] = intf_json["title"]
+
         index_file_data["data"] = index_list
         # 写入index.json
         with open(index_file_path, "w", encoding="utf-8") as index_file:
@@ -70,19 +78,19 @@ class SearcherFunction():
         send(json.dumps(index_file_data))
         send("done")
 
-    def get_intf(self,get_data,send)->None:
+    def get_intf(self, get_data, send) -> None:
         '''
         获取单个功能
         必要参数: get_data.py_path, get_data.module
         '''
         logger.info("获取单个功能")
         module_name = get_data["module"]
-        intf_file_path = os.path.join(get_data["py_path"],module_name, "intf.json")
+        intf_file_path = os.path.join(get_data["py_path"], module_name, "intf.json")
         intf_file_data = json.load(open(intf_file_path, "r", encoding="utf-8"))
         send(json.dumps(intf_file_data))
         send("done")
 
-    def run(self,get_data,send)->None:
+    def run(self, get_data, send) -> None:
         '''
         批处理函数调用
         必要参数: get_data.function, get_data.py_path, get_data.terminal, get_data.其他参数
@@ -98,17 +106,17 @@ class SearcherFunction():
             logger.set_mode("frontend")
             now = time.time()
 
-            for filefiner,name,ispkg in pkgutil.iter_modules([get_data["py_path"]]):
+            for filefiner, name, ispkg in pkgutil.iter_modules([get_data["py_path"]]):
                 if name == get_function:
                     importlib.import_module(name)
                     module = sys.modules[name]
-                    mc = module.MainClass(json_set = get_data)
+                    mc = module.MainClass(json_set=get_data)
                     if not get_button == "":
                         called_func = getattr(mc, get_button)
                         called_func()
                     else:
                         mc.run()
-            
+
             time_spent_ms = int(1000 * (time.time() - now))
             time_spent = str(time_spent_ms / 1000) + "s" if time_spent_ms > 1000 else str(time_spent_ms) + "ms"
             logger.info("time-spent: %s" % time_spent)
@@ -122,6 +130,7 @@ class SearcherFunction():
             catcher = Catcher(main_func, log_func)
             catcher.run(buff_size=10)
         # 终端调用
+
         def run_terminal():
             subprocess.run(['python3', './app_sp_operator/terminal_searcher.py', json.dumps(get_data)], creationflags=subprocess.CREATE_NEW_CONSOLE)
             # subprocess.run(['python3', './app_sp_operator/terminal_searcher.py', json.dumps(get_data)])

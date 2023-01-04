@@ -9,14 +9,15 @@ import codecs
 import markdown  # pip install markdown
 from shutil import copytree, rmtree, copyfile
 
-print("copy backend_v2 file ...")
 
 # 拷贝python文件
+print("copy backend_v2 file ...")
 if os.path.exists("./desktop_v2/public/static/backend_v2"):
     rmtree("./desktop_v2/public/static/backend_v2")
 copytree("./backend_v2", "./desktop_v2/public/static/backend_v2")
 
 # 开发日志转化为html
+print("convert develop.md ...")
 if os.path.isfile("./desktop_v2/public/static/info/develop.html"):
     os.remove("./desktop_v2/public/static/info/develop.html")
 input_file = codecs.open("./0-docs/develop.md", mode="r", encoding="utf-8")

@@ -1,8 +1,10 @@
 <template>
     <div class="cp-getlist">
         <div class="h3">获取目录</div>
-        <span style="padding:10px">当前方法数量:</span>
-        <span style="padding:10px">{{ store_home.index_list.length }}</span>
+        <span style="padding:10px">组数量:</span>
+        <span style="padding:10px">{{ Object.keys(store_home.index_list).length }}</span>
+        <span style="padding:10px">方法数量:</span>
+        <span style="padding:10px">{{ func_total }}</span>
         <el-button @click="get_list">刷新</el-button>
     </div>
 
@@ -14,6 +16,9 @@ import { get_wsurl } from "@/utils/api_config.js";
 import { ElMessage } from "element-plus";
 
 const store_home: any = inject("store_home")
+
+// 方法数量
+const func_total = ref(0)
 
 const get_list = () => {
     // 获取目录
@@ -29,18 +34,27 @@ const get_list = () => {
         wsdemo.send(JSON.stringify(send_data));
     };
     wsdemo.onmessage = (e) => {
-        // console.log(e.data);
         try {
             store_home.index_list = JSON.parse(e.data).data
-            // console.log(store_home.index_list.length)
+
+            // 折叠目录获取栏
             if (store_home.index_list.length != 0) {
                 setTimeout(() => {
                     store_home.extract_display = false
                 }, 1000)
             }
+
+            // 计数所有方法
+            func_total.value = 0
+            for (let key in store_home.index_list) {
+                for (let sub_key in store_home.index_list[key]["data"]) {
+                    func_total.value += 1
+                }
+            }
         } catch {
             if (e.data != "done") {
-                ElMessage.error(e.data)
+                ElMessage.error("data error, see console")
+                console.log(e.data)
             }
         }
     };

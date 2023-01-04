@@ -1,5 +1,9 @@
 {
     "title": "爬虫 - bookwalker通用",
+    "group":{
+        "key":"crawler",
+        "label":"爬虫"
+    } ,
     "info": [
         "1.由于重复调试导致的谷歌人机验证,放弃了全自动过程,改用手动启动debug模式chrome再由selenium接管",
         "2.能力所限,放弃了对<canvas>的操作,直接简单截图,推荐屏幕超分提高图片分辨率",
