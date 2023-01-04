@@ -4,7 +4,7 @@ import sys
 # # 激活虚拟环境
 # print("\nactivate virtualenv by: source env/bin/activate\n")
 
-win_path = r"D:\s-linux\project\pctools\py_server"
+win_path = r"D:\s-linux\project\pctools\backend_v2\py_server"
 wsl_path = r"/mnt/d/s-linux/project/pctools/py_server"
 py_version = "python"
 # py_version = "python3"

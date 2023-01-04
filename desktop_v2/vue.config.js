@@ -33,7 +33,7 @@ module.exports = defineConfig({
           "src/assets", // 相当于{ from: 'src/assets', to: 'src/assets' }
           // { from: 'src/assets', to: 'assets' }, // assets资源目录指定
           { from: 'public/static', to: 'static' }, // public静态资源拷贝目录,程序中用static/xxx可以直接访问
-          { from: '../py_script/box_autoclick', to: 'static/python/box_auto_click' } // python脚本单独拷贝目录
+          // { from: '../py_script/box_autoclick', to: 'static/python/box_auto_click' } // 自动化python脚本单独拷贝目录
         ],
 
         // "directories": {

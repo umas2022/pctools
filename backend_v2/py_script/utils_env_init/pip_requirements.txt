@@ -1,0 +1,34 @@
+
+# image compress 图片压缩
+
+pillow
+scikit-image
+opencv-python
+
+# video compress 视频压缩
+
+moviepy
+ffmpeg-python 
+
+# auto-click 自动点击
+
+pypiwin32
+PyUserinput
+pyautogui
+PyQT5
+
+# general_basic 通用辅助
+
+yagmail
+
+# crawler 网络爬虫
+
+selenium
+piexif
+requests
+lxml
+
+
+
+
+
