@@ -26,13 +26,15 @@
     "image-size": "^1.0.2",
     "intersection-observer": "^0.12.2",
     "js-cookie": "^3.0.1",
+    "marked": "^4.2.5",
     "path": "^0.12.7",
     "python-shell": "^3.0.1",
     "ts-loader": "~8.2.0",
     "vue": "^3.2.13",
     "vue-class-component": "^8.0.0-0",
     "vue-router": "^4.0.3",
-    "vuex": "^4.0.0"
+    "vuex": "^4.0.0",
+    "zero-md": "^2.3.6"
   },
   "devDependencies": {
     "@types/electron-devtools-installer": "^2.2.0",

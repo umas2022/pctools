@@ -15,9 +15,11 @@
       <CpUpdateIndex />
       <!-- 显示导航条 -->
       <CpShowNav />
+      <!-- 开发日志 -->
+      <CpDevelopLog />
       <!-- 尾部占位 -->
       <div class="rear" style="padding:20px">
-        <h3>create : 2022.8.22</h3>
+        <h3>create : 2021.12.25</h3>
         <h3>by : umas</h3>
         <h3>by : umas</h3>
         <h3>by : umas</h3>
@@ -38,6 +40,7 @@ import CpBackendTest from "./cp_settings/CpBackendTest.vue"
 import CpPyPath from "./cp_settings/CpPyPath.vue"
 import CpUpdateIndex from "./cp_settings/CpUpdateIndex.vue"
 import CpShowNav from "./cp_settings/CpShowNav.vue"
+import CpDevelopLog from "./cp_settings/CpDevelopLog.vue"
 </script>
 
 <style scoped lang="scss">
