@@ -20,7 +20,9 @@
 
             <!-- 折叠info栏 -->
             <template #tp-info>
-                <span>python脚本位置: {{ store_home.py_path }}</span>
+                <span>python脚本路径</span> <br>
+                <span>新版已经可以自动读取相对路径,不需要手动设定,不要修改</span> <br>
+                <span>当前: {{ store_home.py_path }}</span>
             </template>
 
         </BasicTemplate>

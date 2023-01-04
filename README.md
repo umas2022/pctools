@@ -1,27 +1,25 @@
-# 批处理工具箱
+# 批处理工具箱（电脑配件）
 
 ## Introduction
 - python basic function
 - Django backend server
-- Electron frontend- (book-walker crawler)
+- Electron frontend
 
 ## Environment
-- refer: ./py_script/utils_env_init
-- refer: ./sh_script
+- refer 1: ./backend_v2/py_script/utils_env_init
+- refer 2: ./sh_script
 
 ## Run
 - dev: run backend server  
 ```python run_backend.py```
-- dev: run backend server in terminal
-```python run_backterminal.py```
 - dev: run electron server in develop mode
 ```python run_electron.py```
 
 ## Build
 - dev: build electron package
-```cd desktop_v2/```
-```npm run electron:build```
-- exe file path: /desktop_v2/dist_electron
+```python build_electron.py```
+
+
 
 
 

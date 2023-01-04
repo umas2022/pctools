@@ -4,7 +4,7 @@
 import subprocess
 import sys
 
-script = r"D:\s-linux\project\pctools\backend_v2\run_backend.py"
+script = r"D:\s-linux\project\pctools\run_backend.py"
 print("backend: %s" %script)
 print("running ...")
 

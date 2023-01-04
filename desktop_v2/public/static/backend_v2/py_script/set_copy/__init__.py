@@ -1,0 +1,1 @@
+from set_copy.quick_start import QuickStart as MainClass

@@ -1,0 +1,40 @@
+{
+    "title": "预设动作集",
+    "info": [
+        "1.注释",
+        "2.懒得写"
+    ],
+    "require": [
+        {
+            "type": "select",
+            "data": {
+                "key": "pre_key",
+                "label": "选择方法",
+                "value": "samu_compress",
+                "option": [
+                    {
+                        "value": "samu_compress",
+                        "label": "samu全压缩"
+                    },
+                    {
+                        "value": "samu_image_compress",
+                        "label": "samu图片压缩备份"
+                    },
+                    {
+                        "value": "samu_video_compress",
+                        "label": "samu视频压缩备份"
+                    },
+                    {
+                        "value": "compress_test",
+                        "label": "测试用三步压缩"
+                    }
+                ],
+                "annotation": [
+                    "全压缩包含：反向对比删除+视频压缩+图片压缩+全部备份",
+                    "全压缩最后的全部备份目标是压缩过程中error跳过的文件",
+                    "视频压缩时候会在py_server文件夹下生成临时视频文件,不要push代码!"
+                ]
+            }
+        }
+    ]
+}

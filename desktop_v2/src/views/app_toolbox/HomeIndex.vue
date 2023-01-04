@@ -114,15 +114,15 @@
 </template>
 <script setup lang="ts">
 import { provide, reactive, ref, onMounted } from "vue"
-import type {Ref} from "vue"
-import { useStore } from "vuex"
-import { get_wsurl } from "@/utils/api_config.js";
+import type { Ref } from "vue"
+import { static_path } from "@/utils/utils_path.js"
+import { get_wsurl } from "@/utils/api_config.js"
 import MainIndex from "./components/main/MainIndex.vue"
 import SettingsIndex from "./components/settings/SettingsIndex.vue"
 import AnimateDown from "@/components/animate_down/AnimateDown.vue"
 import DialogPopup from "@/components/dialog/DialogPopup.vue"
+const path = window.require("path");
 
-const store = useStore()
 
 // 显示全局info
 const info_data = ref([""])
@@ -171,7 +171,7 @@ const state_change = () => {
 // 启动后端
 const { PythonShell } = window.require("python-shell");
 const run_back = () => {
-  let be_path = store.state.pro_path
+  let be_path = store_home.prj_path
   let be_script = "run_backterminal.py"
   let options = {
     mode: "text",
@@ -222,8 +222,10 @@ onMounted(() => {
 const store_home = reactive({
   // 后端端口
   port: 4090,
-  // 脚本调用位置,用于启动后端
-  py_path: "D:\\s-linux\\project\\pctools\\py_script",
+  // 脚本调用位置,用于后端通信
+  py_path: path.join(static_path(), "backend_v2/py_script"),
+  // 项目位置,用于后端启动
+  prj_path: path.join(static_path(), "backend_v2"),
   index_list: [],
   function: "",
   intf_data: {},
@@ -231,6 +233,8 @@ const store_home = reactive({
   extract_display: true
 })
 provide("store_home", store_home)
+
+
 
 </script>
 <style lang="scss" scoped>

@@ -23,18 +23,18 @@
 
 </template>
 <script setup lang="ts">
-import { onMounted, ref, computed } from "vue";
+import { onMounted, ref, computed,inject } from "vue";
 import { ElMessage } from "element-plus";
 import BasicTemplate from "./BasicTemplate.vue"
-import { useStore } from "vuex"
 import { get_wsurl } from "@/utils/api_config.js";
 const path = window.require("path");
 const { PythonShell } = window.require("python-shell");
-const store = useStore()
+
+const store_home: any = inject("store_home")
 
 
 // python调用
-const be_path = store.state.pro_path
+const be_path = store_home.prj_path
 const be_script = "run_backterminal.py"
 const be_full = computed(() => path.join(be_path, be_script))
 const res_msg = ref([""])

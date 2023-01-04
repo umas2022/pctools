@@ -21,7 +21,8 @@ module.exports = defineConfig({
         "productName": "电脑配件",
         "appId": "toolbox", // 包名
         "copyright": "umasnb", // 版权
-        "asar": true, // asar打包的python无法运行
+        // "asar": true, // asar打包的python无法运行
+        "asar": false, // 不使用asar打包
 
         // 复制到根目录下
         // extraFiles: [ 
@@ -33,7 +34,7 @@ module.exports = defineConfig({
           "src/assets", // 相当于{ from: 'src/assets', to: 'src/assets' }
           // { from: 'src/assets', to: 'assets' }, // assets资源目录指定
           { from: 'public/static', to: 'static' }, // public静态资源拷贝目录,程序中用static/xxx可以直接访问
-          // { from: '../py_script/box_autoclick', to: 'static/python/box_auto_click' } // 自动化python脚本单独拷贝目录
+          { from: "../backend_v2", to: "static/backend_v2" } // python脚本和后端打包进项目文件夹
         ],
 
         // "directories": {

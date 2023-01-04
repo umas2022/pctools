@@ -1,0 +1,1 @@
+from sp_compress_image.img_compress import ImgCompress as MainClass

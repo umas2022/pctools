@@ -33,5 +33,9 @@ onMounted(() => {
   );
 
   txtData_2.value = fs.readFileSync(txt_path.value, "utf8");
+
+  // console.log(__dirname)
+  
+  console.log("path: "+path.join(process.cwd()))
 });
 </script>

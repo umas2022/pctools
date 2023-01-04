@@ -1,0 +1,55 @@
+{
+    "title": "压缩 - 视频压缩",
+    "info": [
+        "1.终端的进度条暂时没法截获给前端, 建议打开终端模式",
+        "2.仅对比特率进行压缩, 实测尺寸压缩对视觉效果影响比较大, 不采用"
+    ],
+    "require": [
+        {
+            "type": "input",
+            "data":{
+                "key": "path_in",
+                "label": "输入路径",
+                "value": "D:\\s-linux\\project\\test_file\\test_in"
+            }
+        },
+        {
+            "type": "input",
+            "data":{
+                "key": "path_out",
+                "label": "输出路径",
+                "value": "D:\\s-linux\\project\\test_file\\test_out"
+            }
+        },
+        {
+            "type": "input",
+            "data":{
+                "key": "max_bit_kbps",
+                "label": "码率上限",
+                "value": "10000",
+                "placeholder":"单位 - 千bps",
+                "annotation": "实测10000效果还可以, 这里非int型的输入会引起后端报错"
+            }
+        },
+        {
+            "type": "input",
+            "data":{
+                "key": "cpu_thread",
+                "label": "使用线程",
+                "value": "3",
+                "placeholder":"范围1~6",
+                "annotation": "本机6核, 默认thread=3, 占用率50%"
+            }
+        },
+        {
+            "type": "input",
+            "data":{
+                "key": "path_log",
+                "label": "日志路径",
+                "value": "D:\\s-linux\\project\\test_file\\test_log",
+                "placeholder":"置空不使用日志",
+                "annotation": "日志默认只记录error和warning"
+            }
+        }
+    ]
+}
