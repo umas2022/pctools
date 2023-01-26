@@ -1,6 +1,6 @@
 /**
- * 静态资源目录定位
- * vue.config.js中需要配置{ from: 'public/static', to: 'static' }
+ * 静态资源目录定位,python脚本的位置也由下面的函数确定
+ * vue.config.js中需要设置文件拷贝{ from: 'public/static', to: 'static' }
  */
 
 

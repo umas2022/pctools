@@ -1,1 +1,0 @@
-from sp_copy_backup.copy_backup import CopyBackup as MainClass

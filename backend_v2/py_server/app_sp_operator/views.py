@@ -119,7 +119,7 @@ class SearcherFunction():
 
             time_spent_ms = int(1000 * (time.time() - now))
             time_spent = str(time_spent_ms / 1000) + "s" if time_spent_ms > 1000 else str(time_spent_ms) + "ms"
-            logger.info("time-spent: %s" % time_spent)
+            logger.info("time-cost: %s" % time_spent)
 
         # 定义日志截取函数
         def log_func(log):

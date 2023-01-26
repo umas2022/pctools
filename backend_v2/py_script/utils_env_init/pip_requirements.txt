@@ -10,6 +10,10 @@ opencv-python
 moviepy
 ffmpeg-python 
 
+# 文件夹打包
+
+py7zr
+
 # auto-click 自动点击（windows限定）
 
 pypiwin32

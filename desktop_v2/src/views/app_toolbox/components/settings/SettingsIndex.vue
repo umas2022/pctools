@@ -8,7 +8,9 @@
       <!-- 后端测试 -->
       <CpBackendTest />
       <!-- 开发模式端口 -->
-      <CpPortChange />
+      <CpChangePort />
+      <!-- 开发模式路径 -->
+      <CpChangePath />
       <!-- 脚本路径 -->
       <CpPyPath />
       <!-- 更新目录 -->
@@ -34,7 +36,8 @@
 </template>
 
 <script setup>
-import CpPortChange from "./cp_settings/CpPortChange.vue"
+import CpChangePort from "./cp_settings/CpChangePort.vue"
+import CpChangePath from "./cp_settings/CpChangePath.vue"
 import CpRunBackend from "./cp_settings/CpRunBackend.vue"
 import CpBackendTest from "./cp_settings/CpBackendTest.vue"
 import CpPyPath from "./cp_settings/CpPyPath.vue"

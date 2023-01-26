@@ -60,7 +60,7 @@ const get_list = () => {
     };
 }
 
-// 多次重试获取list
+// 间隔3秒多次重试获取list
 const get_list_repeat = (re_times: number) => {
     const get_list_check = () => {
         get_list()
@@ -71,13 +71,13 @@ const get_list_repeat = (re_times: number) => {
     let set_id = setInterval(get_list_check, 1000)
     setTimeout(() => {
         clearInterval(set_id)
-    }, re_times * 1000)
+    }, (re_times-1) * 3000)
 }
 
-// 启动时尝试获取10次list
+// 启动时尝试获取3次list
 onMounted(() => {
     if (store_home.index_list.length == 0) {
-        get_list_repeat(10)
+        get_list_repeat(3)
     }
 })
 </script>

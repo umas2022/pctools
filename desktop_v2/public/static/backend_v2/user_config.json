@@ -1,8 +1,0 @@
-{
-    "frontend": {
-        "@py_path": "这里路径在运行setup.py时记录,不应该读取这个路径使用",
-        "py_path": "D:\\s-linux\\project\\pctools\\backend_v2"
-    },
-    "backend": {},
-    "script": {}
-}

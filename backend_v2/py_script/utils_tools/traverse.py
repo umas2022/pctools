@@ -18,8 +18,14 @@ class Traverse():
                 yield full_path
 
     def get_dir(self, path_in):
-        '''文件夹遍历'''
+        '''文件夹遍历:返回所有层级文件夹'''
         for root, dirs, files in os.walk(path_in, onerror=self.onerror):
             for dir in dirs:
                 full_path = os.path.join(root, dir).replace('\\', "/")
                 yield full_path
+
+    def get_first_dir(self,path_in):
+        '''文件夹遍历:只返回第一层文件夹'''
+        for dir in os.listdir(path_in):
+            full_path = os.path.join(path_in, dir).replace('\\', "/")
+            yield full_path

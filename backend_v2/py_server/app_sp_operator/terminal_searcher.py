@@ -33,6 +33,6 @@ for filefiner,name,ispkg in pkgutil.iter_modules([get_data["py_path"]]):
 
 time_spent_ms = int(1000 * (time.time() - now))
 time_spent = str(time_spent_ms / 1000) + "s" if time_spent_ms > 1000 else str(time_spent_ms) + "ms"
-logger.info("time-spent: %s" % time_spent)
+logger.info("time-cost: %s" % time_spent)
 
 wait_here = input("\n\nprocess finish, press enter to exit ...")
