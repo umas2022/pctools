@@ -28,4 +28,5 @@ class Traverse():
         '''文件夹遍历:只返回第一层文件夹'''
         for dir in os.listdir(path_in):
             full_path = os.path.join(path_in, dir).replace('\\', "/")
-            yield full_path
+            if os.path.isdir(full_path):
+                yield full_path
