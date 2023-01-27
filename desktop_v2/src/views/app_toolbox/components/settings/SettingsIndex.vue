@@ -54,4 +54,16 @@ div.app-settings {
 }
 </style>
 
+<!-- info文本格式 -->
+<style lang="scss">
+span.line {
+  float: left; // span左对齐
+  text-align: left; // span内文本左对齐
+  word-break: break-all; //超出容器强制换行
+  margin-left: 1em; // 所有行缩进
+  text-indent: -1em; // 调整首行缩进
+
+}
+</style>
+
 

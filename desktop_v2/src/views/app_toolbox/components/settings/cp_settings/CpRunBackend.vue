@@ -13,9 +13,9 @@
 
             <!-- 折叠info栏 -->
             <template #tp-info>
-                <span>使用PythonShell直接启动后端, 默认端口4090</span> <br>
-                <span>脚本位置：{{ be_full }}</span> <br>
-                <span>由于后台启动无法正常结束后端导致下次使用时端口被占用, 暂时为后端单独开了一个终端</span> <br>
+                <span class="line">1.使用PythonShell直接启动后端, 默认端口4090</span>
+                <span class="line">2.脚本位置：{{ be_full }}</span>
+                <span class="line">3.不建议后台启动后端,若后端报错无法正常结束会导致下次启动时端口被占用</span> 
             </template>
 
         </BasicTemplate>

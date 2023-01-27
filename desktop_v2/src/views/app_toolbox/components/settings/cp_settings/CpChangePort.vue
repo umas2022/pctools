@@ -13,8 +13,8 @@
 
             <!-- 折叠info栏 -->
             <template #tp-info>
-                <span>开发模式：localhost:4091 / </span>
-                <span>生产模式：localhost:4090</span> <br />
+                <span class="line">1.开发模式：localhost:4091 / 生产模式：localhost:4090</span>
+                <span class="line">2.调试时后端启动脚本可以接受一个端口号作为输入参数</span>
             </template>
 
         </BasicTemplate>

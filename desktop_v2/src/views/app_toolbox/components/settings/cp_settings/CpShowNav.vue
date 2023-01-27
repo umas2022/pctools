@@ -13,8 +13,8 @@
 
             <!-- 折叠info栏 -->
             <template #tp-info>
-                <span>累了,不想写啥注释了</span> <br>
-                <span>算了还是写一句,看左上角</span>
+                <span class="line">1.左上角显示导航按钮</span> <br>
+                <span class="line">2.导航内目前都在开发中(烂尾)</span>
             </template>
 
         </BasicTemplate>

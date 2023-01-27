@@ -13,8 +13,9 @@
 
             <!-- 折叠info栏 -->
             <template #tp-info>
-                <span>测试后端连通性</span> <br>
-                <span>注释</span> <br>
+                <span class="line">1.测试后端连通性</span>
+                <span class="line">2.访问的是后端app_test_ws,返回值为1~999,检测到999判断连通</span>
+                <span class="line">3.这个api也被用来检测通信延迟,现在使用10个一组的消息打包之后基本不会有什么延迟</span>
             </template>
 
         </BasicTemplate>

@@ -13,8 +13,9 @@
 
             <!-- 折叠info栏 -->
             <template #tp-info>
-                <span>develop.md</span> <br>
-                <span>注释</span> <br>
+                <span class="line">1.develop.md</span> <br>
+                <span class="line">2.在打包的python脚本中将md转换为html,保存在public中</span> <br>
+                <span class="line">3.直接读取md文件的尝试都失败了</span> <br>
             </template>
 
         </BasicTemplate>

@@ -3,7 +3,7 @@
         <BasicTemplate>
             <!-- 标签 -->
             <template #tp-label>
-                <span>脚本路径</span>
+                <span>手动设置路径</span>
             </template>
 
             <!-- 控制 -->
@@ -20,9 +20,9 @@
 
             <!-- 折叠info栏 -->
             <template #tp-info>
-                <span>python脚本路径</span> <br />
-                <span>新版已经可以自动读取相对路径,不需要手动设定,不要修改</span> <br />
-                <span>当前: {{ store_home.py_path }}</span>
+                <span class="line">1.手动设置python脚本路径</span> <br />
+                <span class="line">2.路径定位到py_script文件夹</span> <br />
+                <span class="line">3.当前: {{ store_home.py_path }}</span><br />
             </template>
 
         </BasicTemplate>
