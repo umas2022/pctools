@@ -62,16 +62,20 @@ const get_list = () => {
 
 // 间隔3秒多次重试获取list
 const get_list_repeat = (re_times: number) => {
+    // 时间间隔
+    let time_interval = 3000
+    // 单次获取函数
     const get_list_check = () => {
         get_list()
         if (store_home.index_list.length != 0) {
             clearInterval(set_id)
         }
     }
-    let set_id = setInterval(get_list_check, 1000)
+    // 设置定时器
+    let set_id = setInterval(get_list_check, time_interval)
     setTimeout(() => {
         clearInterval(set_id)
-    }, (re_times-1) * 3000)
+    }, (re_times-1) * time_interval)
 }
 
 // 启动时尝试获取3次list
