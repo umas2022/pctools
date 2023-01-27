@@ -46,9 +46,6 @@ const state_change = () => {
 
 <style scoped lang="scss">
 @import 'animate.css';
-// div.cp-animate {
-//     border: solid 3px red;
-// }
 div.close {
     display: none;
 }

@@ -310,7 +310,7 @@ const test_button = () => {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 // 主体box
 div.intf-main {
     position: relative;

@@ -109,7 +109,6 @@ div.info {
     padding: 10px;
     border: solid 3px gray;
     border-radius: 15px;
-    // z-index: 2;
 }
 
 div.info-blocker {

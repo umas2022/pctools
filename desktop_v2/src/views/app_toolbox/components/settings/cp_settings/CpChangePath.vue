@@ -13,11 +13,10 @@
 
             <!-- 折叠info栏 -->
             <template #tp-info>
-                <span class="line">1.开发时使用的是未打包前的python路径,需要打开这个开个</span> <br/>
+                <span class="line">1.开发时使用的是未打包前的python路径,需要打开这个开关</span> <br/>
                 <span class="line">2.开发模式路径定位到打包前的python脚本路径(写死在cp里了) </span> <br/>
                 <span class="line">3.程序启动时获取功能目录index.json使用这个路径</span> <br />
             </template>
-
         </BasicTemplate>
     </div>
 </template>

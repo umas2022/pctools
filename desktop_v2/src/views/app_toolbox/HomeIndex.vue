@@ -1,119 +1,144 @@
 <template>
   <div class="home">
-    <!-- 手动生成背景图 -->
-    <div class="bg-box">
-      <div class="bg-one" v-for="i in 10">
-        <img class="bg-img" src="static/background/pattern-1.svg" alt="">
-      </div>
-    </div>
+    <el-scrollbar  @scroll="home_onscroll" ref="scrollbarRef">
 
-    <!-- 全局info弹窗 -->
-    <DialogPopup :data="info_data" :display="info_display">
-      <template #content>
-        <div style="margin:0 auto;padding:20px 0 0 0;width: 300px;">
-          <el-icon>
-            <Promotion />
-          </el-icon>
-          这是一行slot,希望今天的你也能喜欢
-          <el-icon>
-            <Promotion />
-          </el-icon>
+      <!-- 手动生成背景图 -->
+      <div class="bg-box">
+        <div class="bg-one" v-for="i in 10">
+          <img class="bg-img" :src=bg_path alt="">
         </div>
-      </template>
+      </div>
 
-    </DialogPopup>
-
-
-
-    <!-- 右上角设置按钮(齿轮) -->
-    <el-tooltip class="box-item" effect="dark" content="参数设置" placement="bottom-end">
-      <div class="go-settings button" @click="state_change">
-        <AnimateDown :display="button_display">
-          <template #content>
-            <el-icon :size="30">
-              <Setting />
+      <!-- 全局info弹窗 -->
+      <DialogPopup :data="info_data" :display="info_display">
+        <template #content>
+          <div style="margin:0 auto;padding:20px 0 0 0;width: 300px;">
+            <el-icon>
+              <Promotion />
             </el-icon>
-          </template>
-        </AnimateDown>
-      </div>
-    </el-tooltip>
-
-
-
-    <!-- 右上角返回主页按钮(右箭头) -->
-    <el-tooltip class="box-item button" effect="dark" content="返回主页" placement="bottom-end">
-      <div class="go-home button" @click="state_change">
-        <AnimateDown :display="!button_display">
-          <template #content>
-            <el-icon :size="30">
-              <Right />
+            这是一行slot,希望今天的你也能喜欢
+            <el-icon>
+              <Promotion />
             </el-icon>
-          </template>
-        </AnimateDown>
-      </div>
-    </el-tooltip>
+          </div>
+        </template>
+      </DialogPopup>
 
-    <!-- 右上角后端启动按钮(小飞机) -->
-    <el-tooltip class="box-item" effect="dark" content="启动后端" placement="bottom-end">
-      <div class="run-back button" @click="run_back">
-        <AnimateDown :display="button_display">
+      <!-- 内容主体 -->
+      <div class="body">
+        <div class="animate-box animate__animated " ref="main_index" style="height:100%">
+          <MainIndex />
+        </div>
+        <div class="animate-box animate__animated  close" ref="settings_index">
+          <SettingsIndex />
+        </div>
+      </div>
+
+
+      <!-- 右上角按钮 -->
+      <div class="button-abs">
+        <AnimateDown :display="!button_hide_all">
           <template #content>
-            <el-icon :size="30">
-              <Position />
-            </el-icon>
+            <div class="button-box">
+
+              <!-- 右上角展开按钮(加号) -->
+              <el-tooltip class="box-item" effect="dark" content="功能展开" placement="bottom-end">
+                <div class="extract button" @click="extract_change">
+                  <AnimateDown :display="home_display">
+                    <template #content>
+                      <AnimateDown :display="!store_home.extract_display">
+                        <template #content>
+                          <el-icon :size="30">
+                            <Plus />
+                          </el-icon>
+                        </template>
+                      </AnimateDown>
+                    </template>
+                  </AnimateDown>
+                </div>
+              </el-tooltip>
+
+              <!-- 右上角折叠按钮(减号) -->
+              <el-tooltip class="box-item" effect="dark" content="功能折叠" placement="bottom-end">
+                <div class="extract button" @click="extract_change">
+                  <AnimateDown :display="home_display">
+                    <template #content>
+                      <AnimateDown :display="store_home.extract_display">
+                        <template #content>
+                          <el-icon :size="30">
+                            <Minus />
+                          </el-icon>
+                        </template>
+                      </AnimateDown>
+                    </template>
+                  </AnimateDown>
+                </div>
+              </el-tooltip>
+
+              <!-- 右上角切换背景按钮(刷新) -->
+              <el-tooltip class="box-item" effect="dark" content="切换背景" placement="bottom-end">
+                <div class="change-bg button" @click="change_bg">
+                  <AnimateDown :display="home_display">
+                    <template #content>
+                      <el-icon :size="30">
+                        <Refresh />
+                      </el-icon>
+                    </template>
+                  </AnimateDown>
+                </div>
+              </el-tooltip>
+
+              <!-- 右上角后端启动按钮(小飞机) -->
+              <el-tooltip class="box-item" effect="dark" content="启动后端" placement="bottom-end">
+                <div class="run-back button" @click="run_back">
+                  <AnimateDown :display="home_display">
+                    <template #content>
+                      <el-icon :size="30">
+                        <Position />
+                      </el-icon>
+                    </template>
+                  </AnimateDown>
+                </div>
+              </el-tooltip>
+
+              <!-- 右上角设置按钮(齿轮) -->
+              <el-tooltip class="box-item" effect="dark" content="参数设置" placement="bottom-end" v-if="home_display">
+                <div class="go-settings button" @click="state_change" >
+                  <AnimateDown :display="home_display">
+                    <template #content>
+                      <el-icon :size="30">
+                        <Setting />
+                      </el-icon>
+                    </template>
+                  </AnimateDown>
+                </div>
+              </el-tooltip>
+
+              <!-- 右上角返回主页按钮(右箭头) -->
+              <el-tooltip class="box-item button" effect="dark" content="返回主页" placement="bottom-end" v-if="!home_display">
+                <div class="go-home button" @click="state_change" >
+                  <AnimateDown :display="!home_display">
+                    <template #content>
+                      <el-icon :size="30">
+                        <Right />
+                      </el-icon>
+                    </template>
+                  </AnimateDown>
+                </div>
+              </el-tooltip>
+
+            </div>
+
           </template>
         </AnimateDown>
       </div>
-    </el-tooltip>
 
-    <!-- 右上角展开按钮(加号) -->
-    <el-tooltip class="box-item" effect="dark" content="功能展开" placement="bottom-end">
-      <div class="extract button" @click="extract_change">
-        <AnimateDown :display="button_display">
-          <template #content>
-            <AnimateDown :display="!store_home.extract_display">
-              <template #content>
-                <el-icon :size="30">
-                  <Plus />
-                </el-icon>
-              </template>
-            </AnimateDown>
-          </template>
-        </AnimateDown>
-      </div>
-    </el-tooltip>
-
-    <!-- 右上角折叠按钮(减号) -->
-    <el-tooltip class="box-item" effect="dark" content="功能折叠" placement="bottom-end">
-      <div class="extract button" @click="extract_change">
-        <AnimateDown :display="button_display">
-          <template #content>
-            <AnimateDown :display="store_home.extract_display">
-              <template #content>
-                <el-icon :size="30">
-                  <Minus />
-                </el-icon>
-              </template>
-            </AnimateDown>
-          </template>
-        </AnimateDown>
-      </div>
-    </el-tooltip>
-
-    <!-- 内容主体 -->
-    <div class="body">
-      <div class="animate-box animate__animated " ref="main_index">
-        <MainIndex />
-      </div>
-      <div class="animate-box animate__animated  close" ref="settings_index">
-        <SettingsIndex />
-      </div>
-    </div>
-
+    </el-scrollbar>
   </div>
 </template>
 <script setup lang="ts">
-import { provide, reactive, ref, onMounted } from "vue"
+import { provide, reactive, ref, onMounted, computed } from "vue"
+import type { ElScrollbar } from "element-plus";
 import type { Ref } from "vue"
 import { static_path } from "@/utils/utils_path.js"
 import { get_wsurl } from "@/utils/api_config.js"
@@ -136,12 +161,12 @@ provide("display_gb_info", display_gb_info)
 // 页面切换
 const main_index = ref<HTMLDivElement>()
 const settings_index = ref<HTMLDivElement>()
-const button_display = ref(true)
+const home_display = ref(true)
 
 const state_change = () => {
-  button_display.value = !button_display.value
+  home_display.value = !home_display.value
   // 显示设置页
-  if (!button_display.value) {
+  if (!home_display.value) {
     main_index.value!.classList.remove("animate__backInLeft")
     main_index.value!.classList.add("animate__backOutLeft")
     setTimeout(() => {
@@ -197,6 +222,16 @@ const extract_change = () => {
   store_home.extract_display = !store_home.extract_display
 }
 
+// 切换背景图片
+const bg_num = ref(1)
+const bg_path = computed(() => "static/background/pattern-" + bg_num.value + ".svg")
+const change_bg = () => {
+  bg_num.value += 1
+  if (bg_num.value == 33) {
+    bg_num.value = 1
+  }
+}
+
 // 后端连通性检测
 const check_be = (flag: Ref<boolean>) => {
   let wsdemo = new WebSocket(get_wsurl().local + "app_test_ws");
@@ -215,8 +250,19 @@ onMounted(() => {
       run_back()
     }
   }, 500)
-
 })
+
+// 滚动条触发事件
+const button_hide_all = ref(false)
+const scrollbarRef = ref<InstanceType<typeof ElScrollbar>>();
+const home_onscroll = (scrollPos: { scrollTop: number }) => {
+  let scrollTop = scrollPos.scrollTop
+  if (scrollTop < 40) {
+    button_hide_all.value = false
+  } else {
+    button_hide_all.value = true
+  }
+}
 
 // 全局参数
 const store_home = reactive({
@@ -229,7 +275,7 @@ const store_home = reactive({
   // 功能列表,后端返回的index.json
   index_list: [],
   // 选中的组
-  group:"",
+  group: "",
   // 选中的具体功能
   function: "",
   // 对应功能的intf.json
@@ -238,6 +284,7 @@ const store_home = reactive({
   extract_display: true
 })
 provide("store_home", store_home)
+
 
 
 
@@ -295,52 +342,59 @@ div.close {
   display: none;
 }
 
-// 右上角按钮统一格式
-div.button {
+// 内容主体
+div.body {
+  position: relative;
+  height: 100%;
+}
+
+// 右上角按钮box
+div.button-abs {
   position: absolute;
-  padding: 10px;
-  z-index: 2;
-  top: 0px;
-  cursor: pointer;
-}
+  top: 10px;
+  // border: solid 1px blue;
+  width: calc(100% - 15px);
+  display: flex;
+  justify-content: flex-end; // 内部div右对齐
 
-// 右上角切换按钮
-div.go-settings {
-  right: 0px;
+  div.button-box {
+    position: relative;
+    display: flex;
+    // border: solid 1px red;
 
-  :hover {
-    border-radius: 5px;
-    background-color: rgba(255, 0, 0, 0.05);
-  }
-}
+    // 右上角按钮统一格式
+    div.button {
+      cursor: pointer;
 
-// 右上角返回主页
-div.go-home {
-  right: 0px;
+      :hover {
+        border-radius: 5px;
+      }
+    }
 
-  :hover {
-    border-radius: 5px;
-    background-color: rgba(0, 0, 255, 0.05);
-  }
-}
+    // 右上角切换按钮
+    div.go-settings :hover {
+      background-color: rgba(255, 0, 0, 0.05);
+    }
 
-// 右上角后端按钮
-div.run-back {
-  right: 35px;
+    // 右上角返回主页
+    div.go-home :hover {
+      background-color: rgba(0, 0, 255, 0.05);
+    }
 
-  :hover {
-    border-radius: 5px;
-    background-color: rgba(0, 0, 255, 0.06);
-  }
-}
+    // 右上角后端按钮
+    div.run-back :hover {
+      background-color: rgba(0, 0, 255, 0.06);
+    }
 
-// 右上角展开按钮
-div.extract {
-  right: 68px;
+    // 右上角切换背景按钮
+    div.change-bg :hover {
+      background-color: rgba(234, 255, 0, 0.469);
+    }
 
-  :hover {
-    border-radius: 5px;
-    background-color: rgba(0, 255, 0, 0.05);
+    // 右上角展开按钮
+    div.extract :hover {
+      background-color: rgba(0, 255, 0, 0.05);
+    }
   }
 }
 </style>
