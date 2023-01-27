@@ -30,3 +30,6 @@ class Traverse():
             full_path = os.path.join(path_in, dir).replace('\\', "/")
             if os.path.isdir(full_path):
                 yield full_path
+
+
+                
