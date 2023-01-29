@@ -1,8 +1,8 @@
 <template>
   <div class="home">
-    <el-scrollbar  @scroll="home_onscroll" ref="scrollbarRef">
+    <el-scrollbar @scroll="home_onscroll" ref="scrollbarRef">
 
-      <!-- 手动生成背景图 -->
+      <!-- 手动生成背景图x10 -->
       <div class="bg-box">
         <div class="bg-one" v-for="i in 10">
           <img class="bg-img" :src=bg_path alt="">
@@ -103,7 +103,7 @@
 
               <!-- 右上角设置按钮(齿轮) -->
               <el-tooltip class="box-item" effect="dark" content="参数设置" placement="bottom-end" v-if="home_display">
-                <div class="go-settings button" @click="state_change" >
+                <div class="go-settings button" @click="state_change">
                   <AnimateDown :display="home_display">
                     <template #content>
                       <el-icon :size="30">
@@ -116,7 +116,7 @@
 
               <!-- 右上角返回主页按钮(右箭头) -->
               <el-tooltip class="box-item" effect="dark" content="返回主页" placement="bottom-end" v-if="!home_display">
-                <div class="go-home button" @click="state_change" >
+                <div class="go-home button" @click="state_change">
                   <AnimateDown :display="!home_display">
                     <template #content>
                       <el-icon :size="30">
@@ -223,7 +223,7 @@ const extract_change = () => {
 }
 
 // 切换背景图片
-const bg_num = ref(1)
+const bg_num = ref(Math.ceil(Math.random() * 33))
 const bg_path = computed(() => "static/background/pattern-" + bg_num.value + ".svg")
 const change_bg = () => {
   bg_num.value += 1
@@ -365,6 +365,7 @@ div.button-abs {
     // 右上角按钮统一格式
     div.button {
       cursor: pointer;
+
       :hover {
         border-radius: 5px;
       }

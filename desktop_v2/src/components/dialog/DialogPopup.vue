@@ -65,21 +65,21 @@ const state_change = () => {
 
 div.gcp-dialog {
     // font-weight: lighter;
-    font-weight: bold;
+    font-weight: bold; // 加粗文字
     font-size: 16px;
     text-align: left;
 }
 
 
 div.info {
-    display: inline-block;
-    position: absolute;
+    position: fixed;
     background-color: rgba(255, 255, 255, 0.9);
     width: 500px;
     left: calc(50% - 250px);
+    box-sizing: border-box;
     top: 50px;
     padding: 10px;
-    border: solid 3px gray;
+    // border: solid 3px gray;
     border-radius: 15px;
 }
 

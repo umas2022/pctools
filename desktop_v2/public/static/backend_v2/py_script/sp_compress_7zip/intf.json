@@ -1,9 +1,9 @@
 {
     "title": "压缩 - 打包7z",
-    "group":{
-        "key":"compress",
-        "label":"压缩"
-    } ,
+    "group": {
+        "key": "compress",
+        "label": "压缩"
+    },
     "info": [
         "1.目标路径下所有一级文件夹批量打包为7zip",
         "2.建议使用终端模式,可以使用ctrl+c随时中断",
@@ -12,14 +12,15 @@
     "require": [
         {
             "type": "input",
-            "data":{
+            "data": {
                 "key": "path_in",
                 "label": "输入路径",
                 "value": "D:\\s-linux\\project\\test_file\\test_in"
             }
-        },{
+        },
+        {
             "type": "input",
-            "data":{
+            "data": {
                 "key": "path_out",
                 "label": "输出路径",
                 "value": "D:\\s-linux\\project\\test_file\\test_in"
@@ -27,19 +28,30 @@
         },
         {
             "type": "input",
-            "data":{
+            "data": {
+                "key": "path_log",
+                "label": "日志路径",
+                "value": "",
+                "placeholder": "置空不使用日志",
+                "annotation": "日志默认只记录error和warning"
+            }
+        },
+        {
+            "type": "input",
+            "data": {
                 "key": "password",
                 "label": "压缩密码",
                 "value": "umas1970"
             }
-        },{
+        },
+        {
             "type": "input",
-            "data":{
-                "key": "path_log",
-                "label": "日志路径",
-                "value": "",
-                "placeholder":"置空不使用日志",
-                "annotation": "日志默认只记录error和warning"
+            "data": {
+                "key": "thread_num",
+                "label": "并行数",
+                "value": "10",
+                "placeholder": "置空不使用日志",
+                "annotation": "int型,取值[1,30]"
             }
         }
     ]

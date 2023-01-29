@@ -21,14 +21,8 @@
     <CpDevelopLog />
     <!-- 尾部占位 -->
     <div class="rear" style="padding:20px">
-      <h3>create : 2021.12.25</h3>
-      <h3>by : umas</h3>
-      <h3>by : umas</h3>
-      <h3>by : umas</h3>
-      <h3>by : umas</h3>
-      <h3>by : umas</h3>
-      <h3>by : umas</h3>
-      <h5>写这么多只是想试试滚动条是不是还活着</h5>
+      <h3>create : 2021.12</h3>
+      <h3 v-for="item in 20">by : umas</h3>
     </div>
   </div>
 </template>
