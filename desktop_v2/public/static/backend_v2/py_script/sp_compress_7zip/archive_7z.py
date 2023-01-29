@@ -93,6 +93,8 @@ class Archive7z():
                 # 等待组内全部完成
                 while self.th_ready_num < self.thread_num:
                     time.sleep(1)
+                    if not self.th_ready_num == 0:
+                        break
 
         # 等待所有任务全部完成
         while not self.all_done_flag:

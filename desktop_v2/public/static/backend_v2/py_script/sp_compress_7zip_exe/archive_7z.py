@@ -57,7 +57,7 @@ class Archive7z():
             script_dir = os.path.split(os.path.realpath(__file__))[0]
             script = os.path.join(script_dir, "call_exe.py")
             print(script)
-            subprocess.run(['python', script,self.path_7z,methodPathIn,methodPathOut,self.password], creationflags=subprocess.CREATE_NEW_CONSOLE)
+            subprocess.run(['python', script, self.path_7z, methodPathIn, methodPathOut, self.password], creationflags=subprocess.CREATE_NEW_CONSOLE)
 
             state = "done"
         except Exception as e:
@@ -101,6 +101,8 @@ class Archive7z():
                 # 等待组内全部完成
                 while self.th_ready_num < self.thread_num:
                     time.sleep(1)
+                    if not self.th_ready_num == 0:
+                        break
 
         # 等待所有任务全部完成
         while not self.all_done_flag:
