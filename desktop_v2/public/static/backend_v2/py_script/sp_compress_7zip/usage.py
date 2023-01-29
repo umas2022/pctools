@@ -9,7 +9,7 @@ json_set = {
     "path_out": r'D:\s-linux\project\test_file\test_in',
     "path_log": r"",
     "password": "umas1970",
-    "thread_num": 3
+    "thread_num": "10"
 }
 vc = Archive7z(json_set=json_set)
 
