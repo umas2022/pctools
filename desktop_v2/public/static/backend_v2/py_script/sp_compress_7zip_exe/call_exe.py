@@ -14,4 +14,4 @@ print("password: " + password)
 
 subprocess.run([path_7z, 'a', path_out,"-p"+password, path_in])
 
-wait_here = input("\npress enter to exit ...")
+# wait_here = input("\npress enter to exit ...")
