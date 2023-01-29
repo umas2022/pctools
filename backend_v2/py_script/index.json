@@ -13,7 +13,8 @@
         "compress": {
             "label": "压缩",
             "data": {
-                "sp_compress_7zip": "压缩 - 打包7z",
+                "sp_compress_7zip": "压缩 - py打包7z",
+                "sp_compress_7zip_exe": "压缩 - exe打包7z",
                 "sp_compress_image": "压缩 - 图片压缩",
                 "sp_compress_video": "压缩 - 视频压缩"
             }

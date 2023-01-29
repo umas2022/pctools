@@ -19,6 +19,7 @@ class Archive7z():
     def __init__(self, path_in="", path_out="", password="", path_log="", thread_num=1, json_set={}) -> None:
         self.path_in = str(path_in).replace("\\", "/")
         self.path_out = str(path_out).replace("\\", "/")
+        self.path_log = str(path_log).replace("\\", "/")
         logger.raw_logger.set_path(str(path_log).replace("\\", "/"))
         self.password = str(password)
         self.thread_num = int(thread_num)

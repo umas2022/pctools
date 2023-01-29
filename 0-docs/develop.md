@@ -16,6 +16,7 @@
 - random背景图片
 - 全局info弹窗组件DialogPopup的fixed属性没有生效,没找到原因
 - 7zip压缩程序添加多线程支持
+- 增加了新的7zip打包方法,python调用windows安装的7z.exe,比py7zr更快,而且可以显示进度条
 
 ### 2023.1.27
 - 补充设置页文本,并格式化,左对齐,第二行缩进

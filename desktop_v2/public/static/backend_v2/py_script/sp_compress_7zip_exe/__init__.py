@@ -1,0 +1,1 @@
+from sp_compress_7zip_exe.archive_7z import Archive7z as MainClass
