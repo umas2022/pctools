@@ -42,7 +42,7 @@
             <div class="button-box">
 
               <!-- 右上角展开按钮(加号) -->
-              <el-tooltip class="box-item" effect="dark" content="功能展开" placement="bottom-end">
+              <el-tooltip class="box-item" effect="dark" content="目录展开" placement="bottom-end">
                 <div class="extract button" @click="extract_change">
                   <AnimateDown :display="home_display">
                     <template #content>
@@ -59,7 +59,7 @@
               </el-tooltip>
 
               <!-- 右上角折叠按钮(减号) -->
-              <el-tooltip class="box-item" effect="dark" content="功能折叠" placement="bottom-end">
+              <el-tooltip class="box-item" effect="dark" content="目录折叠" placement="bottom-end">
                 <div class="extract button" @click="extract_change">
                   <AnimateDown :display="home_display">
                     <template #content>
@@ -115,7 +115,7 @@
               </el-tooltip>
 
               <!-- 右上角返回主页按钮(右箭头) -->
-              <el-tooltip class="box-item button" effect="dark" content="返回主页" placement="bottom-end" v-if="!home_display">
+              <el-tooltip class="box-item" effect="dark" content="返回主页" placement="bottom-end" v-if="!home_display">
                 <div class="go-home button" @click="state_change" >
                   <AnimateDown :display="!home_display">
                     <template #content>
@@ -365,7 +365,6 @@ div.button-abs {
     // 右上角按钮统一格式
     div.button {
       cursor: pointer;
-
       :hover {
         border-radius: 5px;
       }
@@ -388,12 +387,12 @@ div.button-abs {
 
     // 右上角切换背景按钮
     div.change-bg :hover {
-      background-color: rgba(234, 255, 0, 0.469);
+      background-color: rgba(255, 191, 0, 0.2);
     }
 
     // 右上角展开按钮
     div.extract :hover {
-      background-color: rgba(0, 255, 0, 0.05);
+      background-color: rgba(0, 255, 0, 0.1);
     }
   }
 }
