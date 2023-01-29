@@ -3,6 +3,8 @@
     <div class="h1">设置</div>
     <!-- 启动后端 -->
     <CpRunBackend />
+    <!-- python环境初始化 -->
+    <CpEnvInit />
     <!-- 后端测试 -->
     <CpBackendTest />
     <!-- 开发模式端口 -->
@@ -33,6 +35,7 @@
 
 <script setup>
 import CpChangePort from "./cp_settings/CpChangePort.vue"
+import CpEnvInit from "./cp_settings/CpEnvInit.vue"
 import CpChangePath from "./cp_settings/CpChangePath.vue"
 import CpRunBackend from "./cp_settings/CpRunBackend.vue"
 import CpBackendTest from "./cp_settings/CpBackendTest.vue"

@@ -23,3 +23,5 @@ with open(requirements_txt, "r", encoding="utf-8") as re_file:
                 os.system("%s install -i  %s %s" % (pip_cmd, th_source, module))
             else:
                 os.system("%s install %s" % (pip_cmd,module))
+
+wait_here = input("\n\npress enter to exit ...")

@@ -270,7 +270,7 @@ const store_home = reactive({
   port: 4090,
   // 脚本调用位置,用于后端通信
   py_path: path.join(static_path(), "backend_v2/py_script"),
-  // 项目位置,用于后端启动
+  // 项目位置,用于后端启动,这个参数没有在CpChangePath.vue里面用开发模式修改位置,少用这个,尽量用上面那个py_path
   prj_path: path.join(static_path(), "backend_v2"),
   // 功能列表,后端返回的index.json
   index_list: [],
