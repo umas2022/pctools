@@ -5,6 +5,7 @@ create: 2022.9.19
 '''
 
 import os
+import time
 from PIL import Image  # pip install pillow
 from shutil import copyfile
 from moviepy.editor import *  # pip install moviepy
@@ -65,7 +66,7 @@ class ImgCompress():
                 img = img.convert('RGB')
                 img.save(methodPathOut, quality=int(100 * self.cutCoefficient))
                 imgSizeOut = os.path.getsize(methodPathOut) / 1024
-                return "compress"
+            return "compress"
         except Exception as e:
             logger.error("sp-ImgCut - cut error !!! %s" % e)
             logger.error("file : %s" % methodPathIn)
