@@ -50,15 +50,23 @@
         {
             "type": "input",
             "data": {
-                "key": "thread_num",
+                "key": "th_total",
                 "label": "并行数",
-                "value": "10",
+                "value": "3",
                 "placeholder": "置空不使用日志",
                 "annotation": [
                     "int型,取值[1,30],(建议小于30,实测50以上就崩了)",
-                    "py7zr这什么烂包啊速度这么慢,并行把cpu跑满了也还是慢的一批,进度条也不给一个",
-                    "都不如用python调7zip.exe了←有空研究一下"
+                    "这个设计成直接打开新的终端了,能接受满屏终端的话可以调高点"
                 ]
+            }
+        },
+        {
+            "type": "switch",
+            "data": {
+                "key": "overwrite",
+                "label": "同名覆盖",
+                "value": false,
+                "annotation": "如果输出路径已经存在同名压缩包,重新打包覆盖原文件"
             }
         }
     ]

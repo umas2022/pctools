@@ -13,8 +13,8 @@
 
             <!-- 折叠info栏 -->
             <template #tp-info>
-                <span class="line">1.python模块安装,不安装python,电脑要先手动装python</span>
-                <span class="line">2.PythonShell模块不一定好用,也懒得测试了</span>
+                <span class="line">1.python模块安装,不安装python本体,电脑要先手动装python</span>
+                <span class="line">2.PythonShell模块不一定好用,也懒得找空白系统做测试了</span>
                 <span class="line">3.环境初始化脚本在这里:backend_v2/py_script/utils_env_init/setup_terminal.py</span>
                 <span class="line">4.默认使用pip命令,不使用清华源,有需要要手动去脚本里改</span>
                 <span class="line">5.写脚本时候用的是python3.10.9</span>

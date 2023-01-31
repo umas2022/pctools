@@ -20,9 +20,10 @@
 
             <!-- 折叠info栏 -->
             <template #tp-info>
-                <span class="line">1.手动设置python脚本路径</span> <br />
-                <span class="line">2.路径定位到py_script文件夹</span> <br />
-                <span class="line">3.当前: {{ store_home.py_path }}</span><br />
+                <span class="line">1.手动设置python脚本路径</span> 
+                <span class="line">2.路径定位到py_script文件夹</span> 
+                <span class="line">3.默认通过static_path函数自动定位到打包后的public路径下</span> 
+                <span class="line">4.当前: {{ store_home.py_path }}</span>
             </template>
 
         </BasicTemplate>

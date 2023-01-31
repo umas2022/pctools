@@ -74,15 +74,17 @@ class ImgCompress():
     def __method_trans(self, methodPathIn, methodPathOut) -> None:
         '''图片处理方法：转换'''
         try:
-            # 先以jpg保存, 压缩后再改名为png
-            imgPathOutJpg = methodPathOut.replace(
-                "." + methodPathOut.split(".")[-1], ".jpg")
+            # 先以jpg保存
+            imgPathOutJpg = methodPathOut.replace("." + methodPathOut.split(".")[-1], ".jpg")
             img = Image.open(methodPathIn)
             img = img.convert('RGB')
             img.save(imgPathOutJpg)
+            # 压缩后再改名为png
             self.__method_cut(imgPathOutJpg, imgPathOutJpg)
+            if self.path_in == self.path_out:
+                os.remove(methodPathOut)
             os.rename(imgPathOutJpg, methodPathOut)
-            return "transform"
+            return "png2jpg"
         except Exception as e:
             logger.error("sp-ImgCut - trans error !!! %s" % e)
             logger.error("file : %s" % methodPathIn)
@@ -110,7 +112,8 @@ class ImgCompress():
             else:
                 try:
                     if suffix in self.handleFormat or suffix in self.transFormat:
-                        os.remove(methodPathOut)
+                        if not self.path_in == self.path_out:
+                            os.remove(methodPathOut)
                 except Exception as e:
                     logger.error(
                         "error-001 : ImgCut - remove png error !!! :%s" % e)
