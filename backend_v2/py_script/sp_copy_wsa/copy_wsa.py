@@ -34,9 +34,7 @@ class CopyWsa():
 
     def __adb_push(self,methodPathIn, methodPathOut):
         '''调用adb传送文件'''
-        print(methodPathIn)
-        print(methodPathOut)
-        subprocess.run([self.path_adb,"-s", self.adb_port,"push",methodPathIn,methodPathOut])          
+        subprocess.run([self.path_adb,"-s", self.adb_port,"push","--sync",methodPathIn,methodPathOut])          
 
     def __check_keyword(self,target) -> bool:
         '''匹配关键字'''
