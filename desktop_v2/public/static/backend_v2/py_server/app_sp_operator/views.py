@@ -8,8 +8,8 @@ import subprocess
 import threading
 
 from utils.stdout_catcher import *
-from py_script.sp_manager import SpManager
-from py_script.sp_manager import logger
+from py_script.utils_logger.log import logger_re as logger
+
 
 
 class SearcherBasic():

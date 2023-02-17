@@ -71,7 +71,7 @@ class LogRepack:
     logger.set_mode("terminal")
     '''
 
-    def __init__(self, log_path='', mode_input="terminal") -> None:
+    def __init__(self, log_path='', mode_input="frontend") -> None:
         '''self.mode = ["terminal","frontend"]'''
         self.mode = mode_input
         self.raw_logger = logRaw(log_path=log_path)

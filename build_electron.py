@@ -18,6 +18,7 @@ if os.path.exists("./desktop_v2/public/static/backend_v2"):
 copytree("./backend_v2", "./desktop_v2/public/static/backend_v2")
 
 # 开发日志转化为html
+print("develop.md format convert ...")
 if os.path.isfile("./desktop_v2/public/static/info/develop.html"):
     os.remove("./desktop_v2/public/static/info/develop.html")
 input_file = codecs.open("./0-docs/develop.md", mode="r", encoding="utf-8")

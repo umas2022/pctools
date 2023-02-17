@@ -196,7 +196,7 @@ const state_change = () => {
 // 启动后端
 const { PythonShell } = window.require("python-shell");
 const run_back = () => {
-  let be_path = store_home.prj_path
+  let be_path = path.dirname(store_home.py_path)
   let be_script = "run_backterminal.py"
   let options = {
     mode: "text",
@@ -268,10 +268,8 @@ const home_onscroll = (scrollPos: { scrollTop: number }) => {
 const store_home = reactive({
   // 后端端口
   port: 4090,
-  // 脚本调用位置,用于后端通信
+  // 脚本调用位置,用于后端通信,通过设置页的switch切换开发目录和生产目录
   py_path: path.join(static_path(), "backend_v2/py_script"),
-  // 项目位置,用于后端启动,这个参数没有在CpChangePath.vue里面用开发模式修改位置,少用这个,尽量用上面那个py_path
-  prj_path: path.join(static_path(), "backend_v2"),
   // 功能列表,后端返回的index.json
   index_list: [],
   // 选中的组

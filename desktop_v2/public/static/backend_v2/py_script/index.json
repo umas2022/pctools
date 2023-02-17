@@ -7,7 +7,7 @@
         "preset": {
             "label": "预设",
             "data": {
-                "set_copy": "预设动作集"
+                "set_copy": "copy预设动作集"
             }
         },
         "compress": {

@@ -34,7 +34,7 @@ const store_home: any = inject("store_home")
 
 
 // python调用
-const be_path = store_home.prj_path
+const be_path = path.dirname(store_home.py_path)
 const be_script = "run_backterminal.py"
 const be_full = computed(() => path.join(be_path, be_script))
 const res_msg = ref([""])

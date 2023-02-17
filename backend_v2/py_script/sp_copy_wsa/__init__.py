@@ -1,0 +1,1 @@
+from sp_copy_wsa.copy_wsa import CopyWsa as MainClass

@@ -1,14 +1,33 @@
 {
-    "title": "拷贝 - 完全备份",
+    "title": "拷贝 - wsa文件复制",
     "group":{
         "key":"copy",
         "label":"复制"
     } ,
     "info": [
-        "1.所有文件及其结构原样拷贝",
-        "2.输入输出路径中的同名文件视为同一文件, 不考虑内容更新"
+        "1.调用本地adb工具",
+        "2.暂时没有做subprocess中adb报错的截取",
+        "3.文件名带有空格时偶尔会报错(只有一次,暂时没确定触发机制)",
+        "4.wsa自带的文件管理器有时候不显示新文件,实际已经复制成功了,建议使用第三方文件管理器"
     ],
     "require": [
+        {
+            "type": "input",
+            "data": {
+                "key": "path_adb",
+                "label": "adb路径",
+                "value": "D:\\p-tools\\platform-tools\\adb.exe",
+                "annotation": "adb.exe位置"
+            }
+        },{
+            "type": "input",
+            "data": {
+                "key": "adb_port",
+                "label": "adb端口",
+                "value": "127.0.0.1:58526",
+                "annotation": "wsa开发模式中查看,一般不会变"
+            }
+        },
         {
             "type": "input",
             "data": {
@@ -23,7 +42,7 @@
             "data": {
                 "key": "path_out",
                 "label": "输出路径",
-                "value": "D:\\s-linux\\project\\test_file\\test_out"
+                "value": "/sdcard/Download/"
             }
         },
         {

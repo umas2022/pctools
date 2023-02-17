@@ -11,18 +11,31 @@ from utils_tools.traverse import Traverse
 
 
 class CopyBackup():
-    def __init__(self, path_in="", path_out="",path_log = "",json_set = {}) -> None:
+    def __init__(self, path_in="", path_out="",path_log = "",keyword="",json_set = {}) -> None:
         self.path_in = str(path_in).replace("\\", "/")
         self.path_out = str(path_out).replace("\\", "/")
         logger.raw_logger.set_path(str(path_log).replace("\\", "/"))
+        self.keyword = str(keyword)
         if not json_set == {}:
             try:
                 self.path_in = json_set['path_in'].replace("\\", "/")
                 self.path_out = json_set['path_out'].replace("\\", "/")
                 self.path_log = json_set['path_log'] if "path_log" in json_set else ""
+                self.keyword = json_set['keyword'] if "keyword" in json_set else ""
             except Exception as e:
                 logger.error("key error: %s" %e)
                 return
+            
+    def __check_keyword(self,target) -> bool:
+        '''匹配关键字'''
+        if self.keyword == "":
+            return True
+        else:
+            if self.keyword in target:
+                return True
+            else:
+                return False
+
 
     def __copy_filter(self, methodPathIn, methodPathOut):
         '''处理方法：完全备份'''
@@ -41,8 +54,11 @@ class CopyBackup():
             return "pass"
         else:
             try:
-                copyfile(methodPathIn, methodPathOut)
-                return "copy"
+                if self.__check_keyword(name):
+                    copyfile(methodPathIn, methodPathOut)
+                    return "copy"
+                else:
+                    return "pass"
             except Exception as e:
                 logger.error("CopyBackup - COPY ERROR !!! :%s" % e)
                 logger.error("file : %s" % methodPathIn)
