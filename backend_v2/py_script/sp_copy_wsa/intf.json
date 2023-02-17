@@ -8,7 +8,9 @@
         "1.调用本地adb工具",
         "2.暂时没有做subprocess中adb报错的截取",
         "3.文件名带有空格时偶尔会报错(只有一次,暂时没确定触发机制)",
-        "4.wsa自带的文件管理器有时候不显示新文件,实际已经复制成功了,建议使用第三方文件管理器"
+        "4.wsa自带的文件管理器有时候不显示新文件,实际已经复制成功了,建议使用第三方文件管理器",
+        "5.空文件夹会被跳过,不能识别嵌套的空文件夹",
+        "6.使用反斜杠的路径如果直接在命令行里运行会报错,这里后台转换为正斜杠了"
     ],
     "require": [
         {
@@ -32,16 +34,16 @@
             "type": "input",
             "data": {
                 "key": "path_in",
-                "label": "输入路径",
+                "label": "win路径",
                 "value": "D:\\s-linux\\project\\test_file\\test_in",
-                "annotation": "一行注释"
+                "annotation": "正斜杠反斜杠无所谓,尾部加不加斜杠无所谓"
             }
         },
         {
             "type": "input",
             "data": {
                 "key": "path_out",
-                "label": "输出路径",
+                "label": "wsa路径",
                 "value": "/sdcard/Download/"
             }
         },

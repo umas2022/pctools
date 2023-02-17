@@ -1,3 +1,9 @@
+'''
+create: 忘了反正挺早的
+
+默认frontend模式,升级win11之后在server里将mode从terminal改为frontend并不能起效
+'''
+
 from glob import glob
 import os
 import pkgutil
@@ -129,11 +135,11 @@ class SearcherFunction():
         def run_direct():
             catcher = Catcher(main_func, log_func)
             catcher.run(buff_size=10)
+            
         # 终端调用
-
         def run_terminal():
-            subprocess.run(['python3', './app_sp_operator/terminal_searcher.py', json.dumps(get_data)], creationflags=subprocess.CREATE_NEW_CONSOLE)
-            # subprocess.run(['python3', './app_sp_operator/terminal_searcher.py', json.dumps(get_data)])
+            subprocess.run(['python', './app_sp_operator/terminal_searcher.py', json.dumps(get_data)], creationflags=subprocess.CREATE_NEW_CONSOLE)
+            # subprocess.run(['python', './app_sp_operator/terminal_searcher.py', json.dumps(get_data)])
         if get_data["terminal"] == True:
             go_main = threading.Thread(target=run_terminal)
             go_main.start()

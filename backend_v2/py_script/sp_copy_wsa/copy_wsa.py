@@ -5,6 +5,7 @@ wsa文件拷贝
 '''
 
 import os
+import time
 from utils_logger.log import logger_re as logger
 from utils_tools.traverse import Traverse
 import subprocess
@@ -31,21 +32,11 @@ class CopyWsa():
             
 
 
-    def __adb_tree(self):
-        '''创建输出目录结构'''
-        '''直接对顶层文件夹进行一次push就可以创建文件夹目录结构'''
-        for name in os.listdir(self.path_in):
-            full_path = os.path.join(self.path_in,name).replace("\\", "/")
-            if os.path.isdir(full_path):
-                sp=subprocess.Popen([self.path_adb,"-s", self.adb_port,"push",full_path,self.path_out])
-                return sp.wait()
-            
-
     def __adb_push(self,methodPathIn, methodPathOut):
         '''调用adb传送文件'''
-        methodPathOut = os.path.split(methodPathOut)[0]+"/"
+        print(methodPathIn)
+        print(methodPathOut)
         subprocess.run([self.path_adb,"-s", self.adb_port,"push",methodPathIn,methodPathOut])          
-
 
     def __check_keyword(self,target) -> bool:
         '''匹配关键字'''
@@ -60,20 +51,17 @@ class CopyWsa():
 
     def __copy_filter(self, methodPathIn, methodPathOut):
         '''处理方法：完全备份'''
-        name = os.path.split(methodPathIn)[0]
-        if os.path.isfile(methodPathOut):
-            return "pass"
-        else:
-            try:
-                if self.__check_keyword(name):
-                    self.__adb_push(methodPathIn, methodPathOut)
-                    return "copy"
-                else:
-                    return "pass"
-            except Exception as e:
-                logger.error("CopyBackup - COPY ERROR !!! :%s" % e)
-                logger.error("file : %s" % methodPathIn)
-                return "error"
+        name = os.path.split(methodPathIn)[1]
+        try:
+            if self.__check_keyword(name):
+                self.__adb_push(methodPathIn, methodPathOut)
+                return "copy"
+            else:
+                return "pass"
+        except Exception as e:
+            logger.error("CopyBackup - COPY ERROR !!! :%s" % e)
+            logger.error("file : %s" % methodPathIn)
+            return "error"
 
     def run(self):
         '''开始处理'''
@@ -87,10 +75,9 @@ class CopyWsa():
             logger.info("counting : %d\t%s" % (total, name))
         logger.write("total : %d\n" % total)
 
+
         # adb连接
         subprocess.run([self.path_adb,"connect", self.adb_port])
-        self.__adb_tree()
-
 
         # 开始复制
         jetzt = 0

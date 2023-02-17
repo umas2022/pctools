@@ -1,6 +1,6 @@
 '''
 create: 2022.11.1
-sp_searcher的终端启动器
+终端模式启动器
 '''
 import sys
 import os
@@ -16,7 +16,7 @@ script_path = os.path.join(pctools_path,"py_script")
 sys.path.append(pctools_path)
 sys.path.append(script_path)
 
-from py_script.sp_manager import logger
+from py_script.utils_logger.log import logger_re as logger
 
 now = time.time()
 
