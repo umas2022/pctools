@@ -1,19 +1,27 @@
 
+
+import os
 import sys
-sys.path.append("..")
+py_path = os.path.split(os.path.realpath(__file__))[0]
+script_path = os.path.split(py_path)[0]
+sys.path.append(script_path)
 from sp_copy_backup.copy_backup import CopyBackup
 
-
-# path_in = r'D:\s-linux\project\test_file\test_in'
-# path_out = r'D:\s-linux\project\test_file\test_out'
-
-
 json_set = {
-    "path_in": r'G:\内部存储\Tachiyomi',
-    "path_out": r'D:\s-workspace\Tachiyomi',
+    "path_in": r'D:\s-linux\project\test_file\test_in',
+    "path_out": r'D:\s-linux\project\test_file\test_out',
     "path_log": r'D:\s-linux\project\test_file\test_log',
-    "keyword": r".cbz"
+    "keyword": r"txt",
+    "location": r"-1"
 }
+
+# json_set = {
+#     "path_in": r'G:\内部存储\Tachiyomi',
+#     "path_out": r'D:\s-workspace\Tachiyomi',
+#     "path_log": r'D:\s-linux\project\test_file\test_log',
+#     "keyword": r".cbz",
+#     "location": r"-1"
+# }
 
 
 vc = CopyBackup(json_set=json_set)

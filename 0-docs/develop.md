@@ -19,6 +19,7 @@
 - win11前端截不到后端的log了
 - ↑非常奇怪,排查之后应该没有logger重复定义;win11截不到后端log原因是在server里将logger从terminal改为frontend不能在主函数中生效,把logger初始设为frontend暂时可以向前端发送了,此时重复输出的问题也莫名其妙解决了
 - adb的复制其实可以自动创建父文件夹,不需要手动创建文件结构,adb shell mkdir命令创建文件夹时括号会报错,空格也报错,非常恶心
+- utils_tools增加了string_tools.py,目前仅添加了一个字符串搜索关键字位置的函数,copy_backup/copy_wsa增加了对关键字位置的筛选功能
 
 ### 2023.2.11
 - 更新了win11发现一键安装python环境逻辑是错的,后端运行起来之后所有module已经被import过了,此时如果没有安装直接就会报错,后端根本跑不起来 -> 重新排查了一遍,按理说后端跑起来的时候跟script没有关系;发现是后端的废弃代码没有删干净,manager.py相关代码删掉就好了
