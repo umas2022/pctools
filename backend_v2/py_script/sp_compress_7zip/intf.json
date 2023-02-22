@@ -1,16 +1,38 @@
 {
-    "title": "压缩 - py打包7z",
+    "title": "压缩 - 打包7z",
     "group": {
         "key": "compress",
         "label": "压缩"
     },
     "info": [
-        "1.目标路径下所有一级文件夹批量打包为7zip,使用py7zr模块",
-        "2.建议使用终端模式,可以使用ctrl+c随时中断",
+        "1.目标路径下所有一级文件夹批量打包为7zip,注意只处理文件夹不处理文件",
+        "2.建议使用终端模式,可以使用ctrl+c随时中断,exe模式可以显示进度",
         "3.终端的进度提示懒得搞了,文件夹里可以看到半成品7z",
         "3.运行速度非常慢,建议使用另一个exe方法打包"
     ],
     "require": [
+        {
+            "type": "select",
+            "data": {
+                "key": "method",
+                "label": "打包方法",
+                "value": "exe",
+                "option": [
+                    {
+                        "value": "py7zr",
+                        "label": "py7zr"
+                    },
+                    {
+                        "value": "exe",
+                        "label": "7z.exe"
+                    }
+                ],
+                "annotation": [
+                    "py7zr: python包,速度较慢容易卡死",
+                    "7z.exe: 调用windows已经安装的7z.exe"
+                ]
+            }
+        },
         {
             "type": "input",
             "data": {
@@ -39,6 +61,22 @@
         },
         {
             "type": "input",
+            "show": {
+                "value": false,
+                "listen": {
+                    "key": "method",
+                    "value": "exe"
+                }
+            },
+            "data": {
+                "key": "path_7z",
+                "label": "7z路径",
+                "value": "D:\\p-program\\7zip\\7-Zip\\7z.exe",
+                "annotation": "7z安装位置,定位到7z.exe"
+            }
+        },
+        {
+            "type": "input",
             "data": {
                 "key": "password",
                 "label": "压缩密码",
@@ -61,12 +99,47 @@
             }
         },
         {
+            "type": "input",
+            "data": {
+                "key": "keyword",
+                "label": "筛选关键字",
+                "value": "",
+                "placeholder": "置空不使用关键字筛选",
+                "annotation": "只处理包含指定关键词的文件,匹配包含后缀名"
+            }
+        },
+        {
+            "type": "input",
+            "data": {
+                "key": "location",
+                "label": "关键字位置",
+                "value": "",
+                "placeholder": "int型输入,支持负数,置空不筛选位置",
+                "annotation": [
+                    "location=[0,1,2, ... ,-2,-1]",
+                    "负数的匹配计入keyword长度,如在'file.txt'中匹配'.tx'结果是-2,匹配'.txt'结果是-1"
+                ]
+            }
+        },
+        {
             "type": "switch",
             "data": {
                 "key": "overwrite",
                 "label": "同名覆盖",
                 "value": false,
-                "annotation": "如果输出路径已经存在同名压缩包,重新打包覆盖原文件"
+                "annotation": [
+                    "如果输出路径已经存在同名压缩包,重新打包覆盖原文件",
+                    "匹配包含带_cp2的双压文件"
+                ]
+            }
+        },
+        {
+            "type": "switch",
+            "data": {
+                "key": "double_cp",
+                "label": "双层压缩",
+                "value": true,
+                "annotation": "双压文件名后加'_cp2'"
             }
         }
     ]
