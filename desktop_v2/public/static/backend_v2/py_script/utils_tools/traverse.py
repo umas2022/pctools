@@ -4,6 +4,7 @@ from utils_logger.log import logger_re as logger
 
 
 class Traverse():
+    '''文件夹遍历类,记得加括号实例化Traverse().getfile()'''
     def __init__(self) -> None:
         pass
 

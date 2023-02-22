@@ -68,6 +68,19 @@
                 "placeholder":"置空不使用关键字筛选",
                 "annotation": "只复制包含指定关键词的文件,匹配包含后缀名"
             }
+        },
+        {
+            "type": "input",
+            "data": {
+                "key": "location",
+                "label": "关键字位置",
+                "value": "",
+                "placeholder": "int型输入,支持负数,置空不筛选位置",
+                "annotation": [
+                    "location=[0,1,2, ... ,-2,-1]",
+                    "负数的匹配计入keyword长度,如在'file.txt'中匹配'.tx'结果是-2,匹配'.txt'结果是-1"
+                ]
+            }
         }
     ]
 }

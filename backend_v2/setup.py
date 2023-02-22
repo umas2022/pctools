@@ -23,10 +23,14 @@ print("\n\n ========== 安装script运行库(2) ========== \n\n")
 # subprocess.run(["python", script_setup])
 # print("\nscript env init : done ...\n")
 
-print("\n\n ========== 安装server运行库(3) ========== \n\n")
-script_dir = os.path.join(setup_dir, "py_server")
-# script_setup = os.path.join(script_dir, "server_env_init/setup.py")
-# subprocess.run(["python", script_setup])
-os.chdir(script_dir)
+
+'''已经整合至script运行库'''
+# print("\n\n ========== 安装server运行库(3) ========== \n\n")
+# script_dir = os.path.join(setup_dir, "py_server")
+# # script_setup = os.path.join(script_dir, "server_env_init/setup.py")
+# # subprocess.run(["python", script_setup])
+# os.chdir(script_dir)
+
+
 subprocess.run(["python","manage.py","migrate"])
 print("\nscript env init : done ...\n")

@@ -1,7 +1,16 @@
 # python功能拆分
 
+
 ### 安装必备库
 - 参见 ./utils_env_init/setup.py
+
+
+### 使用说明
+- py_script路径需要被添加进path
+```python
+py_path = os.path.split(os.path.realpath(__file__))[0] # 推荐使用
+sys.path.append("xxx/py_script")
+```
 
 ### 文件说明
 - index.json: electron读取的功能目录,由py_server/app_sp_operator/views/SearcherFunction/list_update根据每个sp_xxx/intf.json生成

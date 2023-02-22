@@ -11,6 +11,10 @@
 <li>爬虫对loading页的判断不太好,2k+png-&gt;36k,4k+jpg-&gt;169k,仅凭图片尺寸判断loading需要根据截图环境调整阈值</li>
 <li>7zip压缩程序运行速度非常慢,而且没有进度条,大批量处理时后面会卡死,看任务管理器没有资源占用,怀疑是被windows杀死了</li>
 </ul>
+<h3>2023.2.21</h3>
+<ul>
+<li>退回win10,重装python,发现setup里面漏写了几个包,加上了</li>
+</ul>
 <h3>2023.2.17</h3>
 <ul>
 <li>完全备份增加关键字筛选</li>
@@ -20,6 +24,7 @@
 <li>win11前端截不到后端的log了</li>
 <li>↑非常奇怪,排查之后应该没有logger重复定义;win11截不到后端log原因是在server里将logger从terminal改为frontend不能在主函数中生效,把logger初始设为frontend暂时可以向前端发送了,此时重复输出的问题也莫名其妙解决了</li>
 <li>adb的复制其实可以自动创建父文件夹,不需要手动创建文件结构,adb shell mkdir命令创建文件夹时括号会报错,空格也报错,非常恶心</li>
+<li>utils_tools增加了string_tools.py,目前仅添加了一个字符串搜索关键字位置的函数,copy_backup/copy_wsa增加了对关键字位置的筛选功能</li>
 </ul>
 <h3>2023.2.11</h3>
 <ul>

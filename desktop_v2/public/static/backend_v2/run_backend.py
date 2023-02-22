@@ -13,7 +13,7 @@ py_version = "python"
 print("python version in use: %s" % py_version)
 print("server path: %s" % server_path)
 
-# 无输入参数时认为是在box目录下直接调用的
+# 无输入参数时认为是在backend_v2目录下直接调用的
 if len(sys.argv) == 1:
     print("\n\tbackend use default port:4090\n")
     os.chdir("./backend_v2/py_server")

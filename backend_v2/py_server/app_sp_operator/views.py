@@ -14,6 +14,17 @@ import subprocess
 import threading
 
 from utils.stdout_catcher import *
+
+
+# # 添加工具箱引用目录：backend_v2/py_script
+# import sys
+# server_dir = os.path.split(os.path.realpath(__file__))[0] # backend_v2/py_server
+# backend_dir = os.path.split(os.path.split(server_dir)[0])[0] # backend_v2/
+# script_dir = os.path.join(backend_dir,"py_script") # backend_v2/py_script
+# sys.path.append(backend_dir)
+# print(script_dir)
+# wait=input("...")
+
 from py_script.utils_logger.log import logger_re as logger
 
 
@@ -26,7 +37,7 @@ class SearcherBasic():
 
     def basic_data_check(self, get_data) -> bool:
         '''检查输入参数合法性'''
-        logger.debug("通过预验证(假的,这个功能还没做)")
+        logger.debug("合法性检查(假的,这个功能还没做)")
         return True
 
 

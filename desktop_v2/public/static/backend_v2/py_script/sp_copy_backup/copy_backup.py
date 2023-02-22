@@ -1,27 +1,29 @@
 '''
 create: 2022.9.20
 
-图片压缩
+文件复制,支持关键字筛选
 '''
 
 import os
 from shutil import copyfile
 from utils_logger.log import logger_re as logger
 from utils_tools.traverse import Traverse
-
+from utils_tools.string_tools import StringTools
 
 class CopyBackup():
-    def __init__(self, path_in="", path_out="",path_log = "",keyword="",json_set = {}) -> None:
+    def __init__(self, path_in="", path_out="",path_log = "",keyword="",location="",json_set = {}) -> None:
         self.path_in = str(path_in).replace("\\", "/")
         self.path_out = str(path_out).replace("\\", "/")
         logger.raw_logger.set_path(str(path_log).replace("\\", "/"))
         self.keyword = str(keyword)
+        self.location = str(location)
         if not json_set == {}:
             try:
                 self.path_in = json_set['path_in'].replace("\\", "/")
                 self.path_out = json_set['path_out'].replace("\\", "/")
                 self.path_log = json_set['path_log'] if "path_log" in json_set else ""
                 self.keyword = json_set['keyword'] if "keyword" in json_set else ""
+                self.location = json_set['location'] if "location" in json_set else ""
             except Exception as e:
                 logger.error("key error: %s" %e)
                 return
@@ -31,10 +33,15 @@ class CopyBackup():
         if self.keyword == "":
             return True
         else:
-            if self.keyword in target:
-                return True
+            # 不指定关键字位置
+            if self.location == "":
+                if self.keyword in target:
+                    return True
+                else:
+                    return False
+            # 指定关键字位置
             else:
-                return False
+                return StringTools().location_match(target,self.keyword,int(self.location))
 
 
     def __copy_filter(self, methodPathIn, methodPathOut):
