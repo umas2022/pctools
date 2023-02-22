@@ -12,14 +12,14 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 
 from pathlib import Path
 import os
-from pickle import TRUE
 
-# 工具箱引用目录：py_script
+# 全局添加工具箱引用目录：backend_v2/py_script
 import sys
-dic_upper = os.path.abspath(os.path.join(os.getcwd(), "..")) # 上级目录 /root/onebox
-dic_add = os.path.join(dic_upper, "py_script") # toolbox目录 /root/onebox/py_script
-sys.path.append(dic_upper)
-sys.path.append(dic_add)
+server_dir = os.path.split(os.path.realpath(__file__))[0] # backend_v2/py_server/py_server
+backend_dir = os.path.split(os.path.split(server_dir)[0])[0] # backend_v2/
+script_dir = os.path.join(backend_dir,"py_script")
+sys.path.append(script_dir)
+
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -45,6 +45,7 @@ ALLOWED_HOSTS = [
 # Application definition
 
 INSTALLED_APPS = [
+    'daphne',# websocket支持
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -52,10 +53,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'corsheaders', # 跨域解决
-    'channels', # websocket支持
     'app_test',
     'app_test_ws',
-
+    'app_sp_operator'
 ]
 
 MIDDLEWARE = [
@@ -152,6 +152,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # 允许所有跨域请求
 CORS_ORIGIN_ALLOW_ALL = True
 
+
+
 # 指定ASGI的路由地址
-# ASGI_APPLICATION = 'py_server.asgi.application'
 ASGI_APPLICATION = 'py_server.asgi.application'

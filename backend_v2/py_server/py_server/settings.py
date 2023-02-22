@@ -13,11 +13,12 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 from pathlib import Path
 import os
 
-# 全局添加工具箱引用目录：backend_v2
+# 全局添加工具箱引用目录：backend_v2/py_script
 import sys
 server_dir = os.path.split(os.path.realpath(__file__))[0] # backend_v2/py_server/py_server
 backend_dir = os.path.split(os.path.split(server_dir)[0])[0] # backend_v2/
-sys.path.append(backend_dir)
+script_dir = os.path.join(backend_dir,"py_script")
+sys.path.append(script_dir)
 
 
 

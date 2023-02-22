@@ -25,7 +25,7 @@ from utils.stdout_catcher import *
 # print(script_dir)
 # wait=input("...")
 
-from py_script.utils_logger.log import logger_re as logger
+from utils_logger.log import logger_re as logger
 
 
 
