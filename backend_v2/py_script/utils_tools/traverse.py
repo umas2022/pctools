@@ -9,7 +9,7 @@ class Traverse():
         pass
 
     def onerror(self, err):
-        logger.error("get file error : %s" % err)
+        logger.error("Traverse get file error : %s" % err)
 
     def get_file(self, path_in):
         '''文件遍历'''

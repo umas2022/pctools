@@ -119,7 +119,7 @@ class RenameBasic():
         total = 0
         tarverse_func = ""
         if self.target == "dir":
-            tarverse_func = Traverse().get_dir
+            tarverse_func = Traverse().get_first_dir
         elif self.target == "file":
             tarverse_func = Traverse().get_file
         else:
