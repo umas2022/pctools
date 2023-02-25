@@ -1,0 +1,59 @@
+{
+    "title": "点击 - 窗口截图",
+    "group": {
+        "key": "auto",
+        "label": "点击器"
+    },
+    "info": [
+        "1.给目标窗口截图",
+        "2.目标窗口不能最小化"
+    ],
+    "require": [
+        {
+            "type": "input",
+            "data": {
+                "key": "save_path",
+                "label": "保存路径",
+                "value": "D:\\s-linux\\project\\test_file\\save",
+                "annotation": [
+                    "用以保存截图文件"
+                ]
+            }
+        },
+        {
+            "type": "input",
+            "data": {
+                "key": "img_name",
+                "label": "保存名称",
+                "value": "shot.jpg",
+                "annotation": [
+                    "用以保存截图文件,包含后缀名"
+                ]
+            }
+        },
+        {
+            "type": "input",
+            "data": {
+                "key": "win_name",
+                "label": "目标窗口名",
+                "value": "碧蓝航线",
+                "annotation": [
+                    "支持字符串匹配,输入关键字即可",
+                    "匹配到重复窗口时使用第一个"
+                ]
+            }
+        },
+        {
+            "type": "button",
+            "data": {
+                "key": "get_hwnd",
+                "label": "获取所有窗口句柄",
+                "button": "获取",
+                "annotation": [
+                    "前面是窗口id",
+                    "后面是窗口名"
+                ]
+            }
+        }
+    ]
+}
