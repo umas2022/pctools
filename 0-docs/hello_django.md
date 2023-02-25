@@ -1,5 +1,10 @@
 # 从0开始的django项目搭建
 
+### info
+- 2023.2.25
+- Django version 4.1.7
+- ASGI/Daphne version 4.0.0
+
 ### 创建项目
 ```
 django-admin.exe startproject pj_test

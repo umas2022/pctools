@@ -64,6 +64,11 @@ class AutoStatic():
 
     def run(self):
         '''开始处理'''
+        if  os.path.isfile(self.s1_path):
+            os.remove(self.s1_path)
+        if  os.path.isfile(self.s2_path):
+            os.remove(self.s2_path)
+        
         self.hwnd = self.sf.hwnd_match(self.win_name)
         if self.hwnd == "":
             logger.error("window not found : %s" % self.win_name)

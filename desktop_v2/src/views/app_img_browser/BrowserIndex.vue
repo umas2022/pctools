@@ -65,7 +65,7 @@ const input_form = reactive({
   //     label: "nova",
   //   },
   // ],
-  path_browse: "C:\\Users\\umas\\OneDrive\\o-gallery\\壁纸2",
+  path_browse: "D:\\p-Huawei\\壁纸横_local",
   path_save_list: [
     {
       path: "D:\\s-linux\\project\\test_file\\test_in",
