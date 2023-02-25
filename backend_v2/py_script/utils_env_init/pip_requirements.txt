@@ -32,6 +32,7 @@ pypiwin32
 PyUserinput
 pyautogui
 PyQT5
+winsdk
 
 # general_basic 通用辅助
 

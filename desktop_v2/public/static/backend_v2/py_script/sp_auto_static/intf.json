@@ -1,0 +1,59 @@
+{
+    "title": "点击 - 静态检测",
+    "group": {
+        "key": "auto",
+        "label": "点击器"
+    },
+    "info": [
+        "1.检测窗口内容是否静止",
+        "2.窗口不能最小化"
+    ],
+    "require": [
+        {
+            "type": "input",
+            "data": {
+                "key": "path_cash",
+                "label": "缓存路径",
+                "value": "D:\\s-linux\\project\\test_file\\cash",
+                "annotation": [
+                    "用以保存临时截图文件"
+                ]
+            }
+        },
+        {
+            "type": "input",
+            "data": {
+                "key": "win_name",
+                "label": "目标窗口名",
+                "value": "碧蓝航线",
+                "annotation": [
+                    "支持字符串匹配,输入关键字即可",
+                    "匹配到重复窗口时使用第一个"
+                ]
+            }
+        },
+        {
+            "type": "input",
+            "data": {
+                "key": "interval_time",
+                "label": "检测间隔",
+                "value": "2",
+                "annotation": [
+                    "in型,单位秒"
+                ]
+            }
+        },
+        {
+            "type": "button",
+            "data": {
+                "key": "open_chrome",
+                "label": "这个按钮还没做",
+                "button": "假按钮",
+                "annotation": [
+                    "后面肯定用得上",
+                    "xxx"
+                ]
+            }
+        }
+    ]
+}
