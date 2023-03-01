@@ -7,7 +7,6 @@
         <span style="padding:10px">{{ func_total }}</span>
         <el-button @click="get_list">刷新</el-button>
     </div>
-
 </template>
 <script setup lang="ts">
 import { ref, inject, onMounted } from "vue"
@@ -52,10 +51,7 @@ const get_list = () => {
                 }
             }
         } catch {
-            if (e.data != "done") {
-                ElMessage.error("data error, see console")
-                console.log(e.data)
-            }
+            console.log(e.data)
         }
     };
 }
@@ -75,7 +71,7 @@ const get_list_repeat = (re_times: number) => {
     let set_id = setInterval(get_list_check, time_interval)
     setTimeout(() => {
         clearInterval(set_id)
-    }, (re_times-1) * time_interval)
+    }, (re_times - 1) * time_interval)
 }
 
 // 启动时尝试获取3次list
@@ -85,6 +81,4 @@ onMounted(() => {
     }
 })
 </script>
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>
