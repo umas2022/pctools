@@ -78,7 +78,11 @@ const gotoBottom = () => {
 // 监听传参变化, 刷新文本显示和滚动条位置
 watch(() => props.data, () => {
     // 数组合并
-    logtext.value.push(...JSON.parse(props.data))
+    try{
+        logtext.value.push(...JSON.parse(props.data))
+    } catch{
+        logtext.value.push(props.data)
+    }
     while (logtext.value.length > maxrow.value) {
         logtext.value.shift();
     }

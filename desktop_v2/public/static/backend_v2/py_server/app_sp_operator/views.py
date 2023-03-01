@@ -178,3 +178,4 @@ class SpSearcher(WebsocketConsumer):
             return
         called_func = getattr(SearcherFunction(), get_data["function"])
         called_func(get_data["data"], self.send)
+        self.disconnect()

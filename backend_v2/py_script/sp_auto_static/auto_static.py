@@ -61,7 +61,12 @@ class AutoStatic():
             self.sf.shot_window(self.hwnd, self.s1_path)
             time.sleep(self.itv_time)
             self.sf.shot_window(self.hwnd, self.s2_path)
-        return self.sf.compare_ssim(self.s1_path, self.s2_path)
+        score = 2
+        try:
+            score = self.sf.compare_ssim(self.s1_path, self.s2_path)
+        except Exception as e:
+            logger.error("auto_static.py error : %s" %e)
+        return score
 
     def __recheck(self) -> bool:
         '''检测到重复图片,延长等待时间并重新检测'''
@@ -81,6 +86,7 @@ class AutoStatic():
             logger.error("window not found : %s" % self.win_name)
             return
         while True:
+            
             ssim_score = self.__two_shot()
             logger.info("score: %.2f" % ssim_score)
             if ssim_score > self.__grenze:
