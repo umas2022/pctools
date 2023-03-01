@@ -61,11 +61,11 @@ class AutoStatic():
             self.sf.shot_window(self.hwnd, self.s1_path)
             time.sleep(self.itv_time)
             self.sf.shot_window(self.hwnd, self.s2_path)
-        score = 2
+        score = 0
         try:
             score = self.sf.compare_ssim(self.s1_path, self.s2_path)
         except Exception as e:
-            logger.error("auto_static.py error : %s" %e)
+            logger.error("auto_static.py ssim error : %s" %e)
         return score
 
     def __recheck(self) -> bool:
