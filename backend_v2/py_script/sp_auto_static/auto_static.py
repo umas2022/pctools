@@ -8,6 +8,7 @@ create: 2023.2.25
 
 import os
 import time
+import subprocess
 
 from utils_logger.log import logger_re as logger
 from utils_screenshot.shot_func import ShotFunc
@@ -41,6 +42,12 @@ class AutoStatic():
         self.hwnd = ""
         self.s1_path = os.path.normpath(os.path.join(self.path_cash, "s1.jpg"))
         self.s2_path = os.path.normpath(os.path.join(self.path_cash, "s2.jpg"))
+
+    def open_cash(self):
+        '''打开cash文件夹'''
+        # os.startfile(self.path_cash)
+        subprocess.run(['explorer.exe', self.path_cash])
+
 
     def __two_shot(self) -> float:
         '''前后两次截图返回相似度,如果目录下已经存在s1.jpg和s2.jpg则保留s2并重命名为s1'''

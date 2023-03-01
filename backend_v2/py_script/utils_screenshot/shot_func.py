@@ -4,20 +4,23 @@ create: 2023.2.25
 '''
 
 import sys
+import subprocess
+import threading
 import skimage.metrics
 import skimage.measure
 import cv2  # pip install opencv-python
 import win32gui  # pip install pypiwin32
-from PyQt5.QtGui import *
-from PyQt5.QtWidgets import QApplication  # pip install PyQT5
+from PyQt6.QtWidgets import QApplication  # pip install PyQT6
 
 from utils_logger.log import logger_re as logger
 
 
 class ShotFunc():
-    '''截图方法合集,记得加括号实例化ShotFunc().shot()'''
+    '''截图方法合集,多次实例化会导致QApplication报警,建议只实例化一次'''
     def __init__(self) -> None:
-        pass
+        self.app = QApplication(sys.argv)
+        logger.debug("重复操作会触发QApplication重复实例化的warning,不影响使用(修不好了)")
+
 
     def hwnd_print_all(self) -> None:
         '''直接print所有窗口名和id'''
@@ -54,7 +57,6 @@ class ShotFunc():
     def shot_window(self,window: str, save_path: str) -> None:
         '''按窗口截图;window窗口名不存在时全屏截图;save_path包含图片名'''
         hwnd = win32gui.FindWindow(None, window)
-        app = QApplication(sys.argv)
         screen = QApplication.primaryScreen()
         img = screen.grabWindow(hwnd).toImage()
         img.save(save_path)

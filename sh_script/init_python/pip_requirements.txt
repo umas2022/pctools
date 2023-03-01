@@ -22,7 +22,7 @@ ffmpeg-python
 pypiwin32
 PyUserinput
 pyautogui
-PyQT5
+PyQT6
 
 # general_basic 通用辅助
 
