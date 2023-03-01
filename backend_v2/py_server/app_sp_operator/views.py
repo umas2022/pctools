@@ -164,11 +164,11 @@ class SpSearcher(WebsocketConsumer):
         """ws接收消息"""
         logger.info("get data: %s" % str(text_data))
         get_data = json.loads(text_data)
-        self.send("get data : {")
+        self.send("data check ...")
         for key in get_data["data"]:
             self.send("- %s : %s "%(key, str(get_data["data"][key])))
-        self.send("}")
-        
+        self.send("start ...")
+
         if not SearcherBasic().basic_data_check(get_data):
             return
         called_func = getattr(SearcherFunction(), get_data["function"])

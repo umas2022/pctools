@@ -19,7 +19,7 @@ class ShotFunc():
     '''截图方法合集,多次实例化会导致QApplication报警,建议只实例化一次'''
     def __init__(self) -> None:
         self.app = QApplication(sys.argv)
-        logger.debug("重复操作会触发QApplication重复实例化的warning,不影响使用(修不好了)")
+        logger.debug("重复操作会触发后端QApplication重复实例化的warning,不影响使用(修不好了)")
 
 
     def hwnd_print_all(self) -> None:

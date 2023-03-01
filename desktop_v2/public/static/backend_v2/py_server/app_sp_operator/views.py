@@ -1,7 +1,6 @@
 '''
 create: 忘了反正挺早的
 
-默认frontend模式,升级win11之后在server里将mode从terminal改为frontend并不能起效
 '''
 
 from glob import glob
@@ -15,18 +14,8 @@ import threading
 
 from utils.stdout_catcher import *
 
-
-# # 添加工具箱引用目录：backend_v2/py_script
-# import sys
-# server_dir = os.path.split(os.path.realpath(__file__))[0] # backend_v2/py_server
-# backend_dir = os.path.split(os.path.split(server_dir)[0])[0] # backend_v2/
-# script_dir = os.path.join(backend_dir,"py_script") # backend_v2/py_script
-# sys.path.append(backend_dir)
-# print(script_dir)
-# wait=input("...")
-
+# script目录在settings.py里添加了,这个波浪线没问题
 from utils_logger.log import logger_re as logger
-
 
 
 class SearcherBasic():
@@ -146,7 +135,7 @@ class SearcherFunction():
         def run_direct():
             catcher = Catcher(main_func, log_func)
             catcher.run(buff_size=10)
-            
+
         # 终端调用
         def run_terminal():
             subprocess.run(['python', './app_sp_operator/terminal_searcher.py', json.dumps(get_data)], creationflags=subprocess.CREATE_NEW_CONSOLE)
@@ -166,16 +155,21 @@ class SpSearcher(WebsocketConsumer):
         '''ws连接'''
         self.accept()
 
-    def disconnect(self, close_code):
-        '''ws断开连接'''
-        pass
+    # def disconnect(self, close_code):
+    #     '''ws断开连接'''
+    #     pass
+
 
     def receive(self, text_data):
         """ws接收消息"""
         logger.info("get data: %s" % str(text_data))
         get_data = json.loads(text_data)
+        self.send("data check ...")
+        for key in get_data["data"]:
+            self.send("- %s : %s "%(key, str(get_data["data"][key])))
+        self.send("start ...")
+
         if not SearcherBasic().basic_data_check(get_data):
             return
         called_func = getattr(SearcherFunction(), get_data["function"])
         called_func(get_data["data"], self.send)
-        self.disconnect()
