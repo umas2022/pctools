@@ -2,7 +2,7 @@
   <div>
     <!-- 右上角启动新窗口(显示器) -->
     <el-tooltip class="box-item" effect="dark" content="启动新前端" placement="bottom-end">
-      <div class="run-back button" @click="run_back">
+      <div class="run-back button" @click="start">
         <AnimateDown :display="store_home.current_page == 'home'">
           <template #content>
             <el-icon :size="30">
@@ -18,38 +18,46 @@
 <script setup lang="ts">
 import { inject } from "vue"
 import AnimateDown from "@/components/animate_down/AnimateDown.vue"
+import { get_wsurl } from "@/utils/api_config.js";
 const path = window.require("path");
 
 const store_home: any = inject("store_home")
 
-// 启动后端
-const { PythonShell } = window.require("python-shell");
-const run_back = () => {
-  let be_path = path.dirname(store_home.py_path)
-  let be_script = "run_backterminal.py"
-  let options = {
-    mode: "text",
-    pythonOptions: ["-u"], // get print results in real-time
-    scriptPath: be_path,
-    // args: ["4091"],
-    args: ["win"],
-  };
-  let pyshell = new PythonShell(be_script, options);
-  pyshell.on("message", function (message: string) {
-    console.log(message);
-  });
-  pyshell.end(function (err: string) {
-    if (err) {
-      throw err;
+// 开始按钮
+const start = (button: any) => {
+  let cmd_text = "C:\\Users\\umas\\AppData\\Local\\Programs\\desktop_electron\\电脑配件.exe"
+  if (!store_home.is_dev){
+    cmd_text = path.dirname(store_home.py_path) // desktop_electron\\resources\\static\\backend_v2
+    cmd_text = path.dirname(cmd_text) // desktop_electron\\resources\\static
+    cmd_text = path.dirname(cmd_text) // desktop_electron\\resources
+    cmd_text = path.dirname(cmd_text) // desktop_electron
+    cmd_text = path.join(cmd_text,"电脑配件.exe")
+    console.log(cmd_text)
+  } 
+    
+
+    const send_data = {
+        function: "sp_auto_cmd",
+        terminal: false,
+        py_path: store_home.py_path,
+        cmd_text:cmd_text
     }
-    console.log("finished");
-  });
-}
+
+    console.log("ws connecting ...");
+
+    let wsdemo = new WebSocket(get_wsurl().local + "sp_searcher");
+    wsdemo.onopen = () => {
+        wsdemo.send(JSON.stringify({ function: "run", data: send_data }));
+    };
+    wsdemo.onmessage = (e) => {
+        console.log(e.data) ;
+    };
+};
 
 
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 // 右上角按钮统一格式
 div.button {
   cursor: pointer;
@@ -61,6 +69,6 @@ div.button {
 
 // 右上角后端按钮
 div.run-back :hover {
-  background-color: rgba(0, 0, 255, 0.06);
+  background-color: rgba(0, 123, 255, 0.127);
 }
 </style>

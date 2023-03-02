@@ -16,3 +16,16 @@ const isDevelopment = process.env.NODE_ENV !== "production";
         : path.join(process.cwd(), "resources/static")
     return get_path
 }
+
+/**
+ * 当前是否为开发状态,布尔返回
+ * @returns {boolean} @/static
+ */
+export function is_dev() {
+    let dev = false
+    const isDevelopment = process.env.NODE_ENV !== "production";
+        let get_path = isDevelopment
+            ? dev = true
+            : dev = false
+        return dev
+    }

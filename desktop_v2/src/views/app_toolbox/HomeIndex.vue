@@ -69,7 +69,7 @@
 import { provide, reactive, ref, onMounted, computed } from "vue"
 import type { ElScrollbar } from "element-plus";
 import type { Ref } from "vue"
-import { static_path } from "@/utils/utils_path.js"
+import { static_path,is_dev } from "@/utils/utils_path.js"
 import { get_wsurl } from "@/utils/api_config.js"
 import MainIndex from "./components/main/MainIndex.vue"
 import SettingsIndex from "./components/settings/SettingsIndex.vue"
@@ -144,6 +144,8 @@ const store_home = reactive({
   extract_display: true,
   // 背景图片序号
   bg_num: ref(Math.ceil(Math.random() * 33)),
+  // 当前是否为开发状态
+  is_dev:is_dev(),
   // 脚本调用位置,用于后端通信,通过设置页的switch切换开发目录和生产目录
   py_path: path.join(static_path(), "backend_v2/py_script"),
   // 功能列表,储存后端返回的index.json
@@ -207,10 +209,11 @@ div.body {
 div.button-abs {
   position: absolute;
   top: 10px;
-  // border: solid 1px blue;
   width: calc(100% - 15px);
+  height: 0; // 横向不遮挡其他元素
   display: flex;
   justify-content: flex-end; // 内部div右对齐
+  z-index: 0;
 
   div.button-box {
     position: relative;

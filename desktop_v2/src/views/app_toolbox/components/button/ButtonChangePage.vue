@@ -76,7 +76,7 @@ const state_change = () => {
 
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 // 右上角按钮统一格式
 div.button {
     cursor: pointer;

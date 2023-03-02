@@ -49,7 +49,7 @@ const run_back = () => {
 
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 // 右上角按钮统一格式
 div.button {
   cursor: pointer;
