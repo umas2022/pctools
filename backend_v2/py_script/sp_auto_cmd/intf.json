@@ -1,0 +1,24 @@
+{
+    "title": "远程 - 执行命令",
+    "group": {
+        "key": "auto",
+        "label": "自动化"
+    },
+    "info": [
+        "1.使用os.system直接执行命令",
+        "2.注释2"
+    ],
+    "require": [
+        {
+            "type": "input",
+            "data": {
+                "key": "cmd_text",
+                "label": "命令",
+                "value": "C:\\Users\\umas\\AppData\\Local\\Programs\\desktop_electron\\电脑配件.exe",
+                "annotation": [
+                    "别写错了"
+                ]
+            }
+        }
+    ]
+}

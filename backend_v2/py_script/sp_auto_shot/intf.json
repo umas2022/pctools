@@ -2,7 +2,7 @@
     "title": "点击 - 窗口截图",
     "group": {
         "key": "auto",
-        "label": "点击器"
+        "label": "自动化"
     },
     "info": [
         "1.给目标窗口截图",
