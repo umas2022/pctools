@@ -171,5 +171,7 @@ class SpSearcher(WebsocketConsumer):
 
         if not SearcherBasic().basic_data_check(get_data):
             return
+        
         called_func = getattr(SearcherFunction(), get_data["function"])
-        called_func(get_data["data"], self.send)
+        rc_th = threading.Thread(target=called_func,args=[get_data["data"],self.send])
+        rc_th.start()

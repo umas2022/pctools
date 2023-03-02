@@ -18,6 +18,7 @@ import type { Ref } from "vue"
 import { get_wsurl } from "@/utils/api_config.js";
 import { ElMessage } from "element-plus";
 import useSvgIcon from "@/components/svgbox/useSvgIcon.vue";
+import path from "path";
 
 const store_home: any = inject("store_home")
 
@@ -32,6 +33,9 @@ const pg_info = [
 const func_total = ref(0)
 
 const get_list = () => {
+    console.log(store_home.is_dev)
+    console.log(store_home.py_path)
+    console.log(path.basename(store_home.py_path))
     // 获取目录
     const send_data = {
         function: "get_list",

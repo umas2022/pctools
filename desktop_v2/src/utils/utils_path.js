@@ -9,11 +9,16 @@
  * @returns {string} @/static
  */
 export function static_path() {
-const path = require("path");
-const isDevelopment = process.env.NODE_ENV !== "production";
+    const path = require("path");
+    const isDevelopment = process.env.NODE_ENV !== "production";
     let get_path = isDevelopment
+        // 开发环境
         ? path.join(process.cwd(), "public/static")
-        : path.join(process.cwd(), "resources/static")
+        : path.basename(process.cwd()) == "py_server"
+            // 生产环境被后端启动,cwd()定位在\resources\static\backend_v2\py_server
+            ? path.dirname(path.dirname(process.cwd()))
+            // 生产环境直接启动
+            : path.join(process.cwd(), "resources/static")
     return get_path
 }
 
@@ -24,8 +29,8 @@ const isDevelopment = process.env.NODE_ENV !== "production";
 export function is_dev() {
     let dev = false
     const isDevelopment = process.env.NODE_ENV !== "production";
-        let get_path = isDevelopment
-            ? dev = true
-            : dev = false
-        return dev
-    }
+    let get_path = isDevelopment
+        ? dev = true
+        : dev = false
+    return dev
+}
