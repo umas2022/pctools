@@ -121,30 +121,27 @@ class Archive7z():
         elif (not self.overwrite) and os.path.isfile(double_path):
             state = "exist"
         else:
-            # 关键词匹配
-            if self.__check_keyword(name):
-                # 压缩方法分类
-                cp_method = ""
-                if self.method == "py7zr":
-                    cp_method = self.__cp_py7zr
-                elif self.method == "exe":
-                    cp_method = self.__cp_exe
-                else:
-                    logger.error("unexpected method : %s" % self.method)
-                    return
-                # 调用压缩函数
-                state = cp_method(methodPathIn, methodPathOut)
-                if self.double_cp:
-                    logger.info("%s\t%d/%d\t%s" % ("first_cp done : ", self.jetzt_done+1, self.total, methodPathIn))
-                    double_suffix = os.path.splitext(methodPathOut)[1]
-                    double_path = os.path.splitext(methodPathOut)[0] + "_cp2"
-                    double_path = double_path + double_suffix
-                    state = cp_method(methodPathOut,double_path)
-                    if state == "compress":
-                        os.remove(methodPathOut)
-                        state = "double_cp done : "
+            # 压缩方法分类
+            cp_method = ""
+            if self.method == "py7zr":
+                cp_method = self.__cp_py7zr
+            elif self.method == "exe":
+                cp_method = self.__cp_exe
             else:
-                state = "pass"
+                logger.error("unexpected method : %s" % self.method)
+                return
+            # 调用压缩函数
+            state = cp_method(methodPathIn, methodPathOut)
+            if self.double_cp:
+                logger.info("%s\t%d/%d\t%s" % ("first_cp done : ", self.jetzt_done+1, self.total, methodPathIn))
+                double_suffix = os.path.splitext(methodPathOut)[1]
+                double_path = os.path.splitext(methodPathOut)[0] + "_cp2"
+                double_path = double_path + double_suffix
+                state = cp_method(methodPathOut,double_path)
+                if state == "compress":
+                    os.remove(methodPathOut)
+                    state = "double_cp done : "
+
 
         self.jetzt_done += 1
         self.th_running -= 1
@@ -168,18 +165,19 @@ class Archive7z():
             full_in = full_in.replace("\\", "/")
             # 单文件名
             name = full_in.split("/")[-1]
-            # 对root的相对路径
-            name_upper_dir = full_in.replace(self.path_in + "/", "")
-            # 完整输出路径
-            full_out = os.path.join(self.path_out, name_upper_dir).replace("\\", "/")
-            full_out += ".7z"
-            # 开启新线程
-            new_th = threading.Thread(target=self.__cp_filter, args=[full_in, full_out], daemon=True)
-            new_th.start()
-            self.th_running += 1
-            # 等待组内有任务完成
-            while self.th_running == self.th_total:
-                time.sleep(1)
+            if self.__check_keyword(name):
+                # 对root的相对路径
+                name_upper_dir = full_in.replace(self.path_in + "/", "")
+                # 完整输出路径
+                full_out = os.path.join(self.path_out, name_upper_dir).replace("\\", "/")
+                full_out += ".7z"
+                # 开启新线程
+                new_th = threading.Thread(target=self.__cp_filter, args=[full_in, full_out], daemon=True)
+                new_th.start()
+                self.th_running += 1
+                # 等待组内有任务完成
+                while self.th_running == self.th_total:
+                    time.sleep(1)
 
         # 等待所有任务全部完成
         while not self.all_done_flag:

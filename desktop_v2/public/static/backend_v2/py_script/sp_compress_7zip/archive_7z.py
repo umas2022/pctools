@@ -122,9 +122,9 @@ class Archive7z():
             state = "exist"
         else:
             # 关键词匹配
-            cp_method = ""
             if self.__check_keyword(name):
                 # 压缩方法分类
+                cp_method = ""
                 if self.method == "py7zr":
                     cp_method = self.__cp_py7zr
                 elif self.method == "exe":
@@ -135,13 +135,14 @@ class Archive7z():
                 # 调用压缩函数
                 state = cp_method(methodPathIn, methodPathOut)
                 if self.double_cp:
-                    logger.info("%s\t%d/%d\t%s" % ("double_cp", self.jetzt_done+1, self.total, methodPathIn))
+                    logger.info("%s\t%d/%d\t%s" % ("first_cp done : ", self.jetzt_done+1, self.total, methodPathIn))
                     double_suffix = os.path.splitext(methodPathOut)[1]
                     double_path = os.path.splitext(methodPathOut)[0] + "_cp2"
                     double_path = double_path + double_suffix
                     state = cp_method(methodPathOut,double_path)
                     if state == "compress":
                         os.remove(methodPathOut)
+                        state = "double_cp done : "
             else:
                 state = "pass"
 
@@ -157,9 +158,10 @@ class Archive7z():
         logger.write("7zip compress")
         # 计数
         for full_in in Traverse().get_first_dir(self.path_in):
-            self.total += 1
             name = full_in.replace("\\", "/").split("/")[-1]
-            logger.info("counting : %d\t%s" % (self.total, name))
+            if self.__check_keyword(name):
+                self.total += 1
+                logger.info("counting : %d\t%s" % (self.total, name))
         logger.write("total : %d\n" % self.total)
         # 开始
         for full_in in Traverse().get_first_dir(self.path_in):
