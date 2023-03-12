@@ -178,6 +178,7 @@ div.text {
     text-align: left; // 文字左对齐
     white-space: nowrap; // 文字不换行
     margin-bottom: 5px;
+
 }
 
 

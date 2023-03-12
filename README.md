@@ -12,7 +12,7 @@
 ## Run
 - dev: run backend server  
 ```python run_backend.py```
-- dev: run electron server in develop mode
+- dev: run electron server (develop mode)
 ```python run_electron.py```
 
 ## Build
@@ -21,7 +21,7 @@
 
 ## F&Q
 - 初次部署
-    - 置页点击py环境初始化
+    - 设置页点击py环境初始化按钮
     - 如果按钮没反应,手动运行/backend_v2/py_script/utils_env_init/setup.py
 
 

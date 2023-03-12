@@ -133,6 +133,7 @@ div.body {
 <!-- 全局style -->
 <style lang="scss">
 * {
-  user-select: none; // 页面文字禁止被选中
+  // user-select: none; // 页面文字禁止被选中
+  // user-select: auto; // 允许被选中
 }
 </style>

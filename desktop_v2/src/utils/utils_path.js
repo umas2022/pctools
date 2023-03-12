@@ -24,7 +24,7 @@ export function static_path() {
 
 /**
  * 当前是否为开发状态,布尔返回
- * @returns {boolean} @/static
+ * @returns {boolean} 
  */
 export function is_dev() {
     let dev = false

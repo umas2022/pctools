@@ -44,6 +44,7 @@ div.app-settings {
   height: 100%;
   text-align: center;
   background-color: rgba(255, 0, 0, 0.05);
+  
 }
 </style>
 

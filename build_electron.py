@@ -31,3 +31,5 @@ os.chdir("./desktop_v2")
 os.system("npm run electron:build")
 
 
+
+

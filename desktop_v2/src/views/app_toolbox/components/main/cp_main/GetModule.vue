@@ -48,3 +48,8 @@ const get_intf = () => {
 }
 
 </script>
+<style scoped lang="scss">
+div.cp-module{
+    user-select: none; // 页面文字禁止被选中
+}
+</style>

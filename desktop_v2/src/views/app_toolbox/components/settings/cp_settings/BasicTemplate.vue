@@ -80,7 +80,7 @@ div.label {
     right: 50%;
     top: calc(50% - 11px);
     z-index: 0;
-
+    user-select: none; // 页面文字禁止被选中
     div.info-icon {
         display: inline-block;
         vertical-align: middle; // 垂直居中
@@ -97,6 +97,7 @@ div.control {
     left: 50%;
     top: calc(50% - 15px);
     z-index: 0;
+    user-select: none; // 页面文字禁止被选中
 }
 
 div.info {

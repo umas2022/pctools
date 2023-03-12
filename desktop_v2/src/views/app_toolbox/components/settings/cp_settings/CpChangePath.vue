@@ -23,14 +23,14 @@
 <script setup>
 import { onMounted, ref, inject } from "vue";
 import BasicTemplate from "./BasicTemplate.vue"
-import { static_path } from "@/utils/utils_path.js"
+import { static_path,is_dev } from "@/utils/utils_path.js"
 const path = window.require("path");
 
 
 const store_home = inject("store_home")
 // 开发模式port
 const setInfoFlagPort = ref(false);
-const setDevPath = ref(false);
+const setDevPath = ref(is_dev());
 
 const setFuncPort = () => {
     if (setDevPath.value == true) {

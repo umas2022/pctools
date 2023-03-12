@@ -98,6 +98,9 @@ onMounted(() => {
 })
 </script>
 <style lang="scss" scoped>
+div.cp-getlist{
+  user-select: none; // 页面文字禁止被选中
+}
 div.info-icon {
     display: flex;
     cursor: pointer;
