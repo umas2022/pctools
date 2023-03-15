@@ -6,7 +6,7 @@
     },
     "info": [
         "1.展示了后端intf.json中所有支持的类型",
-        "2.前端/desktop_v2/src/views/app_toolbox/components/main/cp_main/Interface.vue"
+        "2.前端/desktop_electron/src/views/app_toolbox/components/main/cp_main/Interface.vue"
     ],
     "require": [
         {

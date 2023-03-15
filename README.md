@@ -3,7 +3,7 @@
 ## Introduction
 - python basic function (backend_v2/py_script/)
 - Django backend server (backend_v2/py_server/)
-- Electron+Vue frontend (desktop_v2/)
+- Electron+Vue frontend (desktop_electron/)
 
 ## Environment
 - refer 1: ./backend_v2/py_script/utils_env_init
