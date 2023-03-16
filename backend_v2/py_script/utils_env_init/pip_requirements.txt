@@ -44,6 +44,7 @@ selenium
 piexif
 requests
 lxml
+BeautifulSoup4
 
 
 

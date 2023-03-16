@@ -1,0 +1,110 @@
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <!-- import Vue -->
+    <script src="https://unpkg.com/vue@next"></script>
+    <!-- import element CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/element-plus/dist/index.css">
+    <!-- import element JavaScript -->
+    <script src="https://unpkg.com/element-plus"></script>
+    <title>local viewer</title>
+</head>
+
+<body>
+    <div id="app">
+        <div class="header">
+            <h1>宝可梦搜索页</h1>
+        </div>
+        <div class="type">
+            <div class="line">
+                <span class="label">对方属性:</span>
+                <el-select style="width: 100px;"></el-select>
+                <el-select style="width: 100px;"></el-select>
+                <el-select style="width: 100px;"></el-select>
+                <el-select style="width: 100px;"></el-select>
+            </div>
+            <div class="line">
+                <span class="label">我方属性:</span>
+                <el-select style="width: 100px;"></el-select>
+                <el-select style="width: 100px;"></el-select>
+            </div>
+            <div class="line">
+                <span class="label">指定技能:</span>
+                <el-select style="width: 100px;">
+                    <el-option>诡计</el-option>
+                    <el-option>剑舞</el-option>
+                </el-select>
+                <el-select style="width: 100px;"></el-select>
+                <el-select style="width: 100px;"></el-select>
+                <el-select style="width: 100px;"></el-select>
+            </div>
+            <div class="line">
+                <span class="label">克制条件:</span>
+                <el-select style="width: 100px;" v-model="">
+                    <el-option>二倍防御</el-option>
+                    <el-option>四倍防御</el-option>
+                </el-select>
+                <el-select style="width: 100px;">
+                    <el-option>二倍伤害</el-option>
+                    <el-option>四倍伤害</el-option>
+                </el-select>
+            </div>
+            <div class="line">
+                <span class="label">附加条件:</span>
+                <el-select style="width: 100px;"></el-select>
+                <el-select style="width: 100px;"></el-select>
+            </div>
+            <div class="line">
+                <el-button>搜索</el-button>
+            </div>
+
+
+        </div>
+
+    </div>
+    </div>
+    <script>
+        const App = {
+            data() {
+                return {
+                    // 被选中的html文件
+                    html_file: "",
+                    // 文件列表
+                    file_list: ["test1.html", "test2.html"]
+
+                };
+            },
+            methods: {
+                load_html: function (selected) {
+                    this.html_file = selected
+                },
+                testbutton: function () {
+                    console.log("!")
+                }
+            }
+        };
+        const app = Vue.createApp(App);
+        app.use(ElementPlus);
+        app.mount("#app");
+    </script>
+</body>
+<style lang="scss">
+    div#app {
+        height: 100%;
+        text-align: center;
+    }
+
+    /* 标签文本 */
+    span.label {
+        padding: 10px;
+    }
+
+    /* 单行 */
+    div.line {
+        padding: 10px;
+    }
+</style>
+
+</html>
