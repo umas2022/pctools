@@ -9,25 +9,33 @@
     <link rel="stylesheet" href="https://unpkg.com/element-plus/dist/index.css">
     <!-- import element JavaScript -->
     <script src="https://unpkg.com/element-plus"></script>
-    <title>local viewer</title>
+    <!-- import user options -->
+    <script src="./js/options.js"></script>
+    <!-- import user functions -->
+    <script src="./js/filter.js"></script>
+    <title>poke search</title>
 </head>
 
 <body>
     <div id="app">
         <div class="header">
-            <h1>宝可梦搜索页</h1>
+            <h1>宝可梦速查</h1>
         </div>
         <div class="type">
             <div class="line">
                 <span class="label">对方属性:</span>
-                <el-select style="width: 100px;"></el-select>
+                <el-select style="width: 100px;">
+                    <el-option v-for="item in options_list.type_list">{{item}}</el-option>
+                </el-select>
                 <el-select style="width: 100px;"></el-select>
                 <el-select style="width: 100px;"></el-select>
                 <el-select style="width: 100px;"></el-select>
             </div>
             <div class="line">
                 <span class="label">我方属性:</span>
-                <el-select style="width: 100px;"></el-select>
+                <el-select style="width: 100px;">
+                    <el-option v-for="item in options_list.type_list">{{item}}</el-option>
+                </el-select>
                 <el-select style="width: 100px;"></el-select>
             </div>
             <div class="line">
@@ -69,10 +77,8 @@
         const App = {
             data() {
                 return {
-                    // 被选中的html文件
-                    html_file: "",
-                    // 文件列表
-                    file_list: ["test1.html", "test2.html"]
+                    // 选项列表
+                    options_list: options_list
 
                 };
             },
