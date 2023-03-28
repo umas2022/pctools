@@ -20,14 +20,16 @@ class SearchSuffix():
                 logger.error("key error: %s" % e)
                 return
 
-        self.suffix_list = []
+        self.suffix_list = {}
 
     def __suffix_filter(self, methodPathIn):
         '''处理方法：搜索所有后缀名'''
         name = os.path.split(methodPathIn)[-1]
         suffix = str(name).split(".")[-1]
         if not suffix in self.suffix_list:
-            self.suffix_list.append(suffix)
+            self.suffix_list[suffix] = 1
+        else:
+            self.suffix_list[suffix] += 1
         return suffix
 
     def run(self):
@@ -40,4 +42,8 @@ class SearchSuffix():
             full_in = os.path.normpath(full_in)
             state = self.__suffix_filter(full_in)
             logger.info("%s\t%d\t%s" % (state, jetzt, full_in))
-        logger.info("all suffix: %s" % str(self.suffix_list))
+        logger.info("========== ↓ result ↓ ==========")
+        for suffix in self.suffix_list:
+            logger.info("%s : %d" % (suffix,self.suffix_list[suffix]))
+        logger.info("========== ↑ result ↑ ==========")
+        
