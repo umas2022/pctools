@@ -65,11 +65,37 @@
         {
             "type": "input",
             "data": {
+                "key": "location",
+                "label": "主要字段位置",
+                "value": "",
+                "placeholder": "int型输入,支持负数,置空不筛选位置",
+                "annotation": [
+                    "location=[0,1,2, ... ,-2,-1]",
+                    "负数的匹配计入keyword长度,如在'file.txt'中匹配'.tx'结果是-2,匹配'.txt'结果是-1"
+                ]
+            }
+        },
+        {
+            "type": "input",
+            "data": {
                 "key": "keyword_and",
                 "label": "次要字段",
                 "value": "",
                 "placeholder": "置空不使用次要字段",
                 "annotation": "与主要字段同时存在时判断成立,即交集;不提供并集功能,建议程序跑两遍"
+            }
+        },
+        {
+            "type": "input",
+            "data": {
+                "key": "location_and",
+                "label": "次要字段位置",
+                "value": "",
+                "placeholder": "int型输入,支持负数,置空不筛选位置",
+                "annotation": [
+                    "location=[0,1,2, ... ,-2,-1]",
+                    "负数的匹配计入keyword长度,如在'file.txt'中匹配'.tx'结果是-2,匹配'.txt'结果是-1"
+                ]
             }
         },
         {

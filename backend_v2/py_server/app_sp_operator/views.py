@@ -101,7 +101,6 @@ class SearcherFunction():
         批处理函数调用
         必要参数: get_data.function, get_data.py_path, get_data.terminal, get_data.其他参数
         '''
-        logger.info("get data: %s" % str(get_data))
         # 主要功能函数
         get_function = get_data["function"]
         # 由附加按钮触发的子函数

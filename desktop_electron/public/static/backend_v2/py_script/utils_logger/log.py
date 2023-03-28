@@ -53,6 +53,11 @@ class logRaw:
 
     def set_path(self, path):
         '''重设路径'''
+        if path == "":
+            return
+        # 使用normpath会把空字符串转为'.'所以也要排除
+        if path == ".":
+            return
         self.path = path
         self.set_log_file()
 
