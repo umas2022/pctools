@@ -25,7 +25,7 @@ const txtData_2 = ref(".txt file load failed");
 const txt_path = ref(path.join(__static, "static/test/data.txt"));
 onMounted(() => {
   fs.readFile(
-    "D:\\s-linux\\project\\onebox\\desktop_electron\\public\\static\\test\\data.txt",
+    "D:\\s-code\\self\\pctools\\desktop_electron\\public\\static\\test\\data.txt",
     (err, data) => {
       txtData_1.value = data;
       console.log("err:", err);

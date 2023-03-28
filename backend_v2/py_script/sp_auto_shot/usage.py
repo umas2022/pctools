@@ -5,7 +5,7 @@ from sp_auto_static import MainClass
 
 
 json_set = {
-    "path_cash": "D:\\s-linux\\project\\test_file\\cash",
+    "path_cash": "D:\\s-code\\test\\cash",
     "win_name":"碧蓝航线",
     "interval_time":1
 }

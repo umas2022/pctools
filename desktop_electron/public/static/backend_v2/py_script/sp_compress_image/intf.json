@@ -14,7 +14,7 @@
             "data":{
                 "key": "path_in",
                 "label": "输入路径",
-                "value": "D:\\s-linux\\project\\test_file\\test_in"
+                "value": "D:\\s-code\\test\\test_in"
             }
         },
         {
@@ -22,7 +22,7 @@
             "data":{
                 "key": "path_out",
                 "label": "输出路径",
-                "value": "D:\\s-linux\\project\\test_file\\test_out"
+                "value": "D:\\s-code\\test\\test_out"
             }
         },{
             "type": "input",
@@ -39,7 +39,7 @@
             "data":{
                 "key": "path_log",
                 "label": "日志路径",
-                "value": "D:\\s-linux\\project\\test_file\\test_log",
+                "value": "D:\\s-code\\test\\test_log",
                 "placeholder":"置空不使用日志",
                 "annotation": "日志默认只记录error和warning"
             }

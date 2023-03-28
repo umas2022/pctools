@@ -73,7 +73,7 @@ const path = window.require("path")
 // const json_dir = process.env.NODE_ENV === "development"
 //     ? path.join(process.cwd(), "public/static/python/auto_click/preset_json")
 //     : path.join(process.cwd(), "resources/static/python/auto_click/preset_json")
-const json_dir = "D:\\s-linux\\project\\test_file\\preset_json"
+const json_dir = "D:\\s-code\\test\\preset_json"
 const json_path_list = ref()
 const json_name_list = ref()
 const load_json = () => {

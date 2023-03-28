@@ -38,7 +38,7 @@
             "data": {
                 "key": "path_in",
                 "label": "win路径",
-                "value": "D:\\s-linux\\project\\test_file\\test_in",
+                "value": "D:\\s-code\\test\\test_in",
                 "annotation": "正斜杠反斜杠无所谓,尾部加不加斜杠无所谓"
             }
         },

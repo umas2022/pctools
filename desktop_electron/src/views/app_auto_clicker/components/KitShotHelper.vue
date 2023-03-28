@@ -35,7 +35,7 @@ const py_path =
 const input_form = reactive({
   // window: "碧蓝航线", // 中文乱码问题暂未解决
   window: "碧蓝航线",
-  save_path: "D:\\s-linux\\project\\test_file\\shot_save",
+  save_path: "D:\\s-code\\test\\shot_save",
   save_name: "test",
   name_suffix: ".jpg",
 });

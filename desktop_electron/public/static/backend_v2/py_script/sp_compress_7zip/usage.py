@@ -6,8 +6,8 @@
 
 # json_set = {
 #     "method":"py7zr",
-#     "path_in": r'D:\s-linux\project\test_file\test_in',
-#     "path_out": r'D:\s-linux\project\test_file\test_out',
+#     "path_in": r'',
+#     "path_out": r'',
 #     "path_log": r"",
 #     "path_7z": r"D:\\p-program\\7zip\\7-Zip\\7z.exe",
 #     "password": "umas1970",

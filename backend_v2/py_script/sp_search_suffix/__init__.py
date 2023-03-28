@@ -1,0 +1,1 @@
+from sp_search_suffix.search_suffix import SearchSuffix as MainClass

@@ -33,7 +33,7 @@ const py_path =
       );
 
 const input_form = reactive({
-  save_path: "D:\\s-linux\\project\\test_file\\shot_save",
+  save_path: "D:\\s-code\\test\\shot_save",
   save_name_1: "test",
   name_suffix_1: ".jpg",
   save_name_2: "test2",

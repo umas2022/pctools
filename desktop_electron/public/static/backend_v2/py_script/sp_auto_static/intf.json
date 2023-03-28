@@ -14,7 +14,7 @@
             "data": {
                 "key": "path_cash",
                 "label": "缓存路径",
-                "value": "D:\\s-linux\\project\\test_file\\cash",
+                "value": "D:\\s-code\\test\\cash",
                 "annotation": [
                     "用以保存临时截图文件"
                 ]

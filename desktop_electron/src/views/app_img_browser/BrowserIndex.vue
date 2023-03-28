@@ -68,11 +68,11 @@ const input_form = reactive({
   path_browse: "D:\\p-Huawei\\壁纸横_local",
   path_save_list: [
     {
-      path: "D:\\s-linux\\project\\test_file\\test_in",
+      path: "D:\\s-code\\test\\test_in",
       label: "o-1",
     },
     {
-      path: "D:\\s-linux\\project\\test_file\\test_out",
+      path: "D:\\s-code\\test\\test_out",
       label: "o-2",
     },
   ],

@@ -1,12 +1,12 @@
 {
-    "title": "拷贝 - 拷贝合并",
+    "title": "搜索 - 所有后缀",
     "group":{
-        "key":"copy",
-        "label":"复制"
+        "key":"search",
+        "label":"搜索"
     } ,
     "info": [
-        "1.文件名合并上级目录名",
-        "2.一行注释"
+        "1.输入路径下所有文件类型",
+        "2.如果文件没有后缀名,则返回完整文件名"
     ],
     "require": [
         {
@@ -16,14 +16,6 @@
                 "label": "输入路径",
                 "value": "D:\\s-code\\test\\test_in",
                 "annotation": "一行注释"
-            }
-        },
-        {
-            "type": "input",
-            "data": {
-                "key": "path_out",
-                "label": "输出路径",
-                "value": "D:\\s-code\\test\\test_out"
             }
         },
         {

@@ -14,7 +14,7 @@
             "data": {
                 "key": "save_path",
                 "label": "保存路径",
-                "value": "D:\\s-linux\\project\\test_file\\save",
+                "value": "D:\\s-code\\test\\save",
                 "annotation": [
                     "用以保存截图文件"
                 ]

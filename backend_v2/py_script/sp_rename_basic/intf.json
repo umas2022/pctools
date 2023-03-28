@@ -41,7 +41,7 @@
             "data": {
                 "key": "path_in",
                 "label": "目标路径",
-                "value": "D:\\s-linux\\project\\test_file\\test_in",
+                "value": "D:\\s-code\\test\\test_in",
                 "annotation": "这里又是一行注释"
             }
         },

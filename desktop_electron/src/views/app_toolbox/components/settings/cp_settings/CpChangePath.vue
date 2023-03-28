@@ -34,7 +34,7 @@ const setDevPath = ref(is_dev());
 
 const setFuncPort = () => {
     if (setDevPath.value == true) {
-        store_home.py_path = "D:\\s-linux\\project\\pctools\\backend_v2\\py_script"
+        store_home.py_path = "D:\\s-code\\self\\pctools\\backend_v2\\py_script"
     } else {
         store_home.py_path = path.join(static_path(), "backend_v2/py_script")
     }
