@@ -8,7 +8,9 @@ create: 2023.3.29
 
 import os
 import subprocess
-
+import cv2
+import numpy as np
+import pyautogui
 from utils_logger.log import logger_re as logger
 from utils_screenshot.shot_func import ShotFunc
 from PIL import ImageGrab
@@ -48,50 +50,33 @@ class AutoTrans():
         # 当前图片坐标
         self.pos_save = [0, 0, 0, 0]
 
+
     def startShot(self):
         '''开始截图'''
-        self.img = ImageGrab.grab()
-        screen_path = os.path.join(self.save_path, "screen.jpg")
-        self.img.save(screen_path)  # 全屏截图
-        self.img = cv2.imread(screen_path)
-        cv2.namedWindow("img_window")
-        cv2.setMouseCallback("img_window", self.onMouse)
-        cv2.imshow("img_window", self.img)
-        cv2.moveWindow("img_window", 0, 0)
-        cv2.waitKey(0)
+        # 获取屏幕截图
+        screenshot = np.array(pyautogui.screenshot())
+        # 将RGB模式的屏幕截图转换为BGR模式
+        screenshot = cv2.cvtColor(screenshot, cv2.COLOR_RGB2BGR)    
 
-        os.remove(screen_path)
+        # 创建全屏窗口
+        cv2.namedWindow("Screenshot", cv2.WINDOW_NORMAL)
+        cv2.setWindowProperty("Screenshot", cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
+        
+        # 显示屏幕截图
+        cv2.imshow("Screenshot", screenshot)
 
-    def onMouse(self, event, x, y, flags, param):
-        '''回调-在cv2图片窗口中移动鼠标触发'''
-        img2 = self.img.copy()
+        # 等待用户选择区域
+        region = cv2.selectROI("Screenshot", screenshot, fromCenter=False, showCrosshair=False)
+        cv2.destroyAllWindows()
 
-        if event == cv2.EVENT_LBUTTONDOWN:  # 左键点击
-            self.pointt1 = (x, y)
-            self.pos_save[0] = self.pointt1[0]
-            self.pos_save[2] = self.pointt1[1]
-            cv2.imshow("img_window", img2)
+        # 获取用户选择的区域
+        left, top, width, height = region
 
-        elif event == cv2.EVENT_MOUSEMOVE and (flags & cv2.EVENT_FLAG_LBUTTON):  # 左键按住拖曳
-            cv2.rectangle(img2, self.pointt1, (x, y), (255, 0, 0), 4)
-            cv2.imshow("img_window", img2)
+        # 截取用户选择的区域
+        screenshot = screenshot[top:top+height, left:left+width]
 
-        elif event == cv2.EVENT_LBUTTONUP:  # 左键松开
-            self.pointt2 = (x, y)
-            self.pos_save[1] = self.pointt2[0]
-            self.pos_save[3] = self.pointt2[1]
-
-            cv2.rectangle(img2, self.pointt1, self.pointt2, (255, 0, 0), 4)
-            cv2.imshow("img_window", img2)
-            min_x = min(self.pointt1[0], self.pointt2[0])
-            min_y = min(self.pointt1[1], self.pointt2[1])
-            width = abs(self.pointt1[0] - self.pointt2[0])
-            height = abs(self.pointt1[1] - self.pointt2[1])
-            global cut_img
-            cut_img = self.img[min_y:min_y + height, min_x:min_x + width]
-            self.jpg_path = os.path.join(self.save_path, self.jpg_name)
-            cv2.imwrite(self.jpg_path, cut_img)
-            cv2.destroyAllWindows()
+        # 保存截图
+        cv2.imwrite(self.jpg_path, screenshot)
 
     def ocr_trans(self):
         '''ocr和翻译主函数'''
