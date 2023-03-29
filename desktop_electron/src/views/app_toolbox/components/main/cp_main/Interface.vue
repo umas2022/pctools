@@ -316,6 +316,7 @@ const test_button = () => {
 div.intf-main {
     position: relative;
     text-align: center;
+    user-select: none; // 页面文字禁止被选中
 }
 
 // dialog弹窗
