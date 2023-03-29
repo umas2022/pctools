@@ -13,6 +13,9 @@
 
 - 所有的log_path都少了一句logger.raw_logger.set_path(self.path_log),这里参考remove_keyword的写法,注意如果为空,normpath函数会转换为'.',还要再加一个判断
 
+### 2023.3.29
+- qt的框架
+
 ### 2023.3.28
 - 整理了一下硬盘,项目换到s-code文件夹下面了
 - 新增搜索所有后缀名功能
