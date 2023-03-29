@@ -1,0 +1,1 @@
+from sp_auto_trans.auto_trans import AutoTrans as MainClass

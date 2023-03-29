@@ -109,7 +109,6 @@ class RemoveKeyword():
         logger.info("remove keyword function start ...")
         logger.write("remove keyword")
         # 分类
-        total = 0
         tarverse_func = ""
         if self.target == "dir":
             tarverse_func = Traverse().get_dir
@@ -118,12 +117,6 @@ class RemoveKeyword():
         else:
             logger.error("remove_keyword : unexpected target - %s" % self.target)
             return
-        # 计数
-        for full_in in tarverse_func(self.path_in):
-            total += 1
-            name = full_in.replace("\\", "/").split("/")[-1]
-            logger.info("counting : %d\t%s" % (total, name))
-        logger.write("total : %d\n" % total)
         # 开始
         jetzt = 0
         del_count = 0
@@ -131,8 +124,8 @@ class RemoveKeyword():
             jetzt += 1
             full_in = full_in.replace("\\", "/")
             state = self.__remove_filter(full_in)
-            logger.info("%s\t%d/%d\t%s" % (state, jetzt, total, full_in))
+            logger.info("%s\t%d\t%s" % (state, jetzt, full_in))
             if state == "remove" or state == "move":
                 del_count += 1
-        logger.info("total: %d" % total)
+        logger.info("total: %d" % jetzt)
         logger.info("delete: %d" % del_count)
