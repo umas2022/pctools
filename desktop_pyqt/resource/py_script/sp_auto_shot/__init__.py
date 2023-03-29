@@ -1,0 +1,1 @@
+from sp_auto_shot.auto_shot import AutoShot as MainClass

@@ -1,0 +1,63 @@
+{
+    "title": "拷贝 - 筛选拷贝",
+    "group": {
+        "key": "copy",
+        "label": "复制"
+    },
+    "info": [
+        "1.所有文件及其结构原样拷贝",
+        "2.输入输出路径中的同名文件视为同一文件, 不考虑内容更新"
+    ],
+    "require": [
+        {
+            "type": "input",
+            "data": {
+                "key": "path_in",
+                "label": "输入路径",
+                "value": "D:\\s-code\\test\\test_in",
+                "annotation": "一行注释"
+            }
+        },
+        {
+            "type": "input",
+            "data": {
+                "key": "path_out",
+                "label": "输出路径",
+                "value": "D:\\s-code\\test\\test_out"
+            }
+        },
+        {
+            "type": "input",
+            "data": {
+                "key": "path_log",
+                "label": "日志路径",
+                "value": "",
+                "placeholder": "置空不使用log文件",
+                "annotation": "日志默认只记录error和warning"
+            }
+        },
+        {
+            "type": "input",
+            "data": {
+                "key": "keyword",
+                "label": "筛选关键字",
+                "value": "",
+                "placeholder": "置空不使用关键字筛选",
+                "annotation": "只复制包含指定关键词的文件,匹配包含后缀名"
+            }
+        },
+        {
+            "type": "input",
+            "data": {
+                "key": "location",
+                "label": "关键字位置",
+                "value": "",
+                "placeholder": "int型输入,支持负数,置空不筛选位置",
+                "annotation": [
+                    "location=[0,1,2, ... ,-2,-1]",
+                    "负数的匹配计入keyword长度,如在'file.txt'中匹配'.tx'结果是-2,匹配'.txt'结果是-1"
+                ]
+            }
+        }
+    ]
+}

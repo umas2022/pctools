@@ -1,0 +1,139 @@
+{
+    "title": "重命名 - 基本方法合集",
+    "group":{
+        "key":"rename",
+        "label":"重命名"
+    } ,
+    "info": [
+        "1.懒得写",
+        "2.一行注释"
+    ],
+    "require": [
+        {
+            "type": "select",
+            "data": {
+                "key": "use_func",
+                "label": "选择方法",
+                "value": "add_prefix",
+                "option": [
+                    {
+                        "value": "add_prefix",
+                        "label": "添加前缀"
+                    },
+                    {
+                        "value": "del_prefix",
+                        "label": "删除前缀"
+                    },
+                    {
+                        "value": "replace_key",
+                        "label": "关键字替换"
+                    },
+                    {
+                        "value": "num_array",
+                        "label": "序号命名"
+                    }
+                ],
+                "annotation": "这里是一行注释"
+            }
+        },
+        {
+            "type": "input",
+            "data": {
+                "key": "path_in",
+                "label": "目标路径",
+                "value": "D:\\s-code\\test\\test_in",
+                "annotation": "这里又是一行注释"
+            }
+        },
+        {
+            "type": "input",
+            "data": {
+                "key": "path_log",
+                "label": "日志路径",
+                "placeholder": "置空不使用log",
+                "value": "",
+                "annotation": [
+                    "日志默认只记录error和warning"
+                ]
+            }
+        },
+        {
+            "type": "select",
+            "data": {
+                "key": "target",
+                "label": "目标对象",
+                "value": "file",
+                "option": [
+                    {
+                        "value": "file",
+                        "label": "文件"
+                    },
+                    {
+                        "value": "dir",
+                        "label": "文件夹"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "input",
+            "show": {
+                "value": false,
+                "listen": {
+                    "key": "use_func",
+                    "value": "add_prefix"
+                }
+            },
+            "data": {
+                "key": "add_in",
+                "label": "输入前缀",
+                "value": ""
+            }
+        },
+        {
+            "type": "input",
+            "show": {
+                "value": false,
+                "listen": {
+                    "key": "use_func",
+                    "value": "del_prefix"
+                }
+            },
+            "data": {
+                "key": "add_in",
+                "label": "输入前缀",
+                "value": ""
+            }
+        },
+        {
+            "type": "input",
+            "show": {
+                "value": false,
+                "listen": {
+                    "key": "use_func",
+                    "value": "replace_key"
+                }
+            },
+            "data": {
+                "key": "add_in",
+                "label": "目标字段",
+                "value": ""
+            }
+        },
+        {
+            "type": "input",
+            "show": {
+                "value": false,
+                "listen": {
+                    "key": "use_func",
+                    "value": "replace_key"
+                }
+            },
+            "data": {
+                "key": "add_in_2",
+                "label": "替换为",
+                "value": ""
+            }
+        }
+    ]
+}

@@ -1,0 +1,127 @@
+{
+    "title": "删除 - 删除关键字",
+    "group": {
+        "key": "remove",
+        "label": "删除"
+    },
+    "info": [
+        "bug1.文件数量过大时(大概6w左右)后端websocket会直接断开导致程序提前结束,暂未解决",
+        "2.一行注释"
+    ],
+    "require": [
+        {
+            "type": "input",
+            "data": {
+                "key": "path_in",
+                "label": "输入路径",
+                "value": "D:\\s-code\\test\\test_in"
+            }
+        },
+        {
+            "type": "input",
+            "data": {
+                "key": "path_log",
+                "label": "日志路径",
+                "value": "",
+                "placeholder": "置空不使用log文件",
+                "annotation": [
+                    "日志默认只记录error和warning",
+                    "在日志路径下的目标会被忽略"
+                ]
+            }
+        },
+        {
+            "type": "select",
+            "data": {
+                "key": "target",
+                "label": "目标对象",
+                "value": "file",
+                "option": [
+                    {
+                        "value": "file",
+                        "label": "文件"
+                    },
+                    {
+                        "value": "dir",
+                        "label": "文件夹"
+                    }
+                ],
+                "annotation": [
+                    "暂时还没做对于指定后缀名的支持,如果有需要可以使用次要字段",
+                    "目前还没有限定字段的位置,有可能误删如file.txt.jpg类的文件"
+                ]
+            }
+        },
+        {
+            "type": "input",
+            "data": {
+                "key": "keyword",
+                "label": "主要字段",
+                "value": "",
+                "placeholder": "置空匹配所有文件",
+                "annotation": "字段包含后缀名,如输入.txt可以删除所有txt文件"
+            }
+        },
+        {
+            "type": "input",
+            "data": {
+                "key": "location",
+                "label": "主要字段位置",
+                "value": "",
+                "placeholder": "int型输入,支持负数,置空不筛选位置",
+                "annotation": [
+                    "location=[0,1,2, ... ,-2,-1]",
+                    "负数的匹配计入keyword长度,如在'file.txt'中匹配'.tx'结果是-2,匹配'.txt'结果是-1"
+                ]
+            }
+        },
+        {
+            "type": "input",
+            "data": {
+                "key": "keyword_and",
+                "label": "次要字段",
+                "value": "",
+                "placeholder": "置空不使用次要字段",
+                "annotation": "与主要字段同时存在时判断成立,即交集;不提供并集功能,建议程序跑两遍"
+            }
+        },
+        {
+            "type": "input",
+            "data": {
+                "key": "location_and",
+                "label": "次要字段位置",
+                "value": "",
+                "placeholder": "int型输入,支持负数,置空不筛选位置",
+                "annotation": [
+                    "location=[0,1,2, ... ,-2,-1]",
+                    "负数的匹配计入keyword长度,如在'file.txt'中匹配'.tx'结果是-2,匹配'.txt'结果是-1"
+                ]
+            }
+        },
+        {
+            "type": "switch",
+            "data": {
+                "key": "cut_mode",
+                "label": "试错模式",
+                "value": false,
+                "annotation": "开启后目标将被移动到试错目录下,而不是直接删除"
+            }
+        },
+        {
+            "type": "input",
+            "show": {
+                "value": false,
+                "listen": {
+                    "key": "cut_mode",
+                    "value": true
+                }
+            },
+            "data": {
+                "key": "cut_path",
+                "label": "试错路径",
+                "value": "",
+                "placeholder": "置空不使用试错"
+            }
+        }
+    ]
+}

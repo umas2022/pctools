@@ -27,6 +27,9 @@ def resource_path(relative_path):
 
 - 参考  
 https://www.pythonguis.com/tutorials/pyqt6-creating-your-first-window/
+- 所有的Widgets
+https://doc.qt.io/qtforpython/PySide6/QtWidgets/index.html
+
 
 
 - 简单窗口  

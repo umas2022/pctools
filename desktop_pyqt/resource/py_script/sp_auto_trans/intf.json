@@ -1,0 +1,81 @@
+{
+    "title": "点击 - 截图翻译",
+    "group": {
+        "key": "auto",
+        "label": "自动化"
+    },
+    "info": [
+        "1.ocr使用谷歌开源pytesseract,效果一般,截图时尽量只截文字",
+        "2.翻译使用deep_translator的谷歌翻译接口",
+        "3.截图功能来自于2021.9.20 shotHelper项目",
+        "4.截图中的文本会被去除空格和换行符拼接为一句话,所以不要一次截两段文字"
+    ],
+    "require": [
+        {
+            "type": "input",
+            "data": {
+                "key": "save_path",
+                "label": "保存路径",
+                "value": "D:\\s-code\\test\\save",
+                "annotation": [
+                    "用以保存临时截图文件"
+                ]
+            }
+        },
+        {
+            "type": "input",
+            "data": {
+                "key": "path_log",
+                "label": "日志路径",
+                "value": "",
+                "placeholder": "置空不使用log文件",
+                "annotation": [
+                    "日志默认只记录error和warning"
+                ]
+            }
+        },
+        {
+            "type": "select",
+            "data": {
+                "key": "target",
+                "label": "目标对象",
+                "value": "jpn_vert",
+                "option": [
+                    {
+                        "value": "chi_sim",
+                        "label": "简体中文"
+                    },
+                    {
+                        "value": "jpn",
+                        "label": "日文"
+                    },
+                    {
+                        "value": "jpn_vert",
+                        "label": "日文竖排"
+                    }
+                ],
+                "annotation": [
+                    "pytesseract有一个函数是可以查看所有支持的语言的,但当时忘了做笔记",
+                    "日文竖排为从右到左,漫画顺序"
+                ]
+            }
+        },
+        {
+            "type": "select",
+            "data": {
+                "key": "translate",
+                "label": "翻译语言",
+                "value": "zh-CN",
+                "option": [
+                    {
+                        "value": "zh-CN",
+                        "label": "简体中文"
+                    }
+                ],
+                "annotation": [
+                    "只写了谷歌翻译,其他的懒得做了;deep_translator还支持很多翻译引擎"
+                ]
+            }
+        }
+    ]
+}

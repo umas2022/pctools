@@ -1,62 +1,39 @@
-import tkinter as tk
-import pyautogui
+import sys
+from PyQt6.QtCore import Qt
+from PyQt6.QtWidgets import QApplication, QWidget, QVBoxLayout, QGroupBox, QHBoxLayout, QPushButton
 
+class Example(QWidget):
+    def __init__(self):
+        super().__init__()
 
-def on_mouse_down(event):
-    global x1, y1
-    x1, y1 = event.x, event.y
+        self.initUI()
 
-def on_mouse_up(event):
-    global x2, y2
-    x2, y2 = event.x, event.y
-    root.destroy()
+    def initUI(self):
+        # 创建一个垂直布局
+        vbox = QVBoxLayout()
 
-def take_screenshot(left, top, width, height):
-    screenshot = pyautogui.screenshot()
-    screenshot = screenshot.crop((left, top, left+width, top+height))
-    screenshot.save('screenshot.png')
+        # 创建一个QGroupBox并将其添加到vbox中
+        groupbox = QGroupBox("Group Box")
+        vbox.addWidget(groupbox)
 
-root = tk.Tk()
-root.attributes('-fullscreen', True)
-root.configure(bg='#808080')
+        # 在QGroupBox中创建一个水平布局
+        hbox = QHBoxLayout()
+        groupbox.setLayout(hbox)
 
-canvas = tk.Canvas(root, bg='', highlightthickness=0)
-canvas.pack(fill=tk.BOTH, expand=True)
+        # 创建两个按钮并将其添加到水平布局中
+        btn1 = QPushButton("Button 1")
+        hbox.addWidget(btn1)
+        btn2 = QPushButton("Button 2")
+        hbox.addWidget(btn2)
 
-canvas.bind('<Button-1>', on_mouse_down)
-canvas.bind('<ButtonRelease-1>', on_mouse_up)
+        # 设置窗口的布局
+        self.setLayout(vbox)
 
-root.mainloop()
+        self.setGeometry(300, 300, 300, 150)
+        self.setWindowTitle('QGroupBox Example')
+        self.show()
 
-if x1 < x2:
-    left, width = x1, x2 - x1
-else:
-    left, width = x2, x1 - x2
-
-if y1 < y2:
-    top, height = y1, y2 - y1
-else:
-    top, height = y2, y1 - y2
-
-screenshot = pyautogui.screenshot()
-screenshot = screenshot.crop((left, top, left+width, top+height))
-
-mask = tk.Toplevel()
-mask.attributes('-fullscreen', True)
-mask.overrideredirect(True)
-mask.configure(bg='#808080')
-mask.geometry(f'{root.winfo_screenwidth()}x{root.winfo_screenheight()}+0+0')
-
-canvas = tk.Canvas(mask, bg='', highlightthickness=0)
-canvas.pack(fill=tk.BOTH, expand=True)
-
-canvas.create_rectangle(0, 0, root.winfo_screenwidth(), root.winfo_screenheight(), fill='#808080')
-
-canvas.create_rectangle(left, top, left+width, top+height, outline='white', width=2)
-
-screenshot_image = tk.PhotoImage(data=screenshot.tobytes())
-canvas.create_image(left, top, anchor='nw', image=screenshot_image)
-
-take_screenshot(left, top, width, height)
-
-mask.destroy()
+if __name__ == '__main__':
+    app = QApplication(sys.argv)
+    ex = Example()
+    sys.exit(app.exec())

@@ -27,9 +27,11 @@ html = markdown.markdown(text)
 output_file = codecs.open("./desktop_electron/public/static/info/develop.html", mode="w", encoding="utf-8")
 output_file.write(html)
 
+# 执行打包命令
 os.chdir("./desktop_electron")
 os.system("npm run electron:build")
 
-
+# 删除python文件 # 直接在这里删除的话打包命令还没运行完
+# rmtree("./desktop_electron/public/static/backend_v2")
 
 
