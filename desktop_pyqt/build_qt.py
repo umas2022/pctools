@@ -7,8 +7,7 @@ import os
 from shutil import  rmtree
 from shutil import copytree, copyfile
 
-# op_name = "电脑配件qt"
-op_name = "window"
+op_name = "电脑配件qt版"
 
 # 拷贝python文件
 print("copy backend_v2 file ...")

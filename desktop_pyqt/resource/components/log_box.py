@@ -1,10 +1,15 @@
 from PyQt6.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QPushButton, QTextEdit, QGroupBox
 
+from resource.utils.contact import Communicate
 
 class LogBox(QWidget):
 
     def __init__(self):
         super(LogBox, self).__init__()
+
+        self.tomain = Communicate()
+        self.tomain.dataChanged.connect(self.msg_main)
+
         self.layout = QVBoxLayout()
         vbox = QVBoxLayout()
 
@@ -30,3 +35,8 @@ class LogBox(QWidget):
         for i in range(10):
             self.log_text = self.log_text + str(i) + "\n"
             self.log_box.setPlainText(self.log_text)
+
+
+    def msg_main(self,data):
+        '''main_func发来消息'''
+        print(data)
