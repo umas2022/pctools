@@ -1,4 +1,4 @@
-from PyQt6.QtWidgets import QGroupBox, QWidget, QStackedLayout, QVBoxLayout, QHBoxLayout, QLabel, QLineEdit, QCheckBox, QComboBox,QPushButton
+from PyQt6.QtWidgets import QGroupBox, QWidget, QStackedLayout, QVBoxLayout, QHBoxLayout, QLabel, QLineEdit, QCheckBox, QComboBox, QPushButton
 from PyQt6.QtCore import Qt
 from resource.utils.contact import Communicate
 from resource.utils.upath import resource_path
@@ -10,6 +10,12 @@ import importlib
 import sys
 import subprocess
 import threading
+from resource.utils.stdout_catcher import *
+
+py_path = resource_path("py_script")
+sys.path.append(py_path)
+from utils_logger.log import logger_re as logger
+
 
 class MainFunc(QWidget):
 
@@ -17,7 +23,7 @@ class MainFunc(QWidget):
         super(MainFunc, self).__init__()
 
         # 通信
-        self.module_name=""
+        self.module_name = ""
         self.intf = ""
         self.tolist = Communicate()
         self.tolist.dataChanged.connect(self.refresh)
@@ -53,6 +59,15 @@ class MainFunc(QWidget):
         self.intf = json.load(open(intf_file_path, "r", encoding="utf-8"))
         self.intf = json.dumps(self.intf)
         self.intf = json.loads(self.intf)
+        add_terminal = {
+            "type": "switch",
+            "data": {
+                "key": "terminal",
+                "label": "使用终端",
+                "value": True
+            }
+        }
+        self.intf["require"].append(add_terminal)
 
         # 设置新groupbox
         newbox = QGroupBox(self.intf["title"])
@@ -88,9 +103,9 @@ class MainFunc(QWidget):
                 placeholder = item['data']['placeholder'] if "placeholder" in item['data']else "请输入 ..."
                 txtl.setPlaceholderText(placeholder)
                 text = item['data']['value'] if "value" in item['data']else ""
-                txtl.textChanged.connect(lambda text,item = item: self.on_lineedit_changed(text,item))
+                txtl.textChanged.connect(lambda text, item=item: self.on_lineedit_changed(text, item))
                 txtl.setText(text)
-                
+
                 # 布局
                 new_line.addWidget(txtl)
                 vbox.addLayout(new_line)
@@ -107,7 +122,7 @@ class MainFunc(QWidget):
                 if item['data']['value']:
                     checkb.setCheckState(Qt.CheckState.Checked)
                 new_line.addWidget(checkb)
-                checkb.stateChanged.connect(lambda state,item=item: self.on_checkbox_changed(state,item))
+                checkb.stateChanged.connect(lambda state, item=item: self.on_checkbox_changed(state, item))
                 # 布局
                 vbox.addLayout(new_line)
 
@@ -125,48 +140,50 @@ class MainFunc(QWidget):
         self.stackedLayout.addWidget(newbox)
         self.stackedLayout.setCurrentWidget(newbox)
 
-    def change_value(self,key,value):
+    def change_value(self, key, value):
         '''遍历修改intf中的value'''
-        for index,item in enumerate(self.intf["require"]):
+        for index, item in enumerate(self.intf["require"]):
             if item["data"]["key"] == key:
                 self.intf["require"][index]["data"]["value"] = value
 
-    def on_combobox_changed(self,index,item):
+    def on_combobox_changed(self, index, item):
         '''下拉框被改变'''
         key = item["data"]["key"]
         value = item["data"]["option"][index]["value"]
-        self.change_value(key,value)
+        self.change_value(key, value)
 
-    def on_lineedit_changed(self,text,item):
+    def on_lineedit_changed(self, text, item):
         '''输入框被改变'''
         key = item["data"]["key"]
         value = text
-        self.change_value(key,value)
+        self.change_value(key, value)
 
-    def on_checkbox_changed(self,state,item):
+    def on_checkbox_changed(self, state, item):
         '''复选框被改变'''
         key = item["data"]["key"]
         value = True if state else False
-        self.change_value(key,value)
-
+        self.change_value(key, value)
 
     def run(self):
         '''启动程序'''
 
         # 装载参数
-        json_set = {}
+        json_set = {
+            "function":self.module_name,
+            "py_path":resource_path("py_path")
+        }
         for item in self.intf["require"]:
             if item["type"] == "button":
                 continue
             json_set[item["data"]["key"]] = item["data"]["value"]
-        
+
         # 功能主函数
         get_function = self.module_name
-        py_path = resource_path("py_script")
-        sys.path.append(py_path)
 
         # 定义工作主函数
+
         def main_func() -> None:
+            # logger.set_mode("frontend")
             now = time.time()
             for filefiner, name, ispkg in pkgutil.iter_modules([py_path]):
                 if name == get_function:
@@ -179,21 +196,29 @@ class MainFunc(QWidget):
             time_spent = str(time_spent_ms / 1000) + "s" if time_spent_ms > 1000 else str(time_spent_ms) + "ms"
             print("time-cost: %s" % time_spent)
 
+        # 定义日志截取函数
+        def log_func(log):
+            self.send(str(log))
 
         # 直接调用
         def run_direct():
-            main_func()
+            catcher = Catcher(main_func, log_func)
+            catcher.run(buff_size=10)
+            # self.send("start")
+            # main_func()
 
-        # # 终端调用
-        # def run_terminal():
-        #     subprocess.run(['python', './app_sp_operator/terminal_searcher.py', json.dumps(json_set)], creationflags=subprocess.CREATE_NEW_CONSOLE)
-        #     # subprocess.run(['python', './app_sp_operator/terminal_searcher.py', json.dumps(get_data)])
-        # if json_set["terminal"] == True:
-        #     go_main = threading.Thread(target=run_terminal)
-        #     go_main.start()
-        #     return
-
+        # 终端调用
+        def run_terminal():
+            subprocess.run(['python', resource_path("utils/terminal_searcher.py"), json.dumps(json_set)], creationflags=subprocess.CREATE_NEW_CONSOLE)
+            # subprocess.run(['python', resource_path("utils/terminal_searcher.py"), json.dumps(json_set)])
+        
+        if json_set["terminal"] == True:
+            go_main = threading.Thread(target=run_terminal)
+            go_main.start()
+            return
         go_main = threading.Thread(target=run_direct)
         go_main.start()
 
-
+    def send(self, text):
+        '''将日志发送给log_box'''
+        self.tolog.dataChanged.emit(text)

@@ -30,6 +30,7 @@ class MainWindow(QMainWindow):
         layout.addWidget(self.main_func)
         layout.addWidget(self.log_box)
         self.get_list.tomain.dataChanged.connect(self.main_func.tolist.dataChanged)
+        self.main_func.tolog.dataChanged.connect(self.log_box.tomain.dataChanged)
 
 
         # 主体布局

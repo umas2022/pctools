@@ -1,6 +1,7 @@
 from PyQt6.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QPushButton, QTextEdit, QGroupBox
-
+import json
 from resource.utils.contact import Communicate
+
 
 class LogBox(QWidget):
 
@@ -36,7 +37,8 @@ class LogBox(QWidget):
             self.log_text = self.log_text + str(i) + "\n"
             self.log_box.setPlainText(self.log_text)
 
-
-    def msg_main(self,data):
+    def msg_main(self, data):
         '''main_func发来消息'''
-        print(data)
+        for item in json.loads(data):
+            self.log_text = str(item) + "\n" + self.log_text
+            self.log_box.setPlainText(self.log_text)
