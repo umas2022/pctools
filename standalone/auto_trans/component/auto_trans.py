@@ -11,8 +11,6 @@ import subprocess
 import cv2
 import numpy as np
 import pyautogui
-from utils_logger.log import logger_re as logger
-from utils_screenshot.shot_func import ShotFunc
 from PIL import ImageGrab
 from PIL import Image
 import cv2
@@ -20,6 +18,10 @@ import pytesseract  # pip install pytesseract # 需要配置pytesseract路径
 from deep_translator import GoogleTranslator  # pip install deep-translator
 import pykakasi  # pip install Cython # pip install pykakasi
 
+import sys,os
+script_path =os.path.dirname(os.path.realpath(__file__))
+sys.path.append(script_path)
+from utils_logger import logger
 
 class AutoTrans():
     '''漫画截图翻译'''
@@ -32,7 +34,7 @@ class AutoTrans():
             # 日志路径
             self.path_log = os.path.normpath(json_set['path_log']) if "path_log" in json_set else ""
             self.path_log = "" if self.path_log == "." else self.path_log
-            logger.raw_logger.set_path(self.path_log)
+            # logger.raw_logger.set_path(self.path_log)
             # * 目标语言
             self.target = json_set['target']
             # * 翻译语言
@@ -85,13 +87,16 @@ class AutoTrans():
         result = kks.convert(text)
         sentence = ""
         for item in result:
-            word = item['orig']+"(%s)"%item['hira'] if not item['orig']==  item['hira'] else item['orig']
+            word = item['orig']+" (%s) "%item['hira'] if not item['orig']==  item['hira'] else item['orig']
             sentence+=word
         return sentence
     
     def get_text(self,jpg_path,target)->str:
         '''识别图片中的文字,返回去除空格和换行符的字符串'''
-        img = Image.open(jpg_path)
+        try:
+            img = Image.open(jpg_path)
+        except:
+            img = Image.open(os.path.join(jpg_path,"shot.jpg"))
         text = pytesseract.image_to_string(img, lang=target)
         text = str(text).replace(" ", "").replace("\n", "")
         return text
@@ -120,6 +125,5 @@ class AutoTrans():
     def run(self):
         '''开始处理'''
         logger.info("auto trans function start ...")
-        logger.write("auto trans")
         self.startShot()
         self.ocr_trans()

@@ -46,7 +46,11 @@ requests
 lxml
 BeautifulSoup4
 
-
+# auto_trans 截图翻译
+Cython
+pykakasi
+pytesseract
+deep-translator
 
 
 
