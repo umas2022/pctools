@@ -14,7 +14,8 @@ class MainWindow(QMainWindow):
 
         self.config = {
             # 截图临时文件存放位置
-            "save_path": r"D:\s-code\test\save",
+            # "save_path": r"D:\s-code\test\save",
+            "save_path": r".",
             # ocr源语言: 竖排日文
             "target": "jpn_vert",
             # 翻译源语言: 日文
@@ -115,7 +116,6 @@ class MainWindow(QMainWindow):
 
     def on_click_start(self):
         '''按钮: 启动截图'''
-        
         ats = AutoTrans(self.config)
         ats.startShot()
         self.text["raw"] = ats.get_text(self.config["save_path"], self.config["target"])
@@ -124,6 +124,8 @@ class MainWindow(QMainWindow):
         self.roma_box.setText(self.text["romaji"])
         self.text["translated"] = ats.get_translate(self.text["raw"],self.config["source"],self.config["translate"])
         self.trans_box.setText(self.text["translated"])
+        # 删除图片
+        os.remove(os.path.join(self.config["save_path"],"shot.jpg"))
 
     def on_click_new(self):
         '''按钮: 重新翻译'''

@@ -1,0 +1,7 @@
+pyqt6
+Cython
+pykakasi
+pytesseract
+deep-translator
+opencv-python
+pyautogui
