@@ -92,12 +92,14 @@ div.label {
 }
 
 div.control {
-    display: inline-block;
+    display: flex;
     position: absolute;
     left: 50%;
     top: calc(50% - 15px);
     z-index: 0;
     user-select: none; // 页面文字禁止被选中
+    width: calc(40% - 20px);
+
 }
 
 div.info {

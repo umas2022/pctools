@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- 右上角启动新窗口(显示器) -->
-    <el-tooltip class="box-item" effect="dark" content="启动新前端" placement="bottom-end">
+    <el-tooltip class="box-item" effect="dark" content="启动新窗口" placement="bottom-end">
       <div class="run-back button" @click="start">
         <AnimateDown :display="store_home.current_page == 'home'">
           <template #content>
@@ -27,7 +27,7 @@ const store_home: any = inject("store_home")
 const start = (button: any) => {
   let cmd_text = "C:\\Users\\umas\\AppData\\Local\\Programs\\desktop_electron\\电脑配件.exe"
   if (!store_home.is_dev){
-    cmd_text = path.dirname(store_home.py_path) // desktop_electron\\resources\\static\\backend_v2
+    cmd_text = path.dirname(store_home.py_path) // desktop_electron\\resources\\static
     cmd_text = path.dirname(cmd_text) // desktop_electron\\resources\\static
     cmd_text = path.dirname(cmd_text) // desktop_electron\\resources
     cmd_text = path.dirname(cmd_text) // desktop_electron

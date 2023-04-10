@@ -42,19 +42,19 @@
             <div class="button-box">
 
               <!-- 右上角展开按钮(加号/减号) -->
-              <ButtonExtract/>
+              <ButtonExtract />
 
               <!-- 右上角切换背景按钮(刷新) -->
-              <ButtonChangeBg/>
+              <ButtonChangeBg />
 
               <!-- 右上角后端启动按钮(小飞机) -->
-              <ButtonRunBe/>
+              <ButtonRunBe />
 
               <!-- 右上角新建窗口(显示器) -->
-              <ButtonNewWindow/>
+              <ButtonNewWindow />
 
               <!-- 右上角设置按钮(齿轮/右箭头) -->
-              <ButtonChangePage :main_index="main_index" :setting_index="setting_index"/>
+              <ButtonChangePage :main_index="main_index" :setting_index="setting_index" />
 
             </div>
 
@@ -69,12 +69,13 @@
 import { provide, reactive, ref, onMounted, computed } from "vue"
 import type { ElScrollbar } from "element-plus";
 import type { Ref } from "vue"
-import { static_path,is_dev } from "@/utils/utils_path.js"
+import { static_path, is_dev } from "@/utils/utils_path.js"
 import { get_wsurl } from "@/utils/api_config.js"
-import MainIndex from "./components/main/MainIndex.vue"
-import SettingsIndex from "./components/settings/SettingsIndex.vue"
 import AnimateDown from "@/components/animate_down/AnimateDown.vue"
 import DialogPopup from "@/components/dialog/DialogPopup.vue"
+// 功能页/设置页
+import MainIndex from "./components/main/MainIndex.vue"
+import SettingsIndex from "./components/settings/SettingsIndex.vue"
 // 右上角按钮
 import ButtonExtract from "./components/button/ButtonExtract.vue"
 import ButtonChangeBg from "./components/button/ButtonChangeBg.vue"
@@ -139,15 +140,17 @@ const store_home = reactive({
   // 后端端口
   port: 4090,
   // 当前页面
-  current_page : "home",
+  current_page: "home",
   // 隐藏顶部列表组件
   extract_display: true,
   // 背景图片序号
   bg_num: ref(Math.ceil(Math.random() * 33)),
   // 当前是否为开发状态
-  is_dev:is_dev(),
-  // 脚本调用位置,用于后端通信,通过设置页的switch切换开发目录和生产目录
-  py_path: path.join(static_path(), "backend_v2/py_script"),
+  is_dev: is_dev(),
+  // 脚本直接调用位置,用于后端通信,通过设置页的switch切换开发目录和生产目录
+  py_path: path.join(static_path(), "py_script"),
+  // 后端调用位置,用于后端通信,通过设置页的switch切换开发目录和生产目录
+  py_server: path.join(static_path(), "py_server"),
   // 功能列表,储存后端返回的index.json
   index_list: [],
   // 选中的组
@@ -156,7 +159,6 @@ const store_home = reactive({
   function: "",
   // 选中的功能对应的intf.json
   intf_data: {},
-  
 })
 provide("store_home", store_home)
 

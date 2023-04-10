@@ -15,7 +15,7 @@ export function static_path() {
         // 开发环境
         ? path.join(process.cwd(), "public/static")
         : path.basename(process.cwd()) == "py_server"
-            // 生产环境被后端启动,cwd()定位在\resources\static\backend_v2\py_server
+            // 生产环境被后端启动,cwd()定位在\resources\static\py_server
             ? path.dirname(path.dirname(process.cwd()))
             // 生产环境直接启动
             : path.join(process.cwd(), "resources/static")

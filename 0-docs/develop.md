@@ -13,6 +13,13 @@
 
 - 所有的log_path都少了一句logger.raw_logger.set_path(self.path_log),这里参考remove_keyword的写法,注意如果为空,normpath函数会转换为'.',还要再加一个判断
 
+
+### 2023.4.10
+- 调整了一下项目文件结构,script和server单独分列出来
+- 删除了一些多余代码,包括:前端设置页的启动后端按钮
+- 前端设置页一些项目改成输入框了
+- 所有python脚本加入虚拟环境启动
+
 ### 2023.3.29
 - qt的框架
 - 继续完善了qt,get_list两个下拉菜单搞定了,可以获取到intf.json,main_func可以显示三种基本类型控件,按钮和注释还没做,show参数的控制还没做

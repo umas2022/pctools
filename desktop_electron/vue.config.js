@@ -34,7 +34,7 @@ module.exports = defineConfig({
           "src/assets", // 相当于{ from: 'src/assets', to: 'src/assets' }
           // { from: 'src/assets', to: 'assets' }, // assets资源目录指定
           { from: 'public/static', to: 'static' }, // public静态资源拷贝目录,程序中用static/xxx可以直接访问
-          { from: "../backend_v2", to: "static/backend_v2" }, // python脚本和后端打包进项目文件夹
+          // { from: "../backend_v2", to: "static/backend_v2" }, // python脚本和后端打包进项目文件夹!!!!!!!!!!!!!!!!!!!!!!!!!!
           { from: "../0-docs/develop.md", to: "static/info/develop.md" }//开发日志也打包进去
         ],
 

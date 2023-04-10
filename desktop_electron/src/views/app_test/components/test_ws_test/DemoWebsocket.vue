@@ -14,7 +14,7 @@
 
 <script lang="ts" setup>
 import { ref } from "@vue/reactivity";
-import { wsurl } from "@/utils/api_config";
+import { wsurl } from "@/utils/api_config.js";
 
 // 变量：接收websocket返回值
 const wsRes = ref("");

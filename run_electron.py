@@ -11,10 +11,14 @@ from shutil import copytree, rmtree, copyfile
 
 
 # 拷贝python文件
-print("copy backend_v2 file ...")
-if os.path.exists("./desktop_electron/public/static/backend_v2"):
-    rmtree("./desktop_electron/public/static/backend_v2")
-copytree("./backend_v2", "./desktop_electron/public/static/backend_v2")
+print("copy python file ...")
+if os.path.exists("./desktop_electron/public/static/py_script"):
+    rmtree("./desktop_electron/public/static/py_script")
+copytree("./py_script", "./desktop_electron/public/static/py_script")
+if os.path.exists("./desktop_electron/public/static/py_server"):
+    rmtree("./desktop_electron/public/static/py_server")
+copytree("./py_server", "./desktop_electron/public/static/py_server")
+
 
 # 开发日志转化为html
 print("convert develop.md ...")
@@ -30,3 +34,8 @@ output_file.write(html)
 # 启动electron
 os.chdir("./desktop_electron")
 os.system("npm run electron:serve")
+
+# 删除python文件 # 直接在这里删除的话打包命令还没运行完
+# rmtree("./desktop_electron/public/static/py_server")
+# rmtree("./desktop_electron/public/static/py_script")
+

@@ -8,7 +8,10 @@
 
             <!-- 控制 -->
             <template #tp-control>
-                <el-switch v-model="setValuePort" @click="setFuncPort" />
+                <div style="display:inline-block;width: calc(80% - 50px);">
+                    <el-input v-model="pre_port"></el-input>
+                </div>
+                <el-button  type="primary" plain @click="reset_port">修改</el-button>
             </template>
 
             <!-- 折叠info栏 -->
@@ -21,25 +24,18 @@
         </BasicTemplate>
     </div>
 </template>
-<script setup>
-import { onMounted, ref, inject } from "vue";
+<script setup lang="ts">
+import { ref, inject } from "vue";
+import { ElMessage } from "element-plus";
 import BasicTemplate from "./BasicTemplate.vue"
 
-const store_home = inject("store_home")
-// 开发模式port
-const setInfoFlagPort = ref(false);
-const setValuePort = ref(false);
-onMounted(() => {
-    if (store_home.port == 4091) {
-        setValuePort.value = true;
-    }
-});
-const setFuncPort = () => {
-    if (setValuePort.value == true) {
-        store_home.port = 4091
-    } else {
-        store_home.port = 4090
-    }
-    console.log("port in use : " + store_home.port)
+const store_home:any = inject("store_home")
+
+const pre_port = ref(JSON.parse(JSON.stringify(store_home.port)))
+
+const reset_port = () => {
+    store_home.port = pre_port
+    localStorage.setItem("port",store_home.port)
+    ElMessage.success("done")
 };
 </script>

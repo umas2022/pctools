@@ -25,14 +25,13 @@ const store_home: any = inject("store_home")
 // 启动后端
 const { PythonShell } = window.require("python-shell");
 const run_back = () => {
-  let be_path = path.dirname(store_home.py_path)
-  let be_script = "run_backterminal.py"
+  let be_path = store_home.py_server
+  let be_script = "run_backend_venv.py"
   let options = {
     mode: "text",
     pythonOptions: ["-u"], // get print results in real-time
     scriptPath: be_path,
-    // args: ["4091"],
-    args: ["win"],
+    args: [store_home.port],
   };
   let pyshell = new PythonShell(be_script, options);
   pyshell.on("message", function (message: string) {

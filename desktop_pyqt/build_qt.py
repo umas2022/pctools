@@ -10,10 +10,10 @@ from shutil import copytree, copyfile
 op_name = "电脑配件qt版"
 
 # 拷贝python文件
-print("copy backend_v2 file ...")
+print("copy py_script file ...")
 if os.path.exists("./resource/py_script"):
     rmtree("./resource/py_script")
-copytree("../backend_v2/py_script", "./resource/py_script")
+copytree("../py_script", "./resource/py_script")
 
 # 执行打包命令
 os.system("pyinstaller.exe -F -w -n %s \
