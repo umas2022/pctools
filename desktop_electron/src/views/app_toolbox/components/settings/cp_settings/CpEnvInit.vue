@@ -37,18 +37,20 @@ const refresh_config = (item: string) => {
 }
 watch(store_config, () => py_path.value = refresh_config("py_path"))
 const py_path = ref(refresh_config("py_path"))
+watch(store_config, () => venv_path.value = refresh_config("path_venv"))
+const venv_path = ref(refresh_config("path_venv"))
 
 // python调用
 const be_path = computed(() => path.join(py_path.value, "utils_env_init"))
 const be_script = "setup_venv.py"
-const be_full = computed(() => path.join(be_path.value, be_script))
 const res_msg = ref([""])
+
 const env_init = () => {
     let options = {
         mode: "text",
         pythonOptions: ["-u"], // get print results in real-time
         scriptPath: be_path.value,
-        // args: [""]
+        args: [venv_path.value]
     };
     let pyshell = new PythonShell(be_script, options);
     pyshell.on("message", function (message: string) {

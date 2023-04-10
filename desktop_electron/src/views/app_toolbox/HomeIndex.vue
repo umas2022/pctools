@@ -138,8 +138,6 @@ const home_onscroll = (scrollPos: { scrollTop: number }) => {
 
 // 全局参数
 const store_home = reactive({
-  // 后端端口
-  port: 4090,
   // 当前页面
   current_page: "home",
   // 隐藏顶部列表组件
@@ -148,8 +146,6 @@ const store_home = reactive({
   bg_num: ref(Math.ceil(Math.random() * 33)),
   // 当前是否为开发状态
   is_dev: is_dev(),
-  // 后端调用位置,用于后端通信,通过设置页的switch切换开发目录和生产目录
-  py_server: path.join(static_path(), "py_server"),
   // 功能列表,储存后端返回的index.json
   index_list: [],
   // 选中的组

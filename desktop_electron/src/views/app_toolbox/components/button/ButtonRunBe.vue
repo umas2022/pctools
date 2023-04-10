@@ -28,6 +28,8 @@ const refresh_config = (item: string) => {
 }
 watch(store_config, () => py_server.value = refresh_config("py_server"))
 const py_server = ref(refresh_config("py_server"))
+watch(store_config, () => venv_path.value = refresh_config("path_venv"))
+const venv_path = ref(refresh_config("path_venv"))
 
 // 启动后端
 const { PythonShell } = window.require("python-shell");
@@ -38,7 +40,7 @@ const run_back = () => {
     mode: "text",
     pythonOptions: ["-u"], // get print results in real-time
     scriptPath: be_path,
-    args: [store_config.value["port"]["value"]],
+    args: [store_config.value["port"]["value"],venv_path.value],
   };
   let pyshell = new PythonShell(be_script, options);
   pyshell.on("message", function (message: string) {
