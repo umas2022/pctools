@@ -7,6 +7,7 @@ import os
 import codecs
 from shutil import copytree, rmtree, copyfile
 import markdown  # pip install markdown
+import json
 
 # 虽然在vue.config.js中已经设置了包含python文件夹,但并不能自动更新,仅在public下不存在python文件夹时才能打包进去
 # 所以仍然需要手动拷贝更新python文件夹 
@@ -19,6 +20,16 @@ copytree("./py_script", "./desktop_electron/public/static/py_script")
 if os.path.exists("./desktop_electron/public/static/py_server"):
     rmtree("./desktop_electron/public/static/py_server")
 copytree("./py_server", "./desktop_electron/public/static/py_server")
+
+# config.json重设初值
+print("init default config ...")
+config_json = {}
+with open("./desktop_electron/public/static/config.json","r",encoding="utf-8")as config_file:
+    config_json = json.load(config_file)
+    config_json["py_path"]["value"] = ""
+    config_json["py_server"]["value"] = ""
+with open("./desktop_electron/public/static/config.json", "w", encoding="utf-8") as config_file:
+    config_file.write(json.dumps(config_json, ensure_ascii=False) + "\n")
 
 # 开发日志转化为html
 print("develop.md format convert ...")

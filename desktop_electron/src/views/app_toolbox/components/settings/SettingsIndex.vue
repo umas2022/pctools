@@ -8,14 +8,17 @@
     <!-- 后端测试 -->
     <CpBackendTest />
 
+    <!-- 开发模式路径 -->
+    <CpDevPath v-if="IsDev" />
+
     <!-- 通信端口设置 -->
     <CpChangePort />
-    <!-- 开发模式路径 -->
-    <CpChangePath v-if="IsDev"/>
-    <!-- 手动输入脚本路径 -->
+
+    <!-- 手动输入脚本路径\后端路径\环境路径 -->
     <CpChangePathScript />
     <CpChangePathServer />
-    
+    <CpChangePathVenv />
+
     <!-- 显示导航条 -->
     <CpShowNav />
     <!-- 开发日志 -->
@@ -29,14 +32,15 @@
 </template>
 
 <script setup>
-import { static_path,is_dev } from "@/utils/utils_path.js"
+import { static_path, is_dev } from "@/utils/utils_path.js"
 
 import CpChangePort from "./cp_settings/CpChangePort.vue"
 import CpEnvInit from "./cp_settings/CpEnvInit.vue"
-import CpChangePath from "./cp_settings/CpChangePath.vue"
+import CpDevPath from "./cp_settings/CpDevPath.vue"
 import CpBackendTest from "./cp_settings/CpBackendTest.vue"
 import CpChangePathScript from "./cp_settings/CpChangePathScript.vue"
 import CpChangePathServer from "./cp_settings/CpChangePathServer.vue"
+import CpChangePathVenv from "./cp_settings/CpChangePathVenv.vue"
 import CpUpdateIndex from "./cp_settings/CpUpdateIndex.vue"
 import CpShowNav from "./cp_settings/CpShowNav.vue"
 import CpDevelopLog from "./cp_settings/CpDevelopLog.vue"
@@ -51,7 +55,7 @@ div.app-settings {
   height: 100%;
   text-align: center;
   background-color: rgba(255, 0, 0, 0.05);
-  
+
 }
 </style>
 

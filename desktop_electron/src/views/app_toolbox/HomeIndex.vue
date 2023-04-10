@@ -83,6 +83,7 @@ import ButtonRunBe from "./components/button/ButtonRunBe.vue"
 import ButtonNewWindow from "./components/button/ButtonNewWindow.vue"
 import ButtonChangePage from "./components/button/ButtonChangePage.vue"
 
+const fs = window.require("fs");
 const path = window.require("path");
 
 
@@ -147,8 +148,6 @@ const store_home = reactive({
   bg_num: ref(Math.ceil(Math.random() * 33)),
   // 当前是否为开发状态
   is_dev: is_dev(),
-  // 脚本直接调用位置,用于后端通信,通过设置页的switch切换开发目录和生产目录
-  py_path: path.join(static_path(), "py_script"),
   // 后端调用位置,用于后端通信,通过设置页的switch切换开发目录和生产目录
   py_server: path.join(static_path(), "py_server"),
   // 功能列表,储存后端返回的index.json
@@ -162,7 +161,40 @@ const store_home = reactive({
 })
 provide("store_home", store_home)
 
+// 全局设置,注意这里因为源是动态的所以用了ref而不是reactive,要使用.value读取
+const config_path = path.join(static_path(), "config.json")
+const store_config: { [key: string]: any } = ref({})
+provide("store_config", store_config)
+onMounted(() => {
+  fs.readFile(config_path, 'utf-8',
+    (err: any, data: any) => {
+      if (err) {
+        console.log("load config err:", err);
+      } else {
+        store_config.value = JSON.parse(data)
+        // 为空的项目设置初值
+        let write_flag = false
+        if (store_config.value["py_path"]["value"] == "") {
+          store_config.value["py_path"]["value"] = path.join(static_path(), "py_script")
+          write_flag = true
+        }
+        if (store_config.value["py_server"]["value"] == "") {
+          store_config.value["py_server"]["value"] = path.join(static_path(), "py_server")
+          write_flag = true
+        }
+        // 保存初值
+        if (write_flag) {
+          try {
+            fs.writeFileSync(config_path, JSON.stringify(store_config.value));
+          } catch (err) {
+            console.error("config write error : " + err);
+          }
+        }
 
+      }
+    }
+  );
+});
 
 </script>
 <style lang="scss" scoped>

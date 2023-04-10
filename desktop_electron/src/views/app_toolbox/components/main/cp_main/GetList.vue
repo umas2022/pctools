@@ -13,14 +13,20 @@
     </div>
 </template>
 <script setup lang="ts">
-import { ref, inject, onMounted } from "vue"
+import { ref, inject, onMounted,watch } from "vue"
 import type { Ref } from "vue"
 import { get_wsurl } from "@/utils/api_config.js";
 import { ElMessage } from "element-plus";
 import useSvgIcon from "@/components/svgbox/useSvgIcon.vue";
 import path from "path";
 
+const store_config: any = inject("store_config")
 const store_home: any = inject("store_home")
+const refresh_config = (item: string) => {
+    return store_config.value[item] ? store_config.value[item]["value"] : "config load failed"
+}
+watch(store_config, () => py_path.value = refresh_config("py_path"))
+const py_path = ref(refresh_config("py_path"))
 
 // info按钮
 const display_gb_info: any = inject("display_gb_info")
@@ -33,13 +39,11 @@ const pg_info = [
 const func_total = ref(0)
 
 const get_list = () => {
-    console.log(store_home.is_dev)
-    console.log(store_home.py_path)
-    console.log(path.basename(store_home.py_path))
+    console.log("is dev : " + store_home.is_dev)
     // 获取目录
     const send_data = {
         function: "get_list",
-        data: { py_path: store_home.py_path }
+        data: { py_path: py_path.value }
     }
 
     console.log("ws connecting ...");
@@ -98,9 +102,10 @@ onMounted(() => {
 })
 </script>
 <style lang="scss" scoped>
-div.cp-getlist{
-  user-select: none; // 页面文字禁止被选中
+div.cp-getlist {
+    user-select: none; // 页面文字禁止被选中
 }
+
 div.info-icon {
     display: flex;
     cursor: pointer;

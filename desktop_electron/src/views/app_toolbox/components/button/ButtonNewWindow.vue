@@ -16,18 +16,25 @@
 </template>
 
 <script setup lang="ts">
-import { inject } from "vue"
+import { inject,watch,ref } from "vue"
 import AnimateDown from "@/components/animate_down/AnimateDown.vue"
 import { get_wsurl } from "@/utils/api_config.js";
 const path = window.require("path");
 
+const store_config: any = inject("store_config")
 const store_home: any = inject("store_home")
+
+const refresh_config = (item: string) => {
+    return store_config.value[item] ? store_config.value[item]["value"] : "config load failed"
+}
+watch(store_config, () => py_path.value = refresh_config("py_path"))
+const py_path = ref(refresh_config("py_path"))
 
 // 开始按钮
 const start = (button: any) => {
   let cmd_text = "C:\\Users\\umas\\AppData\\Local\\Programs\\desktop_electron\\电脑配件.exe"
   if (!store_home.is_dev){
-    cmd_text = path.dirname(store_home.py_path) // desktop_electron\\resources\\static
+    cmd_text = path.dirname(py_path.value) // desktop_electron\\resources\\static
     cmd_text = path.dirname(cmd_text) // desktop_electron\\resources\\static
     cmd_text = path.dirname(cmd_text) // desktop_electron\\resources
     cmd_text = path.dirname(cmd_text) // desktop_electron
@@ -39,7 +46,7 @@ const start = (button: any) => {
     const send_data = {
         function: "sp_auto_cmd",
         terminal: false,
-        py_path: store_home.py_path,
+        py_path: py_path.value,
         cmd_text:cmd_text
     }
 

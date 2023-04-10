@@ -16,22 +16,29 @@
 </template>
 
 <script setup lang="ts">
-import { inject } from "vue"
+import { inject,watch,ref } from "vue"
 import AnimateDown from "@/components/animate_down/AnimateDown.vue"
 const path = window.require("path");
 
 const store_home: any = inject("store_home")
+const store_config: any = inject("store_config")
+
+const refresh_config = (item: string) => {
+    return store_config.value[item] ? store_config.value[item]["value"] : "config load failed"
+}
+watch(store_config, () => py_server.value = refresh_config("py_server"))
+const py_server = ref(refresh_config("py_server"))
 
 // 启动后端
 const { PythonShell } = window.require("python-shell");
 const run_back = () => {
-  let be_path = store_home.py_server
+  let be_path = store_config.value["py_server"]["value"]
   let be_script = "run_backend_venv.py"
   let options = {
     mode: "text",
     pythonOptions: ["-u"], // get print results in real-time
     scriptPath: be_path,
-    args: [store_home.port],
+    args: [store_config.value["port"]["value"]],
   };
   let pyshell = new PythonShell(be_script, options);
   pyshell.on("message", function (message: string) {

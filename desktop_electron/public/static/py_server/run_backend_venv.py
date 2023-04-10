@@ -29,6 +29,6 @@ if len(sys.argv) == 1:
     subprocess.run([vpython, script, "-v", vpython], creationflags=subprocess.CREATE_NEW_CONSOLE)
 else:
     # 支持一个输入参数port,直接传给run_backend.py
-    subprocess.run([vpython, script, "-v", vpython, "-p", int(sys.argv[1])], creationflags=subprocess.CREATE_NEW_CONSOLE)
+    subprocess.run([vpython, script, "-v", vpython, "-p", sys.argv[1]], creationflags=subprocess.CREATE_NEW_CONSOLE)
 
 print("backend server close")

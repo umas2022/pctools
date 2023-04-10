@@ -7,7 +7,6 @@
 
 ## Environment
 - refer 1: ./py_script/utils_env_init
-- refer 2: ./sh_script
 
 ## Run
 - dev: run backend server  
@@ -23,6 +22,7 @@
 - 初次部署
     - 设置页点击py环境初始化按钮
     - 如果按钮没反应,手动运行/py_script/utils_env_init/setup.py
+    - 项目部署将会创建venv虚拟环境并在其中安装必备运行库
 
 
 

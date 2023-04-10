@@ -25,15 +25,21 @@
 
 </template>
 <script setup lang="ts">
-import { ref, computed, inject } from "vue";
+import { ref, computed, inject,watch } from "vue";
 import BasicTemplate from "./BasicTemplate.vue"
 const path = window.require("path");
 const { PythonShell } = window.require("python-shell");
 
+const store_config: any = inject("store_config")
 const store_home: any = inject("store_home")
+const refresh_config = (item: string) => {
+    return store_config.value[item] ? store_config.value[item]["value"] : "config load failed"
+}
+watch(store_config, () => py_path.value = refresh_config("py_path"))
+const py_path = ref(refresh_config("py_path"))
 
 // python调用
-const be_path = computed(() => path.join(store_home.py_path, "utils_env_init"))
+const be_path = computed(() => path.join(py_path.value, "utils_env_init"))
 const be_script = "setup_venv.py"
 const be_full = computed(() => path.join(be_path.value, be_script))
 const res_msg = ref([""])

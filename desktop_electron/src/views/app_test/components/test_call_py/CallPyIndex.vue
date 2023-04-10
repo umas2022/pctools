@@ -13,7 +13,6 @@ const { PythonShell } = window.require("python-shell");
 const path = window.require("path");
 import { ElMessage } from "element-plus";
 
-// let py_path = path.join(__static, "static/python/hello_world_1.py");
 const py_path =
   process.env.NODE_ENV === "development"
     ? path.join(process.cwd(), "public/static/python/test")

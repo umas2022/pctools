@@ -8,7 +8,7 @@ import argparse
 
 # 两个输入参数:端口和python版本
 parser = argparse.ArgumentParser(description='Script description')
-parser.add_argument('-p', '--port', type=int, required=False, help='Port number')
+parser.add_argument('-p', '--port', type=str, required=False, help='Port number')
 parser.add_argument('-v', '--version', type=str, required=False, help='Version number')
 args = parser.parse_args()
 

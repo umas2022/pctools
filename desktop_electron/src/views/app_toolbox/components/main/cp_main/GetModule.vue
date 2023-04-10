@@ -18,11 +18,17 @@
     </div>
 </template>
 <script setup lang="ts">
-import { ref, inject } from "vue"
+import { ref, inject,watch } from "vue"
 import { get_wsurl } from "@/utils/api_config.js";
 import AnimateDown from "@/components/animate_down/AnimateDown.vue"
 
+const store_config: any = inject("store_config")
 const store_home: any = inject("store_home")
+const refresh_config = (item: string) => {
+    return store_config.value[item] ? store_config.value[item]["value"] : "config load failed"
+}
+watch(store_config, () => py_path.value = refresh_config("py_path"))
+const py_path = ref(refresh_config("py_path"))
 
 const get_intf = () => {
 
@@ -30,7 +36,7 @@ const get_intf = () => {
     // 更新目录
     const send_data = {
         function: "get_intf",
-        data: { py_path: store_home.py_path, module: store_home.function }
+        data: { py_path: py_path.value, module: store_home.function }
     }
 
     console.log("ws connecting ...");

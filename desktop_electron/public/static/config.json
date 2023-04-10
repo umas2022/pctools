@@ -1,0 +1,1 @@
+{"port": {"value": "4099", "info": "后端启动端口"}, "path_venv": {"value": "D:\\p-program\\pctools_venv", "info": "python环境安装位置", "default": "D:\\p-program\\pctools_venv"}, "py_path": {"value": "", "info": "py_script脚本位置,值为空时自动填入默认安装路径(build脚本里将其置空)"}, "py_server": {"value": "", "info": "py_server后端位置,值为空时自动填入默认安装路径(build脚本里将其置空)"}}
