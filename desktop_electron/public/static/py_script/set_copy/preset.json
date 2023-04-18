@@ -1,23 +1,10 @@
 {
-    "samu_image_compress": {
+    "samu_update": {
         "info": "2T盘samu文件夹图片压缩",
         "path_log": "F:\\[1T]-samu-cut\\log",
         "action": [
             {
                 "function": "sp_compress_image",
-                "input": {
-                    "path_in": "E:\\[2T]-samu-raw",
-                    "path_out": "F:\\[1T]-samu-cut"
-                }
-            }
-        ]
-    },
-    "samu_video_compress": {
-        "info": "2T盘samu文件夹视频压缩",
-        "path_log": "F:\\[1T]-samu-cut\\log",
-        "action": [
-            {
-                "function": "sp_compress_video",
                 "input": {
                     "path_in": "E:\\[2T]-samu-raw",
                     "path_out": "F:\\[1T]-samu-cut"
