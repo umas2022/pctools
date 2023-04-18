@@ -25,9 +25,10 @@
                 "input": {
                     "path_in": "F:\\[1T]-upload",
                     "use_func": "replace_key",
-                    "target": "file",
+                    "target": "dir",
                     "add_in": "#",
-                    "add_in_2": ""
+                    "add_in_2": "",
+                    "deep":true
                 }
             },
             {
@@ -35,9 +36,10 @@
                 "input": {
                     "path_in": "F:\\[1T]-upload",
                     "use_func": "replace_key",
-                    "target": "file",
+                    "target": "dir",
                     "add_in": "_cp2",
-                    "add_in_2": ""
+                    "add_in_2": "",
+                    "deep":true
                 }
             },
             {
@@ -45,9 +47,10 @@
                 "input": {
                     "path_in": "F:\\[1T]-samu-sg",
                     "use_func": "replace_key",
-                    "target": "file",
+                    "target": "dir",
                     "add_in": "#",
-                    "add_in_2": ""
+                    "add_in_2": "",
+                    "deep":true
                 }
             }
         ]
@@ -78,9 +81,10 @@
                 "input": {
                     "path_in": "E:\\[2T]-upload",
                     "use_func": "replace_key",
-                    "target": "file",
+                    "target": "dir",
                     "add_in": "#",
-                    "add_in_2": ""
+                    "add_in_2": "",
+                    "deep":true
                 }
             },
             {
@@ -88,9 +92,10 @@
                 "input": {
                     "path_in": "E:\\[2T]-upload",
                     "use_func": "replace_key",
-                    "target": "file",
+                    "target": "dir",
                     "add_in": "_cp2",
-                    "add_in_2": ""
+                    "add_in_2": "",
+                    "deep":true
                 }
             },
             {
@@ -98,9 +103,10 @@
                 "input": {
                     "path_in": "E:\\[2T]-samu-sg",
                     "use_func": "replace_key",
-                    "target": "file",
+                    "target": "dir",
                     "add_in": "#",
-                    "add_in_2": ""
+                    "add_in_2": "",
+                    "deep":true
                 }
             }
         ]

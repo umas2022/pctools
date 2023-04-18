@@ -32,5 +32,12 @@ class Traverse():
             if os.path.isdir(full_path):
                 yield full_path
 
+    def get_first_file(self,path_in):
+        '''文件遍历:只返回第一层文件'''
+        for dir in os.listdir(path_in):
+            full_path = os.path.join(path_in, dir).replace('\\', "/")
+            if not os.path.isdir(full_path):
+                yield full_path
+
 
                 

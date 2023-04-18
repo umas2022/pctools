@@ -12,7 +12,7 @@ from utils_tools.traverse import Traverse
 
 
 class RenameBasic():
-    def __init__(self, path_in="", use_func="", target="file", add_in="", add_in_2="", path_log="", json_set={}) -> None:
+    def __init__(self, path_in="", use_func="", target="file", add_in="", add_in_2="", path_log="",deep=False, json_set={}) -> None:
         '''
         path_in: 输入路径
         use_func: 重命名方法
@@ -22,8 +22,10 @@ class RenameBasic():
         self.path_in = str(path_in).replace("\\", "/")
         logger.raw_logger.set_path(str(path_log).replace("\\", "/"))
         self.use_func = use_func
+        self.target = target
         self.add_in = add_in
         self.add_in_2 = add_in_2
+        self.deep = deep
         if not json_set == {}:
             try:
                 self.path_in = json_set['path_in'].replace("\\", "/")
@@ -32,6 +34,7 @@ class RenameBasic():
                 self.target = json_set['target'] if "target" in json_set else "file"
                 self.add_in = json_set['add_in']if "add_in" in json_set else ""
                 self.add_in_2 = json_set['add_in_2']if "add_in_2" in json_set else ""
+                self.deep = json_set['deep']if "deep" in json_set else False
             except Exception as e:
                 logger.error("key error: %s" % e)
                 return
@@ -117,9 +120,15 @@ class RenameBasic():
         total = 0
         tarverse_func = ""
         if self.target == "dir":
-            tarverse_func = Traverse().get_first_dir
+            if self.deep:
+                tarverse_func = Traverse().get_dir
+            else:
+                tarverse_func = Traverse().get_first_dir
         elif self.target == "file":
-            tarverse_func = Traverse().get_file
+            if self.deep:
+                tarverse_func = Traverse().get_file
+            else:
+                tarverse_func = Traverse().get_first_file
         else:
             logger.error("remove_keyword : unexpected target - %s" % self.target)
             return

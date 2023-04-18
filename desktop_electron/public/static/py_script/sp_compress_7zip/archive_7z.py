@@ -22,7 +22,7 @@ class Archive7z():
 
     def __init__(self, method="", path_in="", path_out="", password="", path_log="", path_7z="", th_total=1, overwrite=False, keyword="", location="", double_cp=False,deep=False, json_set={}) -> None:
         # 多线程是否完成
-        self.all_done_flag = False
+        self.all_done_flag = True
         # 多线程已经在组内的数量
         self.th_running = 0
         # 当前已经完成的数量
@@ -103,6 +103,7 @@ class Archive7z():
 
     def __cp_filter(self, methodPathIn, methodPathOut) -> str:
         '''处理方法分类器'''
+        self.all_done_flag = False
         # 创建输出目录结构
         name = methodPathIn.split("/")[-1]
         dir_out = os.path.split(methodPathOut)[0]
@@ -190,3 +191,4 @@ class Archive7z():
         # 等待所有任务全部完成
         while not self.all_done_flag:
             time.sleep(1)
+
