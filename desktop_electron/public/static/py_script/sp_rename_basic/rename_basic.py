@@ -63,14 +63,13 @@ class RenameBasic():
         state = "replace_key"
         methodPathIn = methodPathIn.replace("\\", "/")
         dir, name = os.path.split(methodPathIn)
-        name_list = name.split(self.add_in)
-        if name_list[0] == "":
+        if self.add_in in name:
+            name_list = name.split(self.add_in)
             name_new = self.add_in_2.join(name_list)
+            methodPathOut = os.path.join(dir, name_new).replace("\\", "/")
         else:
             state = "pass"
-            name_new = self.add_in.join(name_list)
-        methodPathOut = os.path.join(dir, name_new).replace("\\", "/")
-        logger.debug(methodPathOut)
+            methodPathOut = methodPathIn
         return state, methodPathOut
 
     def __method_num_array(self,methodPathIn: str, jetzt: int):
@@ -81,7 +80,6 @@ class RenameBasic():
         fileFormat = name.split(".")[-1]
         name_new = str(jetzt).zfill(3)+"."+fileFormat
         methodPathOut = os.path.join(dir, name_new).replace("\\", "/")
-        logger.debug(methodPathOut)
         return state, methodPathOut
 
     def __filter(self, methodPathIn: str, jetzt: int):

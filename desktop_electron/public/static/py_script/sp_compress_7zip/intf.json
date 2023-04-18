@@ -135,6 +135,16 @@
                     "匹配包含带_cp2的双压文件"
                 ]
             }
+        },{
+            "type": "switch",
+            "data": {
+                "key": "deep",
+                "label": "全层级遍历",
+                "value": false,
+                "annotation": [
+                    "默认false仅遍历当前目录"
+                ]
+            }
         },
         {
             "type": "switch",
