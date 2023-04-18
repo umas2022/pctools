@@ -16,8 +16,11 @@
                 "value": "samu_backup",
                 "option": [
                     {
-                        "value": "samu_backup",
-                        "label": "samu备份更新"
+                        "value": "samu_backup_1t",
+                        "label": "1t盘samu备份更新"
+                    },{
+                        "value": "samu_backup_2t",
+                        "label": "2t盘samu备份更新"
                     },
                     {
                         "value": "compress_test",
@@ -25,7 +28,7 @@
                     }
                 ],
                 "annotation": [
-                    "更新"
+                    "1. samu备份更新:打包->删除7z前后缀->删除原文件夹前缀"
                 ]
             }
         }

@@ -51,6 +51,7 @@ Cython
 pykakasi
 pytesseract
 deep-translator
+PyQT6
 
 
 
