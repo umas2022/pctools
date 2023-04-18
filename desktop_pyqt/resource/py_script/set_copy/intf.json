@@ -1,12 +1,11 @@
 {
     "title": "copy动作集",
-    "group":{
-        "key":"preset",
-        "label":"预设"
-    } ,
+    "group": {
+        "key": "preset",
+        "label": "预设"
+    },
     "info": [
-        "1.动作详细步骤由./preset.json设定",
-        "2.硬盘上云之后这里基本用不上了,有空更新一下"
+        "1.动作详细步骤由./preset.json设定"
     ],
     "require": [
         {
@@ -17,16 +16,8 @@
                 "value": "samu_compress",
                 "option": [
                     {
-                        "value": "samu_compress",
-                        "label": "samu全压缩"
-                    },
-                    {
-                        "value": "samu_image_compress",
-                        "label": "samu图片压缩备份"
-                    },
-                    {
-                        "value": "samu_video_compress",
-                        "label": "samu视频压缩备份"
+                        "value": "samu_update",
+                        "label": "samu备份更新"
                     },
                     {
                         "value": "compress_test",
@@ -34,9 +25,7 @@
                     }
                 ],
                 "annotation": [
-                    "全压缩包含：反向对比删除+视频压缩+图片压缩+全部备份",
-                    "全压缩最后的全部备份目标是压缩过程中error跳过的文件",
-                    "视频压缩时候会在py_server文件夹下生成临时视频文件,不要push代码!"
+                    "更新"
                 ]
             }
         }

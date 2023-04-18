@@ -20,7 +20,7 @@ class Archive7z():
     '''文件夹批量打包7zip\n
     必要参数：path_in,path_out, password'''
 
-    def __init__(self, method="", path_in="", path_out="", password="", path_log="", path_7z="", th_total=1, overwrite=False, keyword="", location="", double_cp=False, json_set={}) -> None:
+    def __init__(self, method="", path_in="", path_out="", password="", path_log="", path_7z="", th_total=1, overwrite=False, keyword="", location="", double_cp=False,deep=False, json_set={}) -> None:
         # 多线程是否完成
         self.all_done_flag = False
         # 多线程已经在组内的数量
@@ -42,6 +42,7 @@ class Archive7z():
         self.keyword = str(keyword)
         self.location = str(location)
         self.double_cp = bool(double_cp)
+        self.deep = bool(deep)
         if not json_set == {}:
             try:
                 self.method = json_set['method']
@@ -55,6 +56,7 @@ class Archive7z():
                 self.keyword = json_set['keyword'] if "keyword" in json_set else ""
                 self.location = json_set['location'] if "location" in json_set else ""
                 self.double_cp = bool(json_set['double_cp']) if "double_cp" in json_set else False
+                self.deep = bool(json_set['deep']) if "deep" in json_set else False
             except Exception as e:
                 logger.error("key error: %s" % e)
                 return
@@ -153,15 +155,21 @@ class Archive7z():
         '''开始处理'''
         logger.info("7zip compress function start ...")
         logger.write("7zip compress")
+
+        target_list = []
+        if self.deep:
+            target_list = Traverse().get_dir
+        else:
+            target_list = Traverse().get_first_dir
         # 计数
-        for full_in in Traverse().get_first_dir(self.path_in):
+        for full_in in target_list(self.path_in):
             name = full_in.replace("\\", "/").split("/")[-1]
             if self.__check_keyword(name):
                 self.total += 1
                 logger.info("counting : %d\t%s" % (self.total, name))
         logger.write("total : %d\n" % self.total)
         # 开始
-        for full_in in Traverse().get_first_dir(self.path_in):
+        for full_in in target_list(self.path_in):
             full_in = full_in.replace("\\", "/")
             # 单文件名
             name = full_in.split("/")[-1]
