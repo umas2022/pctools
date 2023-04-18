@@ -1,6 +1,6 @@
 {
     "port": {
-        "value": "4099",
+        "value": "4096",
         "info": "后端启动端口"
     },
     "path_venv": {
@@ -9,11 +9,11 @@
         "default": "D:\\p-program\\pctools_venv"
     },
     "py_path": {
-        "value": "D:\\s-code\\self\\pctools\\desktop_electron\\public\\static\\py_script",
+        "value": "D:\\s-code\\self\\pctools\\py_script",
         "info": "py_script脚本位置,值为空时自动填入默认安装路径(build脚本里将其置空)"
     },
     "py_server": {
-        "value": "D:\\s-code\\self\\pctools\\desktop_electron\\public\\static\\py_server",
+        "value": "D:\\s-code\\self\\pctools\\py_server",
         "info": "py_server后端位置,值为空时自动填入默认安装路径(build脚本里将其置空)"
     }
 }

@@ -39,7 +39,6 @@ const pg_info = [
 const func_total = ref(0)
 
 const get_list = () => {
-    console.log("is dev : " + store_home.is_dev)
     // 获取目录
     const send_data = {
         function: "get_list",

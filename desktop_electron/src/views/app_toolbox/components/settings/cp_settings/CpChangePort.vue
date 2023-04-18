@@ -3,7 +3,7 @@
         <BasicTemplate>
             <!-- 标签 -->
             <template #tp-label>
-                <span>开发模式端口</span>
+                <span>通信端口</span>
             </template>
 
             <!-- 控制 -->
@@ -25,7 +25,7 @@
     </div>
 </template>
 <script setup lang="ts">
-import { ref, inject, watch } from "vue";
+import { ref, inject, watch, onMounted } from "vue";
 import { ElMessage } from "element-plus";
 import BasicTemplate from "./BasicTemplate.vue"
 import { static_path, is_dev } from "@/utils/utils_path.js"
@@ -56,4 +56,7 @@ const reset_port = () => {
 
     ElMessage.success("done")
 };
+
+watch(store_config, () => localStorage.setItem("port", store_config.value["port"]["value"]))
+
 </script>

@@ -13,6 +13,8 @@
 
 - 所有的log_path都少了一句logger.raw_logger.set_path(self.path_log),这里参考remove_keyword的写法,注意如果为空,normpath函数会转换为'.',还要再加一个判断
 
+### 2023.4.18
+- 设置页初始判断开发环境的switch改用定时器循环触发,避免初始时设置没有读到
 
 ### 2023.4.10
 - 调整了一下项目文件结构,script和server单独分列出来

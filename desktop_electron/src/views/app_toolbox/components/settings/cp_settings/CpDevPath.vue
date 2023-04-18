@@ -26,6 +26,7 @@
 import { onMounted, ref, inject, watch } from "vue";
 import BasicTemplate from "./BasicTemplate.vue"
 import { static_path, is_dev } from "@/utils/utils_path.js"
+import { ElMessage } from "element-plus";
 const path = window.require("path");
 
 
@@ -34,38 +35,45 @@ const store_home: any = inject("store_home")
 const refresh_config = (item: string) => {
     return store_config.value[item] ? store_config.value[item]["value"] : "config load failed"
 }
-// watch(store_config, () => py_path.value = refresh_config("py_path"))
-// const py_path = ref(refresh_config("py_path"))
 
 
-// watch(store_config, () => py_server.value = refresh_config("py_server"))
-// const py_server = ref(refresh_config("py_server"))
+const setDevPath = ref(JSON.parse(JSON.stringify(is_dev())))
 
-const setDevPath = is_dev()
+const loaded = ref(false)
 
 // 开发模式路径
 const dev_path = "D:\\s-code\\self\\pctools\\py_script"
 const dev_server = "D:\\s-code\\self\\pctools\\py_server"
 const devSwitch = () => {
-    try{
-        if (setDevPath == true) {
-        store_config.value["py_path"]["value"] = dev_path
-        store_config.value["py_server"]["value"] = dev_server
-    } else {
-        store_config.value["py_path"]["value"] = path.join(static_path(), "py_script")
-        store_config.value["py_server"]["value"] = path.join(static_path(), "py_server")
-    }
-    } catch{
+    try {
+        if (setDevPath.value == true) {
+            store_config.value["py_path"]["value"] = dev_path
+            store_config.value["py_server"]["value"] = dev_server
+            ElMessage.success("develop path")
+        } else {
+            store_config.value["py_path"]["value"] = path.join(static_path(), "py_script")
+            store_config.value["py_server"]["value"] = path.join(static_path(), "py_server")
+            if (is_dev) { ElMessage.success("product path") }
+
+        }
+        loaded.value = true
+    } catch {
         console.log("devSwitch error, config file not load")
     }
-    
+
     console.log("path in use : " + refresh_config("py_path"))
 };
 
 onMounted(() => {
-    // 两秒后再赋值,确保config.json已经读取完毕
-    setTimeout(() => {
+    // 定时器循环触发刷新,避免初始设置没有读到
+    const init_switch = () => {
         devSwitch()
-    }, 2000);
+        if (loaded) { clearInterval(set_int) }
+    }
+    let set_int = setInterval(init_switch, 1000)
+    setTimeout(() => {
+        clearInterval(set_int)
+    }, 10000)
+
 })
 </script>

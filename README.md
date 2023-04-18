@@ -6,7 +6,7 @@
 - Electron+Vue frontend (desktop_electron/)
 
 ## Environment
-- refer 1: ./py_script/utils_env_init
+- ./py_script/utils_env_init/pip_requirements.txt
 
 ## Run
 - dev: run backend server  

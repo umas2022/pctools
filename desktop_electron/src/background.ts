@@ -21,6 +21,10 @@ async function createWindow() {
       ? path.join(process.cwd(), "public/static/icon/mati_ei_256.ico")
       : path.join(process.cwd(), "resources/static/icon/mati_ei_256.ico"),
 
+      // frame: false, // 隐藏默认窗口边框
+      // backgroundColor: '#00000000', // 设置窗口背景透明
+      // transparent: true, // 设置窗口透明
+
     webPreferences: {
       // Use pluginOptions.nodeIntegration, leave this alone
       // See nklayman.github.io/vue-cli-plugin-electron-builder/guide/security.html#node-integration for more info
@@ -33,6 +37,7 @@ async function createWindow() {
       webSecurity: false // 允许加载本地图片
     },
   });
+
 
   if (process.env.WEBPACK_DEV_SERVER_URL) {
     // Load the url of the dev server if in development mode

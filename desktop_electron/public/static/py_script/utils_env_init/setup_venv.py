@@ -18,8 +18,6 @@ user_path = input_path
 
 # setup脚本位置
 script = os.path.join(setup_dir, "setup.py")
-print("###############")
-print(user_path)
 
 # 虚拟环境位置
 venv_path = os.path.normpath(os.path.join(user_path, "venv"))

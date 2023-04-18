@@ -27,8 +27,13 @@ vpip = os.path.normpath(os.path.join(pctools_path, "venv\\Scripts\\pip.exe"))
 if len(sys.argv) == 1:
     # 无参数直接默认启动
     subprocess.run([vpython, script, "-v", vpython], creationflags=subprocess.CREATE_NEW_CONSOLE)
-else:
+elif len(sys.argv) == 2:
     # 支持一个输入参数port,直接传给run_backend.py
+    subprocess.run([vpython, script, "-v", vpython, "-p", sys.argv[1]], creationflags=subprocess.CREATE_NEW_CONSOLE)
+else:
+    # 支持两个输入参数port和虚拟路径,直接传给run_backend.py
+    user_path = sys.argv[2]
+    vpython = os.path.normpath(os.path.join(user_path, "venv\\Scripts\\python.exe"))
     subprocess.run([vpython, script, "-v", vpython, "-p", sys.argv[1]], creationflags=subprocess.CREATE_NEW_CONSOLE)
 
 print("backend server close")
