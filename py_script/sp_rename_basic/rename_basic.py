@@ -9,6 +9,7 @@ from shutil import copyfile
 
 from utils_logger.log import logger_re as logger
 from utils_tools.traverse import Traverse
+from utils_path.upath import *
 
 
 class RenameBasic():
@@ -80,7 +81,9 @@ class RenameBasic():
         state = "num_array"
         methodPathIn = methodPathIn.replace("\\", "/")
         dir, name = os.path.split(methodPathIn)
-        fileFormat = name.split(".")[-1]
+        fileFormat = ""
+        if self.target == "file":
+            fileFormat = name.split(".")[-1]
         name_new = str(jetzt+int(self.add_in_2)-1).zfill(int(self.add_in))+"."+fileFormat
         methodPathOut = os.path.join(dir, name_new).replace("\\", "/")
         return state, methodPathOut

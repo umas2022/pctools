@@ -49,7 +49,7 @@ output_file = codecs.open("./desktop_electron/public/static/info/develop.html", 
 output_file.write(html)
 
 # 执行打包命令
-subprocess.run(["npm", "run", "electron:serve"], cwd="./desktop_electron", stdout=subprocess.PIPE,shell=True)
+subprocess.run(["npm", "run", "electron:build"], cwd="./desktop_electron", stdout=subprocess.PIPE,shell=True)
 
 # # 删除python文件
 print("remove server & script ...")
