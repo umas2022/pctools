@@ -136,6 +136,36 @@
             }
         },
         {
+            "type": "input",
+            "show": {
+                "value": false,
+                "listen": {
+                    "key": "use_func",
+                    "value": "num_array"
+                }
+            },
+            "data": {
+                "key": "add_in",
+                "label": "序号位数",
+                "value": "4"
+            }
+        },
+        {
+            "type": "input",
+            "show": {
+                "value": false,
+                "listen": {
+                    "key": "use_func",
+                    "value": "num_array"
+                }
+            },
+            "data": {
+                "key": "add_in_2",
+                "label": "序号起始",
+                "value": "1"
+            }
+        },
+        {
             "type": "switch",
             "data": {
                 "key": "deep",

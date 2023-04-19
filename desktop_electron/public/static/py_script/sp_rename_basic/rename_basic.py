@@ -81,7 +81,7 @@ class RenameBasic():
         methodPathIn = methodPathIn.replace("\\", "/")
         dir, name = os.path.split(methodPathIn)
         fileFormat = name.split(".")[-1]
-        name_new = str(jetzt).zfill(3)+"."+fileFormat
+        name_new = str(jetzt+int(self.add_in_2)-1).zfill(int(self.add_in))+"."+fileFormat
         methodPathOut = os.path.join(dir, name_new).replace("\\", "/")
         return state, methodPathOut
 
