@@ -1,1 +1,0 @@
-from sp_copy_merge.copy_merge import CopyMerge as MainClass

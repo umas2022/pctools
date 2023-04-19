@@ -1,1 +1,0 @@
-from set_demo.demo import SpDemo as MainClass

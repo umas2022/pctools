@@ -1,1 +1,0 @@
-from sp_remove_difference.remove_difference import RemoveDifference as MainClass

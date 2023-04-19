@@ -1,1 +1,0 @@
-from sp_copy_split.copy_split import CopySplit as MainClass

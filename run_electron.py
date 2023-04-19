@@ -9,11 +9,12 @@ import sys
 import codecs
 import markdown  # pip install markdown
 from shutil import copytree, rmtree, copyfile
+import subprocess
 
 # 更新script目录
 print("update list.json ...")
-prj_path =os.path.dirname(os.path.realpath(__file__))
-script_path = os.path.normpath(os.path.join(prj_path,"py_script"))
+prj_path = os.path.dirname(os.path.realpath(__file__))
+script_path = os.path.normpath(os.path.join(prj_path, "py_script"))
 sys.path.append(prj_path)
 from py_script.utils_update_list.update import list_update
 list_update(script_path)
@@ -39,11 +40,11 @@ output_file = codecs.open("./desktop_electron/public/static/info/develop.html", 
 output_file.write(html)
 
 
-# 启动electron
-os.chdir("./desktop_electron")
-os.system("npm run electron:serve")
+# # 启动electron
+subprocess.run(["npm", "run", "electron:serve"], cwd="./desktop_electron", stdout=subprocess.PIPE,shell=True)
 
-# 删除python文件 # 直接在这里删除的话打包命令还没运行完
-# rmtree("./desktop_electron/public/static/py_server")
-# rmtree("./desktop_electron/public/static/py_script")
 
+# # 删除python文件
+print("remove server & script ...")
+rmtree("./desktop_electron/public/static/py_server")
+rmtree("./desktop_electron/public/static/py_script")

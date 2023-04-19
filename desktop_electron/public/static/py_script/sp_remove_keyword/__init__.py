@@ -1,1 +1,0 @@
-from sp_remove_keyword.remove_keyword import RemoveKeyword as MainClass

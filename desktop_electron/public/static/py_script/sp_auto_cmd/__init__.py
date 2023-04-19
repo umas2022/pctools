@@ -1,1 +1,0 @@
-from sp_auto_cmd.auto_cmd import AutoCmd as MainClass
