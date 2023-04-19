@@ -48,7 +48,7 @@
             "type": "select",
             "data": {
                 "key": "name_func",
-                "label": "select选择",
+                "label": "单包命名方法",
                 "value": "by_num",
                 "option": [
                     {

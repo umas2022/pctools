@@ -3,8 +3,6 @@
     <div class="h1">设置</div>
     <!-- python环境初始化 -->
     <CpEnvInit />
-    <!-- 更新目录 -->
-    <CpUpdateIndex />
     <!-- 后端测试 -->
     <CpBackendTest />
 
@@ -41,7 +39,6 @@ import CpBackendTest from "./cp_settings/CpBackendTest.vue"
 import CpChangePathScript from "./cp_settings/CpChangePathScript.vue"
 import CpChangePathServer from "./cp_settings/CpChangePathServer.vue"
 import CpChangePathVenv from "./cp_settings/CpChangePathVenv.vue"
-import CpUpdateIndex from "./cp_settings/CpUpdateIndex.vue"
 import CpShowNav from "./cp_settings/CpShowNav.vue"
 import CpDevelopLog from "./cp_settings/CpDevelopLog.vue"
 

@@ -3,14 +3,19 @@
 打包electron项目
 '''
 
-import os
+import os,sys
 import codecs
 from shutil import copytree, rmtree, copyfile
 import markdown  # pip install markdown
 import json
 
-# 虽然在vue.config.js中已经设置了包含python文件夹,但并不能自动更新,仅在public下不存在python文件夹时才能打包进去
-# 所以仍然需要手动拷贝更新python文件夹 
+# 更新script目录
+print("update list.json ...")
+prj_path =os.path.dirname(os.path.realpath(__file__))
+script_path = os.path.normpath(os.path.join(prj_path,"py_script"))
+sys.path.append(prj_path)
+from py_script.utils_update_list.update import list_update
+list_update(script_path)
 
 # 拷贝python文件
 print("copy python file ...")

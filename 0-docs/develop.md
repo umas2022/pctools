@@ -21,7 +21,6 @@
 - 新建的copy_split用更可靠的函数替代了一些不稳定的写法,其他的copy函数应该参考这个都进行升级
 - usage.py中使用script_path =os.path.dirname(os.path.dirname(os.path.realpath(__file__))) 
 sys.path.append(script_path)替代sys.path.append("..")
-- 应该把目录更新改成一个utils,在打包时候调用一次
 ---
 
 ## 开发记录
@@ -29,6 +28,7 @@ sys.path.append(script_path)替代sys.path.append("..")
 
 ### 2023.4.19
 - 为了给3k+沙雕图分包,新增了分包拷贝的功能,将包含大量文件的单个文件夹拆分为多个小文件夹
+- 顺便把目录更新改成一个utils,在打包时候调用一次,前端设置里的更新按钮删掉了
 
 ### 2023.4.18
 - 设置页初始判断开发环境的switch改用定时器循环触发,避免初始时设置没有读到
