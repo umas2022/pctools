@@ -1,17 +1,34 @@
 # develop开发记录
 
-### 备忘/待办/bug/下次一定/总之写在最前面
-- 记得没事看下future
+## 备忘/待办/bug/下次一定/总之写在最前面
+这里记录未完成的内容,重要内容用方括号强调
+
+### desktop
+- 增加help页面, 最好附上图片, 处理前->处理后
 - 通过前端手动结束或者暂停程序,想办法结束没有启用终端模式的程序
 - 增加选项：是否要先计数
 - 增加选项：是否要预计剩余时间（用数量简单预测/用文件大小精确预测）
-- 使用os.path.normpath()替代replace("\\", "/")注意空字符串会被替换为'.'
 - 没填输出路径时直接使用输入路径
 - 关于输入参数检查:加一个utils,顺便把每次的输入写进intf.json里,保存上次的输入结果;输入参数分成必填和有默认值两种,给所有的必填项目加上星号
+- 前端统计显示error和warning信息
+- 进度条
+### server
 - 后端发回的消息增加一个id来区分多个前端窗口
-- 重命名遍历增加选项:一级目录/遍历所有
+### script
+- 使用os.path.normpath()替代replace("\\", "/")注意空字符串会被替换为'.'
+- [所有的log_path都少了一句logger.raw_logger.set_path(self.path_log),这里参考remove_keyword的写法,注意如果为空,normpath函数会转换为'.',还要再加一个判断]
+- box_copy_batch: 图片压缩对bmp失败
+- 新建的copy_split用更可靠的函数替代了一些不稳定的写法,其他的copy函数应该参考这个都进行升级
+- usage.py中使用script_path =os.path.dirname(os.path.dirname(os.path.realpath(__file__))) 
+sys.path.append(script_path)替代sys.path.append("..")
+- 应该把目录更新改成一个utils,在打包时候调用一次
+---
 
-- 所有的log_path都少了一句logger.raw_logger.set_path(self.path_log),这里参考remove_keyword的写法,注意如果为空,normpath函数会转换为'.',还要再加一个判断
+## 开发记录
+流水日志,可以记录生活
+
+### 2023.4.19
+- 为了给3k+沙雕图分包,新增了分包拷贝的功能,将包含大量文件的单个文件夹拆分为多个小文件夹
 
 ### 2023.4.18
 - 设置页初始判断开发环境的switch改用定时器循环触发,避免初始时设置没有读到
@@ -20,6 +37,25 @@
 - 新增samu文件夹打包的动作集
 - 增加了draw.io流程图
 - 序号命名增加参数:序号位数,起始序号
+- 整理了一下future,有用的写上面了,下面是放弃不想做的功能:
+- new: 换个图标
+- 前端home获取ip偶尔还是会被跨域block
+- 主页：网页远程命令行功能太简单, 目前还不能接受报错, 不能cd切换目录, 也没有当前目录提示
+- py_script：文件夹目录中间修改了一次, import可能报错, 还没改完
+- rename: 删除括号扩展为删除任意前缀
+- new: 增加linux环境shell工具的支持
+- 重命名：前端重命名功能支持[动作叠加], 如先删括号再加前缀
+- 重命名：copy_to_one增加选项：命名是否合并上一级文件夹名
+- 后端允许了所有跨域请求, 不安全
+- 推荐使用虚拟环境（目前powershell报错, 暂时搁置）
+    ```
+    pip3 install virtualenv -i  https://pypi.tuna.tsinghua.edu.cn/simple
+    virtualenv -p python3.8 env 
+    source env/bin/activate
+    deactivate 
+    ```
+- new: 首页增加项目一键部署到远程主机功能
+- new: 返回当前环境 uname -a 或者是自定义的设备标识, wsl/dell/raspi
 
 ### 2023.4.10
 - 调整了一下项目文件结构,script和server单独分列出来
