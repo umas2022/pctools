@@ -68,12 +68,12 @@ class logRaw:
 
 class LogRepack:
     '''
-    为满足直接调用和前端调用的不同需求, 对输出函数进行再封装
-    frontend模式用于前端请求,内部为print函数,可以截取标准输出发送至前端,默认只在log文件中写入error和warning
-    terminal模式输出原版logger到控制台
+    为满足直接调用和前端调用的不同需求, 对输出函数进行再封装 \n
+    frontend模式用于前端请求,内部为print函数,可以截取标准输出发送至前端,默认只在log文件中写入error和warning \n
+    terminal模式输出原版logger到控制台 \n
 
-    logger = LogRepack("frontend")
-    logger.set_mode("terminal")
+    logger = LogRepack("frontend") \n
+    logger.set_mode("terminal") \n
     '''
 
     def __init__(self, log_path='', mode_input="frontend") -> None:
@@ -103,6 +103,13 @@ class LogRepack:
         with open(self.raw_logger.file, "a") as log_file:
             log_file.write(str(inputstr) + "\n")
 
+    def print(self, inputstr):
+        '''print模式不附加任何前缀,直接输出'''
+        if self.mode == "terminal":
+            self.logger.debug(inputstr)
+        elif self.mode == "frontend":
+            print(str(inputstr))
+
     def debug(self, inputstr):
         if self.mode == "terminal":
             self.logger.debug(inputstr)
@@ -128,6 +135,9 @@ class LogRepack:
         elif self.mode == "frontend":
             print("error : " + str(inputstr))
             self.write("error : " + str(inputstr))
+
+    
+
 
 
 # 只能实例化一次, 避免handler的重复添加, 导致多重输出

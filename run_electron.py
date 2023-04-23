@@ -19,14 +19,15 @@ sys.path.append(prj_path)
 from py_script.utils_update_list.update import list_update
 list_update(script_path)
 
-# 拷贝python文件
-print("copy python file ...")
-if os.path.exists("./desktop_electron/public/static/py_script"):
-    rmtree("./desktop_electron/public/static/py_script")
-copytree("./py_script", "./desktop_electron/public/static/py_script")
-if os.path.exists("./desktop_electron/public/static/py_server"):
-    rmtree("./desktop_electron/public/static/py_server")
-copytree("./py_server", "./desktop_electron/public/static/py_server")
+'''以这个模式启动的前端将会使用开发路径,因此不需要拷贝python文件'''
+# # 拷贝python文件
+# print("copy python file ...")
+# if os.path.exists("./desktop_electron/public/static/py_script"):
+#     rmtree("./desktop_electron/public/static/py_script")
+# copytree("./py_script", "./desktop_electron/public/static/py_script")
+# if os.path.exists("./desktop_electron/public/static/py_server"):
+#     rmtree("./desktop_electron/public/static/py_server")
+# copytree("./py_server", "./desktop_electron/public/static/py_server")
 
 
 # 开发日志转化为html
