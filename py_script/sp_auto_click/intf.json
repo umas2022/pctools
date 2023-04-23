@@ -1,0 +1,58 @@
+{
+    "title": "点击 - 连续点击",
+    "group": {
+        "key": "auto",
+        "label": "自动化"
+    },
+    "info": [
+        "1.点击器",
+        "2."
+    ],
+    "require": [
+        {
+            "type": "input",
+            "data": {
+                "key": "pos_x",
+                "label": "x轴坐标",
+                "value": "0",
+                "annotation": [
+                    "注释"
+                ]
+            }
+        },
+        {
+            "type": "input",
+            "data": {
+                "key": "pos_y",
+                "label": "y轴坐标",
+                "value": "0",
+                "annotation": [
+                    "注释"
+                ]
+            }
+        },
+        {
+            "type": "input",
+            "data": {
+                "key": "sleep_time",
+                "label": "点击间隔",
+                "value": "5",
+                "annotation": [
+                    "in型,单位秒"
+                ]
+            }
+        },
+        {
+            "type": "button",
+            "data": {
+                "key": "get_pos",
+                "label": "当前坐标",
+                "button": "获取",
+                "annotation": [
+                    "按钮",
+                    "按钮"
+                ]
+            }
+        }
+    ]
+}

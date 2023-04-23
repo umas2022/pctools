@@ -1,0 +1,1 @@
+from sp_auto_click.auto_click import AutoClick as MainClass

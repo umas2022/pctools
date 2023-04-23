@@ -31,8 +31,8 @@ py7zr
 pypiwin32
 PyUserinput
 pyautogui
-PyQT5
 winsdk
+pynput
 
 # general_basic 通用辅助
 
