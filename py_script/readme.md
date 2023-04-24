@@ -5,12 +5,12 @@
 - 参见 ./utils_env_init/setup.py
 
 
-### 使用说明
-- py_script路径需要被添加进path
-```python
-py_path = os.path.split(os.path.realpath(__file__))[0] # 推荐使用
-sys.path.append("xxx/py_script")
-```
+### 新增功能
+1. 创建以sp开头的文件夹
+2. 在__init__.py中 import 主类 as MainClass
+3. 主类接收一个json_set的对象作为输入参数
+4. 主类中run()函数作为调用接口
+5. intf.json参照set_demo的全接口demo,要包含所有输入参数
 
 ### 文件说明
 - index.json: electron读取的功能目录,由py_server/app_sp_operator/views/SearcherFunction/list_update根据每个sp_xxx/intf.json生成
