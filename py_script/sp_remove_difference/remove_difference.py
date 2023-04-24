@@ -16,11 +16,13 @@ class RemoveDifference():
         self.base_path = str(base_path).replace("\\", "/")
         self.del_path = str(del_path).replace("\\", "/")
         self.path_log = str(path_log).replace("\\", "/")
+        logger.set_path(self.path_log)
         if not json_set == {}:
             try:
                 self.base_path = json_set['base_path'].replace("\\", "/")
                 self.del_path = json_set['del_path'].replace("\\", "/")
                 self.path_log = json_set['path_log'].replace("\\", "/") if "path_log" in json_set else ""
+                logger.set_path(self.path_log)
             except Exception as e:
                 logger.error("key error: %s" %e)
                 return

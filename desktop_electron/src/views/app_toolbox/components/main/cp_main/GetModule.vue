@@ -2,8 +2,8 @@
     <div class="cp-module">
         <div class="h3">获取功能</div>
         <el-select v-model="store_home.group" placeholder="选择组">
-            <el-option v-for="(item, key) in store_home.index_list" :key="key"
-                :label="store_home.index_list[key]['label']" :value="key" @click="store_home.function=''"/>
+            <el-option v-for="(item, key) in store_home.index_list" :key="key" :label="store_home.index_list[key]['label']"
+                :value="key" @click="store_home.function = ''" />
         </el-select>
 
         <AnimateDown :display="store_home.group != ''">
@@ -18,17 +18,12 @@
     </div>
 </template>
 <script setup lang="ts">
-import { ref, inject,watch } from "vue"
+import { ref, inject, watch } from "vue"
 import { get_wsurl } from "@/utils/api_config.js";
 import AnimateDown from "@/components/animate_down/AnimateDown.vue"
-
-const store_config: any = inject("store_config")
+import { useStore } from "vuex";
+const store = useStore();
 const store_home: any = inject("store_home")
-const refresh_config = (item: string) => {
-    return store_config.value[item] ? store_config.value[item]["value"] : "config load failed"
-}
-watch(store_config, () => py_path.value = refresh_config("py_path"))
-const py_path = ref(refresh_config("py_path"))
 
 const get_intf = () => {
 
@@ -36,7 +31,7 @@ const get_intf = () => {
     // 更新目录
     const send_data = {
         function: "get_intf",
-        data: { py_path: py_path.value, module: store_home.function }
+        data: { py_path: store.state.config["py_path"]["value"], module: store_home.function }
     }
 
     console.log("ws connecting ...");
@@ -55,7 +50,7 @@ const get_intf = () => {
 
 </script>
 <style scoped lang="scss">
-div.cp-module{
+div.cp-module {
     user-select: none; // 页面文字禁止被选中
 }
 </style>

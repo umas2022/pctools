@@ -21,7 +21,7 @@ class ImgCompress():
     def __init__(self, path_in="", path_out="", path_log="", max_size_kb=3072, json_set={}) -> None:
         self.path_in = str(path_in).replace("\\", "/")
         self.path_out = str(path_out).replace("\\", "/")
-        logger.raw_logger.set_path(str(path_log).replace("\\", "/"))
+        logger.set_path(str(path_log).replace("\\", "/"))
         # 图片尺寸上限
         self.max_size_kb = max_size_kb
         # 单次压缩系数
@@ -35,6 +35,7 @@ class ImgCompress():
                 self.path_in = json_set['path_in'].replace("\\", "/")
                 self.path_out = json_set['path_out'].replace("\\", "/")
                 self.path_log = json_set['path_log'].replace("\\", "/") if "path_log" in json_set else ""
+                logger.set_path(self.path_log)
                 self.max_size_kb = int(json_set['max_size_kb']) if "max_size_kb" in json_set else 3072
             except Exception as e:
                 logger.error("key error: %s" % e)

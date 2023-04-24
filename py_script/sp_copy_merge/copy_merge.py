@@ -14,12 +14,13 @@ class CopyMerge():
     def __init__(self, path_in="", path_out="",path_log="",json_set = {}) -> None:
         self.path_in = path_in.replace("\\", "/")
         self.path_out = path_out.replace("\\", "/")
-        logger.raw_logger.set_path(str(path_log).replace("\\", "/"))
+        logger.set_path(str(path_log).replace("\\", "/"))
         if not json_set == {}:
             try:
                 self.path_in = json_set['path_in'].replace("\\", "/")
                 self.path_out = json_set['path_out'].replace("\\", "/")
                 self.path_log = json_set['path_log'].replace("\\", "/") if "path_log" in json_set else ""
+                logger.set_path(self.path_log)
             except Exception as e:
                 logger.error("key error: %s" %e)
                 return

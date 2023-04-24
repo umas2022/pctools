@@ -32,13 +32,15 @@
 <script setup>
 import { static_path, is_dev } from "@/utils/utils_path.js"
 
-import CpChangePort from "./cp_settings/CpChangePort.vue"
 import CpEnvInit from "./cp_settings/CpEnvInit.vue"
-import CpDevPath from "./cp_settings/CpDevPath.vue"
 import CpBackendTest from "./cp_settings/CpBackendTest.vue"
+import CpDevPath from "./cp_settings/CpDevPath.vue"
+
+import CpChangePort from "./cp_settings/CpChangePort.vue"
 import CpChangePathScript from "./cp_settings/CpChangePathScript.vue"
 import CpChangePathServer from "./cp_settings/CpChangePathServer.vue"
 import CpChangePathVenv from "./cp_settings/CpChangePathVenv.vue"
+
 import CpShowNav from "./cp_settings/CpShowNav.vue"
 import CpDevelopLog from "./cp_settings/CpDevelopLog.vue"
 

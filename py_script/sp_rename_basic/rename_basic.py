@@ -21,7 +21,7 @@ class RenameBasic():
         path_log: 日志路径(置空不使用日志)
         '''
         self.path_in = str(path_in).replace("\\", "/")
-        logger.raw_logger.set_path(str(path_log).replace("\\", "/"))
+        logger.set_path(str(path_log).replace("\\", "/"))
         self.use_func = use_func
         self.target = target
         self.add_in = add_in
@@ -31,6 +31,7 @@ class RenameBasic():
             try:
                 self.path_in = json_set['path_in'].replace("\\", "/")
                 self.path_log = json_set['path_log'].replace("\\", "/") if "path_log" in json_set else ""
+                logger.set_path(self.path_log)
                 self.use_func = json_set['use_func']
                 self.target = json_set['target'] if "target" in json_set else "file"
                 self.add_in = json_set['add_in']if "add_in" in json_set else ""

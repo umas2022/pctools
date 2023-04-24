@@ -147,14 +147,9 @@ import { ref, onMounted, reactive, inject, provide, computed, watch } from "vue"
 import { get_wsurl } from "@/utils/api_config.js";
 import ShowLogBox from "@/components/show_log/ShowLogBox.vue";
 import useSvgIcon from "@/components/svgbox/useSvgIcon.vue";
-
-const store_config: any = inject("store_config")
+import { useStore } from "vuex";
+const store = useStore();
 const store_home: any = inject("store_home")
-const refresh_config = (item: string) => {
-    return store_config.value[item] ? store_config.value[item]["value"] : "config load failed"
-}
-watch(store_config, () => py_path.value = refresh_config("py_path"))
-const py_path = ref(refresh_config("py_path"))
 
 const display_gb_info: any = inject("display_gb_info")
 
@@ -231,7 +226,7 @@ const start = (button: any) => {
     const send_data: type_send = {
         function: store_home.function,
         terminal: as_terminal.value,
-        py_path: py_path.value,
+        py_path: store.state.config["py_path"]["value"],
         button: button
     }
     pg_data.value.forEach((item: type_page) => {

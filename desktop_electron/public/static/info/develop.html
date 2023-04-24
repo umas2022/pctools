@@ -19,7 +19,7 @@
 <h3>script</h3>
 <ul>
 <li>使用os.path.normpath()替代replace("\", "/")注意空字符串会被替换为'.'</li>
-<li>[所有的log_path都少了一句logger.raw_logger.set_path(self.path_log),这里参考remove_keyword的写法,注意如果为空,normpath函数会转换为'.',还要再加一个判断]</li>
+<li>[所有的log_path都少了一句logger.set_path(self.path_log),这里参考remove_keyword的写法,注意如果为空,normpath函数会转换为'.',还要再加一个判断]</li>
 <li>box_copy_batch: 图片压缩对bmp失败</li>
 <li>新建的copy_split用更可靠的函数替代了一些不稳定的写法,其他的copy函数应该参考这个都进行升级</li>
 <li>usage.py中使用script_path =os.path.dirname(os.path.dirname(os.path.realpath(<strong>file</strong>))) 

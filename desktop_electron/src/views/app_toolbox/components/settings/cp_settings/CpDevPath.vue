@@ -17,24 +17,25 @@
                 <span class="line">1.开发时使用的是未打包前的python路径,需要打开这个开关</span> <br />
                 <span class="line">2.开发模式路径定位到打包前的python脚本路径(写死在cp里了) </span> <br />
                 <span class="line">3.程序启动时获取功能目录index.json使用这个路径</span> <br />
-                <span class="line">4.当前:{{ refresh_config("py_path") }}</span> <br />
+                <span class="line">4.当前:{{ py_path }}</span> <br />
             </template>
         </BasicTemplate>
     </div>
 </template>
 <script setup lang="ts">
 import { onMounted, ref, inject, watch } from "vue";
+import { useStore } from "vuex";
 import BasicTemplate from "./BasicTemplate.vue"
 import { static_path, is_dev } from "@/utils/utils_path.js"
 import { ElMessage } from "element-plus";
+const store = useStore();
 const path = window.require("path");
 
+const py_path = ref("")
 
-const store_config: any = inject("store_config")
-const store_home: any = inject("store_home")
-const refresh_config = (item: string) => {
-    return store_config.value[item] ? store_config.value[item]["value"] : "config load failed"
-}
+watch(store.state.config, () => {
+    py_path.value = store.state.config["py_path"]["value"]
+})
 
 
 const setDevPath = ref(JSON.parse(JSON.stringify(is_dev())))
@@ -47,13 +48,13 @@ const dev_server = "D:\\s-code\\self\\pctools\\py_server"
 const devSwitch = () => {
     try {
         if (setDevPath.value == true) {
-            store_config.value["py_path"]["value"] = dev_path
-            store_config.value["py_server"]["value"] = dev_server
+            store.commit("set_config", { "key": "py_path", value: dev_path })
+            store.commit("set_config", { "key": "py_server", value: dev_server })
             ElMessage.success("develop path")
         } else {
-            store_config.value["py_path"]["value"] = path.join(static_path(), "py_script")
-            store_config.value["py_server"]["value"] = path.join(static_path(), "py_server")
-            if (is_dev) { ElMessage.success("product path") }
+            store.commit("set_config", { "key": "py_path", "value": path.join(static_path(), "py_script") })
+            store.commit("set_config", { "key": "py_server", "value": path.join(static_path(), "py_server") })
+            if (is_dev()) { ElMessage.success("product path") }
 
         }
         loaded.value = true
@@ -61,7 +62,7 @@ const devSwitch = () => {
         console.log("devSwitch error, config file not load")
     }
 
-    console.log("path in use : " + refresh_config("py_path"))
+    console.log("path in use : " + store.state.config["py_path"]["value"])
 };
 
 onMounted(() => {

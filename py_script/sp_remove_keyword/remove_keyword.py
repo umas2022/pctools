@@ -26,7 +26,7 @@ class RemoveKeyword():
             # * 如果日志路径包含在被删除目录中,将被直接跳过不作删除
             self.path_log = os.path.normpath(json_set['path_log']) if "path_log" in json_set else ""
             self.path_log = "" if self.path_log == "." else self.path_log
-            logger.raw_logger.set_path(self.path_log)
+            logger.set_path(self.path_log)
             # 主要字段,置空匹配所有文件
             self.keyword = json_set['keyword'] if "keyword" in json_set else ""
             # 主要字段位置,置空匹配所有位置

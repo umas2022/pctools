@@ -67,6 +67,7 @@
 </template>
 <script setup lang="ts">
 import { provide, reactive, ref, onMounted, computed } from "vue"
+import { useStore } from "vuex";
 import type { ElScrollbar } from "element-plus";
 import type { Ref } from "vue"
 import { static_path, is_dev } from "@/utils/utils_path.js"
@@ -85,7 +86,7 @@ import ButtonChangePage from "./components/button/ButtonChangePage.vue"
 
 const fs = window.require("fs");
 const path = window.require("path");
-
+const store = useStore()
 
 // 显示全局info
 const info_data = ref([""])
@@ -157,31 +158,35 @@ const store_home = reactive({
 })
 provide("store_home", store_home)
 
-// 全局设置,注意这里因为源是动态的所以用了ref而不是reactive,要使用.value读取
+// store加载全局设置
 const config_path = path.join(static_path(), "config.json")
-const store_config: { [key: string]: any } = ref({})
-provide("store_config", store_config)
 onMounted(() => {
   fs.readFile(config_path, 'utf-8',
     (err: any, data: any) => {
       if (err) {
         console.log("load config err:", err);
       } else {
-        store_config.value = JSON.parse(data)
+
+        data = JSON.parse(data)
+        for (let key in data) {
+          store.commit("init_config", { "key": key, "value": data[key] })
+        }
+
         // 为空的项目设置初值
         let write_flag = false
-        if (store_config.value["py_path"]["value"] == "") {
-          store_config.value["py_path"]["value"] = path.join(static_path(), "py_script")
+        if (store.state.config["py_path"]["value"] == "") {
+          store.state.config["py_path"]["value"] = path.join(static_path(), "py_script")
           write_flag = true
         }
-        if (store_config.value["py_server"]["value"] == "") {
-          store_config.value["py_server"]["value"] = path.join(static_path(), "py_server")
+        if (store.state.config["py_server"]["value"] == "") {
+          store.state.config["py_server"]["value"] = path.join(static_path(), "py_server")
           write_flag = true
         }
+
         // 保存初值
         if (write_flag) {
           try {
-            fs.writeFileSync(config_path, JSON.stringify(store_config.value));
+            fs.writeFileSync(config_path, JSON.stringify(store.state.config));
           } catch (err) {
             console.error("config write error : " + err);
           }

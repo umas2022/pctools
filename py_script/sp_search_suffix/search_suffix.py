@@ -15,7 +15,7 @@ class SearchSuffix():
             try:
                 self.path_in = os.path.normpath(json_set['path_in'])
                 self.path_log = os.path.normpath(json_set['path_log']) if "path_log" in json_set else ""
-                logger.raw_logger.set_path(self.path_log)
+                logger.set_path(self.path_log)
             except Exception as e:
                 logger.error("key error: %s" % e)
                 return

@@ -18,7 +18,7 @@ class CopySplit():
             self.path_out = os.path.normpath(json_set['path_out'])
             # 日志路径(默认无)
             self.path_log = os.path.normpath(json_set['path_log']) if "path_log" in json_set else ""
-            logger.raw_logger.set_path(str(self.path_log).replace("\\", "/"))
+            logger.set_path(str(self.path_log).replace("\\", "/"))
             # *单包容量
             self.single_cap = int(json_set['single_cap'])
             # 命名方法(默认序号命名)

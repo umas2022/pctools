@@ -21,7 +21,7 @@ class VideoCompress():
     def __init__(self, path_in="", path_out="", path_log="", max_bit=10000, cpu_thread=3,json_set = {}) -> None:
         self.path_in = str(path_in).replace("\\", "/")
         self.path_out = str(path_out).replace("\\", "/")
-        logger.raw_logger.set_path(str(path_log).replace("\\", "/"))
+        logger.set_path(str(path_log).replace("\\", "/"))
         # 最大比特率(kbps)
         self.max_bit = max_bit
         # 容许系数(倍率范围内都被视为满足条件, 由于写入误差存在, 此系数建议>1.05)
@@ -37,6 +37,7 @@ class VideoCompress():
                 self.path_in = json_set['path_in'].replace("\\", "/")
                 self.path_out = json_set['path_out'].replace("\\", "/")
                 self.path_log = json_set['path_log'].replace("\\", "/") if "path_log" in json_set else ""
+                logger.set_path(self.path_log)
                 self.max_bit_kbps = int(json_set['max_bit_kbps'])  if "max_bit_kbps" in json_set else 10000
                 self.cpu_thread = int(json_set['cpu_thread']) if "cpu_thread" in json_set else 3
             except Exception as e:

@@ -19,9 +19,9 @@ os.chdir(server_path)
 py_version = args.version if args.version else "python"
 port = args.port if args.port else 4090
 
-print("python version in use: %s" % py_version)
-print("backend port: %s\n" % port)
-print("server path: %s" % server_path)
+print("python in use: %s" % py_version)
+print("backend port: %s" % port)
+print("server path: %s\n" % server_path)
 
 
 os.system("%s manage.py runserver 0.0.0.0:%s" % (py_version, port))

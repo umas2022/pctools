@@ -16,7 +16,6 @@
 - 后端发回的消息增加一个id来区分多个前端窗口
 ### script
 - 使用os.path.normpath()替代replace("\\", "/")注意空字符串会被替换为'.'
-- [所有的log_path都少了一句logger.raw_logger.set_path(self.path_log),这里参考remove_keyword的写法,注意如果为空,normpath函数会转换为'.',还要再加一个判断]
 - box_copy_batch: 图片压缩对bmp失败
 - 新建的copy_split用更可靠的函数替代了一些不稳定的写法,其他的copy函数应该参考这个都进行升级
 - usage.py中使用script_path =os.path.dirname(os.path.dirname(os.path.realpath(__file__))) 
@@ -36,6 +35,8 @@ sys.path.append(script_path)替代sys.path.append("..")
 - 顺便把目录更新改成一个utils,在打包时候调用一次,前端设置里的更新按钮删掉了
 - 用subprocess替代os.system,删掉了开发中的public里的py脚本
 - 序号命名对文件夹也加了后缀名,修了
+- 前端config修改不能实时更新,改用store了
+- - [所有的log_path都少了一句logger.set_path(self.path_log),这里参考remove_keyword的写法,注意如果为空,normpath函数会转换为'.',还要再加一个判断] 修好了
 
 ### 2023.4.18
 - 设置页初始判断开发环境的switch改用定时器循环触发,避免初始时设置没有读到

@@ -34,8 +34,8 @@ class Archive7z():
         self.path_in = str(path_in).replace("\\", "/")
         self.path_out = str(path_out).replace("\\", "/")
         self.path_log = str(path_log).replace("\\", "/")
+        logger.set_path(str(path_log).replace("\\", "/"))
         self.path_7z = str(path_7z).replace("\\", "/")
-        logger.raw_logger.set_path(str(path_log).replace("\\", "/"))
         self.password = str(password)
         self.th_total = int(th_total)
         self.overwrite = bool(overwrite)
@@ -49,6 +49,8 @@ class Archive7z():
                 self.path_in = json_set['path_in'].replace("\\", "/")
                 self.path_out = json_set['path_out'].replace("\\", "/")
                 self.path_log = json_set['path_log'].replace("\\", "/") if "path_log" in json_set else ""
+                self.path_log = "" if self.path_log == "." else self.path_log
+                logger.set_path(self.path_log)
                 self.path_7z = json_set['path_7z'].replace("\\", "/") if "path_7z" in json_set else ""
                 self.password = json_set['password']
                 self.th_total = int(json_set['th_total'])

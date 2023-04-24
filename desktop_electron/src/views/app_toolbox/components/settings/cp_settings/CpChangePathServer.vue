@@ -31,25 +31,27 @@ import { ref, inject, watch } from "vue";
 import BasicTemplate from "./BasicTemplate.vue"
 import { ElMessage } from "element-plus";
 import { static_path, is_dev } from "@/utils/utils_path.js"
+import { useStore } from "vuex";
+const store = useStore();
+
 const fs = window.require("fs");
 const path = window.require("path");
 
-const store_home: any = inject("store_home")
-const store_config: any = inject("store_config")
 
-const refresh_config = (item: string) => {
-    return store_config.value[item] ? store_config.value[item]["value"] : "config load failed"
-}
-watch(store_config, () => py_server.value = refresh_config("py_server"))
-const py_server = ref(refresh_config("py_server"))
+const py_server = ref("")
 
+watch(store.state.config,()=>{
+    py_server.value = store.state.config["py_server"]["value"]
+})
 
 const reset_path = () => {
-    store_config.value["py_server"]["value"] = py_server
+    // 修改store
+    store.commit("set_config", { "key": "py_server", "value": py_server.value })
+
     // 修改config.json文件
     const config_path = path.join(static_path(), "config.json")
     try {
-        fs.writeFileSync(config_path, JSON.stringify(store_config.value));
+        fs.writeFileSync(config_path, JSON.stringify(store.state.config));
     } catch (err) {
         console.error("config write error : " + err);
     }

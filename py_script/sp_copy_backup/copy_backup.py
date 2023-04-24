@@ -14,7 +14,7 @@ class CopyBackup():
     def __init__(self, path_in="", path_out="",path_log = "",keyword="",location="",json_set = {}) -> None:
         self.path_in = str(path_in).replace("\\", "/")
         self.path_out = str(path_out).replace("\\", "/")
-        logger.raw_logger.set_path(str(path_log).replace("\\", "/"))
+        logger.set_path(str(path_log).replace("\\", "/"))
         self.keyword = str(keyword)
         self.location = str(location)
         if not json_set == {}:
@@ -22,6 +22,7 @@ class CopyBackup():
                 self.path_in = json_set['path_in'].replace("\\", "/")
                 self.path_out = json_set['path_out'].replace("\\", "/")
                 self.path_log = json_set['path_log'] if "path_log" in json_set else ""
+                logger.set_path(self.path_log)
                 self.keyword = json_set['keyword'] if "keyword" in json_set else ""
                 self.location = json_set['location'] if "location" in json_set else ""
             except Exception as e:

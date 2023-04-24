@@ -32,7 +32,7 @@ class AutoTrans():
             # 日志路径
             self.path_log = os.path.normpath(json_set['path_log']) if "path_log" in json_set else ""
             self.path_log = "" if self.path_log == "." else self.path_log
-            logger.raw_logger.set_path(self.path_log)
+            logger.set_path(self.path_log)
             # * 目标语言
             self.target = json_set['target']
             # * 翻译语言
