@@ -15,9 +15,9 @@
             "label": "自动化",
             "data": {
                 "sp_auto_cmd": "远程 - 执行命令",
-                "sp_auto_shot": "点击 - 窗口截图",
-                "sp_auto_static": "点击 - 静态检测",
-                "sp_auto_trans": "点击 - 截图翻译"
+                "sp_auto_shot": "识别 - 窗口截图",
+                "sp_auto_static": "识别 - 静态检测",
+                "sp_auto_trans": "识别 - 截图翻译"
             }
         },
         "compress": {
