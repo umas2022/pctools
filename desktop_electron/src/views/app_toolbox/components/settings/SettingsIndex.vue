@@ -29,7 +29,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { static_path, is_dev } from "@/utils/utils_path.js"
 
 import CpEnvInit from "./cp_settings/CpEnvInit.vue"

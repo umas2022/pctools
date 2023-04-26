@@ -107,7 +107,7 @@ const bg_path = computed(() => "static/background/pattern-" + store_home.bg_num 
 
 // 后端连通性检测
 const check_be = (flag: Ref<boolean>) => {
-  let wsdemo = new WebSocket(get_wsurl().local + "app_test_ws");
+  let wsdemo = new WebSocket(get_wsurl(store.state.config["port"]["value"]).local + "app_test_ws");
   wsdemo.onopen = () => {
     flag.value = true
   };

@@ -2,9 +2,7 @@ import { createStore } from "vuex";
 
 export default createStore({
   state: {
-    config: {
-      "test_key": "test_value"
-    } as { [key: string]: any }
+    config: {} as { [key: string]: any }
   },
   getters: {
     get_config(state) {

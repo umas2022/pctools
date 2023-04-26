@@ -36,7 +36,7 @@ const get_intf = () => {
 
     console.log("ws connecting ...");
 
-    let wsdemo = new WebSocket(get_wsurl().local + "sp_searcher");
+    let wsdemo = new WebSocket(get_wsurl(store.state.config["port"]["value"]).local + "sp_searcher");
     wsdemo.onopen = () => {
         wsdemo.send(JSON.stringify(send_data));
     };

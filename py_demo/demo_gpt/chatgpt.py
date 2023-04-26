@@ -20,8 +20,9 @@ def translate(text, target_language):
 
     
 
-text = "Hello, how are you?"
-target_language = "zh"
+text = "大事なお客さんを"
+# target_language = "zh"
+target_language = "chinese"
 
 translation = translate(text, target_language)
 print(f"Translation: {translation}")

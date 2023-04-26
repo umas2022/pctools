@@ -26,11 +26,12 @@
 import { ElMessage } from "element-plus";
 import BasicTemplate from "./BasicTemplate.vue"
 import { get_wsurl } from "@/utils/api_config.js";
-
+import { useStore } from "vuex";
+const store = useStore();
 
 const check_be = () => {
     console.log("wsConnect");
-    let wsdemo = new WebSocket(get_wsurl().local + "app_test_ws");
+    let wsdemo = new WebSocket(get_wsurl(store.state.config["port"]["value"]).local + "app_test_ws");
     wsdemo.onopen = () => {
         wsdemo.send("hello");
         console.log("connected !");

@@ -50,7 +50,7 @@ const start = (button: any) => {
 
     console.log("ws connecting ...");
 
-    let wsdemo = new WebSocket(get_wsurl().local + "sp_searcher");
+    let wsdemo = new WebSocket(get_wsurl(store.state.config["port"]["value"]).local + "sp_searcher");
     wsdemo.onopen = () => {
         wsdemo.send(JSON.stringify({ function: "run", data: send_data }));
     };

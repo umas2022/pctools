@@ -29,6 +29,8 @@ sys.path.append(script_path)替代sys.path.append("..")
 ### 2023.4.21
 - 增加了连续点击功能
 
+### 2023.4.26
+- api_config不再定义port,改用store;之前使用localStorage的方法在打包后会导致端口错误,可能是之前的storage没有自动清除
 
 ### 2023.4.19
 - 为了给3k+沙雕图分包,新增了分包拷贝的功能,将包含大量文件的单个文件夹拆分为多个小文件夹

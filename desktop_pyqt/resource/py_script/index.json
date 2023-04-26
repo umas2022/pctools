@@ -29,7 +29,7 @@
             }
         },
         "copy": {
-            "label": "复制",
+            "label": "拷贝",
             "data": {
                 "sp_copy_backup": "拷贝 - 筛选拷贝",
                 "sp_copy_merge": "拷贝 - 拷贝合并",

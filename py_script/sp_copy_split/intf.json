@@ -2,7 +2,7 @@
     "title": "拷贝 - 拷贝拆分",
     "group":{
         "key":"copy",
-        "label":"复制"
+        "label":"拷贝"
     } ,
     "info": [
         "1.拆分小包",

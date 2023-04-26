@@ -44,9 +44,6 @@ const reset_port = () => {
     // 修改store
     store.commit("set_config", { "key": "port", "value": port.value })
 
-    // localStorage给axios用
-    localStorage.setItem("port", store.state.config["port"]["value"])
-    
     // 修改config.json文件
     const config_path = path.join(static_path(), "config.json")
     try {
