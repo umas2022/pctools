@@ -1,0 +1,1 @@
+from sp_copy_mirage.copy_mirage import CopyMirage as MainClass

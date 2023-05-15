@@ -12,12 +12,17 @@
 - 关于输入参数检查:加一个utils,顺便把每次的输入写进intf.json里,保存上次的输入结果;输入参数分成必填和有默认值两种,给所有的必填项目加上星号
 - 前端统计显示error和warning信息
 - 进度条
+- 右上角启动新窗口的按钮坏了
 ### server
 - 后端发回的消息增加一个id来区分多个前端窗口
 ### script
 - 使用os.path.normpath()替代replace("\\", "/")注意空字符串会被替换为'.'
-- box_copy_batch: 图片压缩对bmp失败
-- 新建的copy_split用更可靠的函数替代了一些不稳定的写法,其他的copy函数应该参考这个都进行升级
+- 图片压缩对bmp失败
+- 新建的copy_split用更可靠的函数替代了一些不稳定的写法,其他的copy函数应该参考这个都进行升级,具体如下
+  - 输入参数仅json_set,参数写明注释
+  - 使用utils_path库(这里还没用)
+  - self.if_count判断是否要先计数
+  - os.path.relpath计算相对路径,而不是replace
 - usage.py中使用script_path =os.path.dirname(os.path.dirname(os.path.realpath(__file__))) 
 sys.path.append(script_path)替代sys.path.append("..")
 - 新建了utils_path,一些常用的path函数可以放进去
@@ -25,6 +30,9 @@ sys.path.append(script_path)替代sys.path.append("..")
 
 ## 开发记录
 流水日志,可以记录生活
+
+### 2023.5.15
+- 增加了批量生成幻影坦克功能,不支持中文路径
 
 ### 2023.4.21
 - 增加了连续点击功能

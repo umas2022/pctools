@@ -53,5 +53,6 @@ pytesseract
 deep-translator
 PyQT6
 
+# 幻影坦克
 
-
+numba

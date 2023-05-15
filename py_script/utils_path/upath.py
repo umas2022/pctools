@@ -1,5 +1,6 @@
 '''
 常用的path函数
+注意normpath会将空字符替换为"."
 '''
 
 import os
