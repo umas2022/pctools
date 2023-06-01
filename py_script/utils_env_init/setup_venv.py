@@ -9,7 +9,8 @@ import sys
 import os
 
 # 前端输入虚拟环境位置
-input_path = sys.argv[1]
+# input_path = sys.argv[1]
+input_path = r"C:\Users\umas-vt\code\pctools_venv"
 # 项目位置
 setup_dir = os.path.split(os.path.realpath(__file__))[0]
 pctools_path = os.path.dirname(os.path.dirname(setup_dir))
@@ -25,5 +26,9 @@ vpython = os.path.normpath(os.path.join(user_path, "venv\\Scripts\\python.exe"))
 vpip = os.path.normpath(os.path.join(user_path, "venv\\Scripts\\pip.exe"))
 
 subprocess.run("pip install virtualenv", creationflags=subprocess.CREATE_NEW_CONSOLE)
-subprocess.run("virtualenv -p python3.9 %s" % venv_path, creationflags=subprocess.CREATE_NEW_CONSOLE)
+subprocess.run("virtualenv -p python3.10 %s" % venv_path, creationflags=subprocess.CREATE_NEW_CONSOLE)
 subprocess.run([vpython, script, vpip], creationflags=subprocess.CREATE_NEW_CONSOLE)
+
+# subprocess.run("pip install virtualenv")
+# subprocess.run("virtualenv -p python3.10 %s" % venv_path)
+# subprocess.run([vpython, script, vpip])

@@ -37,20 +37,11 @@
 - pyqt6 desktup (desktop_pyqt/) (已经放弃更新)
 
 ## Environment
-- ./py_script/utils_env_init/pip_requirements.txt
+参见 ./0-docs/deploy.md，链接待补
 
-## Run
-- dev: run backend server  
-```python run_backend.py```
-- dev: run electron server (develop mode)
-```python run_electron.py```
-
-## Build
-- dev: build electron package
-```python build_electron.py```
 
 ## 初次部署
-- 设置页点击py环境初始化按钮
+- 设置页输入环境安装路径，点击py环境初始化按钮（注意环境安装路径输入后要点击修改按钮）
 - 如果按钮没反应,手动运行/py_script/utils_env_init/setup.py
 - 项目部署将会创建venv虚拟环境并在其中安装必备运行库
 

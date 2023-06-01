@@ -1,11 +1,11 @@
 {
   "name": "desktop_electron",
+  "version": "0.2.0",
+  "private": true,
+  "description": "description:电脑配件",
   "author": {
     "name": "umas"
   },
-  "description": "description:电脑配件",
-  "version": "0.2.0",
-  "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
@@ -22,6 +22,7 @@
     "asar": "^3.2.0",
     "core-js": "^3.8.3",
     "csshake": "^1.7.0",
+    "electron": "^13.6.9",
     "element-plus": "^2.2.14",
     "image-size": "^1.0.2",
     "intersection-observer": "^0.12.2",
@@ -47,7 +48,6 @@
     "@vue/cli-plugin-vuex": "~5.0.0",
     "@vue/cli-service": "~5.0.0",
     "@vue/eslint-config-typescript": "^9.1.0",
-    "electron": "^13.0.0",
     "electron-devtools-installer": "^3.1.0",
     "eslint": "^7.32.0",
     "eslint-config-prettier": "^8.3.0",
