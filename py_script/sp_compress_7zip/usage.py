@@ -8,7 +8,7 @@ json_set = {
     "method": "exe",
     "path_in": "D:\\s-code\\test\\test_in",
     "path_out": "D:\\s-code\\test\\test_out",
-    "password": "umas1970",
+    "password": "",
     "path_log": "D:\\s-code\\test\\test_log",
     "path_7z": "D:\\p-program\\7zip\\7-Zip\\7z.exe",
     "th_total": 1,

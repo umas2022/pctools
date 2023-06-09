@@ -83,7 +83,7 @@
             "data": {
                 "key": "password",
                 "label": "压缩密码",
-                "value": "umas1970",
+                "value": "",
                 "placeholder": "置空不使用密码",
                 "annotation": "置空不使用密码"
             }

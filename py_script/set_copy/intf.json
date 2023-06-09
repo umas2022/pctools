@@ -13,14 +13,14 @@
             "data": {
                 "key": "pre_key",
                 "label": "选择方法",
-                "value": "samu_backup_1t",
+                "value": "backup_M2",
                 "option": [
                     {
-                        "value": "samu_backup_1t",
-                        "label": "1t盘samu备份更新"
+                        "value": "backup_M2",
+                        "label": "M2全盘备份至HDD"
                     },{
-                        "value": "samu_backup_2t",
-                        "label": "2t盘samu备份更新"
+                        "value": "backup_samu",
+                        "label": "M2单文件夹备份至HDD"
                     },
                     {
                         "value": "compress_test",
@@ -28,7 +28,7 @@
                     }
                 ],
                 "annotation": [
-                    "1. samu备份更新:打包->删除7z前后缀->删除原文件夹前缀"
+                    "1. 注释"
                 ]
             }
         }

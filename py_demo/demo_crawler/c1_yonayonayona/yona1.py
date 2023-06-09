@@ -40,7 +40,7 @@ print("start ...")
 driver.get(url=url_login)
 driver.implicitly_wait(30)
 driver.find_element(By.CSS_SELECTOR, 'input[name="j_username"').send_keys("1970313791@qq.com")
-driver.find_element(By.CSS_SELECTOR, 'input[name="j_password"').send_keys("umas1970")
+driver.find_element(By.CSS_SELECTOR, 'input[name="j_password"').send_keys("")
 driver.find_element(By.CSS_SELECTOR, 'button[class="g-recaptcha c-btn--forward"').click()
 driver.implicitly_wait(30)
 

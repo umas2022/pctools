@@ -1,112 +1,42 @@
 {
-    "samu_backup_1t": {
-        "info": "1T盘samu文件夹打包拷贝",
-        "path_log": "F:\\[1T]-samu-sg\\log",
+    "backup_M2": {
+        "info": "M2全盘备份至HDD",
+        "path_log": "V:\\log",
         "action": [
             {
-                "function": "sp_compress_7zip",
+                "function": "sp_copy_backup",
                 "input": {
-                    "method": "exe",
-                    "path_in": "F:\\[1T]-samu-sg",
-                    "path_out": "F:\\[1T]-upload",
-                    "password": "umas1970",
-                    "path_log": "D:\\s-code\\test\\test_log",
-                    "path_7z": "D:\\p-program\\7zip\\7-Zip\\7z.exe",
-                    "th_total": 1,
-                    "overwrite": false,
-                    "keyword": "#",
-                    "location": "0",
-                    "double_cp": true,
-                    "deep": true
+                    "path_in": "V:\\",
+                    "path_out": "W:\\",
+                    "path_log": "V:\\log"
                 }
             },
             {
-                "function": "sp_rename_basic",
+                "function": "sp_remove_difference",
                 "input": {
-                    "path_in": "F:\\[1T]-upload",
-                    "use_func": "replace_key",
-                    "target": "dir",
-                    "add_in": "#",
-                    "add_in_2": "",
-                    "deep":true
-                }
-            },
-            {
-                "function": "sp_rename_basic",
-                "input": {
-                    "path_in": "F:\\[1T]-upload",
-                    "use_func": "replace_key",
-                    "target": "dir",
-                    "add_in": "_cp2",
-                    "add_in_2": "",
-                    "deep":true
-                }
-            },
-            {
-                "function": "sp_rename_basic",
-                "input": {
-                    "path_in": "F:\\[1T]-samu-sg",
-                    "use_func": "replace_key",
-                    "target": "dir",
-                    "add_in": "#",
-                    "add_in_2": "",
-                    "deep":true
+                    "base_path": "V:\\",
+                    "del_path": "W:\\"
                 }
             }
         ]
     },
-    "samu_backup_2t": {
-        "info": "2T盘samu文件夹打包拷贝",
-        "path_log": "E:\\[2T]-samu-sg\\log",
+    "backup_samu": {
+        "info": "M2单文件夹备份至HDD",
+        "path_log": "V:\\log",
         "action": [
             {
-                "function": "sp_compress_7zip",
+                "function": "sp_copy_backup",
                 "input": {
-                    "method": "exe",
-                    "path_in": "E:\\[2T]-samu-sg",
-                    "path_out": "E:\\[2T]-upload",
-                    "password": "umas1970",
-                    "path_log": "D:\\s-code\\test\\test_log",
-                    "path_7z": "D:\\p-program\\7zip\\7-Zip\\7z.exe",
-                    "th_total": 1,
-                    "overwrite": false,
-                    "keyword": "#",
-                    "location": "0",
-                    "double_cp": true,
-                    "deep": true
+                    "path_in": "V:\\[M2]-samu",
+                    "path_out": "W:\\[M2]-samu",
+                    "path_log": "V:\\log"
                 }
             },
             {
-                "function": "sp_rename_basic",
+                "function": "sp_remove_difference",
                 "input": {
-                    "path_in": "E:\\[2T]-upload",
-                    "use_func": "replace_key",
-                    "target": "dir",
-                    "add_in": "#",
-                    "add_in_2": "",
-                    "deep":true
-                }
-            },
-            {
-                "function": "sp_rename_basic",
-                "input": {
-                    "path_in": "E:\\[2T]-upload",
-                    "use_func": "replace_key",
-                    "target": "dir",
-                    "add_in": "_cp2",
-                    "add_in_2": "",
-                    "deep":true
-                }
-            },
-            {
-                "function": "sp_rename_basic",
-                "input": {
-                    "path_in": "E:\\[2T]-samu-sg",
-                    "use_func": "replace_key",
-                    "target": "dir",
-                    "add_in": "#",
-                    "add_in_2": "",
-                    "deep":true
+                    "base_path": "V:\\[M2]-samu",
+                    "del_path": "W:\\[M2]-samu"
                 }
             }
         ]
