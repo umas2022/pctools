@@ -1,0 +1,1 @@
+from sp_copy_v2gif.copy_v2gif import Video2Gif as MainClass

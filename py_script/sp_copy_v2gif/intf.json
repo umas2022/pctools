@@ -1,13 +1,12 @@
 {
-    "title": "拷贝 - 幻影坦克(不支持中文路径)",
+    "title": "拷贝 - 视频转gif",
     "group": {
         "key": "copy",
         "label": "拷贝"
     },
     "info": [
-        "1.图片转白色幻影",
-        "2. !!!不支持中文路径!!!",
-        "3.中文路径报错在cv2.imread,有时间找一找替代函数"
+        "1.目前只支持mp4",
+        "2.但其他格式也不一定不行,懒得做判断了,遇到再说"
     ],
     "require": [
         {
@@ -37,6 +36,36 @@
                 "annotation": "日志默认只记录error和warning"
             }
         },
+        {
+            "type": "input",
+            "data": {
+                "key": "fps",
+                "label": "帧率",
+                "value": "10",
+                "annotation": "高帧率的gif格式文件体积可能非常大"
+            }
+        },
+        {
+            "type": "input",
+            "data": {
+                "key": "size_w",
+                "label": "宽度",
+                "value": "",
+                "placeholder":"置空使用原始尺寸",
+                "annotation": "置空使用原始尺寸"
+            }
+        },
+        {
+            "type": "input",
+            "data": {
+                "key": "size_h",
+                "label": "高度",
+                "value": "",
+                "placeholder":"置空使用原始尺寸",
+                "annotation": "置空使用原始尺寸"
+            }
+        },
+
         {
             "type": "switch",
             "data": {
