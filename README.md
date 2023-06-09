@@ -38,9 +38,10 @@
 - Django backend server (py_server/)
 - Electron+Vue frontend (desktop_electron/)
 - pyqt6 desktup (desktop_pyqt/) (已经放弃更新)
+- 没有传release,感兴趣可以微信找我(umas)
 
 ## Environment
-参见 ./0-docs/deploy.md，链接待补
+参见 [./0-docs/deploy.md](https://github.com/umas2022/pctools/blob/main/0-docs/deploy.md)
 
 
 ## 初次部署
