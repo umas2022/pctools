@@ -4,20 +4,21 @@
         "path_log": "V:\\log",
         "action": [
             {
+                "function": "sp_remove_difference",
+                "input": {
+                    "base_path": "V:\\",
+                    "del_path": "W:\\"
+                }
+            },
+            {
                 "function": "sp_copy_backup",
                 "input": {
                     "path_in": "V:\\",
                     "path_out": "W:\\",
                     "path_log": "V:\\log"
                 }
-            },
-            {
-                "function": "sp_remove_difference",
-                "input": {
-                    "base_path": "V:\\",
-                    "del_path": "W:\\"
-                }
             }
+            
         ]
     },
     "backup_samu": {
@@ -25,20 +26,21 @@
         "path_log": "V:\\log",
         "action": [
             {
+                "function": "sp_remove_difference",
+                "input": {
+                    "base_path": "V:\\[M2]-samu",
+                    "del_path": "W:\\[M2]-samu"
+                }
+            },
+            {
                 "function": "sp_copy_backup",
                 "input": {
                     "path_in": "V:\\[M2]-samu",
                     "path_out": "W:\\[M2]-samu",
                     "path_log": "V:\\log"
                 }
-            },
-            {
-                "function": "sp_remove_difference",
-                "input": {
-                    "base_path": "V:\\[M2]-samu",
-                    "del_path": "W:\\[M2]-samu"
-                }
             }
+            
         ]
     },
     "compress_test": {
