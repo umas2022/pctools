@@ -1,13 +1,14 @@
 {
-    "title": "压缩 - 视频压缩",
+    "title": "拷贝 - 视频压缩",
     "group":{
-        "key":"compress",
-        "label":"压缩"
+        "key":"copy",
+        "label":"拷贝"
     } ,
     "info": [
         "1.终端的进度条暂时没法截获给前端, 建议打开终端模式",
         "2.仅对比特率进行压缩, 实测尺寸压缩对视觉效果影响比较大, 不采用",
-        "3.注意ffmpeg要手动下载并在windows中配置好环境变量"
+        "3.注意ffmpeg要手动下载并在windows中配置好环境变量",
+        "4.注意程序运行时会在当前目录下生成临时视频文件,如果中途意外结束,应该手动删除这个文件(不会引起报错,但占用空间)"
     ],
     "require": [
         {
@@ -24,6 +25,16 @@
                 "key": "path_out",
                 "label": "输出路径",
                 "value": "D:\\s-code\\test\\test_out"
+            }
+        },
+        {
+            "type": "input",
+            "data":{
+                "key": "path_log",
+                "label": "日志路径",
+                "value": "D:\\s-code\\test\\test_log",
+                "placeholder":"置空不使用日志",
+                "annotation": "日志默认只记录error和warning"
             }
         },
         {
@@ -47,13 +58,15 @@
             }
         },
         {
-            "type": "input",
-            "data":{
-                "key": "path_log",
-                "label": "日志路径",
-                "value": "D:\\s-code\\test\\test_log",
-                "placeholder":"置空不使用日志",
-                "annotation": "日志默认只记录error和warning"
+            "type": "switch",
+            "data": {
+                "key": "if_count",
+                "label": "是否计数",
+                "value": false,
+                "annotation": [
+                    "注释2",
+                    "注释1"
+                ]
             }
         }
     ]

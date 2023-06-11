@@ -1,8 +1,8 @@
 {
-    "title": "压缩 - 图片压缩",
+    "title": "拷贝 - 图片压缩",
     "group":{
-        "key":"compress",
-        "label":"压缩"
+        "key":"copy",
+        "label":"拷贝"
     } ,
     "info": [
         "1.图片质量和尺寸同时压缩, 单次压缩系数好像是0.8, 循环执行",
@@ -24,6 +24,16 @@
                 "label": "输出路径",
                 "value": "D:\\s-code\\test\\test_out"
             }
+        },
+        {
+            "type": "input",
+            "data":{
+                "key": "path_log",
+                "label": "日志路径",
+                "value": "D:\\s-code\\test\\test_log",
+                "placeholder":"置空不使用日志",
+                "annotation": "日志默认只记录error和warning"
+            }
         },{
             "type": "input",
             "data":{
@@ -35,13 +45,15 @@
             }
         },
         {
-            "type": "input",
-            "data":{
-                "key": "path_log",
-                "label": "日志路径",
-                "value": "D:\\s-code\\test\\test_log",
-                "placeholder":"置空不使用日志",
-                "annotation": "日志默认只记录error和warning"
+            "type": "switch",
+            "data": {
+                "key": "if_count",
+                "label": "是否计数",
+                "value": false,
+                "annotation": [
+                    "注释2",
+                    "注释1"
+                ]
             }
         }
     ]

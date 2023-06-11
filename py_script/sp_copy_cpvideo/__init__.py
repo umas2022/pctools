@@ -1,0 +1,1 @@
+from sp_copy_cpvideo.video_compress import VideoCompress as MainClass

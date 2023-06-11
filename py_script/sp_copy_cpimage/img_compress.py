@@ -2,6 +2,7 @@
 create: 2022.9.19
 
 图片压缩
+- 质量和尺寸双重压缩, 边界条件为图片占用空间
 '''
 
 import os
@@ -11,35 +12,40 @@ from shutil import copyfile
 from moviepy.editor import *  # pip install moviepy
 from utils_logger.log import logger_re as logger
 from utils_tools.traverse import Traverse
+from utils_tools.traverse_copy import TVcopy
 
 
-class ImgCompress():
+class ImgCompress(TVcopy):
     '''JustCopy + 图片压缩\n
     必要参数：path_in, path_out\n
     默认参数：max_size(3072)'''
 
-    def __init__(self, path_in="", path_out="", path_log="", max_size_kb=3072, json_set={}) -> None:
-        self.path_in = str(path_in).replace("\\", "/")
-        self.path_out = str(path_out).replace("\\", "/")
-        logger.set_path(str(path_log).replace("\\", "/"))
-        # 图片尺寸上限
-        self.max_size_kb = max_size_kb
-        # 单次压缩系数
-        self.cutCoefficient = 0.9
-        # 默认处理的文件格式
-        self.handleFormat = ["jpg", "JPG", "jpeg", "bmp", "BMP", "jpe", "JPEG"]
-        # 需要转换的图片格式
-        self.transFormat = ["png", "PNG"]
-        if not json_set == {}:
-            try:
-                self.path_in = json_set['path_in'].replace("\\", "/")
-                self.path_out = json_set['path_out'].replace("\\", "/")
-                self.path_log = json_set['path_log'].replace("\\", "/") if "path_log" in json_set else ""
-                logger.set_path(self.path_log)
-                self.max_size_kb = int(json_set['max_size_kb']) if "max_size_kb" in json_set else 3072
-            except Exception as e:
-                logger.error("key error: %s" % e)
-                return
+    def __init__(self,json_set={}) -> None:
+        try:
+            # *输入路径
+            self.path_in = os.path.normpath(json_set['path_in'])
+            # *输出路径
+            self.path_out = os.path.normpath(json_set['path_out'])
+            # 日志路径(默认无)
+            self.path_log = os.path.normpath(json_set['path_log']) if "path_log" in json_set else ""
+            logger.set_path(str(self.path_log).replace("\\", "/"))
+            # 程序控制:是否计数(默认True)
+            self.if_count = bool(json_set['if_count']) if "if_count" in json_set else True
+            TVcopy.__init__(self,self.path_in,self.path_out,self.path_log,self.if_count)
+
+            # 图片尺寸上限
+            self.max_size_kb = int(json_set['max_size_kb']) if "max_size_kb" in json_set else 3072
+
+            # 单次压缩系数
+            self.cutCoefficient = 0.9
+            # 默认处理的文件格式
+            self.handleFormat = ["jpg", "JPG", "jpeg", "bmp", "BMP", "jpe", "JPEG"]
+            # 需要转换的图片格式
+            self.transFormat = ["png", "PNG"]
+        except Exception as e:
+            logger.error("key error: %s" % e)
+            return
+        
 
     def __method_copy(self, methodPathIn, methodPathOut) -> None:
         '''图片处理方法：直接拷贝'''
@@ -92,12 +98,11 @@ class ImgCompress():
             logger.error("file : %s" % methodPathIn)
             return "error"
 
-    def __img_filter(self, methodPathIn, methodPathOut) -> str:
+    def func_handle(self, methodPathIn, methodPathOut,jetzt) -> str:
         '''处理方法分类器'''
         # 创建输出目录结构
-        name = methodPathIn.split("/")[-1]
         suffix = methodPathOut.split(".")[-1]
-        dir_out = methodPathOut.replace("/" + name, "")
+        dir_out = os.path.split(methodPathOut)[0]
         if not os.path.exists(dir_out):
             try:
                 os.makedirs(dir_out)
@@ -139,25 +144,27 @@ class ImgCompress():
         '''开始处理'''
         logger.info("image compress function start ...")
         logger.write("image compress")
-        # 计数
-        total = 0
-        for full_in in Traverse().get_file(self.path_in):
-            if full_in.split(".")[-1] in self.handleFormat or full_in.split(".")[-1] in self.transFormat:
-                total += 1
-                name = full_in.replace("\\", "/").split("/")[-1]
-                logger.info("counting : %d\t%s" % (total, name))
-        logger.write("total : %d\n" % total)
-        # 开始
-        jetzt = 0
-        for full_in in Traverse().get_file(self.path_in):
-            full_in = full_in.replace("\\", "/")
-            # 单文件名
-            name = full_in.split("/")[-1]
-            # 对root的相对路径
-            name_upper_dir = full_in.replace(self.path_in + "/", "")
-            # 完整输出路径
-            full_out = os.path.join(self.path_out, name_upper_dir).replace("\\", "/")
-            state = self.__img_filter(full_in, full_out)
-            if state:
-                jetzt += 1
-                logger.info("%s\t%d/%d\t%s" % (state, jetzt, total, full_in))
+        self.find_all(Traverse().get_file,self.func_handle)
+
+        # # 计数
+        # total = 0
+        # for full_in in Traverse().get_file(self.path_in):
+        #     if full_in.split(".")[-1] in self.handleFormat or full_in.split(".")[-1] in self.transFormat:
+        #         total += 1
+        #         name = full_in.replace("\\", "/").split("/")[-1]
+        #         logger.info("counting : %d\t%s" % (total, name))
+        # logger.write("total : %d\n" % total)
+        # # 开始
+        # jetzt = 0
+        # for full_in in Traverse().get_file(self.path_in):
+        #     full_in = full_in.replace("\\", "/")
+        #     # 单文件名
+        #     name = full_in.split("/")[-1]
+        #     # 对root的相对路径
+        #     name_upper_dir = full_in.replace(self.path_in + "/", "")
+        #     # 完整输出路径
+        #     full_out = os.path.join(self.path_out, name_upper_dir).replace("\\", "/")
+        #     state = self.__img_filter(full_in, full_out)
+        #     if state:
+        #         jetzt += 1
+        #         logger.info("%s\t%d/%d\t%s" % (state, jetzt, total, full_in))
