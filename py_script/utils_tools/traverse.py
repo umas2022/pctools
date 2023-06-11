@@ -1,3 +1,9 @@
+'''
+文件夹遍历类,记得加括号实例化Traverse().getfile() \n
+注意遍历以文件名字符串排序输出,不能自动排序多位数字 \n
+即 1,10,2,3...8,9;应该先对不齐的位置补零
+'''
+
 
 import os
 from utils_logger.log import logger_re as logger

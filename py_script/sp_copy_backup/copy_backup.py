@@ -8,26 +8,32 @@ import os
 from shutil import copyfile
 from utils_logger.log import logger_re as logger
 from utils_tools.traverse import Traverse
+from utils_tools.traverse_copy import TVcopy
 from utils_tools.string_tools import StringTools
 
-class CopyBackup():
-    def __init__(self, path_in="", path_out="",path_log = "",keyword="",location="",json_set = {}) -> None:
-        self.path_in = str(path_in).replace("\\", "/")
-        self.path_out = str(path_out).replace("\\", "/")
-        logger.set_path(str(path_log).replace("\\", "/"))
-        self.keyword = str(keyword)
-        self.location = str(location)
-        if not json_set == {}:
-            try:
-                self.path_in = json_set['path_in'].replace("\\", "/")
-                self.path_out = json_set['path_out'].replace("\\", "/")
-                self.path_log = json_set['path_log'] if "path_log" in json_set else ""
-                logger.set_path(self.path_log)
-                self.keyword = json_set['keyword'] if "keyword" in json_set else ""
-                self.location = json_set['location'] if "location" in json_set else ""
-            except Exception as e:
-                logger.error("key error: %s" %e)
-                return
+class CopyBackup(TVcopy):
+    def __init__(self,json_set = {}) -> None:
+        try:
+            # *输入路径
+            self.path_in = os.path.normpath(json_set['path_in'])
+            # *输出路径
+            self.path_out = os.path.normpath(json_set['path_out'])
+            # 日志路径(默认无)
+            self.path_log = os.path.normpath(json_set['path_log']) if "path_log" in json_set else ""
+            logger.set_path(str(self.path_log).replace("\\", "/"))
+            # 程序控制:是否计数(默认True)
+            self.if_count = bool(json_set['if_count']) if "if_count" in json_set else True
+            TVcopy.__init__(self,self.path_in,self.path_out,self.path_log,self.if_count)
+
+            # 关键词匹配
+            self.keyword = json_set['keyword'] if "keyword" in json_set else ""
+            # 关键词位置
+            self.location = json_set['location'] if "location" in json_set else ""
+            
+        except Exception as e:
+            logger.error("key error: %s" % e)
+            return
+
             
     def __check_keyword(self,target) -> bool:
         '''匹配关键字'''
@@ -45,12 +51,11 @@ class CopyBackup():
                 return StringTools().location_match(target,self.keyword,int(self.location))
 
 
-    def __copy_filter(self, methodPathIn, methodPathOut):
+    def func_handle(self, methodPathIn, methodPathOut,jetzt):
         '''处理方法：完全备份'''
 
         # 创建输出目录结构
-        name = methodPathIn.split("/")[-1]
-        dir_out = methodPathOut.replace("/" + name, "")
+        dir_out = os.path.split(methodPathOut)[0]
         if not os.path.exists(dir_out):
             try:
                 os.makedirs(dir_out)
@@ -62,6 +67,7 @@ class CopyBackup():
             return "pass"
         else:
             try:
+                name = os.path.split(methodPathOut)[-1]
                 if self.__check_keyword(name):
                     copyfile(methodPathIn, methodPathOut)
                     return "copy"
@@ -76,23 +82,25 @@ class CopyBackup():
         '''开始处理'''
         logger.info("copy backup function start ...")
         logger.write("copy backup")
-        # 计数
-        total = 0
-        for full_in in Traverse().get_file(self.path_in):
-            total += 1
-            name = full_in.replace("\\", "/").split("/")[-1]
-            logger.info("counting : %d\t%s" % (total, name))
-        logger.write("total : %d\n" % total)
-        # 开始
-        jetzt = 0
-        for full_in in Traverse().get_file(self.path_in):
-            jetzt += 1
-            full_in = full_in.replace("\\", "/")
-            # 单文件名
-            name = full_in.split("/")[-1]
-            # 对root的相对路径
-            name_upper_dir = full_in.replace(self.path_in + "/", "")
-            # 完整输出路径
-            full_out = os.path.join(self.path_out, name_upper_dir).replace("\\", "/")
-            state = self.__copy_filter(full_in, full_out)
-            logger.info("%s\t%d/%d\t%s" % (state, jetzt, total, full_in))
+        self.find_all(Traverse().get_file,self.func_handle)
+
+        # # 计数
+        # total = 0
+        # for full_in in Traverse().get_file(self.path_in):
+        #     total += 1
+        #     name = full_in.replace("\\", "/").split("/")[-1]
+        #     logger.info("counting : %d\t%s" % (total, name))
+        # logger.write("total : %d\n" % total)
+        # # 开始
+        # jetzt = 0
+        # for full_in in Traverse().get_file(self.path_in):
+        #     jetzt += 1
+        #     full_in = full_in.replace("\\", "/")
+        #     # 单文件名
+        #     name = full_in.split("/")[-1]
+        #     # 对root的相对路径
+        #     name_upper_dir = full_in.replace(self.path_in + "/", "")
+        #     # 完整输出路径
+        #     full_out = os.path.join(self.path_out, name_upper_dir).replace("\\", "/")
+        #     state = self.__copy_filter(full_in, full_out)
+        #     logger.info("%s\t%d/%d\t%s" % (state, jetzt, total, full_in))

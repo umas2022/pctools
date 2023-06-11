@@ -8,7 +8,7 @@ json_set = {
     'path_in': r'D:\s-code\test\test_in',
     'path_out': r'D:\s-code\test\test_out',
     'path_log': "",
-    'if_count': False,
+    'if_count': True,
     "fps":15,
     "size_w":0,
     "size_h":0,

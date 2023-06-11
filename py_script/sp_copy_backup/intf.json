@@ -58,6 +58,18 @@
                     "负数的匹配计入keyword长度,如在'file.txt'中匹配'.tx'结果是-2,匹配'.txt'结果是-1"
                 ]
             }
+        },
+        {
+            "type": "switch",
+            "data": {
+                "key": "if_count",
+                "label": "是否计数",
+                "value": false,
+                "annotation": [
+                    "注释2",
+                    "注释1"
+                ]
+            }
         }
     ]
 }

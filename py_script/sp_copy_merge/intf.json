@@ -35,6 +35,18 @@
                 "placeholder":"置空不使用log文件",
                 "annotation": "日志默认只记录error和warning"
             }
+        },
+        {
+            "type": "switch",
+            "data": {
+                "key": "if_count",
+                "label": "是否计数",
+                "value": false,
+                "annotation": [
+                    "注释2",
+                    "注释1"
+                ]
+            }
         }
     ]
 }

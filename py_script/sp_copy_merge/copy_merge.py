@@ -1,36 +1,39 @@
 '''
 create: 2022.9.20
 
-图片压缩
+多级目录扁平至单级, 文件名合并目录名
 '''
 
 import os
 from shutil import copyfile
 from utils_logger.log import logger_re as logger
 from utils_tools.traverse import Traverse
+from utils_tools.traverse_copy import TVcopy
 
 
-class CopyMerge():
-    def __init__(self, path_in="", path_out="",path_log="",json_set = {}) -> None:
-        self.path_in = path_in.replace("\\", "/")
-        self.path_out = path_out.replace("\\", "/")
-        logger.set_path(str(path_log).replace("\\", "/"))
-        if not json_set == {}:
-            try:
-                self.path_in = json_set['path_in'].replace("\\", "/")
-                self.path_out = json_set['path_out'].replace("\\", "/")
-                self.path_log = json_set['path_log'].replace("\\", "/") if "path_log" in json_set else ""
-                logger.set_path(self.path_log)
-            except Exception as e:
-                logger.error("key error: %s" %e)
-                return
+class CopyMerge(TVcopy):
+    def __init__(self,json_set = {}) -> None:
+        try:
+            # *输入路径
+            self.path_in = os.path.normpath(json_set['path_in'])
+            # *输出路径
+            self.path_out = os.path.normpath(json_set['path_out'])
+            # 日志路径(默认无)
+            self.path_log = os.path.normpath(json_set['path_log']) if "path_log" in json_set else ""
+            logger.set_path(str(self.path_log).replace("\\", "/"))
+            # 程序控制:是否计数(默认True)
+            self.if_count = bool(json_set['if_count']) if "if_count" in json_set else True
+            TVcopy.__init__(self,self.path_in,self.path_out,self.path_log,self.if_count)
+        except Exception as e:
+            logger.error("key error: %s" % e)
+            return
+        
 
-    def __copy_filter(self, methodPathIn, methodPathOut):
+    def func_handle(self, methodPathIn, methodPathOut,jetzt):
         '''处理方法：拷贝合并'''
-        name = methodPathIn.split("/")[-1]
-        name_upper_dir = methodPathIn.replace(self.path_in + "/", "")
-        new_name = ".".join(name_upper_dir.split("/"))
-        full_out = os.path.join(self.path_out, new_name).replace("\\", "/")
+        relpath = os.path.relpath(methodPathIn,self.path_in)
+        new_name = ".".join(relpath.split(os.sep))
+        full_out = os.path.normpath(os.path.join(self.path_out, new_name)) 
 
         if not os.path.exists(self.path_out):
             try:
@@ -54,23 +57,6 @@ class CopyMerge():
         '''开始处理'''
         logger.info("copy merge function start ...")
         logger.write("copy merge")
-        # 计数
-        total = 0
-        for full_in in Traverse().get_file(self.path_in):
-            total += 1
-            name = full_in.replace("\\", "/").split("/")[-1]
-            logger.info("counting : %d\t%s" % (total, name))
-        logger.write("total : %d\n" % total)
-        # 开始
-        jetzt = 0
-        for full_in in Traverse().get_file(self.path_in):
-            jetzt += 1
-            full_in = full_in.replace("\\", "/")
-            # 单文件名
-            name = full_in.split("/")[-1]
-            # 对root的相对路径
-            name_upper_dir = full_in.replace(self.path_in + "/", "")
-            # 完整输出路径
-            full_out = os.path.join(self.path_out, name_upper_dir).replace("\\", "/")
-            state = self.__copy_filter(full_in, full_out)
-            logger.info("%s\t%d/%d\t%s" % (state, jetzt, total, full_in))
+        self.find_all(Traverse().get_file,self.func_handle)
+
+

@@ -8,6 +8,7 @@ json_set = {
     'path_in': r'D:\s-code\test\test_in',
     'path_out': r'D:\s-code\test\test_out',
     'path_log': "",
+    "if_count":True,
     'single_cap': 3,
     'name_func': "by_num",
     'if_count': False
