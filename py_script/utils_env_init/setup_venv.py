@@ -2,15 +2,20 @@
 2023.4.10
 创建虚拟环境并在虚拟环境中运行setup.py
 接收一个参数:虚拟环境位置
+
+脚本测试
+python setup_venv.py D:\p-program\pctools_venv
 '''
 
 import subprocess
 import sys
 import os
 
-# 前端输入虚拟环境位置
-# input_path = sys.argv[1]
-input_path = r"C:\Users\umas-vt\code\pctools_venv"
+# 虚拟环境位置
+input_path = sys.argv[1]
+# input_path = r"C:\Users\umas-vt\code\pctools_venv"
+# input_path = r"D:\p-program\pctools_venv"
+
 # 项目位置
 setup_dir = os.path.split(os.path.realpath(__file__))[0]
 pctools_path = os.path.dirname(os.path.dirname(setup_dir))
@@ -32,3 +37,4 @@ subprocess.run([vpython, script, vpip], creationflags=subprocess.CREATE_NEW_CONS
 # subprocess.run("pip install virtualenv")
 # subprocess.run("virtualenv -p python3.10 %s" % venv_path)
 # subprocess.run([vpython, script, vpip])
+

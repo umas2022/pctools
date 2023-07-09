@@ -1,5 +1,9 @@
-# 批处理工具箱（电脑配件）
+# python批处理工具箱（电脑配件）
 
+
+## 简介
+- python写的批处理脚本越来越多，就想着能不能做一个ui
+- 因为技能树限制，采用electron -> django -> python脚本
 
 
 ## 功能
@@ -28,6 +32,7 @@
   - 爬虫 - bookwalker通用
 - 删除
   - 删除 - 删除差异
+  - 删除 - 图片查重
   - 删除 - 删除关键字
 - 重命名
   - 重命名 - 基本方法合集
@@ -51,8 +56,21 @@
 - 项目部署将会创建venv虚拟环境并在其中安装必备运行库
 
 
+## 开发者功能
+- 开启开发模式服务器
 
+```bash
+python run_electron.py
+```
 
+- 打包
+
+```bash
+python build_electron.py
+```
+
+- 新功能在./py_script/添加，注意目录结构格式
+- 如果有新模组需要pip安装，写在./py_script/utils_env_init/pip_requirements.txt，然后在前端的设置页里点击【python环境初始化】按钮。（按钮可能会因为权限问题报错，手动运行./py_script/utils_env_init/setup_venv.py，注意设置安装目录）
 
 
 

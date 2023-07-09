@@ -1,0 +1,151 @@
+{
+    "title": "删除 - 图片查重",
+    "group": {
+        "key": "remove",
+        "label": "删除"
+    },
+    "info": [
+        "1.查重",
+        "2.删除"
+    ],
+    "require": [
+        {
+            "type": "input",
+            "data": {
+                "key": "path_in",
+                "label": "输入路径",
+                "value": "D:\\s-code\\test\\test_in",
+                "annotation": "目标路径"
+            }
+        },
+        {
+            "type": "input",
+            "data": {
+                "key": "path_log",
+                "label": "日志路径",
+                "value": "",
+                "placeholder": "置空不使用log文件",
+                "annotation": "日志默认只记录error和warning"
+            }
+        },
+        {
+            "type": "select",
+            "data": {
+                "key": "filter_1",
+                "label": "预筛过滤器",
+                "value": "dimension",
+                "option": [
+                    {
+                        "value": "dimension",
+                        "label": "尺寸（像素）"
+                    },
+                    {
+                        "value": "hash",
+                        "label": "哈希（感知哈希）"
+                    },
+                    {
+                        "value": "size",
+                        "label": "大小（KB）"
+                    }
+                ],
+                "annotation": [
+                    "尺寸和大小快，哈希慢",
+                    "但哈希更精准"
+                ]
+            }
+        },
+        {
+            "type": "select",
+            "data": {
+                "key": "filter_2",
+                "label": "复筛过滤器",
+                "value": "hash",
+                "option": [
+                    {
+                        "value": "dimension",
+                        "label": "尺寸（像素）"
+                    },
+                    {
+                        "value": "hash",
+                        "label": "哈希（感知哈希）"
+                    },
+                    {
+                        "value": "size",
+                        "label": "大小（KB）"
+                    }
+                ],
+                "annotation": [
+                    "注释2",
+                    "注释1"
+                ]
+            }
+        },
+        {
+            "type": "select",
+            "data": {
+                "key": "iter_level",
+                "label": "遍历层级",
+                "value": "all",
+                "option": [
+                    {
+                        "value": "all",
+                        "label": "全层级"
+                    },
+                    {
+                        "value": "first",
+                        "label": "仅第一层"
+                    }
+                ],
+                "annotation": [
+                    "全层级遍历适用于多级目录",
+                    "注释1"
+                ]
+            }
+        },
+        {
+            "type": "select",
+            "data": {
+                "key": "cut_mode",
+                "label": "试错模式",
+                "value": true,
+                "option": [
+                    {
+                        "value": true,
+                        "label": "true"
+                    },
+                    {
+                        "value": false,
+                        "label": "false"
+                    }
+                ],
+                "annotation": [
+                    "试错模式启用后，将不会直接删除图片，",
+                    "而是将重复图片组的第[0]张复制到试错目录，[1:]剪切到试错路径",
+                    "人工复查试错路径，确认无误后手动删除试错路径"
+                ]
+            }
+        },
+        {
+            "type": "input",
+            "data": {
+                "key": "cut_path",
+                "label": "试错路径",
+                "value": "D:\\s-code\\test\\test_out",
+                "placeholder": "置空不使用试错",
+                "annotation": "需要打开试错模式"
+            }
+        },
+        {
+            "type": "switch",
+            "data": {
+                "key": "if_count",
+                "label": "是否计数",
+                "value": false,
+                "annotation": [
+                    "不计数会快一点点",
+                    "注释1"
+                ]
+            }
+        }
+    ]
+}

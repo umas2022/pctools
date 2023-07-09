@@ -21,6 +21,7 @@ class Video2Gif(TVcopy):
             # 日志路径(默认无)
             self.path_log = os.path.normpath(json_set['path_log']) if "path_log" in json_set else ""
             logger.set_path(str(self.path_log).replace("\\", "/"))
+            
             # 程序控制:是否计数(默认True)
             self.if_count = bool(json_set['if_count']) if "if_count" in json_set else True
             TVcopy.__init__(self,self.path_in,self.path_out,self.path_log,self.if_count)

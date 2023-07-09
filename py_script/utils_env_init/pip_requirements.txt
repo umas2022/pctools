@@ -56,3 +56,8 @@ PyQT6
 # 幻影坦克
 
 numba
+
+
+# 图片查重
+
+imagehash

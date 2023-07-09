@@ -119,7 +119,8 @@ class AutoTrans():
 
     def run(self):
         '''开始处理'''
-        logger.info("auto trans function start ...")
+        logger.info(r"auto trans function start ...")
+        logger.info(r"截图启动后鼠标变为十字形，框选识别区域后按回车确定。（本窗口不在识别范围内，可以最小化）")
         logger.write("auto trans")
         self.startShot()
         self.ocr_trans()

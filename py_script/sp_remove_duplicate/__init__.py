@@ -1,0 +1,1 @@
+from sp_remove_duplicate.duplicate_rm import DuplicateRm as MainClass
