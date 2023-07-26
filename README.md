@@ -1,12 +1,19 @@
 # python批处理工具箱（电脑配件）
 
 
-## 简介
-- python写的批处理脚本越来越多，就想着能不能做一个ui
-- 因为技能树限制，采用electron -> django -> python脚本
+
+## Introduction
+- python写的批处理脚本越来越多，就想着能不能做一个ui来统合
+- 因为技能树限制，采用electron(vue) -> django -> python脚本
+- python basic function (py_script/)
+- Django backend server (py_server/)
+- Electron+Vue frontend (desktop_electron/)
+- pyqt6 desktup (desktop_pyqt/) (已经放弃更新)
+- 没有传release,感兴趣可以微信找我(umas)
 
 
-## 功能
+
+## 所有功能
 (./py_script/index.json)
 - 预设
   - copy动作集
@@ -39,12 +46,6 @@
 - 搜索
   - 搜索 - 所有后缀
 
-## Introduction
-- python basic function (py_script/)
-- Django backend server (py_server/)
-- Electron+Vue frontend (desktop_electron/)
-- pyqt6 desktup (desktop_pyqt/) (已经放弃更新)
-- 没有传release,感兴趣可以微信找我(umas)
 
 ## Environment
 参见 [./0-docs/deploy.md](https://github.com/umas2022/pctools/blob/main/0-docs/deploy.md)
@@ -57,7 +58,7 @@
 
 
 ## 开发者功能
-- 开启开发模式服务器
+- 启动开发模式服务器
 
 ```bash
 python run_electron.py
@@ -67,6 +68,7 @@ python run_electron.py
 
 ```bash
 python build_electron.py
+# 打包路径：pctools\desktop_electron\dist_electron
 ```
 
 - 新功能在./py_script/添加，注意目录结构格式

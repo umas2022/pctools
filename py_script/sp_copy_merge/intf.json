@@ -39,6 +39,18 @@
         {
             "type": "switch",
             "data": {
+                "key": "if_inner",
+                "label": "仅合并内层",
+                "value": false,
+                "annotation": [
+                    "遍历内层1级目录",
+                    "对1级目录内的文件进行层级合并"
+                ]
+            }
+        },
+        {
+            "type": "switch",
+            "data": {
                 "key": "if_count",
                 "label": "是否计数",
                 "value": false,
