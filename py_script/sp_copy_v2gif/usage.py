@@ -5,8 +5,8 @@ from sp_copy_v2gif.copy_v2gif import Video2Gif as MainClass
 
 
 json_set = {
-    'path_in': r'D:\s-code\test\test_in',
-    'path_out': r'D:\s-code\test\test_out',
+    'path_in': r'D:\p-Huawei\Huawei Share',
+    'path_out': r'D:\p-Huawei\HuaweiShare2',
     'path_log': "",
     'if_count': True,
     "fps":15,

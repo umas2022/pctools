@@ -36,6 +36,15 @@ class TVcopy():
         else:
             logger.info("skip count ...")
 
+
+        # 创建目录结构
+        if not os.path.exists(self.path_out):
+            try:
+                os.makedirs(self.path_out)
+            except Exception as e:
+                logger.error("find_all - make dir error :%s" % e)
+                logger.error("DIR : %s" % self.path_out)
+
         # 开始
         jetzt = 0
         for full_in in func_tv(self.path_in):
@@ -45,6 +54,9 @@ class TVcopy():
             name = os.path.split(full_in)[-1]
             name_upper_dir = os.path.relpath(full_in, self.path_in)
             full_out = os.path.normpath(os.path.join(self.path_out, name_upper_dir))
+
+
+
             # 返回状态
             state = func_hd(full_in, full_out, jetzt)
             logger.info("%s\t%d/%d\t%s" % (state, jetzt, total, full_in))

@@ -52,6 +52,8 @@ class Video2Gif(TVcopy):
         methodPathOut[-1] = "gif"
         methodPathOut = ".".join(methodPathOut)
 
+        
+
         # 开始转换
         video = VideoFileClip(methodPathIn)
         if self.size_h*self.size_w :
