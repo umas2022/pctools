@@ -26,7 +26,7 @@ class SearcherBasic():
 
     def basic_data_check(self, get_data) -> bool:
         '''检查输入参数合法性'''
-        logger.debug("合法性检查(假的,这个功能还没做)")
+        # logger.debug("合法性检查(假的,这个功能还没做)")
         return True
 
 

@@ -49,46 +49,53 @@ class DuplicateRm(TVcopy):
             logger.error("key error: %s" % e)
             return
 
-        # 所有图片列表，格式 [[path_1,path_2],[path_1,path2],[path_1,path_2]]
+        # 所有图片列表，格式 [[path_1,path_2],[path_1,path2],[path_1,path_2]]，用于遍历查重
         self.image_path_list = [[]]
-        # 重复图片列表，格式同上
+        self.total = len(self.image_path_list[0])
+        # 重复图片列表，格式同上，用于删除
         self.duplicate_list = []
 
-    def filter_entrance(self, image_paths: list, feature_func: Callable, func_name: str) -> list:
-        '''过滤器外壳，套在不同的特征提前方法上'''
+    def filter_entrance(self, image_paths: list, feature_func: Callable, func_name: str, process_str: str) -> list:
+        '''过滤器外壳，套在不同的特征筛选方法上'''
         image_hashes = defaultdict(list)
         duplicate_dict = defaultdict(list)
+        total = len(image_paths)
+        now = 0
         for image_path in image_paths:
-            image = Image.open(image_path)
-            image_hash = feature_func(image)
-            image_hashes[image_hash].append(image_path)
-            if len(image_hashes[image_hash]) > 1:
-                duplicate_dict[image_hash] = list(set(duplicate_dict[image_hash] + image_hashes[image_hash]))
-                logger.info("\nfind duplicate : (%s)" % func_name)
-                for item in duplicate_dict[image_hash]:
-                    logger.info(item)
+            now += 1
+            try:
+                image = Image.open(image_path)
+                image_hash = feature_func(image)
+                image_hashes[image_hash].append(image_path)
+                if len(image_hashes[image_hash]) > 1:
+                    duplicate_dict[image_hash] = list(set(duplicate_dict[image_hash] + image_hashes[image_hash]))
+                    logger.info("\n==> find duplicate : (%s) %d/%d %s" % (func_name, now, total, process_str))
+                    for item in duplicate_dict[image_hash]:
+                        logger.info(item)
+            except Exception as err:
+                logger.error("Image.open error: %s" % err)
         duplicate_list = [image_list for image_list in duplicate_dict.values()]
         return duplicate_list
 
-    def dim_filter(self, image_paths):
-        '''寻找相同图片(尺寸)'''
+    def __dim_filter(self, image_paths, process_str):
+        '''筛选方法：寻找相同图片(尺寸)'''
         def filter_func(image):
             width, height = image.size
             image_dim = str(width) + "-" + str(height)
             return image_dim
-        return self.filter_entrance(image_paths, filter_func, "dimension")
+        return self.filter_entrance(image_paths, filter_func, "dimension", process_str)
 
-    def hash_filter(self, image_paths):
-        '''寻找相同图片(哈希)'''
+    def __hash_filter(self, image_paths, process_str):
+        '''筛选方法：寻找相同图片(哈希)'''
         def filter_func(image):
             return imagehash.phash(image)
-        return self.filter_entrance(image_paths, filter_func, "hash")
+        return self.filter_entrance(image_paths, filter_func, "hash", process_str)
 
-    def size_filter(self, image_paths):
-        '''寻找相同图片(体积)'''
+    def __size_filter(self, image_paths, process_str):
+        '''筛选方法：寻找相同图片(体积)'''
         def filter_func(image):
             return os.path.getsize(image)
-        return self.filter_entrance(image_paths, filter_func, "size")
+        return self.filter_entrance(image_paths, filter_func, "size", process_str)
 
     def main_filter(self):
         '''分类查重主函数'''
@@ -97,17 +104,20 @@ class DuplicateRm(TVcopy):
 
         for filter in self.filter_chain:
             if filter == "hash":
-                filter_func = self.hash_filter
+                filter_func = self.__hash_filter
             elif filter == "size":
-                filter_func = self.size_filter
+                filter_func = self.__size_filter
             elif filter == "dimension":
-                filter_func = self.dim_filter
+                filter_func = self.__dim_filter
             else:
                 logger.error("unexpected filter : %s" % filter)
                 return
 
+            total = len(source_list)
+            now = 0
             for each_group in source_list:
-                duplicate_list_add = filter_func(each_group)
+                now += 1
+                duplicate_list_add = filter_func(each_group, "%d/%d" % (now, total))
                 duplicate_list += duplicate_list_add if not duplicate_list_add == [] else []
 
             source_list = duplicate_list
@@ -117,7 +127,7 @@ class DuplicateRm(TVcopy):
 
     def rm_dp(self):
         '''删除重复'''
-        '''试错模式'''
+        # 试错模式
         if (self.cut_mode == True) and (not self.cut_path == "") and (not self.cut_path == "."):
             logger.info("cut mode : true")
             for dp_list in self.duplicate_list:
