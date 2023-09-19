@@ -1,6 +1,12 @@
 <template>
     <div class="cp-module">
-        <div class="h3">获取功能</div>
+        <div class="h3">
+            获取功能
+            <div class="info-icon"
+                style="display: inline-block;  vertical-align: middle;  padding-left: 10px;  padding-right: 20px;  cursor: pointer;">
+                <useSvgIcon icon="info" color="black" :width="Number(20)" @click="display_gb_info(pg_info)" />
+            </div>
+        </div>
         <el-select v-model="store_home.group" placeholder="选择组">
             <el-option v-for="(item, key) in store_home.index_list" :key="key" :label="store_home.index_list[key]['label']"
                 :value="key" @click="store_home.function = ''" />
@@ -21,10 +27,21 @@
 import { ref, inject, watch } from "vue"
 import { get_wsurl } from "@/utils/api_config.js";
 import AnimateDown from "@/components/animate_down/AnimateDown.vue"
+import useSvgIcon from "@/components/svgbox/useSvgIcon.vue";
 import { useStore } from "vuex";
 const store = useStore();
 const store_home: any = inject("store_home")
 
+
+// info按钮
+const display_gb_info: any = inject("display_gb_info")
+const pg_info = [
+    "1.选择组",
+    "2.选择功能"
+]
+
+
+// 获取json
 const get_intf = () => {
 
     console.log(store_home.index_list)

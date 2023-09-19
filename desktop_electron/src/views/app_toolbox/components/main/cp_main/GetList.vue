@@ -1,19 +1,26 @@
 <template>
     <div class="cp-getlist">
-        <div class="h3">获取目录<div class="info-icon"
+        <div class="h3">
+            获取目录
+            <div class="info-icon"
                 style="display: inline-block;  vertical-align: middle;  padding-left: 10px;  padding-right: 20px;  cursor: pointer;">
                 <useSvgIcon icon="info" color="black" :width="Number(20)" @click="display_gb_info(pg_info)" />
             </div>
         </div>
-        <span style="padding:10px">组数量:</span>
+        <div style="padding: 10px;">
+            <el-button @click="run_back">启动后端</el-button>
+        </div>
+        <span style="padding:10px">组:</span>
         <span style="padding:10px">{{ Object.keys(store_home.index_list).length }}</span>
-        <span style="padding:10px">方法数量:</span>
+        <span style="padding:10px">方法:</span>
         <span style="padding:10px">{{ func_total }}</span>
-        <el-button @click="get_list">刷新</el-button>
+        <el-button @click="get_list"><el-icon>
+                <RefreshRight />
+            </el-icon></el-button>
     </div>
 </template>
 <script setup lang="ts">
-import { ref, inject, onMounted,watch } from "vue"
+import { ref, inject, onMounted, watch } from "vue"
 import type { Ref } from "vue"
 import { get_wsurl } from "@/utils/api_config.js";
 import { ElMessage } from "element-plus";
@@ -32,6 +39,32 @@ const pg_info = [
     "1.首次启动时等待后端启动完成后手动点击刷新",
     "2.前端启动时以3秒间隔向后端请求3次"
 ]
+
+
+// 启动后端
+const { PythonShell } = window.require("python-shell");
+const run_back = () => {
+    let be_path = store.state.config["py_server"]["value"]
+    let be_script = "run_backend_venv.py"
+    let options = {
+        mode: "text",
+        pythonOptions: ["-u"], // get print results in real-time
+        scriptPath: be_path,
+        args: [store.state.config["port"]["value"], store.state.config["path_venv"]["value"]],
+    };
+    let pyshell = new PythonShell(be_script, options);
+    pyshell.on("message", function (message: string) {
+        console.log("py-res: " + message);
+    });
+    pyshell.end(function (err: string) {
+        if (err) {
+            throw err;
+        }
+        console.log("finished");
+    });
+}
+
+
 
 // 方法数量
 const func_total = ref(0)

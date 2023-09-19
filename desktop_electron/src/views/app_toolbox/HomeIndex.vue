@@ -42,16 +42,16 @@
             <div class="button-box">
 
               <!-- 右上角展开按钮(加号/减号) -->
-              <ButtonExtract />
+              <!-- <ButtonExtract /> -->
 
               <!-- 右上角切换背景按钮(刷新) -->
-              <ButtonChangeBg />
+              <!-- <ButtonChangeBg /> -->
 
               <!-- 右上角后端启动按钮(小飞机) -->
-              <ButtonRunBe />
+              <!-- <ButtonRunBe /> -->
 
-              <!-- 右上角新建窗口(显示器) -->
-              <ButtonNewWindow />
+              <!-- 右上角新建窗口(显示器) 暂时有bug-->
+              <!-- <ButtonNewWindow /> -->
 
               <!-- 右上角设置按钮(齿轮/右箭头) -->
               <ButtonChangePage :main_index="main_index" :setting_index="setting_index" />
