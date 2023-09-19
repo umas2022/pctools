@@ -14,7 +14,7 @@
 
 ## 界面
 
-<img src="https://github.com/umas2022/pctool/0-docs/img/example.jpg" width="30%" height="30%">
+<img src="https://github.com/umas2022/pctools/blob/main/0-docs/img/example.jpg" width="30%" height="30%">
 
 
 
