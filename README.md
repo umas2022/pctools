@@ -2,10 +2,19 @@
 
 
 
+
+
+
 ## Introduction
 - python写的批处理脚本越来越多，做了一个ui统一调用
 - 因为技能树限制，采用electron(vue) -> django -> python脚本
 - 没有传release,感兴趣可以微信找我(umas)
+
+
+
+## 界面
+
+<img src="https://github.com/umas2022/pctool/0-docs/img/example.jpg" width="30%" height="30%">
 
 
 
