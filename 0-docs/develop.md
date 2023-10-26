@@ -26,11 +26,15 @@
 - usage.py中使用script_path =os.path.dirname(os.path.dirname(os.path.realpath(__file__))) 
 sys.path.append(script_path)替代sys.path.append("..")
 - 新建了utils_path,一些常用的path函数可以放进去
+- 图片压缩，处理证件照时候报错 module PIL.Image has no attribute "ANTIALIAS"
 ---
 
 ## 开发记录
 流水日志,可以记录生活
 
+
+## 2023.10.26
+- 目录栏常显示后下面的宽度不够el-select显示了，窗口从800x600改成800x800
 
 ### 2023.9.19
 - 注释了右上角没必要的按钮

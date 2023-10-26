@@ -1,6 +1,6 @@
 {
     "backup_M2": {
-        "info": "M2全盘备份至HDD",
+        "info": "M2(V)全盘备份至HDD(W)",
         "path_log": "V:\\log",
         "action": [
             {
@@ -22,7 +22,7 @@
         ]
     },
     "backup_samu": {
-        "info": "M2单文件夹备份至HDD",
+        "info": "M2(V)单文件夹备份至HDD(W)",
         "path_log": "V:\\log",
         "action": [
             {

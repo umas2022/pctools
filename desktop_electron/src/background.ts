@@ -16,7 +16,7 @@ async function createWindow() {
   // Create the browser window.
   const win = new BrowserWindow({
     width: process.env.NODE_ENV === "development" ? 1200 : 800,
-    height: 600,
+    height: 800,
     icon: process.env.NODE_ENV === "development" // 图标路径在打包之后不能识别, 使用extraResources单独拷贝出来
       ? path.join(process.cwd(), "public/static/icon/mati_ei_256.ico")
       : path.join(process.cwd(), "resources/static/icon/mati_ei_256.ico"),

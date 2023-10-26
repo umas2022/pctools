@@ -15,7 +15,7 @@
 
     <Interface />
     <!-- 占位空白 -->
-    <div class="block"></div>
+    <div class="block">umas2022</div>
   </div>
 </template>
 <script setup lang="ts">
@@ -36,6 +36,9 @@ div.app-main {
 }
 
 div.block {
-  height: 450px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column-reverse;
+  padding-bottom: 30px;
 }
 </style>
