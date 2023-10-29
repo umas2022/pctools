@@ -20,7 +20,7 @@ class ImgCompress(TVcopy):
     必要参数：path_in, path_out\n
     默认参数：max_size(3072)'''
 
-    def __init__(self,json_set={}) -> None:
+    def __init__(self, json_set={}) -> None:
         try:
             # *输入路径
             self.path_in = os.path.normpath(json_set['path_in'])
@@ -31,7 +31,7 @@ class ImgCompress(TVcopy):
             logger.set_path(str(self.path_log).replace("\\", "/"))
             # 程序控制:是否计数(默认True)
             self.if_count = bool(json_set['if_count']) if "if_count" in json_set else True
-            TVcopy.__init__(self,self.path_in,self.path_out,self.path_log,self.if_count)
+            TVcopy.__init__(self, self.path_in, self.path_out, self.path_log, self.if_count)
 
             # 图片尺寸上限
             self.max_size_kb = int(json_set['max_size_kb']) if "max_size_kb" in json_set else 3072
@@ -43,9 +43,8 @@ class ImgCompress(TVcopy):
             # 需要转换的图片格式
             self.transFormat = ["png", "PNG"]
         except Exception as e:
-            logger.error("key error: %s" % e)
+            logger.error("ImgCut - key error !!! : %s" % e)
             return
-        
 
     def __method_copy(self, methodPathIn, methodPathOut) -> None:
         '''图片处理方法：直接拷贝'''
@@ -57,8 +56,8 @@ class ImgCompress(TVcopy):
                 copyfile(methodPathIn, methodPathOut)
                 return "copy"
             except Exception as e:
-                logger.error("sp-ImgCut - COPY ERROR !!! :%s" % e)
-                logger.error("file : %s" % methodPathIn)
+                logger.error("ImgCut - copy error !!! :%s" % e)
+                logger.error("path : %s" % methodPathIn)
                 return "error"
 
     def __method_cut(self, methodPathIn, methodPathOut) -> None:
@@ -67,6 +66,7 @@ class ImgCompress(TVcopy):
         img = Image.open(methodPathIn)
         imgSizeOut = imgSizeRaw
         try:
+            # 依系数cutCoefficient循环压缩至满足要求
             while imgSizeOut > self.max_size_kb:
                 img = img.resize((int(img.size[0] * self.cutCoefficient), int(
                     img.size[1] * self.cutCoefficient)), Image.ANTIALIAS)
@@ -75,8 +75,8 @@ class ImgCompress(TVcopy):
                 imgSizeOut = os.path.getsize(methodPathOut) / 1024
             return "compress"
         except Exception as e:
-            logger.error("sp-ImgCut - cut error !!! %s" % e)
-            logger.error("file : %s" % methodPathIn)
+            logger.error("ImgCut - cut error !!! %s" % e)
+            logger.error("path : %s" % methodPathIn)
             return "error"
 
     def __method_trans(self, methodPathIn, methodPathOut) -> None:
@@ -94,11 +94,11 @@ class ImgCompress(TVcopy):
             os.rename(imgPathOutJpg, methodPathOut)
             return "png2jpg"
         except Exception as e:
-            logger.error("sp-ImgCut - trans error !!! %s" % e)
-            logger.error("file : %s" % methodPathIn)
+            logger.error("ImgCut - trans error !!! %s" % e)
+            logger.error("path : %s" % methodPathIn)
             return "error"
 
-    def func_handle(self, methodPathIn, methodPathOut,jetzt) -> str:
+    def func_handle(self, methodPathIn, methodPathOut, jetzt) -> str:
         '''处理方法分类器'''
         # 创建输出目录结构
         suffix = methodPathOut.split(".")[-1]
@@ -107,8 +107,8 @@ class ImgCompress(TVcopy):
             try:
                 os.makedirs(dir_out)
             except Exception as e:
-                logger.error("sp-ImgCut - MAKEDIR ERROR !!! :%s" % e)
-                logger.error("file : %s" % dir_out)
+                logger.error("ImgCut - makedir error !!! :%s" % e)
+                logger.error("path : %s" % dir_out)
 
         # 输出路径已存在格式在拷贝列表中的文件, 或满足尺寸条件的图片
         if os.path.isfile(methodPathOut):
@@ -122,49 +122,30 @@ class ImgCompress(TVcopy):
                         if not self.path_in == self.path_out:
                             os.remove(methodPathOut)
                 except Exception as e:
-                    logger.error(
-                        "error-001 : ImgCut - remove png error !!! :%s" % e)
+                    logger.error("ImgCut - remove png error !!! :%s" % e)
                     logger.error("path : %s" % dir_out)
 
-        imgSizeRaw = os.path.getsize(methodPathIn) / 1024
-        # 原图尺寸满足, 直接拷贝
-        if imgSizeRaw < self.max_size_kb:
-            return self.__method_copy(methodPathIn, methodPathOut)
-        # 转换列表
-        elif suffix in self.transFormat:
-            return self.__method_trans(methodPathIn, methodPathOut)
-        # 压缩列表
-        elif suffix in self.handleFormat:
-            return self.__method_cut(methodPathIn, methodPathOut)
-        # 其他格式
-        else:
-            pass
+        try:
+            imgSizeRaw = os.path.getsize(methodPathIn) / 1024
+            # 原图尺寸满足, 直接拷贝
+            if imgSizeRaw < self.max_size_kb:
+                return self.__method_copy(methodPathIn, methodPathOut)
+            # 转换列表
+            elif suffix in self.transFormat:
+                return self.__method_trans(methodPathIn, methodPathOut)
+            # 压缩列表
+            elif suffix in self.handleFormat:
+                return self.__method_cut(methodPathIn, methodPathOut)
+            # 其他格式
+            else:
+                return "skip"
+        except Exception as err:
+            logger.error("ImgCut - getsize error !!! : %s" % err)
+            logger.error("path : %s" % methodPathIn)
 
     def run(self):
         '''开始处理'''
         logger.info("image compress function start ...")
         logger.write("image compress")
-        self.find_all(Traverse().get_file,self.func_handle)
+        self.find_all(Traverse().get_file, self.func_handle)
 
-        # # 计数
-        # total = 0
-        # for full_in in Traverse().get_file(self.path_in):
-        #     if full_in.split(".")[-1] in self.handleFormat or full_in.split(".")[-1] in self.transFormat:
-        #         total += 1
-        #         name = full_in.replace("\\", "/").split("/")[-1]
-        #         logger.info("counting : %d\t%s" % (total, name))
-        # logger.write("total : %d\n" % total)
-        # # 开始
-        # jetzt = 0
-        # for full_in in Traverse().get_file(self.path_in):
-        #     full_in = full_in.replace("\\", "/")
-        #     # 单文件名
-        #     name = full_in.split("/")[-1]
-        #     # 对root的相对路径
-        #     name_upper_dir = full_in.replace(self.path_in + "/", "")
-        #     # 完整输出路径
-        #     full_out = os.path.join(self.path_out, name_upper_dir).replace("\\", "/")
-        #     state = self.__img_filter(full_in, full_out)
-        #     if state:
-        #         jetzt += 1
-        #         logger.info("%s\t%d/%d\t%s" % (state, jetzt, total, full_in))

@@ -31,7 +31,7 @@
             "data": {
                 "key": "path_log",
                 "label": "日志路径",
-                "value": "",
+                "value": "D:\\s-code\\test\\test_log",
                 "placeholder":"置空不使用log文件",
                 "annotation": "日志默认只记录error和warning"
             }
@@ -55,8 +55,8 @@
                 "label": "是否计数",
                 "value": false,
                 "annotation": [
-                    "注释2",
-                    "注释1"
+                    "文件数量极大时如果开启计数可能会占用很多时间",
+                    "一些硬盘盒不能支持极大量的计数"
                 ]
             }
         }

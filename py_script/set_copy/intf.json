@@ -17,10 +17,10 @@
                 "option": [
                     {
                         "value": "backup_M2",
-                        "label": "M2全盘备份至HDD"
+                        "label": "M2(V)全盘备份至HDD(W)"
                     },{
                         "value": "backup_samu",
-                        "label": "M2单文件夹备份至HDD"
+                        "label": "M2(V)单samu备份至HDD(W)"
                     },
                     {
                         "value": "compress_test",

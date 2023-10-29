@@ -24,6 +24,10 @@ class CopyBackup(TVcopy):
             # 程序控制:是否计数(默认True)
             self.if_count = bool(json_set['if_count']) if "if_count" in json_set else True
             TVcopy.__init__(self,self.path_in,self.path_out,self.path_log,self.if_count)
+            # 程序控制:是否检测重名文件的大小
+            self.check_size = bool(json_set['check_size']) if "check_size" in json_set else False
+            # 内部：重名文件大小模糊系数（除以系数取整，取1024即检测精度到KB为止）
+            self.__fuzzy = 1024
 
             # 关键词匹配
             self.keyword = json_set['keyword'] if "keyword" in json_set else ""
@@ -31,7 +35,7 @@ class CopyBackup(TVcopy):
             self.location = json_set['location'] if "location" in json_set else ""
             
         except Exception as e:
-            logger.error("key error: %s" % e)
+            logger.error("CopyBackup - key error: %s" % e)
             return
 
             
@@ -54,29 +58,41 @@ class CopyBackup(TVcopy):
     def func_handle(self, methodPathIn, methodPathOut,jetzt):
         '''处理方法：完全备份'''
 
+        state = "copy"
+
         # 创建输出目录结构
         dir_out = os.path.split(methodPathOut)[0]
         if not os.path.exists(dir_out):
             try:
                 os.makedirs(dir_out)
             except Exception as e:
-                logger.error("sp-ImgCut - MAKEDIR ERROR !!! :%s" % e)
-                logger.error("file : %s" % dir_out)
+                logger.error("CopyBackup - make dir error !!! :%s" % e)
+                logger.error("path : %s" % dir_out)
 
+        # 存在同名文件
         if os.path.isfile(methodPathOut):
-            return "pass"
-        else:
-            try:
-                name = os.path.split(methodPathOut)[-1]
-                if self.__check_keyword(name):
-                    copyfile(methodPathIn, methodPathOut)
-                    return "copy"
+            # 检测两文件大小
+            if self.check_size:
+                size_in = int(os.path.getsize(methodPathIn) / self.__fuzzy)
+                size_out = int(os.path.getsize(methodPathOut) / self.__fuzzy)
+                if size_in == size_out:
+                    return "exist"
                 else:
-                    return "pass"
-            except Exception as e:
-                logger.error("CopyBackup - COPY ERROR !!! :%s" % e)
-                logger.error("file : %s" % methodPathIn)
-                return "error"
+                    state = "cover"
+            else:
+                return "exist"
+        # 拷贝
+        try:
+            name = os.path.split(methodPathOut)[-1]
+            if self.__check_keyword(name):
+                copyfile(methodPathIn, methodPathOut)
+                return state
+            else:
+                return "pass"
+        except Exception as e:
+            logger.error("CopyBackup - copy error !!! :%s" % e)
+            logger.error("path : %s" % methodPathIn)
+            return "error"
 
     def run(self):
         '''开始处理'''
@@ -84,23 +100,4 @@ class CopyBackup(TVcopy):
         logger.write("copy backup")
         self.find_all(Traverse().get_file,self.func_handle)
 
-        # # 计数
-        # total = 0
-        # for full_in in Traverse().get_file(self.path_in):
-        #     total += 1
-        #     name = full_in.replace("\\", "/").split("/")[-1]
-        #     logger.info("counting : %d\t%s" % (total, name))
-        # logger.write("total : %d\n" % total)
-        # # 开始
-        # jetzt = 0
-        # for full_in in Traverse().get_file(self.path_in):
-        #     jetzt += 1
-        #     full_in = full_in.replace("\\", "/")
-        #     # 单文件名
-        #     name = full_in.split("/")[-1]
-        #     # 对root的相对路径
-        #     name_upper_dir = full_in.replace(self.path_in + "/", "")
-        #     # 完整输出路径
-        #     full_out = os.path.join(self.path_out, name_upper_dir).replace("\\", "/")
-        #     state = self.__copy_filter(full_in, full_out)
-        #     logger.info("%s\t%d/%d\t%s" % (state, jetzt, total, full_in))
+

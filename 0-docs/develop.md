@@ -6,32 +6,38 @@
 ### desktop
 - 增加help页面, 最好附上图片, 处理前->处理后
 - 通过前端手动结束或者暂停程序,想办法结束没有启用终端模式的程序
-- 增加选项：是否要先计数
-- 增加选项：是否要预计剩余时间（用数量简单预测/用文件大小精确预测）
-- 没填输出路径时直接使用输入路径
+- 预计剩余时间（用数量简单预测/用文件大小精确预测）
 - 关于输入参数检查:加一个utils,顺便把每次的输入写进intf.json里,保存上次的输入结果;输入参数分成必填和有默认值两种,给所有的必填项目加上星号
 - 前端统计显示error和warning信息
 - 进度条
-- 右上角启动新窗口的按钮坏了,这里应该读取自身路径,而不是定死
 ### server
 - 后端发回的消息增加一个id来区分多个前端窗口
 ### script
+- 计数和主程序是否可以并行运行？
 - 使用os.path.normpath()替代replace("\\", "/")注意空字符串会被替换为'.'
 - 图片压缩对bmp失败
 - 新建的copy_split用更可靠的函数替代了一些不稳定的写法,其他的copy函数应该参考这个都进行升级,具体如下
   - 输入参数仅json_set,参数写明注释
   - 使用utils_path库(这里还没用)
   - self.if_count判断是否要先计数
-  - os.path.relpath计算相对路径,而不是replace
+  - 使用os.path.relpath计算相对路径,而不是replace
 - usage.py中使用script_path =os.path.dirname(os.path.dirname(os.path.realpath(__file__))) 
 sys.path.append(script_path)替代sys.path.append("..")
 - 新建了utils_path,一些常用的path函数可以放进去
 - 图片压缩，处理证件照时候报错 module PIL.Image has no attribute "ANTIALIAS"
 ---
 
+
 ## 开发记录
 流水日志,可以记录生活
 
+
+## 2023.10.29
+- copy_backup备份增加了一个选项check_size，如果遇到已存在的同名文件，可以选择检查文件大小，如果大小不一致则覆盖替换旧文件
+- 修复了对比删除时del_path拼接错误的问题
+
+## 2023.10.28
+- 图片压缩增加了一行try，所有报错都可以被捕获了（悲伤的发现读不到图片可能并不是程序的问题而是硬盘暴毙了）
 
 ## 2023.10.26
 - 目录栏常显示后下面的宽度不够el-select显示了，窗口从800x600改成800x800

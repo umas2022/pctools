@@ -31,8 +31,20 @@
             "data": {
                 "key": "path_log",
                 "label": "日志路径",
-                "value": "",
+                "value": "D:\\s-code\\test\\test_log",
                 "placeholder":"置空不使用log文件"
+            }
+        },
+        {
+            "type": "switch",
+            "data": {
+                "key": "if_count",
+                "label": "是否计数",
+                "value": false,
+                "annotation": [
+                    "注释2",
+                    "注释1"
+                ]
             }
         }
     ]

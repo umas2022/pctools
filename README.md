@@ -68,22 +68,27 @@
 
 
 ## 开发备忘
-- 启动开发模式服务器
+
+- 脚本：启动开发模式服务器
 
 ```bash
 python run_electron.py
 # 后端路径自动切换为开发路径
 ```
 
-- 打包
+- 脚本：打包
 
 ```bash
 python build_electron.py
 # 打包路径：pctools\desktop_electron\dist_electron
 ```
 
+
 - 新功能在./py_script/添加，注意目录结构格式，添加后运行build_electron.py
 - 如果有新模组需要pip安装，记录在./py_script/utils_env_init/pip_requirements.txt，然后在前端的设置页里点击【python环境初始化】按钮。（按钮可能会因为权限问题报错，手动运行./py_script/utils_env_init/setup_venv.py，注意设置安装目录）
 
 
 
+## 开发记录
+
+- 参见 ./0-docs/develop.md

@@ -123,13 +123,17 @@
 
             <!-- 终端switch和开始按钮 -->
             <div class="start-box">
-            <div style="display:inline-block;padding: 10px;">
-                <span>使用终端 </span>
-                <el-switch v-model="as_terminal" />
+                <div class="switch-box">
+                    <div style="display:inline-block;width:150px">
+                        后端log
+                    </div>
+                    <el-switch v-model="as_terminal" />
+                </div>
+
+                <div style="padding: 10px;">
+                    <el-button @click="start">开始</el-button>
+                </div>
             </div>
-            <div style="display:inline-block;padding: 10px;">
-                <el-button @click="start">开始</el-button>
-            </div></div>
 
             <!-- 显示log -->
             <div class="log-box">
@@ -333,6 +337,7 @@ div.intf-main {
 // 输入框
 div.input-box {
     user-select: none; // 页面文字禁止被选中
+
     .el-input {
         width: 50%;
         padding: 10px;
@@ -349,6 +354,7 @@ div.input-box {
 // 选择框
 div.select-box {
     user-select: none; // 页面文字禁止被选中
+
     .el-select {
         width: calc(50% - 20px);
         padding: 10px;
@@ -366,6 +372,7 @@ div.select-box {
 div.switch-box {
     padding: 10px;
     user-select: none; // 页面文字禁止被选中
+
     .el-switch {
         padding-left: 10px;
     }
@@ -394,7 +401,7 @@ div.button-box {
 }
 
 // 开始
-div.start-box{
+div.start-box {
     user-select: none; // 页面文字禁止被选中
 
 }
@@ -403,6 +410,4 @@ div.start-box{
 div.log-box {
     width: calc(100% - 180px);
     margin: auto;
-}
-
-</style>
+}</style>

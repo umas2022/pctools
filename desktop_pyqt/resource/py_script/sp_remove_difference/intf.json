@@ -32,7 +32,7 @@
             "data": {
                 "key": "path_log",
                 "label": "日志路径",
-                "value": "",
+                "value": "D:\\s-code\\test\\test_log",
                 "placeholder":"置空不使用log文件"
             }
         }

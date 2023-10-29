@@ -10,6 +10,7 @@ json_set = {
     "path_out": r'D:\s-code\test\test_out',
     "path_log": r'D:\s-code\test\test_log',
     "if_count": False,
+    "check_size": True,
     # "keyword": r"txt",
     # "location": r"-1"
 }

@@ -100,7 +100,7 @@ class LogRepack:
         if self.raw_logger.file == "":
             # print("logger.write -> exit: no log file specified")
             return
-        with open(self.raw_logger.file, "a") as log_file:
+        with open(self.raw_logger.file, "a",encoding='utf-8') as log_file:
             log_file.write(str(inputstr) + "\n")
 
     def print(self, inputstr):

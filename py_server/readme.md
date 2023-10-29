@@ -11,7 +11,7 @@
 
 ## 使用说明
 - 手动启动服务器（backend文件夹下）  
-    ```python ./manage.py runserver 0.0.0.0:8008```  
+    ```python ./manage.py runserver 0.0.0.0:4090```  
     网页访问：http://localhost:8008/
 
 

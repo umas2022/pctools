@@ -51,7 +51,7 @@
                 "key": "path_log",
                 "label": "日志路径",
                 "placeholder": "置空不使用log",
-                "value": "",
+                "value": "D:\\s-code\\test\\test_log",
                 "annotation": [
                     "日志默认只记录error和warning"
                 ]

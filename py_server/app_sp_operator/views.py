@@ -101,10 +101,10 @@ class SearcherFunction():
             catcher = Catcher(main_func, log_func)
             catcher.run(buff_size=10)
 
-        # 终端调用
+        # 终端调用 # 改成直接在后端窗口里log，不再唤起新的终端
         def run_terminal():
-            subprocess.run(['python', './app_sp_operator/terminal_searcher.py', json.dumps(get_data)], creationflags=subprocess.CREATE_NEW_CONSOLE)
-            # subprocess.run(['python', './app_sp_operator/terminal_searcher.py', json.dumps(get_data)])
+            # subprocess.run(['python', './app_sp_operator/terminal_searcher.py', json.dumps(get_data)], creationflags=subprocess.CREATE_NEW_CONSOLE)
+            subprocess.run(['python', './app_sp_operator/terminal_searcher.py', json.dumps(get_data)])
         if get_data["terminal"] == True:
             go_main = threading.Thread(target=run_terminal)
             go_main.start()
