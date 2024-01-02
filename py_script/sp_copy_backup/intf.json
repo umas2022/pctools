@@ -63,11 +63,11 @@
             "type": "switch",
             "data": {
                 "key": "check_size",
-                "label": "大小检测",
+                "label": "size检测",
                 "value": false,
                 "annotation": [
-                    "同名文件如果大小不一致则覆盖旧文件",
-                    "不检测大小时，同名文件将会直接跳过"
+                    "同名文件如果大小不一致则覆盖旧文件，返回cover",
+                    "不检测大小时，将会直接跳过同名文件，返回exist"
                 ]
             }
         },
