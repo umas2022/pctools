@@ -1,11 +1,11 @@
-"""
-create: 2024.10.02
-modify: 2024.10.02
-简单拷贝，保留文件结构
-"""
-
+'''
+create: 2024.10.03
+modify: 2024.10.03
+备份更新，首先删除path_out中的旧内容，再拷贝path_in目录
+'''
 import os
 import shutil
+import filecmp
 
 
 def check_inputs(input_json):
@@ -24,6 +24,33 @@ def count_files(path_in):
     return file_count
 
 
+def delete_inconsistent_files(path_in, path_out):
+    """删除path_out中与path_in不一致的文件或目录"""
+    for root, dirs, files in os.walk(path_out):
+        # 计算对应的path_in中的路径
+        rel_path = os.path.relpath(root, path_out)
+        corresponding_in_path = os.path.join(path_in, rel_path)
+
+        # 如果path_in中没有该目录，删除path_out中的该目录
+        if not os.path.exists(corresponding_in_path):
+            print(f"Deleting directory: {root}")
+            shutil.rmtree(root)
+            continue
+
+        # 删除不在path_in中的文件
+        for file in files:
+            corresponding_file_in = os.path.join(corresponding_in_path, file)
+            file_in_out = os.path.join(root, file)
+            if not os.path.exists(corresponding_file_in):
+                # 如果path_in中没有该文件，则删除
+                print(f"Deleting file: {file_in_out}")
+                os.remove(file_in_out)
+            elif not filecmp.cmp(corresponding_file_in, file_in_out, shallow=False):
+                # 如果文件内容不同，也删除
+                print(f"Deleting inconsistent file: {file_in_out}")
+                os.remove(file_in_out)
+
+
 def copy_with_structure(input_json):
     input_json = check_inputs(input_json)
     path_in = input_json["path_in"]
@@ -34,6 +61,10 @@ def copy_with_structure(input_json):
         print(f"Error: The source path {path_in} does not exist.")
         return
 
+    # 删除path_out中与path_in不一致的内容
+    if os.path.exists(path_out):
+        delete_inconsistent_files(path_in, path_out)
+
     # 计算文件总数
     if input_json['if_count']:
         total_files = count_files(path_in)
@@ -42,7 +73,6 @@ def copy_with_structure(input_json):
             return
     else:
         total_files = 0
-
 
     file_index = 0  # 当前文件的序号
 
@@ -72,3 +102,6 @@ def copy_with_structure(input_json):
     print(
         f"All files copied from {path_in} to {path_out} while maintaining directory structure."
     )
+
+
+
