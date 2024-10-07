@@ -13,16 +13,16 @@ def check_inputs(input_json):
     if not 'if_count' in output_json:
         output_json['if_count'] = True
     if not 'if_copy' in output_json:
-        output_json['if_copy'] = True
+        output_json['if_copy'] = False
     return output_json
 
 
-def count_files(path_in, keyword):
-    """计算输入目录下不包含关键字的所有文件数量"""
+def count_files(path_in, keywords):
+    """计算输入目录下不包含关键字列表中任意关键字的所有文件数量"""
     print("counting ...")
     file_count = 0
     for _, _, files in os.walk(path_in):
-        file_count += len([file for file in files if keyword not in file])
+        file_count += len([file for file in files if not any(keyword in file for keyword in keywords)])
     return file_count
 
 
@@ -30,7 +30,7 @@ def copy_or_delete_files(input_json):
     input_json = check_inputs(input_json)
     path_in = input_json["path_in"]
     path_out = input_json["path_out"]
-    keyword = input_json.get("keyword", "")
+    keywords = input_json.get("keywords", [])
     if_copy = input_json["if_copy"]
 
     # 检查输入目录是否存在
@@ -40,7 +40,7 @@ def copy_or_delete_files(input_json):
 
     # 如果需要计数，计算需要处理的文件总数
     if input_json['if_count']:
-        total_files = count_files(path_in, keyword)
+        total_files = count_files(path_in, keywords)
         if total_files == 0:
             print(f"No files to process in {path_in}.")
             return
@@ -61,7 +61,8 @@ def copy_or_delete_files(input_json):
                 os.makedirs(dest_dir)
 
             for file in files:
-                if keyword not in file:
+                # 只有当文件名不包含任何关键字时才进行复制
+                if not any(keyword in file for keyword in keywords):
                     file_index += 1
                     src_file = os.path.join(root, file)
                     dest_file = os.path.join(dest_dir, file)
@@ -73,17 +74,17 @@ def copy_or_delete_files(input_json):
                         shutil.copy2(src_file, dest_file)
                         print(f"{file_index}/{total_files} Copied: {src_file} to {dest_file}")
 
-        print(f"All files copied from {path_in} to {path_out} excluding files with '{keyword}' in the name.")
+        print(f"All files copied from {path_in} to {path_out} excluding files with any of the keywords: {keywords}.")
     
     else:
         # 删除包含关键字的文件
         for root, dirs, files in os.walk(path_in):
             for file in files:
-                if keyword in file:
+                # 如果文件名中包含任意一个关键字，则删除
+                if any(keyword in file for keyword in keywords):
                     file_index += 1
                     file_to_delete = os.path.join(root, file)
                     os.remove(file_to_delete)
                     print(f"{file_index}/{total_files} Deleted: {file_to_delete}")
 
-        print(f"All files containing '{keyword}' in {path_in} have been deleted.")
-
+        print(f"All files containing any of the keywords: {keywords} in {path_in} have been deleted.")

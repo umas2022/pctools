@@ -13,8 +13,8 @@ input_json = {
         "if_count": True,
         # 是否拷贝
         "if_copy": False,
-        # 删除关键字
-        "keyword": "2a23"
+        # 关键字列表
+        "keywords": ["_1.","_2.","_3.","_4."]
 }
 
 
