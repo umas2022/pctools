@@ -1,5 +1,7 @@
+'''
+备份升级，删除差异
+'''
 import sys, os
-
 script_path = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
 sys.path.append(script_path)
 from functions import *
