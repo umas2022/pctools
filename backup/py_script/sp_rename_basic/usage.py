@@ -13,10 +13,10 @@ from sp_rename_basic.rename_basic import RenameBasic as MainClass
 
 path_in = r'D:\s-code\test\test_out'
 json_set = {
-    "path_in": r"D:\p-Huawei\华为云盘\hw-TJpaperBackup",
+    "path_in": r"C:\Users\umas2\Downloads\新建文件夹\gweda 2024.11.02\202410",
     "use_func": "add_prefix",
-    "target": "file",
-    "add_in": "_",
+    "target": "dir",
+    "add_in": "2024-10-",
     "add_in_2": "",
     "deep":False
 }

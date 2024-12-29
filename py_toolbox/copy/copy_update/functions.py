@@ -18,6 +18,7 @@ def check_inputs(input_json):
 
 def count_files(path_in):
     """计算输入目录下的所有文件数量"""
+    print("counting ...")
     file_count = 0
     for _, _, files in os.walk(path_in):
         file_count += len(files)
@@ -49,6 +50,9 @@ def delete_inconsistent_files(path_in, path_out):
                 # 如果文件内容不同，也删除
                 print(f"Deleting inconsistent file: {file_in_out}")
                 os.remove(file_in_out)
+            else:
+                print("del - pass : %s",file_in_out)
+                
 
 
 def copy_with_structure(input_json):
